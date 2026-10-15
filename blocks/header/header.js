@@ -134,12 +134,14 @@ function buildMenu(menu, index) {
     [...menu.list.children].forEach((item) => {
       const group = document.createElement('div');
       group.className = 'nav-mega-group';
-      const groupLink = item.querySelector(':scope > a');
+      // the delivery pipeline wraps an item's own content in <p> when the item has a sub-list
+      const itemLabel = item.querySelector(':scope > p') || item;
+      const groupLink = itemLabel.querySelector(':scope > a');
       if (groupLink) {
         groupLink.className = 'nav-mega-group-title';
         group.append(groupLink);
       } else {
-        const text = [...item.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE)
+        const text = [...itemLabel.childNodes].filter((n) => n.nodeType === Node.TEXT_NODE)
           .map((n) => n.textContent).join('').trim();
         if (text) {
           const span = document.createElement('span');
