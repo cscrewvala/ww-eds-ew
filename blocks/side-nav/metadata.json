@@ -1,0 +1,24 @@
+{
+  "variantName": "side-nav",
+  "baseBlock": "side-nav",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "section-navigation",
+    "imagePattern": "none",
+    "structure": "heading + nested link lists (fragment)",
+    "textAlignment": "left"
+  },
+  "contentPattern": "Auto-blocked section navigation loaded from a nav-section fragment: vertical collapsible groups (investors side navigation) or a horizontal sticky link bar (sustainability secondary navigation).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/asx-announcements.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-15T00:00:00Z"
+  },
+  "options": ["vertical", "horizontal"],
+  "memberVariantIds": []
+}

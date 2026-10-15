@@ -1,0 +1,24 @@
+{
+  "variantName": "columns-logos",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "partner-certification-logos",
+    "imagePattern": "square logos, 16px radius",
+    "structure": "left-aligned wrapping grid of logos (empty slots keep logos at the left)",
+    "columns": "6 slots of 16% from 1280px, 4 from 768px, 2 on mobile; gap 24px 8px"
+  },
+  "contentPattern": "Logo row for certifications, benchmarking and partner groups. One row with one logo per cell (or one logo per row); logos may be linked. The group H2 ('Certifications', 'Benchmarking', 'Partners') and the separating horizontal rule are default content around each block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/human-rights.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

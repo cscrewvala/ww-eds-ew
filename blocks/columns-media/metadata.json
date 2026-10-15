@@ -1,0 +1,29 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "explanatory-text-with-photo",
+    "imagePattern": "rounded landscape photo (or portrait) filling the right column",
+    "structure": "two equal columns per row: text (heading, paragraphs, bulleted list, optional link) beside a photo; rows separated by thin rules",
+    "columns": "2 (50/50) on desktop, stacked text-then-image on mobile"
+  },
+  "contentPattern": "One row per text | image pair: cell 1 heading + paragraphs + bulleted list (optional link), cell 2 image. Repeated as separate rows separated by thin rules (in-store technology x6, collection x3); our-artwork 'About The Artist' uses the same pattern with a portrait.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/privacy/collection.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/sharing.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/in-store-technology-and-your-privacy.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/protection.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/usage.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/cookies-and-digital-identifiers.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/our-artwork.html"
+    ],
+    "reuseCount": 6,
+    "lastUsed": "2026-10-14T00:00:00Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

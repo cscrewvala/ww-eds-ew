@@ -1,0 +1,98 @@
+/* columns-media: text beside a rounded photo, 50/50 on desktop.
+ * Values from source .container__body__two-column.two-50-50 computed styles. */
+.columns-media {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0;
+  color: var(--text-color);
+}
+
+.columns-media > .columns-media-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-media .columns-media-text,
+.columns-media .columns-media-image {
+  min-width: 0;
+}
+
+/* source headings: .heading.title.ocean, 24px above the copy (sizes follow the global tiers) */
+.columns-media .columns-media-text :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 24px;
+  color: var(--heading-color);
+}
+
+.columns-media .columns-media-text > :first-child {
+  margin-top: 0;
+}
+
+.columns-media .columns-media-text ul {
+  margin: 12px 0 0;
+}
+
+.columns-media .columns-media-image picture {
+  display: block;
+}
+
+.columns-media .columns-media-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* variant "image-border": source .image.with-border (white frame) */
+.columns-media.image-border .columns-media-image img {
+  box-sizing: border-box;
+  border: 16px solid var(--color-snow);
+  border-radius: 32px;
+}
+
+/* variant "bullets-berry": source .text.custom-bullets--berry */
+.columns-media.bullets-berry .columns-media-text ul {
+  list-style: none;
+}
+
+.columns-media.bullets-berry .columns-media-text li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 30px;
+  margin: 0 0 22px;
+}
+
+.columns-media.bullets-berry .columns-media-text li > p {
+  margin: 0;
+}
+
+.columns-media.bullets-berry .columns-media-text li::before {
+  content: "";
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: rgb(145 49 153);
+}
+
+/* mobile: text always above the photo, even when the image is authored first */
+.columns-media > .columns-media-image-first > .columns-media-image {
+  order: 1;
+}
+
+@media (width >= 900px) {
+  .columns-media > .columns-media-row {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .columns-media > .columns-media-row > div {
+    flex: 1 1 0;
+  }
+
+  .columns-media > .columns-media-image-first > .columns-media-image {
+    order: 0;
+  }
+}

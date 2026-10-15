@@ -1,0 +1,28 @@
+{
+  "variantName": "video-story",
+  "baseBlock": "video",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "story-video",
+    "imagePattern": "poster-full-width",
+    "structure": "poster + play + title + description",
+    "cta": false
+  },
+  "contentPattern": "Story video card: row 1 poster image + link to a Scene7 SmartCropVideoViewer (or Scene7/DAM video) URL; row 2 title (bold paragraph or h3) + description paragraphs. Renders a full-width poster with a centred play button; clicking opens a modal player (lazy, no autoplay on load), caption sits below inside the same card.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/2026-world-environment-day.html",
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+      "https://www.woolworthsgroup.com.au/au/en/wiq.html",
+      "/au/en/our-impact/reconciliation/our-artwork"
+    ],
+    "reuseCount": 6,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

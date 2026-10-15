@@ -1,0 +1,26 @@
+{
+  "variantName": "hero-banner",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark-image",
+    "density": "spacious",
+    "purpose": "landing-intro",
+    "imagePattern": "background-full-bleed",
+    "structure": "image + heading + description",
+    "textAlignment": "center"
+  },
+  "contentPattern": "Background image with overlaid text: one row with a full-bleed background image and a cell holding an h1 title plus an intro paragraph, rendered centered horizontally and vertically over the image (e.g. the 'Our stories' landing hero).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories.html",
+      "https://www.woolworthsgroup.com.au/",
+      "https://www.woolworthsgroup.com.au/au/en/investors.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are.html"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-14T06:41:16.351384Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

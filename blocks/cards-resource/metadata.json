@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-resource",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "external-support-resources",
+    "imagePattern": "small centred circular org icon/logo above the title",
+    "structure": "centred card: icon, bold title, centred description, outlined CTA button pinned to the card bottom",
+    "columns": "3 on desktop, auto-fit on tablet, 1 on mobile; 2 stacked frames when placed in a narrow column"
+  },
+  "contentPattern": "One row per card: cell 1 icon/logo image (optional), cell 2 title (heading or bold paragraph), description paragraph(s), and a link-only CTA paragraph ('Learn more', 'Read Privacy Policy'). Used for OAIC/IDCARE/Scamwatch support cards on privacy.html and the policy-document frames on privacy/policy-documents.html.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/privacy.html",
+      "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14T00:00:00Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

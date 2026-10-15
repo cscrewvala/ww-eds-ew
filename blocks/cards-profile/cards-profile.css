@@ -1,0 +1,139 @@
+/* cards-profile: source .leadership-profile__item cards on an ocean band */
+.cards-profile {
+  margin-top: 40px;
+}
+
+/* consecutive profile blocks: source rows sit in separate containers (24px + 24px) */
+.cards-profile-wrapper + .cards-profile-wrapper > .cards-profile {
+  margin-top: 48px;
+}
+
+.cards-profile > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-profile > ul > li {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 334px;
+  min-width: 0;
+  min-height: 422px;
+  margin: 0;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  color: var(--color-charcoal);
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+}
+
+.cards-profile .cards-profile-image {
+  width: 200px;
+  max-width: 100%;
+  margin: 0 0 16px;
+  line-height: 0;
+}
+
+.cards-profile .cards-profile-image picture {
+  display: block;
+}
+
+.cards-profile .cards-profile-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cards-profile .cards-profile-body {
+  max-width: 100%;
+}
+
+.cards-profile .cards-profile-body > * {
+  margin: 0 0 4px;
+  color: var(--color-charcoal);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.cards-profile .cards-profile-body > .cards-profile-name {
+  margin: 0 0 8px;
+  color: var(--color-ocean);
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 44px;
+}
+
+.cards-profile .cards-profile-body > .cards-profile-role {
+  font-weight: 600;
+}
+
+.cards-profile .cards-profile-body > .cards-profile-note {
+  margin-bottom: 16px;
+  color: var(--color-midnight);
+  font-size: 14px;
+}
+
+.cards-profile .cards-profile-body > .cards-profile-cta {
+  margin: 0;
+}
+
+/* no appointment note: source keeps the empty note's 16px bottom margin */
+.cards-profile .cards-profile-body > .cards-profile-role + .cards-profile-cta {
+  margin-top: 16px;
+}
+
+/* beats main .section.ocean a:any-link:not(.button) (snow + underline) */
+main .section .cards-profile li .cards-profile-cta a:any-link {
+  color: var(--color-extended-ocean);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.cards-profile li .cards-profile-cta a::after {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 17px;
+  margin-left: 6px;
+  background: url("./arrow-next.svg") 0 0 / cover;
+}
+
+@media (width >= 768px) {
+  .cards-profile > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards-profile.cards-profile-large > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 32px;
+  }
+}
+
+@media (width >= 1024px) {
+  .cards-profile > ul > li {
+    max-width: 368px;
+  }
+}
+
+@media (width >= 1200px) {
+  .cards-profile.cards-profile-large > ul {
+    column-gap: 0;
+  }
+}

@@ -1,0 +1,133 @@
+/* columns-contact (source: .contactpanel .contact-panel in container__body__*-column) */
+.columns-contact > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* mobile: icon stacked above centred text */
+.columns-contact > ul > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  margin: 32px 19.5px;
+  text-align: center;
+}
+
+.columns-contact .columns-contact-icon {
+  flex: 0 0 auto;
+  padding-bottom: 16px;
+  line-height: 0;
+}
+
+.columns-contact .columns-contact-icon picture,
+.columns-contact .columns-contact-icon span.icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+
+.columns-contact .columns-contact-icon img {
+  display: block;
+  max-width: none;
+  object-fit: contain;
+}
+
+.columns-contact .columns-contact-icon picture img,
+.columns-contact .columns-contact-icon span.icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.columns-contact .columns-contact-body {
+  min-width: 0;
+  font-size: var(--body-font-size-m);
+}
+
+/* value lines (.value.p3): 16px / 20px, 10px apart, break anywhere */
+.columns-contact .columns-contact-body > * {
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: var(--body-font-size-m);
+  line-height: 20px;
+  word-break: break-all;
+}
+
+/* label (.title.p1--heavy) */
+.columns-contact .columns-contact-body > .columns-contact-label {
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  line-height: 24px;
+  color: var(--text-color);
+  word-break: normal;
+}
+
+/* link lines (.link.p1) and the phone card's extra lines use p1 metrics */
+.columns-contact .columns-contact-body > .columns-contact-link,
+.columns-contact li.columns-contact-phone .columns-contact-body > p {
+  line-height: 24px;
+}
+
+.columns-contact .columns-contact-body a:any-link {
+  color: var(--link-color);
+  word-break: break-all;
+}
+
+.columns-contact .columns-contact-body a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 768px) {
+  .columns-contact > ul {
+    grid-template-columns: minmax(0, 1fr);
+    justify-content: space-between;
+    gap: 24px 32px;
+    padding: 24px 0;
+  }
+
+  .columns-contact > ul > li {
+    flex-direction: row;
+    align-items: flex-start;
+    max-width: 390px;
+    margin: 0 40px;
+    text-align: left;
+  }
+
+  .columns-contact .columns-contact-icon {
+    padding-right: 20px;
+  }
+
+  /* two-column container: 49% columns, space-between */
+  .columns-contact.columns-contact-2-up > ul {
+    grid-template-columns: repeat(2, 49%);
+    column-gap: 0;
+  }
+
+  /*
+   * 4 items: two stacked per column (column-major), in two centred 365px
+   * columns 54px apart (source investors 50-50 > 33-66 container geometry)
+   */
+  .columns-contact.columns-contact-4-up > ul {
+    grid-template-columns: repeat(2, min(30.4%, 365px));
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+    justify-content: center;
+    column-gap: 4.5%;
+  }
+
+  /* three-column container: 32% columns (max 389px), centred */
+  .columns-contact.columns-contact-3-up > ul {
+    grid-template-columns: repeat(3, min(32%, 389px));
+    justify-content: center;
+  }
+}
+
+@media (width >= 1440px) {
+  .columns-contact.columns-contact-3-up > ul {
+    column-gap: 16px;
+  }
+}

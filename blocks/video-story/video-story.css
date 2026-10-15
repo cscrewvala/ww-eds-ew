@@ -1,0 +1,155 @@
+/* video-story -- values from source .wwgvideo .cmp-video (see migration-work/design/video-story) */
+
+/* card: source content column is 1200px wide (wrapper here is wider) */
+.video-story {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  color: var(--color-charcoal);
+}
+
+/* captioned card (.cmp-video--with-content): rounded, shadowed */
+.video-story:has(.video-story-body) {
+  border-radius: 8px;
+  box-shadow: rgb(58 71 78 / 15%) 0 2px 20px -2px;
+}
+
+.video-story .video-story-media {
+  position: relative;
+}
+
+.video-story.no-poster .video-story-media {
+  aspect-ratio: 16 / 9;
+}
+
+.video-story .video-story-media picture {
+  display: block;
+}
+
+.video-story .video-story-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.video-story:has(.video-story-body) .video-story-media img {
+  border-radius: 8px 8px 0 0;
+}
+
+/* whole poster is the click target (source wraps the image block in the link) */
+.video-story .video-story-play {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.video-story .video-story-play-icon {
+  position: absolute;
+  top: 40%;
+  left: 0;
+  right: 0;
+  display: block;
+  width: 71px;
+  height: 71px;
+  margin: auto;
+  filter: drop-shadow(1px 3px 3.5px rgb(0 12 45 / 37%));
+}
+
+.video-story .video-story-play:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: -4px;
+}
+
+.video-story .video-story-body {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding: 24px;
+  border-radius: 0 0 8px 8px;
+  background-color: var(--color-snow);
+}
+
+.video-story .video-story-body > * {
+  margin: 0;
+}
+
+.video-story .video-story-body p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: var(--color-charcoal);
+}
+
+.video-story .video-story-body .video-story-title {
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--color-ocean);
+}
+
+.video-story .video-story-title strong,
+.video-story .video-story-title b {
+  font-weight: inherit;
+}
+
+/* modal player (appended to <body>, scoped by its own class) */
+.video-story-dialog {
+  width: min(92vw, 1200px);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: #000;
+  overflow: visible;
+}
+
+.video-story-dialog::backdrop {
+  background: rgb(0 0 0 / 80%);
+}
+
+.video-story-dialog .video-story-player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.video-story-dialog .video-story-player iframe,
+.video-story-dialog .video-story-player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-story-dialog .video-story-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (width >= 900px) {
+  .video-story:has(.video-story-body) {
+    margin-bottom: 16px;
+  }
+}

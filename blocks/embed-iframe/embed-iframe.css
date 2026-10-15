@@ -1,0 +1,114 @@
+/*
+ * embed-iframe
+ * Values from source computed styles:
+ *  - tabbed: .tabs.panelcontainer.tab--ocean (investors/our-performance/share-price)
+ *  - single: Inbenta enquiry iframe (privacy)
+ * Iframe contents are third-party; only the frame size/spacing is styled.
+ */
+.embed-iframe {
+  --embed-iframe-height: 1350px;
+
+  color: var(--text-color);
+}
+
+/* single iframe (source: Inbenta iframe width="700", capped at the column;
+   spacing measured from the source text above / heading below) */
+.embed-iframe:not(.embed-iframe-tabbed) {
+  margin: 56px 0 143px;
+}
+
+/* tabbed (source: .tabs.panelcontainer margin 32px 10px -> 64px 1px) */
+.embed-iframe.embed-iframe-tabbed {
+  margin: 32px 10px;
+}
+
+/* tab bar (source: ol.cmp-tabs__tablist) */
+.embed-iframe .embed-iframe-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* tab pill (source: li.cmp-tabs__tab) */
+.embed-iframe .embed-iframe-tab {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  height: 36px;
+  margin: 0;
+  padding: 6px 16px;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 100px;
+  background-color: rgb(209 228 255);
+  color: var(--color-midnight);
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: start;
+  white-space: normal;
+  cursor: pointer;
+  appearance: none;
+}
+
+.embed-iframe .embed-iframe-tab:hover {
+  background-color: rgb(232 242 255);
+}
+
+/* active tab (source: .cmp-tabs__tab--active) */
+.embed-iframe .embed-iframe-tab[aria-selected='true'] {
+  border-bottom-color: var(--color-snow);
+  background-color: var(--color-midnight);
+  color: var(--color-snow);
+  font-weight: 600;
+  cursor: default;
+}
+
+.embed-iframe .embed-iframe-panel {
+  min-height: var(--embed-iframe-height);
+}
+
+.embed-iframe .embed-iframe-panel[hidden] {
+  display: none;
+}
+
+.embed-iframe .embed-iframe-panel iframe {
+  display: block;
+  width: 100%;
+  height: var(--embed-iframe-height);
+  border: 0;
+}
+
+.embed-iframe:not(.embed-iframe-tabbed) .embed-iframe-panel iframe {
+  max-width: 700px;
+}
+
+.embed-iframe .embed-iframe-tab:focus-visible,
+.embed-iframe .embed-iframe-panel:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+@media (width >= 900px) {
+  .embed-iframe:not(.embed-iframe-tabbed) {
+    margin-bottom: 119px;
+  }
+
+  .embed-iframe.embed-iframe-tabbed {
+    margin: 64px 1px;
+  }
+
+  .embed-iframe .embed-iframe-tabs {
+    gap: 16px 32px;
+  }
+
+  .embed-iframe .embed-iframe-tab {
+    padding: 12px 24px;
+  }
+}

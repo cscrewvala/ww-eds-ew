@@ -1,0 +1,24 @@
+{
+  "variantName": "hero-story",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "article-hero",
+    "imagePattern": "split-right-rounded",
+    "structure": "heading + subtitle + image",
+    "textAlignment": "left-top",
+    "cta": false
+  },
+  "contentPattern": "Page-top story hero: row 1 feature image, row 2 h1 title + subtitle paragraph (date, 'x min video' or 'x min read'; may be empty). Renders as a 50/50 split with text left and rounded image right on desktop, stacked on mobile.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/2026-world-environment-day.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

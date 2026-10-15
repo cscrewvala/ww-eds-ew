@@ -1,0 +1,81 @@
+/* source: .container__body__content.two-50-50 rows of .mastercard text cards */
+.columns-text {
+  margin: 24px 0;
+}
+
+.columns-text .columns-text-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+/* source: .card + .card__title / .card__description paddings */
+.columns-text .columns-text-item {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+
+/* source: blank spacer paragraphs give 24px between text runs */
+.columns-text .columns-text-item > * {
+  margin: 0 0 24px;
+}
+
+.columns-text .columns-text-item > :last-child {
+  margin-bottom: 0;
+}
+
+/* source: span.h5--common title (Montserrat 21/28 600, ocean) */
+.columns-text .columns-text-item h1,
+.columns-text .columns-text-item h2,
+.columns-text .columns-text-item h3,
+.columns-text .columns-text-item h4,
+.columns-text .columns-text-item h5,
+.columns-text .columns-text-item h6 {
+  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--heading-color);
+}
+
+.columns-text .columns-text-item ul,
+.columns-text .columns-text-item ol {
+  padding: 0;
+  list-style-position: inside;
+}
+
+.columns-text .columns-text-item li {
+  margin: 0;
+}
+
+.columns-text .columns-text-item a:any-link {
+  color: var(--link-color);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.columns-text .columns-text-item a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 900px) {
+  .columns-text.columns-text-2-cols .columns-text-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* source: .container__body__three-column -- 3 x 384px, 16px gap, centred */
+  .columns-text.columns-text-3-cols .columns-text-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 0 8px;
+  }
+}

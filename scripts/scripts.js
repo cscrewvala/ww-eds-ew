@@ -10,6 +10,10 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  createOptimizedPicture as aemCreateOptimizedPicture,
+  readBlockConfig,
+  toCamelCase,
+  toClassName,
 } from './aem.js';
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
@@ -35,6 +39,244 @@ if (window.trustedTypes && window.trustedTypes.createPolicy) {
     createScriptURL: (input) => input,
     createScript: (input) => input,
   });
+}
+
+// --- BEGIN DM/Scene7 auto-block (excat-generated) ---
+
+const DM_BREAKPOINTS = [
+  { media: '(min-width: 600px)', width: 2000 }, // desktop
+  { width: 750 }, // mobile / fallback (no media)
+];
+
+// ---- Canonical helpers (keep in sync with dm-scene7-helpers.js) ----
+function detectDynamicMediaUrl(urlStr) {
+  // Reject relative URLs up front — without this guard, the auto-block
+  // scans every anchor in <main> and a normal site link like
+  // `<a href="/is/image/foo">` would be classified as DM and replaced by
+  // a <picture>. Keep byte-identical with dm-scene7-helpers.js.
+  if (!/^(https?:\/\/|\/\/)/i.test(urlStr)) return false;
+  let u;
+  try { u = new URL(urlStr, 'https://x/'); } catch { return false; }
+  // Scene7 detected by path alone — hostname is irrelevant because
+  // customer sites routinely CNAME a vanity domain to Scene7 (e.g.
+  // media-assets.brand.example).
+  if (u.pathname.startsWith('/is/image/')) {
+    return 'scene7';
+  }
+  if (/^delivery-p\d+-e\d+\.adobeaemcloud\.com$/.test(u.hostname)
+      && u.pathname.startsWith('/adobe/assets/urn:')) {
+    return 'dm-openapi';
+  }
+  return false;
+}
+
+function buildScene7Rendition(src, { width, format }) {
+  // Manipulate the query string verbatim — URL.searchParams percent-
+  // encodes `$`, but Scene7's IS/Image template-parameter syntax
+  // (`$image=`, `$badge=`, etc.) requires the literal `$`. Encoded
+  // form is silently dropped by Scene7's parser, returning the bare
+  // template image instead of the personalized composite.
+  const normalized = src.startsWith('//') ? `https:${src}` : src;
+  const qIdx = normalized.indexOf('?');
+  const base = qIdx >= 0 ? normalized.slice(0, qIdx) : normalized;
+  const query = qIdx >= 0 ? normalized.slice(qIdx + 1) : '';
+  const pairs = query.split('&').filter((p) => p);
+  const filtered = pairs.filter((p) => {
+    const k = p.split('=')[0];
+    return k !== 'wid' && k !== 'fmt' && k !== 'fit';
+  });
+  filtered.push(`wid=${width}`);
+  filtered.push(`fmt=${format}`);
+  // never upscale: without fit=constrain Scene7 pads small originals with blank side bars
+  filtered.push('fit=constrain');
+  return `${base}?${filtered.join('&')}`;
+}
+
+function buildDmOpenApiRendition(src, { width }) {
+  // Synthetic base — see buildScene7Rendition above.
+  const url = new URL(src, 'https://x/');
+  url.searchParams.set('width', String(width));
+  return url.toString();
+}
+
+function findDmOnAnchor(a) {
+  if (!a || typeof a.getAttribute !== 'function') return null;
+  const href = a.getAttribute('href') || '';
+  if (detectDynamicMediaUrl(href)) return { mode: 'unlinked', dmUrl: href };
+  const title = a.getAttribute('title') || '';
+  if (detectDynamicMediaUrl(title)) return { mode: 'linked', dmUrl: title };
+  return null;
+}
+
+// True when the given anchor is the sole child of a markdown-generated
+// <p> wrapper that should be unwrapped so the picture becomes a top-
+// level grid cell. P only — NEVER DIV: EDS block content uses <div>
+// cells (cards/carousel/columns decorators detect image cells via
+// `div.querySelector('picture')`); unwrapping a <div> collapses the
+// block's row structure and stops images rendering inside blocks.
+// Text-node guard: <p>caption <a href="DM">alt</a></p> must NOT be
+// treated as unwrappable — replacing the parent would delete "caption".
+// Comparing trimmed textContent of <p> against the anchor's catches this.
+function isUnwrappableMarkdownParagraph(anchor) {
+  const parent = anchor && anchor.parentElement;
+  if (!parent || parent.tagName !== 'P') return false;
+  if (parent.children.length !== 1 || parent.firstElementChild !== anchor) return false;
+  return parent.textContent.trim() === anchor.textContent.trim();
+}
+
+// Sentinel used by the transformer when source <img> alt is empty. Document
+// view shows the visible cue; we translate it back to alt="" here so screen
+// readers correctly skip decorative images. If an author edits the link
+// text away from the sentinel, their edit becomes the real alt — a11y
+// improves. Must stay byte-identical to dm-scene7-helpers.js EMPTY_ALT_SENTINEL.
+const EMPTY_ALT_SENTINEL = 'Image without alt text';
+
+function linkTextToAlt(linkText) {
+  return linkText === EMPTY_ALT_SENTINEL ? '' : linkText;
+}
+
+// ---- Rendering ----
+function appendSource(picture, { type, srcset, media }) {
+  const source = document.createElement('source');
+  if (type) source.type = type;
+  source.srcset = srcset;
+  if (media) source.setAttribute('media', media);
+  picture.append(source);
+}
+
+function renderScene7Picture(src, alt) {
+  const picture = document.createElement('picture');
+  DM_BREAKPOINTS.forEach((bp) => appendSource(picture, {
+    type: 'image/webp',
+    srcset: buildScene7Rendition(src, { width: bp.width, format: 'webp' }),
+    media: bp.media,
+  }));
+  DM_BREAKPOINTS.forEach((bp) => appendSource(picture, {
+    type: 'image/jpeg',
+    srcset: buildScene7Rendition(src, { width: bp.width, format: 'jpg' }),
+    media: bp.media,
+  }));
+  const img = document.createElement('img');
+  img.src = buildScene7Rendition(src, { width: 750, format: 'jpg' });
+  img.alt = alt;
+  img.loading = 'lazy';
+  picture.append(img);
+  return picture;
+}
+
+function renderDmOpenApiPicture(src, alt) {
+  const picture = document.createElement('picture');
+  DM_BREAKPOINTS.forEach((bp) => appendSource(picture, {
+    srcset: buildDmOpenApiRendition(src, { width: bp.width }),
+    media: bp.media,
+  }));
+  const img = document.createElement('img');
+  img.src = buildDmOpenApiRendition(src, { width: 750 });
+  img.alt = alt;
+  img.loading = 'lazy';
+  picture.append(img);
+  return picture;
+}
+
+function buildDynamicMediaImages(main) {
+  // Anchors carrying DM URLs from the markdown round-trip. The transformer
+  // turns <img DM> into <a href=DM-URL> (or <a href=/page title=DM-URL>
+  // for the linked case); CommonMark's [text](url "title") syntax
+  // survives docx and the title attribute round-trips back to a real
+  // HTML attribute at render time.
+  main.querySelectorAll('a').forEach((a) => {
+    const match = findDmOnAnchor(a);
+    if (!match) return;
+
+    const { mode, dmUrl } = match;
+    // Translate link text back to alt: sentinel ('Image without alt text')
+    // means the source had alt="" — render with alt="" for a11y. Any other
+    // text (including the author's edit of the placeholder) is real alt.
+    const alt = linkTextToAlt(a.textContent.trim());
+    const picture = detectDynamicMediaUrl(dmUrl) === 'scene7'
+      ? renderScene7Picture(dmUrl, alt)
+      : renderDmOpenApiPicture(dmUrl, alt);
+
+    // decorateMain() calls decorateButtons() BEFORE buildAutoBlocks(). At
+    // that point every DM anchor (linked or unlinked) looks like a plain
+    // text link — no <img> yet — so decorateButtons promotes it to a button
+    // and adds `button-container` to its sole-child <p>/<div> parent. The
+    // unwanted border around the rebuilt <picture> is the visible symptom;
+    // for unlinked-in-<div> the leftover `button-container` on a block-cell
+    // <div> can also confuse block decorators that filter on classList.
+    // Strip both classes BEFORE rebuilding so the cleanup covers every
+    // branch below (replaceChildren / replaceWith / parent-replaceWith).
+    // Idempotent — no-op when the classes aren't present.
+    a.classList.remove('button', 'primary', 'secondary');
+    if (a.classList.length === 0) a.removeAttribute('class');
+    const buttonContainer = a.parentElement;
+    if (
+      buttonContainer
+      && buttonContainer.classList.contains('button-container')
+      && buttonContainer.children.length === 1
+    ) {
+      buttonContainer.classList.remove('button-container');
+      if (buttonContainer.classList.length === 0) buttonContainer.removeAttribute('class');
+    }
+
+    if (mode === 'linked') {
+      // Keep the outer <a> and its navigation href. Drop the DM URL from title
+      // (it's been consumed) and replace the anchor's content with the picture.
+      a.removeAttribute('title');
+      a.replaceChildren(picture);
+      return;
+    }
+
+    // Unlinked: the whole anchor is just a carrier for the DM URL.
+    // If it's the markdown-generated <p> wrapper around a standalone
+    // image, unwrap so the picture becomes a top-level grid cell.
+    // NEVER unwrap <div> — those are block-content cells (cards,
+    // carousel, columns); unwrapping them collapses the block's row
+    // structure and decorators can't find their image cells.
+    if (isUnwrappableMarkdownParagraph(a)) {
+      a.parentElement.replaceWith(picture);
+    } else {
+      a.replaceWith(picture);
+    }
+  });
+}
+
+// Register the DM dispatcher for createOptimizedPicture interop.
+// createOptimizedPicture() below (aem.js is vendored, so the wrapper lives
+// here instead of a patch) checks this hook and delegates DM URLs to it,
+// so block decorators that call createOptimizedPicture(img.src, ...) on
+// Scene7 IS/Image template URLs or DM Open API URLs preserve their
+// query parameters instead of having them stripped by the path-only
+// optimizer in aem.js. No-op when the auto-block is not installed
+// (hook unregistered → aem.js falls through to standard logic).
+//
+// Returning null for non-DM URLs lets the caller (createOptimizedPicture)
+// fall through to its standard path-only optimization. This is the
+// regression guard for non-DM images on the same page.
+window.__dmRender__ = (src, alt) => {
+  const family = detectDynamicMediaUrl(src);
+  if (!family) return null;
+  return family === 'scene7'
+    ? renderScene7Picture(src, alt)
+    : renderDmOpenApiPicture(src, alt);
+};
+
+// --- END DM/Scene7 auto-block ---
+
+/**
+ * DM/Scene7-aware wrapper around aem.js createOptimizedPicture.
+ * Blocks should import createOptimizedPicture from here, not from aem.js, so Scene7
+ * URLs keep their IS/Image params instead of being rewritten to same-origin paths.
+ */
+export function createOptimizedPicture(src, alt = '', eager = false, breakpoints = undefined) {
+  if (typeof window.__dmRender__ === 'function') {
+    const dmPicture = window.__dmRender__(src, alt);
+    if (dmPicture) {
+      if (eager) dmPicture.querySelector('img')?.setAttribute('loading', 'eager');
+      return dmPicture;
+    }
+  }
+  return aemCreateOptimizedPicture(src, alt, eager, breakpoints);
 }
 
 /**
@@ -74,6 +316,58 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Section navigation: path prefix -> nav fragment + side-nav variant.
+ * Paths are compared without the local-preview /content prefix.
+ */
+const SIDE_NAVS = [
+  {
+    prefix: '/au/en/investors/',
+    fragment: '/au/en/investors/nav-section',
+    variant: 'vertical',
+  },
+  {
+    prefix: '/au/en/our-impact/sustainability/',
+    fragment: '/au/en/our-impact/sustainability/nav-section',
+    variant: 'horizontal',
+    includeRoot: true, // the Overview page carries the bar too (source)
+    exclude: /^\/au\/en\/our-impact\/sustainability\/our-stories\/\d{4}\//,
+  },
+];
+
+/**
+ * Inserts a side-nav block (in its own section, after the hero section) on pages
+ * covered by a section navigation fragment.
+ * @param {Element} main The container element
+ */
+function buildSideNavAutoBlock(main) {
+  // only the page itself: fragments are decorated in a detached <main>
+  if (main !== document.querySelector('main') || main.querySelector('.side-nav')) return;
+  const path = window.location.pathname.replace(/^\/content(?=\/)/, '').replace(/\/+$/, '');
+  const config = SIDE_NAVS.find((c) => (path.startsWith(c.prefix)
+    || (c.includeRoot && `${path}/` === c.prefix))
+    && path !== c.fragment
+    && !(c.exclude && c.exclude.test(path)));
+  if (!config) return;
+  const sections = [...main.querySelectorAll(':scope > div')];
+  if (!sections.length) return;
+
+  const link = document.createElement('a');
+  link.href = config.fragment;
+  link.textContent = config.fragment;
+  const block = buildBlock('side-nav', [[link]]);
+  block.classList.add(config.variant);
+  const section = document.createElement('div');
+  section.append(block);
+  sections[0].after(section);
+
+  if (config.variant === 'vertical') {
+    document.body.classList.add('side-nav-layout');
+    // the nav column spans every content section (grid rows)
+    main.style.setProperty('--side-nav-rows', sections.length);
+  }
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -97,6 +391,8 @@ function buildAutoBlocks(main) {
       });
     }
     buildWidgetAutoBlocks(main);
+    buildSideNavAutoBlock(main);
+    buildDynamicMediaImages(main);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);
@@ -147,10 +443,35 @@ function decorateButtons(main) {
  * @param {Element} main The main element
  */
 // eslint-disable-next-line import/prefer-default-export
+/**
+ * Applies unprocessed Section Metadata (style -> section classes, other keys -> data attributes).
+ * The delivery pipeline normally does this server-side; this covers raw content (e.g. local
+ * preview of imported .plain.html) and is a no-op when no section-metadata block is present.
+ * @param {Element} main The container element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > div.section > div > .section-metadata, :scope > div.section > .section-metadata').forEach((meta) => {
+    const section = meta.closest('.section');
+    const config = readBlockConfig(meta);
+    Object.entries(config).forEach(([key, value]) => {
+      if (key === 'style') {
+        value.split(',').map((v) => toClassName(v.trim())).filter(Boolean)
+          .forEach((cls) => section.classList.add(cls));
+      } else {
+        section.dataset[toCamelCase(key)] = value;
+      }
+    });
+    const wrapper = meta.parentElement;
+    meta.remove();
+    if (wrapper !== section && !wrapper.children.length) wrapper.remove();
+  });
+}
+
 export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
 }

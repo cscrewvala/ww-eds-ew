@@ -1,0 +1,156 @@
+/*
+ * hero-banner: full-bleed image with 60% black overlay and centered title/intro.
+ * Values from source herobannercarousel.single-banner (woolworthsgroup.com.au).
+ * Source image heights per breakpoint are clipped by 20px at the bottom
+ * (slick margin-bottom -27px + 7px inline-block gap), so the block min-height
+ * is the visible height and the media layer extends 20px below it.
+ */
+
+.hero-banner-container .hero-banner-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 666px;
+  margin-top: 24px;
+  overflow: hidden;
+  color: var(--color-snow);
+  text-align: center;
+}
+
+.hero-banner .hero-banner-media {
+  position: absolute;
+  inset: 0 0 -20px;
+  z-index: 0;
+}
+
+.hero-banner .hero-banner-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0);
+  opacity: 0.6;
+}
+
+.hero-banner .hero-banner-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-banner .hero-banner-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  border-radius: 0;
+}
+
+.hero-banner .hero-banner-inner {
+  position: relative;
+  z-index: 1;
+  top: 10px; /* source centers text in the unclipped (visible + 20px) image box */
+  width: 89%;
+}
+
+.hero-banner .hero-banner-content > * {
+  margin: 0;
+  color: var(--color-snow);
+}
+
+.hero-banner .hero-banner-content .hero-banner-title {
+  font-family: var(--heading-font-family);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 48px;
+}
+
+.hero-banner .hero-banner-content p {
+  padding: 10px 0;
+  font-family: var(--heading-font-family);
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+/* no image authored: plain centered intro on page background */
+.hero-banner.no-image {
+  min-height: 0;
+  color: var(--text-color);
+}
+
+.hero-banner.no-image .hero-banner-content > * {
+  color: var(--text-color);
+}
+
+.hero-banner.no-image .hero-banner-content .hero-banner-title {
+  color: var(--heading-color);
+}
+
+@media (width >= 540px) {
+  .hero-banner {
+    min-height: 211px;
+  }
+}
+
+@media (width >= 768px) {
+  .hero-banner {
+    min-height: 309px;
+  }
+
+  .hero-banner .hero-banner-media img {
+    object-position: 0% 50%;
+  }
+
+  .hero-banner .hero-banner-content .hero-banner-title {
+    font-size: 64px;
+    line-height: 80px;
+  }
+
+  .hero-banner .hero-banner-content p {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
+@media (width >= 900px) {
+  .hero-banner {
+    min-height: 366px;
+  }
+}
+
+@media (width >= 1024px) {
+  .hero-banner {
+    min-height: 419px;
+  }
+}
+
+@media (width >= 1025px) {
+  .hero-banner .hero-banner-inner {
+    width: 65%;
+  }
+}
+
+@media (width >= 1280px) {
+  .hero-banner {
+    min-height: 529px;
+  }
+}
+
+@media (width >= 1440px) {
+  .hero-banner {
+    min-height: 597px;
+  }
+}
+
+@media (width >= 1600px) {
+  .hero-banner {
+    min-height: 666px;
+  }
+}

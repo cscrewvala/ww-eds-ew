@@ -1,0 +1,26 @@
+{
+  "variantName": "columns-contact",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "contact-details",
+    "imagePattern": "small circular icon left of each item",
+    "structure": "icon | bold label + value lines (address, tel/mailto link, hours)",
+    "columns": "2 or 3 equal columns by item count, stacked on mobile"
+  },
+  "contentPattern": "Icon contact items (Email / Phone / Address). One cell per item (one row with 2-3 cells, or one item per row): optional icon image or EDS :icon:, label paragraph ('Postal address:', 'Phone contact'), then value paragraphs (address lines, mailto:/tel: links, opening hours). Section H1/H2 and intro text are default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors.html",
+      "https://www.woolworthsgroup.com.au/au/en/contact-us.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/investor-contact.html"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-14T07:38:27.460073+00:00"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

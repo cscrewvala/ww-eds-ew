@@ -1,0 +1,24 @@
+{
+  "variantName": "columns-text",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "multi-topic-text-grid",
+    "imagePattern": "none",
+    "structure": "heading + rich text (paragraphs, links, lists) per item",
+    "columns": "2x2 grid on desktop, stacked on mobile"
+  },
+  "contentPattern": "Text grid (source card component without image). Rows of 2 cells; each cell holds a heading (H3, e.g. 'Speak Up', 'Vulnerability Disclosure') followed by paragraphs, inline links and bullet lists. Example: Contact Us page 2x2 grid of enquiry topics.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/contact-us.html",
+      "/au/en/privacy/usage"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

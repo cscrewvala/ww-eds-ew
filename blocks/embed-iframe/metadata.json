@@ -1,0 +1,25 @@
+{
+  "variantName": "embed-iframe",
+  "baseBlock": "embed",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "third-party-widget",
+    "imagePattern": "none",
+    "structure": "centred pill tab bar above a full-width iframe (single iframe when only one row)",
+    "columns": 1,
+    "cta": false
+  },
+  "contentPattern": "Third-party (Euroland) widgets referenced by URL: one row per widget, cell 1 tab label (e.g. 'Stock Quote', 'Price Lookup', 'Share Calculator'), cell 2 iframe URL link, optional cell 3 height in px. One row renders a plain iframe; more than one row renders an accessible tab bar switching iframes. Iframes are created lazily (near viewport, on first tab show) and titled from the label.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/share-price.html",
+      "/au/en/privacy"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

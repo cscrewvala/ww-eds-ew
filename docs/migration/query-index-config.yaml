@@ -1,0 +1,34 @@
+# Query index for the article-list block. Configure at tools.aem.live (config service → content → query.yaml);
+# helix-query.yaml in the repo is retired.
+version: 1
+indices:
+  articles:
+    include:
+      - /au/en/our-newsroom/media-releases/**
+      - /au/en/our-impact/sustainability/our-stories/**
+    target: /au/en/article-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, "content")
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, "content")
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, "content")
+      date:
+        select: head > meta[name="date"]
+        value: attribute(el, "content")
+      tags:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, "content")
+      listing:
+        select: head > meta[name="listing"]
+        value: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
+      lastModified:
+        select: none
+        value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")

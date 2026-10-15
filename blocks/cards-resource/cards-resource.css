@@ -1,0 +1,344 @@
+/*
+ * cards-resource
+ * Source: privacy.html "More advice and support" (smallmediacard) and
+ * privacy/policy-documents.html (policydocument frames).
+ * Values from getComputedStyle on the source (1440 / 768 / 375).
+ * Source descriptions start with an authored <br> (one 24px line); that
+ * blank line is reproduced with extra top padding on the description.
+ *
+ * Layout classes (set by JS):
+ *   .cards-resource-cards     centred support cards (accordion < 768px)
+ *   .cards-resource-documents policy-document frames (icon left)
+ */
+
+.cards-resource > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-resource > ul > li {
+  margin: 0;
+}
+
+.cards-resource .cards-resource-icon {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.cards-resource .cards-resource-icon picture {
+  display: block;
+}
+
+.cards-resource .cards-resource-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cards-resource .cards-resource-title {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.cards-resource .cards-resource-description {
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  color: var(--color-charcoal);
+}
+
+.cards-resource .cards-resource-cta,
+.cards-resource .cards-resource-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.cards-resource .cards-resource-actions > p {
+  margin: 0;
+}
+
+/* CTA buttons (source: .button-container .button) */
+main .cards-resource.block .cards-resource-cta a:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100% - 8px);
+  margin: 4px;
+  border: 1px solid transparent;
+  border-radius: var(--button-border-radius);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  text-decoration: none;
+}
+
+main .cards-resource.block .cards-resource-cta a:focus-visible {
+  outline: 2px solid var(--color-ocean);
+  outline-offset: 2px;
+}
+
+main .cards-resource.block .cards-resource-cta a.cards-resource-external::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 19px;
+  height: 19px;
+  margin-left: 7px;
+  background-color: currentcolor;
+  mask: url("./external-link.svg") center / contain no-repeat;
+}
+
+/* ---------- cards: centred support cards ---------- */
+
+/* mobile (< 768px): accordion rows */
+.cards-resource.cards-resource-cards > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cards-resource.cards-resource-cards > ul > li {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px;
+  margin: 16px auto;
+  padding: 16px;
+  background-color: var(--color-snow);
+}
+
+.cards-resource .cards-resource-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  cursor: pointer;
+}
+
+.cards-resource .cards-resource-header .cards-resource-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.cards-resource .cards-resource-header .cards-resource-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: start;
+}
+
+.cards-resource .cards-resource-toggle {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: var(--color-ocean);
+  mask: url("./chevron-down.svg") center / contain no-repeat;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cards-resource .cards-resource-toggle:focus-visible {
+  outline: 2px solid var(--color-ocean);
+  outline-offset: 2px;
+}
+
+.cards-resource .cards-resource-open .cards-resource-toggle {
+  transform: rotate(180deg);
+}
+
+.cards-resource.cards-resource-cards .cards-resource-body {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cards-resource.cards-resource-cards .cards-resource-open .cards-resource-body {
+  display: flex;
+}
+
+.cards-resource .cards-resource-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.cards-resource .cards-resource-content > .cards-resource-description {
+  padding: 40px 8px 16px;
+  text-align: start;
+}
+
+.cards-resource .cards-resource-content > .cards-resource-cta,
+.cards-resource .cards-resource-content > .cards-resource-actions {
+  justify-content: center;
+  margin-top: auto;
+  padding-bottom: 24px;
+}
+
+main .cards-resource.block.cards-resource-cards .cards-resource-cta a:any-link {
+  height: 38px;
+  padding: 9px 24px;
+  border-color: var(--color-midnight);
+  background-color: transparent;
+  color: var(--color-midnight);
+  text-decoration: none;
+}
+
+main .cards-resource.block.cards-resource-cards .cards-resource-cta a:hover {
+  background-color: var(--color-sky);
+  color: var(--color-midnight);
+  text-decoration: none;
+}
+
+/* tablet / desktop (>= 768px): 3 centred cards per row */
+@media (width >= 768px) {
+  .cards-resource.cards-resource-cards > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 384px));
+    justify-content: center;
+    gap: 24px 32px;
+  }
+
+  .cards-resource.cards-resource-cards.cards-resource-count-3 > ul {
+    grid-template-columns: repeat(3, minmax(0, 384px));
+  }
+
+  .cards-resource.cards-resource-cards > ul > li {
+    max-width: 281px;
+    margin: 16px auto 9px;
+    padding: 8px 8px 24px;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px -4px rgb(58 71 78 / 15%);
+  }
+
+  .cards-resource .cards-resource-header {
+    flex-direction: column;
+    gap: 16px;
+    cursor: auto;
+  }
+
+  .cards-resource .cards-resource-header .cards-resource-icon {
+    width: 54px;
+    height: 54px;
+  }
+
+  .cards-resource .cards-resource-header .cards-resource-title {
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .cards-resource .cards-resource-toggle {
+    display: none;
+  }
+
+  .cards-resource.cards-resource-cards .cards-resource-body {
+    display: flex;
+  }
+
+  .cards-resource .cards-resource-content > .cards-resource-description {
+    padding: 32px 0 16px;
+    text-align: center;
+  }
+
+}
+
+@media (width >= 1200px) {
+  .cards-resource.cards-resource-cards > ul {
+    gap: 24px 16px;
+  }
+}
+
+/* ---------- documents: policy-document frames ---------- */
+
+.cards-resource.cards-resource-documents > ul {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cards-resource.cards-resource-documents > ul > li {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 472px;
+  padding: 24px;
+  background: linear-gradient(var(--color-tint-sky-20), var(--color-tint-sky-20)), var(--color-snow);
+  color: var(--color-charcoal);
+}
+
+.cards-resource.cards-resource-documents .cards-resource-icon {
+  width: 64px;
+  height: 64px;
+}
+
+.cards-resource .cards-resource-frame {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  margin-top: 24px;
+}
+
+.cards-resource .cards-resource-no-icon > .cards-resource-frame {
+  margin-top: 0;
+}
+
+.cards-resource .cards-resource-frame > .cards-resource-title {
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.cards-resource .cards-resource-frame > .cards-resource-description {
+  margin-top: 16px;
+  padding-top: 24px;
+}
+
+.cards-resource .cards-resource-frame > .cards-resource-cta,
+.cards-resource .cards-resource-frame > .cards-resource-actions {
+  margin-top: 16px;
+}
+
+main .cards-resource.block.cards-resource-documents .cards-resource-cta a:any-link {
+  padding: 5px 24px;
+  border: 0;
+  background-color: var(--color-ocean);
+  color: var(--color-snow);
+  text-decoration: none;
+}
+
+main .cards-resource.block.cards-resource-documents .cards-resource-cta a:hover {
+  background-color: var(--color-midnight);
+  color: var(--color-snow);
+  text-decoration: none;
+}
+
+@media (width >= 768px) {
+  .cards-resource.cards-resource-documents > ul > li {
+    flex-direction: row;
+  }
+
+  .cards-resource .cards-resource-frame {
+    margin: 0 0 0 24px;
+  }
+
+  .cards-resource .cards-resource-no-icon > .cards-resource-frame {
+    margin-left: 0;
+  }
+
+  .cards-resource .cards-resource-frame > .cards-resource-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

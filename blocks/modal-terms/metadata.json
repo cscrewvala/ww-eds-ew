@@ -1,0 +1,24 @@
+{
+  "variantName": "modal-terms",
+  "baseBlock": "modal",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "consent-gate",
+    "imagePattern": "none",
+    "structure": "centred modal dialog over dimmed page: scrollable legal text panel, right-aligned Decline / Accept buttons",
+    "columns": 1,
+    "cta": true
+  },
+  "contentPattern": "Terms-of-use gate authored at the top of the page: one row, cell 1 optional alert label + H2 'Terms of use' + legal rich text, cell 2 the actions 'Decline' (optional link, e.g. /investors) and 'Accept and Continue'. Shown as a modal dialog on page load; Accept stores consent in sessionStorage (per page path) and closes; Decline navigates to its link or history.back(). Not shown again once accepted this session.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/debt-investors.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

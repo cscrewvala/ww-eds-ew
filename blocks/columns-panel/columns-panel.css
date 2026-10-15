@@ -1,0 +1,88 @@
+/* columns-panel: values from source computed styles
+   (.container__body__content.two-33-66 with .mastercard panels + .image) */
+
+.columns-panel {
+  margin: 24px 0;
+  color: var(--text-color);
+}
+
+.columns-panel .columns-panel-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* source stacks panels with 24px separators, including one above the first */
+.columns-panel .columns-panel-items {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 24px;
+  min-width: 0;
+}
+
+.columns-panel .columns-panel-item {
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  overflow-wrap: anywhere;
+}
+
+.columns-panel .columns-panel-item :is(h2, h3, h4, h5, h6) {
+  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: var(--heading-font-weight);
+  line-height: 28px;
+  color: var(--color-ocean);
+}
+
+.columns-panel .columns-panel-item p,
+.columns-panel .columns-panel-item ul,
+.columns-panel .columns-panel-item ol {
+  margin: 0;
+}
+
+.columns-panel .columns-panel-item > :last-child {
+  margin-bottom: 0;
+}
+
+.columns-panel .columns-panel-media {
+  min-width: 0;
+  line-height: 0;
+}
+
+.columns-panel .columns-panel-media picture {
+  display: block;
+}
+
+.columns-panel .columns-panel-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+@media (width >= 900px) {
+  .columns-panel .columns-panel-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  /* source two-33-66 columns: 388px + 784px in a 1200px row */
+  .columns-panel .columns-panel-items {
+    flex: 0 1 calc(33.333% - 12px);
+  }
+
+  .columns-panel .columns-panel-media {
+    flex: 0 1 calc(66.666% - 16px);
+  }
+
+  .columns-panel.columns-panel-no-media .columns-panel-items {
+    flex-basis: 100%;
+  }
+}

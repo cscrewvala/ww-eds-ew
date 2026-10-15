@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-calendar",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "event-calendar",
+    "imagePattern": "icon",
+    "structure": "stacked pill rows: calendar icon | date above title | 'Add (+)' action panel on the right",
+    "columns": 1,
+    "cta": true
+  },
+  "contentPattern": "Repeating event rows: one row per event, cell 1 date (dd/mm/yyyy, e.g. 28/10/2026), cell 2 event title, optional cell 3 description. Renders as a stacked list with a calendar icon, date and title; the 'Add' action builds an all-day .ics file client-side (Blob download) from the row's date and title.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/shareholder-calendar.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

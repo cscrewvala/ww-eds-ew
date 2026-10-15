@@ -1,0 +1,24 @@
+{
+  "variantName": "quote-story",
+  "baseBlock": "quote",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "pull-quote",
+    "imagePattern": "noimg",
+    "structure": "quote marks + attribution + quote text",
+    "cta": false
+  },
+  "contentPattern": "Pull quote: row 1 quote text paragraph(s), row 2 attribution. Renders a large decorative quote mark, the attribution as an eyebrow above, then the quote text (figure > figcaption + blockquote).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/2026-world-environment-day.html",
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-14T06:41:16.405438Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

@@ -1,0 +1,188 @@
+/* hero-brand: full-bleed ocean band, logo + tagline, brand ripple graphic bottom-right.
+ * Values from source .heroBannerV3 computed styles (breakpoints 768 / 900 / 1024 / 1280 / 1440). */
+
+.hero-brand-container .hero-brand-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-brand {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 210px;
+  overflow: hidden;
+  background-color: var(--color-ocean);
+  color: var(--color-snow);
+}
+
+/* default decorative ripple graphic (source .container__body__corner-graphic) */
+.hero-brand::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 168px;
+  height: 140px;
+  background: url('ocean-berry-land-line.svg') no-repeat right bottom / 100% 100%;
+  pointer-events: none;
+}
+
+.hero-brand.has-art::after {
+  display: none;
+}
+
+.hero-brand .hero-brand-art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 168px;
+  height: 140px;
+  pointer-events: none;
+}
+
+.hero-brand .hero-brand-art picture,
+.hero-brand .hero-brand-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-brand .hero-brand-art img {
+  object-fit: contain;
+  object-position: right bottom;
+}
+
+.hero-brand .hero-brand-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px 36px;
+  box-sizing: border-box;
+}
+
+.hero-brand .hero-brand-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* logo: source svg sits in an inline box, leaving ~7px below it before the text block */
+.hero-brand .hero-brand-logo {
+  padding-bottom: 7px;
+  line-height: 0;
+}
+
+.hero-brand .hero-brand-logo .icon,
+.hero-brand .hero-brand-logo picture {
+  display: block;
+  width: 150px;
+  height: auto;
+}
+
+.hero-brand .hero-brand-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hero-brand .hero-brand-text {
+  max-width: 325px;
+  margin: 16px 0;
+}
+
+.hero-brand .hero-brand-text > * {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--color-snow);
+}
+
+@media (width >= 768px) {
+  .hero-brand {
+    min-height: 192px;
+  }
+
+  .hero-brand .hero-brand-inner {
+    padding: 24px;
+  }
+
+  .hero-brand .hero-brand-logo .icon,
+  .hero-brand .hero-brand-logo picture {
+    width: 250px;
+  }
+
+  .hero-brand .hero-brand-text {
+    max-width: 515px;
+  }
+
+  .hero-brand .hero-brand-text > * {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}
+
+@media (width >= 900px) {
+  .hero-brand::after,
+  .hero-brand .hero-brand-art {
+    width: 360px;
+    height: 300px;
+  }
+}
+
+@media (width >= 1024px) {
+  .hero-brand {
+    min-height: 270px;
+  }
+
+  .hero-brand .hero-brand-inner {
+    max-width: 976px;
+  }
+
+  .hero-brand .hero-brand-logo .icon,
+  .hero-brand .hero-brand-logo picture {
+    width: 346px;
+  }
+
+  .hero-brand .hero-brand-text {
+    max-width: 650px;
+  }
+
+  .hero-brand .hero-brand-text > * {
+    font-size: 24px;
+    line-height: 28px;
+  }
+}
+
+@media (width >= 1280px) {
+  .hero-brand .hero-brand-inner {
+    max-width: var(--content-max-width);
+  }
+}
+
+@media (width >= 1440px) {
+  .hero-brand {
+    min-height: 300px;
+  }
+
+  .hero-brand .hero-brand-logo .icon,
+  .hero-brand .hero-brand-logo picture {
+    width: 385px;
+  }
+
+  .hero-brand .hero-brand-text {
+    max-width: 800px;
+  }
+
+  .hero-brand .hero-brand-text > * {
+    font-size: 27px;
+    line-height: 32px;
+  }
+}

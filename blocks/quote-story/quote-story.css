@@ -1,0 +1,120 @@
+/* quote-story: source .pullquote (values from computed styles) */
+.quote-story {
+  display: flex;
+  justify-content: center;
+  color: var(--text-color);
+}
+
+.quote-story .quote-story-figure {
+  display: grid;
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 1024px;
+  margin: 16px;
+}
+
+.quote-story .quote-story-mark {
+  display: block;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 44px;
+  color: var(--color-ocean-light);
+  text-align: start;
+}
+
+.quote-story .quote-story-mark-end {
+  text-align: end;
+}
+
+.quote-story .quote-story-attribution {
+  margin: 0 42px;
+  font-size: var(--body-font-size-s);
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+.quote-story .quote-story-attribution > * {
+  margin: 0;
+}
+
+.quote-story .quote-story-text {
+  margin: 10px 42px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 600;
+  line-height: var(--heading-line-height-m);
+  color: var(--color-ocean);
+}
+
+.quote-story .quote-story-text > * {
+  margin: 0 0 16px;
+}
+
+.quote-story .quote-story-text > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  .quote-story .quote-story-figure {
+    margin: 50px;
+  }
+
+  .quote-story .quote-story-mark {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  .quote-story .quote-story-attribution {
+    font-size: var(--body-font-size-m);
+  }
+
+  .quote-story .quote-story-text {
+    font-size: var(--heading-font-size-l);
+    line-height: var(--heading-line-height-l);
+  }
+}
+
+/* variant: blockquote — source rich-text <blockquote> form (e.g. refrigeration-apprenticeship-program) */
+.quote-story.blockquote {
+  display: block;
+}
+
+.quote-story.blockquote .quote-story-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: none;
+  margin: 0 40px;
+}
+
+.quote-story.blockquote .quote-story-mark {
+  display: none;
+}
+
+.quote-story.blockquote .quote-story-text {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-s);
+  line-height: var(--heading-line-height-s);
+}
+
+.quote-story.blockquote .quote-story-text > * {
+  margin: 0 0 16px;
+}
+
+.quote-story.blockquote .quote-story-text > :last-child {
+  margin-bottom: 0;
+}
+
+.quote-story.blockquote .quote-story-attribution {
+  order: 1;
+  margin: 0;
+  font-size: var(--body-font-size-m);
+  color: var(--color-ocean);
+}
+
+.quote-story.blockquote .quote-story-attribution > :first-child::before {
+  content: "- ";
+}

@@ -1,0 +1,1194 @@
+{
+  "templates": [
+    {
+      "name": "news-article",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-locks-in-cinnabon-cake-as-a-permanent-bakery-hero.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/big-w-treats-thousands-of-mums-to-free-gifts-from-new-autumn-win.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-bricks-returns-with-a-spin-on-cricket.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/mini-woolies-tafe-casino.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/top-bakers-battle-for-glory-at-woolworths-baker-of-the-year-2026.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/media-release---australian-beef-industry-collaboration-launches.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-group-now-powering-its-business-with-100--renewable-e.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/all-the-ways-to-win-at-woolies-in-the-new-year--cars--gift-cards.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-shakes-up-home-cooking-with-70-new-globally-inspired-.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-and-share-the-dignity-team-up-for-march-dignity-drive.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-fissler-launch.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/big-w-drops-prices-on-over-2-000-products-to-help-customers-save.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/st-marys-estore-launch-.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/little-one-s-nappies-get-major-overhaul-with-improved-absorbency.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/milkrun-is-giving-away-20-000-free-grocery-items.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-brings-back-in-store-soft-plastics-collection.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/healthylife-living-healthy-report-2026-.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/australian-dairy-farmers-have-now-received-an-extra-10m-from-woolworths-sustainable-dairy-initiatives.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/national-regional-launch-of-2026-anzac-appeal-takes-place-at-woo.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/-game-on---woolworths--netball-grants-return-with-funding-for-gr.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/ceo-and-chairman-acknowledge-leadership-responsibility.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/aussies-can-make-a-difference-for-food-insecure-families-heading-back-to-school.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/big-w-announcement.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/delivery-now-service-offers-brisbane-grocery-delivery-in-under-two-hours.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/disney-and-woolworths-team-up-to-celebrate-the-lion-king.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/jamie-oliver-woolworths-make-healthier-eating-easier-for-aussies.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/caltex-and-woolworths-welcome-customers-to-the-new-age-of-convenience.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/f19-final-profit-and-dividend-announcement.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/endeavour-drinks-welcomes-chapel-hill-and-establishes-paragon-wine-estates.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/proposed-class-action-in-relation-to-salaried-team-member-payments.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/food-insecurity-at-christmas-an-increasing-reality.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/international-expert-to-help-fight-food-waste-in-australia.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/intention-to-separate-endeavour-group-following-merger-of-endeavour-drinks-and-alh.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/helping-australian-women-in-need.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/hilton-foods-australia-unveils-280m-fresh-meat-production-facility-in-heathwood-to-service-hundreds-of-woolworths-stores.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/making-plastic-bags-history.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/lockyer-valley-farming-group-to-benefit-from-woolworths-organic-growth-fund.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/more-than-500-aussie-schools-to-share-in-half-a-million-dollars-to-help-grow-the-next-generation-of-environmental-champions.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/new-barcode-trial-promises-to-cut-product-recall-food-waste-and-improve-traceability.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/deflation-in-fruit-and-veg.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive/2019/remote-schools-receive-educational-boost-through-woolworths-earn-and-learn-program.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/putting-potatoes-to-sleep.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/six-savings-hacks-for-online-shopping.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/mini-woolies-in-tasmania.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/pasta-match.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-freezes-shelf-prices-on-300-household-staples.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/we-want-you-to-spend-less-this-spring.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/winner-winner-chicken-dinner.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/remote-deliveries.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/berries-are-back-.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/deirdre-retirement-.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/rosh-hashanah.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/Carnival-of-Flowers.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/check-it-out/2023/how-we-re-supporting-community-resilience.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-locks-in-cinnabon-cake-as-a-permanent-bakery-hero.html",
+      "description": "Media release / news article (AEM media-page-template): hero banner with category + title, body text, side navigation. Sampled 20 latest-news, 20 news-archive, 14 check-it-out (newest first).",
+      "blocks": [
+        {
+          "name": "hero-article",
+          "instances": [
+            "section.cmp-carousel.hero-banner-carousel",
+            "herobannercarousel.heroBannerCarousel"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/our-newsroom/media-releases/*/*/*",
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero-banner",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel",
+            "section.hero-banner-carousel"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "article-body",
+          "selector": [
+            ".media-template-body",
+            ".container.responsivegrid.media-template-body"
+          ],
+          "style": null,
+          "blocks": [],
+          "defaultContent": [
+            ".media-template-body .cmp-text",
+            ".media-template-body .cmp-image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "story-article",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/2026-world-environment-day.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/fresh-food-depends-on-innovation-and-resilient-supply.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/woolworths-groups-new-sustainability-plan.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/31-million-and-growing-the-procurement-strategy-making-a-real-difference.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/how-woolworths-group-reached-100-renewable-electricity.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/Backing-the-next-generation-AgriEmpower-Scholarships-now-open.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/delivering-sustainable-seafood-choices-our-customers-can-trust.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/recycle-and-save.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/woolworths-farmer-cattle-partnership.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/partnering-with-rural-aid-to-back-aussie-farmers-during-tough-times.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/inspiring-indigenous-australians-through-achievement.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/generations-of-care-and-quality-cherries-at-wandin-valley-farms.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/thriving-in-a-quiet-and-inclusive-workplace.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2025/2025-living-healthy-report.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/reducing-hunger-in-the-top-end-in-partnership-with-foodbank.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/giving-the-gift-of-christmas.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/caring-for-kids-in-remote-rural-and-regional-qld-with-rfds.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/providing-career-pathways-for-diverse-talent.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/celebrating-woolworth-groups-proud-and-gender-diverse-team.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2024/meet-the-team-kash-chanderjith.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories/2026/2026-world-environment-day.html",
+      "description": "Sustainability story article (AEM content-page-template) under our-stories/<year>/. Sampled the 20 newest stories shown in the Our Stories listing.",
+      "blocks": [
+        {
+          "name": "hero-story",
+          "instances": [
+            ".container__body__two-column.two-50-50:has(h1)"
+          ]
+        },
+        {
+          "name": "video-story",
+          "instances": [
+            ".wwgvideo"
+          ]
+        },
+        {
+          "name": "quote-story",
+          "instances": [
+            ".pullquote"
+          ]
+        },
+        {
+          "name": "cards-story",
+          "instances": [
+            ".container__body__two-column.two-50-50:has(.contenttile)",
+            ".container__body__one-column .contenttile.teaser"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/our-impact/sustainability/our-stories/*/*",
+      "sections": [
+        {
+          "id": "1",
+          "name": "story-hero",
+          "selector": [
+            ".colscontainer:has(.container__body__two-column h1)"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-story"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "story-body",
+          "selector": [
+            ".colscontainer:has(.container__body__one-column):not(:has(.container__body__two-column))"
+          ],
+          "style": null,
+          "blocks": [
+            "video-story",
+            "quote-story",
+            "cards-story"
+          ],
+          "defaultContent": [
+            ".colscontainer:has(.container__body__one-column):not(:has(.container__body__two-column)) .text .cmp-text",
+            ".colscontainer:has(.container__body__one-column):not(:has(.container__body__two-column)) .heading",
+            ".colscontainer:has(.container__body__one-column):not(:has(.container__body__two-column)) .image .cmp-image",
+            ".colscontainer:has(.container__body__one-column):not(:has(.container__body__two-column)) .button"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "related-stories",
+          "selector": [
+            ".colscontainer:has(.container__body__two-column .contenttile)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-story"
+          ],
+          "defaultContent": [
+            ".colscontainer:has(.container__body__two-column .contenttile) .container__body__one-column .heading"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "listing-page",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/100-years-of-wwg.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases.html",
+      "description": "Pages whose primary content is a DYNAMIC filtered listing of articles (newsArticlesDynamic, latestNewsDynamic, filterTag+contentTile). Listings must be migrated as query-index driven article-list blocks, not static cards.",
+      "blocks": [
+        {
+          "name": "article-list",
+          "instances": [
+            ".newsarticles.list",
+            ".latestnews.list",
+            ".cmp-container:has(> .filtertag)"
+          ]
+        },
+        {
+          "name": "hero-article",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:has(.banner--category)"
+          ]
+        },
+        {
+          "name": "hero-banner",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category))"
+          ]
+        },
+        {
+          "name": "hero-brand",
+          "instances": [
+            ".colscontainer.heroBannerV3"
+          ]
+        },
+        {
+          "name": "cards-featured",
+          "instances": [
+            ".container__body__two-column.two-50-50:has(.contenttile)"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/**/(media-releases|news-archive|our-stories|100-years-of-wwg)",
+      "sections": [
+        {
+          "id": "1",
+          "name": "title-band",
+          "selector": [
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):not(:has(.text))"
+          ],
+          "style": "ocean",
+          "blocks": [],
+          "defaultContent": [
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):not(:has(.text)) .heading"
+          ]
+        },
+        {
+          "id": "2",
+          "name": "news-listing",
+          "selector": [
+            ".colscontainer:has(.newsarticles)"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": [
+            ".colscontainer:has(.newsarticles) div.button"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "archive-hero",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel:has(.banner--category)"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "4",
+          "name": "archive-listing",
+          "selector": [
+            ".colscontainer:has(.latestnews)"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": [
+            ".colscontainer:has(.latestnews) div.button"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "stories-hero",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category))"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "6",
+          "name": "stories-listing",
+          "selector": [
+            ".colscontainer.article-homepage:not(:has(.heading))"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "7",
+          "name": "brand-hero",
+          "selector": [
+            ".heroBanner.teaser:has(> .heroBannerV3)"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-brand"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "8",
+          "name": "featured-stories",
+          "selector": [
+            ".colscontainer:has(> .container__body > .container__body__two-column .contenttile)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-featured"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "9",
+          "name": "news-and-stories",
+          "selector": [
+            ".colscontainer.article-homepage:has(.heading)"
+          ],
+          "style": null,
+          "blocks": [
+            "article-list"
+          ],
+          "defaultContent": [
+            ".colscontainer.article-homepage:has(.heading) .heading"
+          ]
+        },
+        {
+          "id": "10",
+          "name": "careers-cta",
+          "selector": [
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):has(.text)"
+          ],
+          "style": "ocean, centered",
+          "blocks": [],
+          "defaultContent": [
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):has(.text) .heading",
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):has(.text) .text.snow .cmp-text",
+            ".colscontainer.container--bg-ocean:not(.heroBannerV3):has(.text) div.button"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "homepage",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/",
+      "description": "Homepage (source /au/en.html 301 -> /): hero banner carousel, curated content tiles.",
+      "blocks": [
+        {
+          "name": "hero-banner",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category))"
+          ]
+        },
+        {
+          "name": "cards-featured",
+          "instances": [
+            ".container__body__two-column.two-50-50:has(.contenttile)"
+          ]
+        },
+        {
+          "name": "cards-tile",
+          "instances": [
+            ".container__body__three-column:has(.contenttile)"
+          ]
+        }
+      ],
+      "urlPattern": "/",
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category))"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-banner"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "2",
+          "name": "latest-news",
+          "selector": [
+            ".colscontainer.container--bg-snow:has(.container__body__two-column .contenttile)"
+          ],
+          "style": "snow",
+          "blocks": [
+            "cards-featured"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-snow:has(.container__body__two-column .contenttile) .container__body__one-column .heading",
+            ".colscontainer.container--bg-snow:has(.container__body__two-column .contenttile) div.button"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "asx-announcements",
+          "selector": [
+            ".colscontainer:not(.container--bg-snow):has(.container__body__three-column .contenttile)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".colscontainer:not(.container--bg-snow):has(.container__body__three-column .contenttile) .container__body__one-column .heading",
+            ".colscontainer:not(.container--bg-snow):has(.container__body__three-column .contenttile) div.button"
+          ]
+        },
+        {
+          "id": "4",
+          "name": "find-out-more",
+          "selector": [
+            ".colscontainer.container--bg-snow:has(.container__body__three-column .contenttile)"
+          ],
+          "style": "snow",
+          "blocks": [
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-snow:has(.container__body__three-column .contenttile) .container__body__one-column .heading"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "content-page",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors.html",
+        "https://www.woolworthsgroup.com.au/au/en/contact-us.html",
+        "https://www.woolworthsgroup.com.au/au/en/wiq.html",
+        "https://www.woolworthsgroup.com.au/au/en/contact-us/partner-with-us.html",
+        "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/diversity-equity-inclusion.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-brands.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-history.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/reports.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/reconciliation-at-woolworths-group.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/health-and-nutrition.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/human-rights.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/social-impact.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/waste-and-circularity.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability.html",
+      "description": "General landing/content pages (AEM content-page-template). Curated (static) content tiles, ecosystem logo grids, leadership-profile cards. Capped at 20.",
+      "blocks": [
+        {
+          "name": "hero-article",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:has(.banner--category, .alignLeft__text)"
+          ]
+        },
+        {
+          "name": "hero-banner",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category, .alignLeft__text))"
+          ]
+        },
+        {
+          "name": "video-story",
+          "instances": [
+            ".container__body__one-column .wwgvideo:not(.accordion *)",
+            ".container__body__two-column:not(:has(.h3-secondary)) .wwgvideo:not(.accordion *)",
+            ".container__body__one-column .contenttile:has(.cmp-teaser--tile-video):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "quote-story",
+          "instances": [
+            ".text:has(.cmp-text > blockquote):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "cards-tile",
+          "instances": [
+            ".container__body__content:not(.container__body__one-column):has(.contenttile):not(:has(.contenttile ~ .contenttile)):not(.accordion *)",
+            ".container__body__content:not(.container__body__one-column):has(.mastercard .card__primary-img img):not(:has(.heading, .text, .contactpanel)):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "cards-featured",
+          "instances": [
+            ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile)"
+          ]
+        },
+        {
+          "name": "cards-stats",
+          "instances": [
+            ".heroStats:not(.accordion *)"
+          ]
+        },
+        {
+          "name": "accordion-program",
+          "instances": [
+            ".accordion.panelcontainer:not(.accordion .accordion)"
+          ]
+        },
+        {
+          "name": "columns-logos",
+          "instances": [
+            ".container__body__content.container__body__six-column:has(.image):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "columns-spotlight",
+          "instances": [
+            ".container__body__content.container__body__two-column:has(.h3-secondary):has(.wwgvideo, .mastercard)"
+          ]
+        },
+        {
+          "name": "columns-contact",
+          "instances": [
+            ".container__body__content:has(.contactpanel):not(:has(.mastercard, .heading)):not(.container__body__content *)"
+          ]
+        },
+        {
+          "name": "cards-logo",
+          "instances": [
+            ".ecosystem:not(.ecosystem *)"
+          ]
+        },
+        {
+          "name": "columns-text",
+          "instances": [
+            ".container__body__content.two-50-50:has(.mastercard):not(:has(.card__primary-img img, .image, .h3-secondary, .contactpanel, .wwgvideo))"
+          ]
+        },
+        {
+          "name": "columns-panel",
+          "instances": [
+            ".container__body__content.two-33-66:has(.mastercard):has(.image)"
+          ]
+        },
+        {
+          "name": "columns-gallery",
+          "instances": [
+            ".container__body__content.container__body__three-column:has(.image):not(:has(.button, .contenttile, .mastercard, .heading, .text)):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "cards-timeline",
+          "instances": [
+            ".historytimeline"
+          ]
+        },
+        {
+          "name": "cards-documents",
+          "instances": [
+            ".colscontainer:has(> .container__body > .container__body__content > .container__body__content__cols > .cmp-container > .linklist)"
+          ]
+        },
+        {
+          "name": "cards-profile",
+          "instances": [
+            ".colscontainer:has(.leadershipprofile):not(:has(.text))",
+            ".colscontainer:has(.leadershipprofile):has(.text) .container__body__content:has(.leadershipprofile)"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/**",
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero-and-intro",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article",
+            "hero-banner",
+            "video-story",
+            "cards-stats",
+            "columns-gallery",
+            "columns-contact",
+            "columns-text",
+            "cards-logo",
+            "cards-timeline"
+          ],
+          "defaultContent": [
+            ".colscontainer .top-cnt > .cmp-container > .heading",
+            ".colscontainer .top-cnt > .cmp-container > .text",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .heading",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) div.button",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "2",
+          "name": "ocean-band",
+          "selector": [
+            ".colscontainer.container--bg-ocean:not(.container--bg-ocean + .colscontainer)"
+          ],
+          "style": "ocean",
+          "blocks": [
+            "cards-profile"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-ocean .heading",
+            ".colscontainer.container--bg-ocean .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-ocean div.button",
+            ".colscontainer.container--bg-ocean .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "ocean-band-2",
+          "selector": [
+            ".colscontainer.container--bg-ocean:not(.container--bg-ocean + .colscontainer) ~ .colscontainer.container--bg-ocean:not(.container--bg-ocean + .colscontainer)"
+          ],
+          "style": "ocean",
+          "blocks": [
+            "cards-featured"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-ocean .heading",
+            ".colscontainer.container--bg-ocean .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-ocean div.button",
+            ".colscontainer.container--bg-ocean .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "4",
+          "name": "tint-sky-10-band",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-10:not(.container--bg-tint-sky-10 + .colscontainer)"
+          ],
+          "style": "tint-sky-10",
+          "blocks": [
+            "cards-tile",
+            "quote-story",
+            "accordion-program",
+            "columns-panel"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-sky-10 .heading",
+            ".colscontainer.container--bg-tint-sky-10 .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-tint-sky-10 div.button",
+            ".colscontainer.container--bg-tint-sky-10 .container__body__content:has(.button) .image",
+            ".colscontainer.container--bg-tint-sky-10 .newsArticlesButton",
+            ".colscontainer.container--bg-tint-sky-10 .container__body__one-column .mastercard"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "tint-sky-10-band-2",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-10:not(.container--bg-tint-sky-10 + .colscontainer) ~ .colscontainer.container--bg-tint-sky-10:not(.container--bg-tint-sky-10 + .colscontainer)"
+          ],
+          "style": "tint-sky-10",
+          "blocks": [],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-sky-10 .heading",
+            ".colscontainer.container--bg-tint-sky-10 .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-tint-sky-10 div.button",
+            ".colscontainer.container--bg-tint-sky-10 .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "6",
+          "name": "tint-sky-5-band",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-5:not(.container--bg-tint-sky-5 + .colscontainer)"
+          ],
+          "style": "tint-sky-5",
+          "blocks": [
+            "video-story",
+            "cards-documents"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-sky-5 .heading",
+            ".colscontainer.container--bg-tint-sky-5 .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-tint-sky-5 div.button",
+            ".colscontainer.container--bg-tint-sky-5 .container__body__content:has(.button) .image",
+            ".colscontainer.container--bg-tint-sky-5 .container__body__two-column .image"
+          ]
+        },
+        {
+          "id": "7",
+          "name": "tint-sky-5-band-2",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-5:not(.container--bg-tint-sky-5 + .colscontainer) ~ .colscontainer.container--bg-tint-sky-5:not(.container--bg-tint-sky-5 + .colscontainer)"
+          ],
+          "style": "tint-sky-5",
+          "blocks": [
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-sky-5 .heading",
+            ".colscontainer.container--bg-tint-sky-5 .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-tint-sky-5 div.button",
+            ".colscontainer.container--bg-tint-sky-5 .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "8",
+          "name": "tint-sky-20-band",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-20:not(.container--bg-tint-sky-20 + .colscontainer)"
+          ],
+          "style": "tint-sky-20",
+          "blocks": [
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-sky-20 .heading",
+            ".colscontainer.container--bg-tint-sky-20 .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer.container--bg-tint-sky-20 div.button",
+            ".colscontainer.container--bg-tint-sky-20 .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "9",
+          "name": "footnote-band",
+          "selector": [
+            ".colscontainer.container--bg-tint-ocean-10:not(.container--bg-tint-ocean-10 + .colscontainer)"
+          ],
+          "style": "tint-ocean-10",
+          "blocks": [],
+          "defaultContent": [
+            ".colscontainer.container--bg-tint-ocean-10 .text"
+          ]
+        },
+        {
+          "id": "10",
+          "name": "plain-after-band",
+          "selector": [
+            ":is(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10) + .colscontainer:not(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10)"
+          ],
+          "style": null,
+          "blocks": [
+            "video-story",
+            "cards-stats",
+            "accordion-program",
+            "cards-tile",
+            "cards-featured",
+            "columns-spotlight",
+            "columns-contact",
+            "cards-logo",
+            "cards-documents"
+          ],
+          "defaultContent": [
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .heading",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) div.button",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .container__body__content:has(.button) .image"
+          ]
+        },
+        {
+          "id": "11",
+          "name": "plain-after-band-2",
+          "selector": [
+            ":is(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10) + .colscontainer:not(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10) ~ :is(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10) + .colscontainer:not(.container--bg-ocean, .container--bg-tint-sky-10, .container--bg-tint-sky-5, .container--bg-tint-sky-20, .container--bg-tint-ocean-10)"
+          ],
+          "style": null,
+          "blocks": [
+            "cards-tile",
+            "cards-documents",
+            "columns-spotlight",
+            "columns-logos"
+          ],
+          "defaultContent": [
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .heading",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .text:not(:has(.cmp-text > blockquote))",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) div.button",
+            ".colscontainer:not(.container--bg-ocean, [class*=\"container--bg-tint-\"]) .container__body__content:has(.button) .image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "investor-page",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/results-and-presentations.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/asx-announcements.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/share-price.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/shareholding.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/webcasts.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/five-year-summary.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/investor-contact.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/debt-investors.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/shareholder-calendar.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/annual-general-meetings.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/reports-archive.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/dividends.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/shareholder-faqs.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/annual-general-meetings-archive.html",
+        "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/Financial-Results-archive.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/asx-announcements.html",
+      "description": "Investor pages (AEM media/sub-landing templates): side navigation, link lists of documents, tables, cards.",
+      "blocks": [
+        {
+          "name": "hero-article",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:has(.banner--category)"
+          ]
+        },
+        {
+          "name": "modal-terms",
+          "instances": [
+            ".wwgmodal:has(modal.modal)"
+          ]
+        },
+        {
+          "name": "accordion-program",
+          "instances": [
+            ".accordion.accordion-core:not(.accordion .accordion)"
+          ]
+        },
+        {
+          "name": "cards-documents",
+          "instances": [
+            ".container__body__content:has(> .container__body__content__cols > .cmp-container > .linklist):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "cards-video",
+          "instances": [
+            ".container__body__content:has(> .container__body__content__cols > .cmp-container > .mastercard .card__video):not(.accordion *)"
+          ]
+        },
+        {
+          "name": "embed-iframe",
+          "instances": [
+            ".tabs.panelcontainer:has(iframe)"
+          ]
+        },
+        {
+          "name": "table-data",
+          "instances": [
+            "tablecomp.tableComp table.table-comp__section",
+            ".text .cmp-text > table:not(.accordion *)"
+          ]
+        },
+        {
+          "name": "cards-calendar",
+          "instances": [
+            ".cmp-container:has(> .mastercardlist > mastercardlist.calendar-list)"
+          ]
+        },
+        {
+          "name": "columns-contact",
+          "instances": [
+            ".container__body__content.container__body__two-column:has(.contactpanel)"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/investors/**",
+      "sections": [
+        {
+          "id": "s1",
+          "name": "hero",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "s2",
+          "name": "investor-content",
+          "selector": [
+            ".side-nav-template__body__content .media-template-body",
+            ".sub-landing-template-body herobannercarousel.heroBannerCarousel ~ :is(.container, .colscontainer)"
+          ],
+          "style": null,
+          "blocks": [
+            "modal-terms",
+            "accordion-program",
+            "cards-documents",
+            "cards-video",
+            "embed-iframe",
+            "table-data",
+            "cards-calendar",
+            "columns-contact"
+          ],
+          "defaultContent": [
+            ".side-nav-template__body__content .heading:not(.accordion *):not(.container__body__two-column *)",
+            ".side-nav-template__body__content .text:not(.accordion *):not(:has(table)):not(.container__body__two-column *)",
+            ".side-nav-template__body__content cta.button-container.cta-primary:not(.accordion *)",
+            "tablecomp.tableComp .table-comp__title"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "legal-page",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-approach-/corporate-governance/safety-health-and-wellbeing-policy.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-approach-/corporate-governance/recovery-and-return-to-work-policy.html",
+        "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/our-artwork.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents/privacy-policy.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/collection.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/cookies-and-digital-identifiers.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/usage.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/managing-your-information.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents/cookies-statement.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/sharing.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/in-store-technology-and-your-privacy.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/protection.html",
+        "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents/terms-and-conditions.html",
+        "https://www.woolworthsgroup.com.au/au/en/woolworths-captive-insurance-pte--ltd-statement.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/privacy/collection.html",
+      "description": "Privacy, policy and legal statement pages (AEM blank-page-template).",
+      "blocks": [
+        {
+          "name": "hero-article",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:has(.banner--category)"
+          ]
+        },
+        {
+          "name": "cards-tile",
+          "instances": [
+            ".container__body__content:is(.container__body__three-column, .container__body__four-column):has(> .container__body__content__cols > .cmp-container > .mastercard .card__primary-img img)"
+          ]
+        },
+        {
+          "name": "cards-logo",
+          "instances": [
+            ".ecosystem:not(.ecosystem *)"
+          ]
+        },
+        {
+          "name": "embed-iframe",
+          "instances": [
+            ".embed-iframe.embed:has(iframe)"
+          ]
+        },
+        {
+          "name": "accordion-program",
+          "instances": [
+            ".accordion.panelcontainer:not(.accordion .accordion)"
+          ]
+        },
+        {
+          "name": "columns-text",
+          "instances": [
+            ".container__body__content.container__body__three-column:has(> .container__body__content__cols > .cmp-container > .mastercard .card__title):not(:has(.card__primary-img, .card__video))"
+          ]
+        },
+        {
+          "name": "columns-spotlight",
+          "instances": [
+            "imagevideotext.dual-container"
+          ]
+        },
+        {
+          "name": "video-story",
+          "instances": [
+            ".mastercard:has(.card__video)"
+          ]
+        },
+        {
+          "name": "cards-resource",
+          "instances": [
+            ".container__body__content.container__body__three-column:has(> .container__body__content__cols > .cmp-container > smallmediacard.small-media-card)",
+            ".container__body__content__cols:has(> .cmp-container > .policydocument)"
+          ]
+        },
+        {
+          "name": "columns-media",
+          "instances": [
+            ".container__body__content.container__body__two-column.two-50-50:has(.image):has(.text)"
+          ]
+        }
+      ],
+      "urlPattern": "/au/en/privacy/**",
+      "sections": [
+        {
+          "id": "1",
+          "name": "hero",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel"
+          ],
+          "style": null,
+          "blocks": [
+            "hero-article"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "v1",
+          "name": "ocean-title-band",
+          "selector": [
+            ".colscontainer.container--bg-ocean"
+          ],
+          "style": "ocean",
+          "blocks": [
+            "cards-resource"
+          ],
+          "defaultContent": [
+            ".text.welcome-banner",
+            ".heading",
+            ".text"
+          ]
+        },
+        {
+          "id": "2",
+          "name": "intro",
+          "selector": [
+            "herobannercarousel.heroBannerCarousel + .colscontainer:not([class*='container--bg'])"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media",
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".text",
+            ".heading",
+            ".button",
+            ".image"
+          ]
+        },
+        {
+          "id": "3",
+          "name": "snow-band",
+          "selector": [
+            ".colscontainer.container--bg-snow:not(.container--bg-snow + .colscontainer)"
+          ],
+          "style": "snow",
+          "blocks": [
+            "cards-tile",
+            "accordion-program",
+            "columns-media"
+          ],
+          "defaultContent": [
+            ".heading",
+            ".text",
+            ".button",
+            ".image"
+          ]
+        },
+        {
+          "id": "4",
+          "name": "snow-band-2",
+          "selector": [
+            ".colscontainer.container--bg-snow + .colscontainer.container--bg-snow"
+          ],
+          "style": "snow",
+          "blocks": [
+            "cards-logo"
+          ],
+          "defaultContent": [
+            ".heading",
+            ".text",
+            ".button"
+          ]
+        },
+        {
+          "id": "v5",
+          "name": "tint-sky-10-band",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-10:not(.container--bg-tint-sky-10 + .colscontainer)"
+          ],
+          "style": "tint-sky-10",
+          "blocks": [
+            "columns-media",
+            "columns-text",
+            "columns-spotlight"
+          ],
+          "defaultContent": [
+            ".heading",
+            ".text"
+          ]
+        },
+        {
+          "id": "5",
+          "name": "get-in-touch",
+          "selector": [
+            ".colscontainer.container--bg-tint-sky-5"
+          ],
+          "style": "tint-sky-5",
+          "blocks": [
+            "embed-iframe",
+            "cards-resource"
+          ],
+          "defaultContent": [
+            ".heading",
+            ".text",
+            ".separator"
+          ]
+        },
+        {
+          "id": "v10",
+          "name": "plain-after-band",
+          "selector": [
+            ":is(.container--bg-ocean, .container--bg-snow, .container--bg-tint-sky-10, .container--bg-tint-sky-5) + .colscontainer:not([class*='container--bg']):has(.text, .heading, .image, .mastercard)"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-media",
+            "cards-tile"
+          ],
+          "defaultContent": [
+            ".heading",
+            ".text",
+            ".image"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "leadership-profile",
+      "urls": [
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/jennifer-carr-smith.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/jon-alferness.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/kathee-tesija.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/ken-meyer.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/maxine-brenner.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/philip-chronican.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/scott-perkins.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/warwick-bray.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/allan-beacham.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/amanda-bardwell.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/amitabh-mall.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/annette-karantoni.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/carly-richards.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/caroline-israel.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/dan-hake.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/jaimie-lovell.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/mike-tyquin.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/peter-atkin.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/rob-mcCartney.html",
+        "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/sally-copland.html"
+      ],
+      "representativeUrl": "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/jennifer-carr-smith.html",
+      "description": "Board of directors / management board profile pages (heading, photo, biography; default content only). Sampled 20 CURRENT leaders linked from the listing pages.",
+      "blocks": [],
+      "urlPattern": "/au/en/who-we-are/our-leadership-team/*/*",
+      "sections": []
+    }
+  ],
+  "metadata": {
+    "projectType": "da"
+  }
+}

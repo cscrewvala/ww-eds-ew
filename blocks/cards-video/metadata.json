@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-video",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "video-messages",
+    "imagePattern": "top-image",
+    "structure": "16:9 poster + centred play button + title link + date",
+    "columns": 3,
+    "cta": false
+  },
+  "contentPattern": "Repeating video message cards: one row per card, cell 1 poster image, cell 2 link to the Scene7 video viewer URL (title as link text) + date paragraph. Renders 3-up (2 on tablet, 1 on mobile); clicking the play button or title opens the video in a modal, loaded lazily on click.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/results-and-presentations.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

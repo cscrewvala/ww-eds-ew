@@ -1,0 +1,37 @@
+{
+  "variantName": "accordion-program",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "program-details-disclosure",
+    "imagePattern": "optional images inside panels",
+    "structure": "stacked full-width collapsible bars, label left, chevron right, rich-text panel",
+    "columns": 1
+  },
+  "contentPattern": "Collapsible program items. One row per item: cell 1 label (e.g. 'Renewable electricity'), cell 2 rich body (paragraphs, lists, links, images). Group headings (H2 such as 'Climate: towards net zero') are default content placed before each accordion block; one block per group. Also used for 'Find out more' FAQ-style lists and link-heavy panels.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/diversity-equity-inclusion.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/human-rights.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/asx-announcements.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/five-year-summary.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/debt-investors.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/annual-general-meetings.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/reports-archive.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/dividends.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/shareholder-faqs.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/shareholding-information/annual-general-meetings-archive.html",
+      "/au/en/privacy/policy-documents/cookies-statement",
+      "/au/en/privacy/policy-documents/privacy-policy",
+      "/au/en/privacy/policy-documents/terms-and-conditions"
+    ],
+    "reuseCount": 8,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

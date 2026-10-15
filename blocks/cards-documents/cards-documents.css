@@ -1,0 +1,126 @@
+/* cards-documents: values from the source linkList (woolworthsgroup.com.au) */
+.cards-documents {
+  margin: 24px 0;
+  color: var(--text-color);
+}
+
+.cards-documents > ul {
+  /* grid + space-between = source flex row positions; partial rows stay on the grid */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-content: space-between;
+  gap: 24px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-documents .cards-documents-group {
+  box-sizing: border-box;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 40px 14px;
+}
+
+.cards-documents .cards-documents-title {
+  margin: 0;
+  padding: 14px 0;
+  border-bottom: 1px solid rgb(0 0 0);
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-midnight);
+}
+
+.cards-documents .cards-documents-list {
+  margin: 0;
+  padding: 8px 0 0;
+  list-style: none;
+}
+
+.cards-documents .cards-documents-list > li {
+  position: relative;
+  margin: 0;
+  padding: 5px 0 5px 30px;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  background-image: url("icon-link.svg");
+}
+
+.cards-documents .cards-documents-list > li[data-type="pdf"] {
+  background-image: url("icon-pdf.svg");
+}
+
+.cards-documents .cards-documents-list > li[data-type="video"] {
+  background-image: url("icon-video.svg");
+}
+
+.cards-documents .cards-documents-list > li[data-type="content"] {
+  background-image: url("icon-content.svg");
+}
+
+.cards-documents a.cards-documents-link:any-link {
+  display: block;
+  overflow: hidden;
+  color: var(--color-ocean);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cards-documents .cards-documents-list > li:hover a.cards-documents-link:any-link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-ocean);
+}
+
+.cards-documents .cards-documents-tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 5px;
+  border-radius: 6px;
+  background-color: var(--color-ocean);
+  color: var(--color-snow);
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.cards-documents .cards-documents-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: var(--color-ocean);
+}
+
+.cards-documents .cards-documents-list > li:hover .cards-documents-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+@media (width >= 768px) {
+  .cards-documents {
+    margin: 32px 0;
+  }
+
+  .cards-documents > ul {
+    grid-template-columns: repeat(2, 47%);
+  }
+}
+
+@media (width >= 1024px) {
+  .cards-documents > ul {
+    grid-template-columns: repeat(4, min(23%, 288px));
+  }
+}
