@@ -1,0 +1,179 @@
+/*
+ * side-nav: section navigation rendered from a nav fragment.
+ * Source: sidenavigation.side-nav-container (vertical, investors) and
+ * .cmp-secondary-navigation (horizontal, sustainability).
+ */
+
+/* section shell (the side-nav auto-block owns its section) */
+main > .section.side-nav-container {
+  margin: 0;
+}
+
+main > .section.side-nav-container > .side-nav-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+main > .section.side-nav-container.side-nav-empty {
+  display: none;
+}
+
+.side-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.side-nav li {
+  margin: 0;
+}
+
+.side-nav a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+/* ---------- vertical (investors) ---------- */
+
+/* source hides the side navigation below desktop; the page header menu covers it */
+main > .section.side-nav-container:has(.side-nav.vertical) {
+  display: none;
+}
+
+.side-nav.vertical {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.side-nav.vertical .side-nav-title {
+  margin: 0;
+  padding: 16px 24px;
+  box-shadow: inset 0 -1px 0 var(--color-grey-300);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.side-nav.vertical .side-nav-group {
+  margin-top: 2px;
+}
+
+.side-nav.vertical .side-nav-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 18px 24px;
+}
+
+.side-nav.vertical .side-nav-group-head a:any-link {
+  font-weight: 600;
+}
+
+.side-nav.vertical .side-nav-group-head a:hover {
+  color: var(--link-hover-color);
+}
+
+.side-nav.vertical .side-nav-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--color-midnight);
+  cursor: pointer;
+}
+
+.side-nav.vertical .side-nav-toggle svg {
+  transform: rotate(-90deg);
+  transition: transform 0.2s ease;
+}
+
+.side-nav.vertical .side-nav-toggle[aria-expanded="true"] svg {
+  transform: none;
+}
+
+.side-nav.vertical .side-nav-toggle:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.side-nav.vertical .side-nav-items[hidden] {
+  display: none;
+}
+
+.side-nav.vertical .side-nav-items li {
+  margin-top: 8px;
+}
+
+.side-nav.vertical .side-nav-items a:any-link {
+  display: block;
+  padding: 10px 24px 10px 40px;
+}
+
+.side-nav.vertical .side-nav-items a:hover {
+  background-color: var(--color-tint-ocean-20);
+}
+
+.side-nav.vertical a[aria-current="page"] {
+  color: var(--color-ocean);
+  font-weight: 600;
+}
+
+/* ---------- horizontal (sustainability) ---------- */
+main > .section.side-nav-container:has(.side-nav.horizontal) {
+  position: sticky;
+  top: var(--nav-height);
+  z-index: 3;
+  background-color: var(--background-color);
+  box-shadow: 0 4px 15px -2px rgb(58 71 78 / 15%);
+}
+
+.side-nav.horizontal nav {
+  margin: 0 12px;
+  padding: 8px 0;
+}
+
+.side-nav.horizontal .side-nav-items {
+  position: relative;
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  white-space: nowrap;
+}
+
+.side-nav.horizontal .side-nav-items li {
+  flex: none;
+  padding: 18px 0;
+}
+
+.side-nav.horizontal .side-nav-items a:any-link {
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.side-nav.horizontal .side-nav-items a:hover {
+  color: var(--color-tint-ocean-60);
+}
+
+.side-nav.horizontal a[aria-current="page"] {
+  color: var(--color-ocean);
+}
+
+@media (width >= 1200px) {
+  main > .section.side-nav-container:has(.side-nav.vertical) {
+    display: block;
+  }
+
+  .side-nav.horizontal .side-nav-items {
+    justify-content: safe center;
+  }
+}

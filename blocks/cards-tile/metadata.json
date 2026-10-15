@@ -1,0 +1,36 @@
+{
+  "variantName": "cards-tile",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "link-tiles",
+    "imagePattern": "top image per tile (16:9)",
+    "structure": "image + title + optional description + link",
+    "columns": "3 equal columns (2 on tablet, 1 on mobile)"
+  },
+  "contentPattern": "Repeating hand-set image + title + link tiles (e.g. ASX announcement PDFs, 'Find out more' destinations); links are curated DAM PDFs/pages, not indexable articles. One row per tile: cell 1 image, cell 2 title (heading or linked paragraph), optional description paragraph, and a link-only paragraph CTA ('Click here' / 'Learn more').",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/",
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors.html",
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/reports.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/reconciliation-at-woolworths-group.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/social-impact.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors.html",
+      "/au/en/privacy",
+      "/au/en/privacy/protection",
+      "/au/en/privacy/sharing"
+    ],
+    "reuseCount": 14,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

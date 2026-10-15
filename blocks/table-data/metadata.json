@@ -1,0 +1,24 @@
+{
+  "variantName": "table-data",
+  "baseBlock": "table",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "high",
+    "purpose": "data-table",
+    "imagePattern": "none",
+    "structure": "full-width table, bold header row, light row rules, linked cells",
+    "columns": 3,
+    "cta": false
+  },
+  "contentPattern": "Tabular data: first row = header cells (e.g. Date | Title | Duration), subsequent rows = data; cells may contain links. Renders as a semantic table (thead/tbody, th scope=col) inside a horizontally scrollable wrapper. Used for the webcasts list and the dividend history table.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/webcasts.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

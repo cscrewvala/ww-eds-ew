@@ -1,0 +1,309 @@
+import { readBlockConfig } from '../../scripts/aem.js';
+import { createOptimizedPicture } from '../../scripts/scripts.js';
+
+const DEFAULT_INDEX = '/au/en/article-index.json';
+const CHUNK = 500;
+
+const LABELS = {
+  all: 'All',
+  allStories: 'All Stories',
+  allYears: 'All years',
+  year: 'Filter by year',
+  sort: 'Sort by',
+  newest: 'Most recent',
+  oldest: 'Oldest first',
+  results: 'results available',
+  noResults: 'We’re sorry, but we couldn’t find any results.',
+  previous: 'Previous',
+  next: 'Next',
+  loadMore: 'Load More',
+  learnMore: 'Learn more',
+};
+
+/**
+ * Splits a config value or index cell into a trimmed, de-duplicated list.
+ * Index cells may be JSON arrays ('["a","b"]') or comma-separated strings.
+ * @param {string|string[]} value
+ * @returns {string[]}
+ */
+function toList(value) {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.map((v) => `${v}`.trim()).filter(Boolean);
+  const str = `${value}`.trim();
+  if (str.startsWith('[')) {
+    try {
+      return toList(JSON.parse(str));
+    } catch { /* fall through to comma split */ }
+  }
+  return [...new Set(str.split(',').map((v) => v.trim()).filter(Boolean))];
+}
+
+/**
+ * Fetches every row of a query index, following offset/limit pagination.
+ * @param {string} index Index URL
+ * @returns {Promise<object[]>}
+ */
+async function fetchIndex(index) {
+  const rows = [];
+  let offset = 0;
+  let total = Infinity;
+  while (offset < total) {
+    const url = new URL(index, window.location.origin);
+    url.searchParams.set('offset', offset);
+    url.searchParams.set('limit', CHUNK);
+    // eslint-disable-next-line no-await-in-loop
+    const resp = await fetch(url);
+    if (!resp.ok) break;
+    // eslint-disable-next-line no-await-in-loop
+    const json = await resp.json();
+    const data = json.data || [];
+    rows.push(...data);
+    total = Number.isFinite(json.total) ? json.total : rows.length;
+    if (!data.length) break;
+    offset += data.length;
+  }
+  return rows;
+}
+
+/**
+ * Normalises an index row into the shape the list renders.
+ * Sort key: published date, else the year folder in the path, then lastModified.
+ */
+function toArticle(row) {
+  const yearInPath = (row.path.match(/\/(\d{4})\//) || [])[1];
+  const date = /^\d{4}-\d{2}-\d{2}/.test(row.date || '') ? row.date.slice(0, 10) : '';
+  const lastModified = Number(row.lastModified) || 0;
+  return {
+    path: row.path,
+    title: row.title || '',
+    description: row.description || '',
+    image: row.image || '',
+    tags: toList(row.tags),
+    date,
+    year: date ? date.slice(0, 4) : (yearInPath || ''),
+    sortKey: `${date || (yearInPath ? `${yearInPath}-00-00` : '0000-00-00')}|${String(lastModified).padStart(13, '0')}`,
+  };
+}
+
+function formatDate(iso) {
+  const [y, m, d] = iso.split('-');
+  return `${d}/${m}/${y}`;
+}
+
+function el(tag, attrs = {}, ...children) {
+  const node = document.createElement(tag);
+  Object.entries(attrs).forEach(([k, v]) => {
+    if (v !== undefined && v !== null && v !== false) node.setAttribute(k, v);
+  });
+  children.flat().forEach((c) => {
+    if (c) node.append(c);
+  });
+  return node;
+}
+
+function renderImage(article) {
+  if (!article.image) return null;
+  const picture = createOptimizedPicture(article.image, article.title, false, [{ width: '750' }]);
+  return el('div', { class: 'article-list-image' }, picture);
+}
+
+function renderNewsCard(article) {
+  const tag = article.tags[0];
+  return el(
+    'li',
+    { class: 'article-list-card' },
+    renderImage(article),
+    el(
+      'div',
+      { class: 'article-list-body' },
+      tag ? el('span', { class: 'article-list-tag' }, tag) : null,
+      el('h3', {}, el('a', { href: article.path }, article.title)),
+      article.date ? el('p', { class: 'article-list-date' }, el('time', { datetime: article.date }, formatDate(article.date))) : null,
+      el('p', { class: 'article-list-more' }, el('a', { href: article.path, 'aria-hidden': 'true', tabindex: '-1' }, LABELS.learnMore)),
+    ),
+  );
+}
+
+function renderStoryCard(article) {
+  return el(
+    'li',
+    { class: 'article-list-card' },
+    renderImage(article),
+    el(
+      'div',
+      { class: 'article-list-body' },
+      article.tags.length ? el('ul', { class: 'article-list-tags' }, article.tags.map((t) => el('li', { class: 'article-list-tag' }, t))) : null,
+      el('h3', {}, el('a', { href: article.path }, article.title)),
+      article.description ? el('p', { class: 'article-list-description' }, article.description) : null,
+      el('p', { class: 'article-list-more' }, el('a', { href: article.path, 'aria-hidden': 'true', tabindex: '-1' }, 'Learn More')),
+    ),
+  );
+}
+
+function buildSelect(name, label, options, value) {
+  const id = `article-list-${name}-${Math.random().toString(36).slice(2, 8)}`;
+  const select = el('select', { id, name });
+  options.forEach(([v, text]) => {
+    const option = el('option', { value: v }, text);
+    if (v === value) option.selected = true;
+    select.append(option);
+  });
+  return el('div', { class: `article-list-field article-list-${name}` }, el('label', { for: id }, label), select);
+}
+
+/**
+ * Reads filter state from the URL so filtered views are linkable and survive reloads.
+ */
+function readState(defaults) {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    tag: params.get('tag') || defaults.tag,
+    year: params.get('year') || '',
+    sort: params.get('sort') === 'asc' ? 'asc' : 'desc',
+    page: Math.max(1, parseInt(params.get('page'), 10) || 1),
+  };
+}
+
+function writeState(state, defaults) {
+  const url = new URL(window.location.href);
+  const set = (k, v, d) => (v && v !== d ? url.searchParams.set(k, v) : url.searchParams.delete(k));
+  set('tag', state.tag, defaults.tag);
+  set('year', state.year, '');
+  set('sort', state.sort, 'desc');
+  set('page', state.page > 1 ? `${state.page}` : '', '');
+  window.history.replaceState(null, '', url);
+}
+
+/**
+ * Dynamic article listing driven by the query index.
+ * Config rows: Source, Filters (tags|category, year, sort), Tags, Limit,
+ * Layout (news|stories), Index.
+ * @param {Element} block The block element
+ */
+export default async function decorate(block) {
+  const config = readBlockConfig(block);
+  const sources = toList(config.source);
+  const filters = toList(config.filters).map((f) => f.toLowerCase());
+  const presetTags = toList(config.tags);
+  const limit = Math.max(1, parseInt(config.limit, 10) || 12);
+  const layout = (config.layout || 'news').toLowerCase() === 'stories' ? 'stories' : 'news';
+  const index = config.index || DEFAULT_INDEX;
+  const showTags = filters.includes('tags') || filters.includes('category');
+
+  block.textContent = '';
+  block.classList.add(`article-list-${layout}`);
+  block.setAttribute('aria-busy', 'true');
+
+  let rows = [];
+  try {
+    rows = await fetchIndex(index);
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('article-list: failed to load index', index, e);
+  }
+
+  const ownPath = window.location.pathname.replace(/\/$/, '');
+  const articles = rows
+    .filter((r) => r.path && r.path !== ownPath)
+    .filter((r) => !sources.length || sources.some((s) => r.path.startsWith(s)))
+    .filter((r) => /\/\d{4}\/[^/]+$/.test(r.path))
+    .map(toArticle)
+    .filter((a) => presetTags.every((t) => a.tags.includes(t)));
+
+  const tagOptions = [...new Set(articles.flatMap((a) => a.tags))]
+    .filter((t) => !presetTags.includes(t))
+    .sort((a, b) => a.localeCompare(b));
+  const yearOptions = [...new Set(articles.map((a) => a.year).filter(Boolean))].sort().reverse();
+  const allLabel = layout === 'stories' ? LABELS.allStories : LABELS.all;
+  const defaults = { tag: '' };
+  const state = readState(defaults);
+  if (state.tag && !tagOptions.includes(state.tag)) state.tag = '';
+  if (state.year && !yearOptions.includes(state.year)) state.year = '';
+
+  const controls = el('div', { class: 'article-list-controls' });
+  const status = el('p', { class: 'article-list-status', role: 'status', 'aria-live': 'polite' });
+  const list = el('ul', { class: 'article-list-items' });
+  const pager = el('nav', { class: 'article-list-pager', 'aria-label': 'Pagination' });
+  block.append(controls, status, list, pager);
+
+  // eslint-disable-next-line no-use-before-define
+  const update = (patch) => { Object.assign(state, patch); render(); };
+
+  if (showTags && tagOptions.length) {
+    const chips = el('div', { class: 'article-list-chips', role: 'group', 'aria-label': 'Filter by category' });
+    [['', allLabel], ...tagOptions.map((t) => [t, t])].forEach(([value, text]) => {
+      const chip = el('button', { type: 'button', class: 'article-list-chip', 'data-tag': value }, text);
+      chip.addEventListener('click', () => update({ tag: value, page: 1 }));
+      chips.append(chip);
+    });
+    controls.append(chips);
+  }
+  const selects = el('div', { class: 'article-list-selects' });
+  if (filters.includes('year') && yearOptions.length) {
+    const year = buildSelect('year', LABELS.year, [['', LABELS.allYears], ...yearOptions.map((y) => [y, y])], state.year);
+    year.querySelector('select').addEventListener('change', (e) => update({ year: e.target.value, page: 1 }));
+    selects.append(year);
+  }
+  if (filters.includes('sort')) {
+    const sort = buildSelect('sort', LABELS.sort, [['desc', LABELS.newest], ['asc', LABELS.oldest]], state.sort);
+    sort.querySelector('select').addEventListener('change', (e) => update({ sort: e.target.value, page: 1 }));
+    selects.append(sort);
+  }
+  if (selects.children.length) controls.append(selects);
+  if (!controls.children.length) controls.remove();
+
+  function renderPager(totalPages) {
+    pager.textContent = '';
+    if (totalPages <= 1) return;
+    if (layout === 'stories') {
+      if (state.page < totalPages) {
+        const more = el('button', { type: 'button', class: 'button article-list-load-more' }, LABELS.loadMore);
+        more.addEventListener('click', () => update({ page: state.page + 1 }));
+        pager.append(more);
+      }
+      return;
+    }
+    const button = (label, page, attrs = {}) => {
+      const b = el('button', { type: 'button', ...attrs }, label);
+      b.addEventListener('click', () => {
+        update({ page });
+        block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      return b;
+    };
+    pager.append(button(LABELS.previous, state.page - 1, { class: 'article-list-prev', disabled: state.page === 1 }));
+    const pages = el('ol', { class: 'article-list-pages' });
+    const windowStart = Math.max(1, Math.min(state.page - 2, totalPages - 4));
+    const windowEnd = Math.min(totalPages, windowStart + 4);
+    for (let p = windowStart; p <= windowEnd; p += 1) {
+      const current = p === state.page ? 'page' : false;
+      pages.append(el('li', {}, button(`${p}`, p, { 'aria-current': current, 'aria-label': `Page ${p}` })));
+    }
+    pager.append(pages);
+    pager.append(button(LABELS.next, state.page + 1, { class: 'article-list-next', disabled: state.page === totalPages }));
+    pager.append(el('p', { class: 'article-list-page-of' }, `page ${state.page} of ${totalPages}`));
+  }
+
+  function render() {
+    const matches = articles
+      .filter((a) => !state.tag || a.tags.includes(state.tag))
+      .filter((a) => !state.year || a.year === state.year)
+      .sort((a, b) => (state.sort === 'asc' ? a.sortKey.localeCompare(b.sortKey) : b.sortKey.localeCompare(a.sortKey)));
+    const totalPages = Math.max(1, Math.ceil(matches.length / limit));
+    state.page = Math.min(state.page, totalPages);
+    // stories accumulate with "Load More"; news shows one numbered page at a time
+    const start = layout === 'stories' ? 0 : (state.page - 1) * limit;
+    const visible = matches.slice(start, state.page * limit);
+
+    controls.querySelectorAll('.article-list-chip').forEach((chip) => {
+      chip.setAttribute('aria-pressed', chip.dataset.tag === state.tag ? 'true' : 'false');
+    });
+    status.textContent = matches.length ? `${matches.length} ${LABELS.results}` : LABELS.noResults;
+    list.replaceChildren(...visible.map(layout === 'stories' ? renderStoryCard : renderNewsCard));
+    renderPager(totalPages);
+    writeState(state, defaults);
+  }
+
+  render();
+  block.removeAttribute('aria-busy');
+}

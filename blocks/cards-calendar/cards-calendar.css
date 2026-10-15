@@ -1,0 +1,149 @@
+/*
+ * cards-calendar
+ * Values from source computed styles
+ * (.master-card-list-container.calendar-list, migration-work/cards-calendar-extracted.css).
+ * Mobile-first: stacked card with full-width "Add" bar; >= 768px (source breakpoint):
+ * 96px pill row with the "Add" panel on the right.
+ */
+.cards-calendar > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-calendar .cards-calendar-event {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 64px;
+  box-sizing: border-box;
+  width: 95.31%;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid rgb(25 113 237 / 20%);
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  color: var(--text-color);
+}
+
+.cards-calendar .cards-calendar-icon {
+  display: block;
+  align-self: start;
+  width: 64px;
+  height: 64px;
+  margin: 32px 24px 0 18px;
+  background-color: var(--color-ocean);
+  mask: url('./calendar.svg') center / contain no-repeat;
+}
+
+.cards-calendar .cards-calendar-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 32px 18px 32px 0;
+}
+
+.cards-calendar .cards-calendar-body > * {
+  margin: 0;
+}
+
+.cards-calendar .cards-calendar-date {
+  padding-bottom: 8px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--text-color);
+}
+
+.cards-calendar .cards-calendar-title {
+  font-family: var(--body-font-family);
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 28px;
+  color: var(--color-ocean);
+}
+
+.cards-calendar .cards-calendar-details {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.cards-calendar .cards-calendar-add {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 64px;
+  margin: 0;
+  padding: 1px 17px;
+  border: 0;
+  border-radius: 0 0 7px 7px;
+  background-color: var(--color-tint-ocean-10);
+  color: var(--color-ocean);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  cursor: pointer;
+}
+
+.cards-calendar .cards-calendar-add:hover {
+  text-decoration: underline;
+}
+
+.cards-calendar .cards-calendar-add-label {
+  margin-right: 24px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 25px;
+  text-transform: none;
+}
+
+.cards-calendar .cards-calendar-add-icon {
+  display: inline-block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background-color: currentcolor;
+  mask: url('./add.svg') center / contain no-repeat;
+}
+
+.cards-calendar .cards-calendar-add:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: -4px;
+}
+
+@media (width >= 768px) {
+  .cards-calendar .cards-calendar-event {
+    grid-template-columns: auto 1fr calc(13.625rem - 1px);
+    grid-template-rows: 100%;
+    align-items: center;
+    height: 6rem;
+    border-radius: 50px;
+  }
+
+  .cards-calendar .cards-calendar-icon {
+    align-self: center;
+    margin: 0 24px 0 48px;
+  }
+
+  .cards-calendar .cards-calendar-body {
+    padding: 0;
+  }
+
+  .cards-calendar .cards-calendar-title {
+    font-size: 21px;
+    line-height: 24px;
+  }
+
+  /* source panel is 218 x 96 and sits over the row border */
+  .cards-calendar .cards-calendar-add {
+    grid-column: auto;
+    align-self: stretch;
+    width: auto;
+    height: auto;
+    margin: -1px -1px -1px 0;
+    border-radius: 0 50px 50px 0;
+  }
+}

@@ -1,0 +1,186 @@
+/* table-data: values extracted from source tableComp (webcasts) and RTE table (dividends) */
+.table-data .table-data-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-data table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table-data th,
+.table-data td {
+  padding: 0;
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.table-data td > :first-child {
+  margin-top: 0;
+}
+
+.table-data td > :last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- bordered style (plain ruled grid, e.g. dividend history) ---------- */
+.table-data.bordered table {
+  border-collapse: collapse;
+  border: 1px solid rgb(0 0 0);
+}
+
+.table-data.bordered th,
+.table-data.bordered td {
+  padding: 8px 12px;
+  border: 1px solid rgb(0 0 0);
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* ---------- default (list) style: mobile stacked rows ---------- */
+.table-data:not(.bordered) table,
+.table-data:not(.bordered) tbody,
+.table-data:not(.bordered) tr {
+  display: block;
+}
+
+.table-data:not(.bordered) thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.table-data:not(.bordered) th,
+.table-data:not(.bordered) td {
+  color: var(--color-midnight);
+  font-size: var(--body-font-size-s);
+  line-height: 24px;
+}
+
+.table-data:not(.bordered) th {
+  font-weight: 600;
+}
+
+.table-data:not(.bordered) tbody tr {
+  position: relative;
+  padding: 8px 0;
+  margin-bottom: 20px;
+}
+
+.table-data:not(.bordered) tbody tr:hover {
+  background-color: rgb(25 113 237 / 20%);
+}
+
+.table-data:not(.bordered) td {
+  display: flex;
+  padding: 8px 0 8px 8px;
+  border-bottom: 1px solid rgb(25 113 237 / 20%);
+  font-weight: 400;
+}
+
+.table-data:not(.bordered) td[data-label]::before {
+  content: attr(data-label) ": ";
+  min-width: 50%;
+  font-weight: 700;
+}
+
+.table-data:not(.bordered) td:first-child {
+  background-color: rgb(14 13 38 / 80%);
+  color: var(--color-snow);
+}
+
+.table-data:not(.bordered) td:first-child::before {
+  display: none;
+}
+
+.table-data:not(.bordered) td a:any-link {
+  position: relative;
+  display: table;
+  width: 70%;
+  color: rgb(18 18 18);
+  text-decoration: none;
+}
+
+.table-data:not(.bordered) td:first-child a:any-link {
+  color: var(--color-snow);
+  text-decoration: underline;
+}
+
+.table-data:not(.bordered) td a:any-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- default (list) style: desktop table ---------- */
+@media (width >= 768px) {
+  .table-data:not(.bordered) table {
+    display: table;
+  }
+
+  .table-data:not(.bordered) thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+    display: table-header-group;
+  }
+
+  .table-data:not(.bordered) tbody {
+    display: table-row-group;
+  }
+
+  .table-data:not(.bordered) tr,
+  .table-data:not(.bordered) tbody tr {
+    display: table-row;
+    padding: 0;
+    margin: 0;
+  }
+
+  .table-data:not(.bordered) th {
+    padding: 0 12px 0 0;
+    box-shadow: inset 0 -1px 0 rgb(25 113 237 / 80%);
+  }
+
+  .table-data:not(.bordered) td {
+    display: table-cell;
+    padding: 8px 12px 8px 0;
+    border-bottom: 0;
+    box-shadow: inset 0 -1px 0 rgb(25 113 237 / 20%);
+  }
+
+  .table-data:not(.bordered) td::before,
+  .table-data:not(.bordered) td[data-label]::before {
+    content: none;
+  }
+
+  .table-data:not(.bordered) td:first-child {
+    padding-left: 30px;
+    background-color: transparent;
+    color: var(--color-midnight);
+  }
+
+  .table-data:not(.bordered) td.table-data-link {
+    padding-left: 30px;
+    background: url("table-link.svg") no-repeat 0 center;
+  }
+
+  .table-data:not(.bordered) td a:any-link,
+  .table-data:not(.bordered) td:first-child a:any-link {
+    width: 100%;
+    color: var(--link-color);
+    text-decoration: none;
+  }
+
+  .table-data:not(.bordered) td a:any-link:hover,
+  .table-data:not(.bordered) td:first-child a:any-link:hover {
+    text-decoration: underline;
+  }
+}

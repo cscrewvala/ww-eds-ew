@@ -1,0 +1,221 @@
+/*
+ * columns-spotlight - source: .container__body__two-column.two-50-50 holding a
+ * .wwgvideo / .mastercard video card next to a .h3-secondary heading + text + CTA.
+ * Values from getComputedStyle on woolworthsgroup.com.au (our-newsroom, reconciliation).
+ */
+.columns-spotlight .columns-spotlight-row {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.columns-spotlight .columns-spotlight-media,
+.columns-spotlight .columns-spotlight-text {
+  min-width: 0;
+}
+
+/* media card (.cmp-video / .card) */
+.columns-spotlight .columns-spotlight-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  overflow: hidden;
+}
+
+/* .cmp-video--with-content */
+.columns-spotlight .columns-spotlight-card.columns-spotlight-card-captioned {
+  box-shadow: 0 2px 20px -2px rgb(58 71 78 / 15%);
+}
+
+.columns-spotlight .columns-spotlight-poster {
+  position: relative;
+  line-height: 0;
+}
+
+.columns-spotlight .columns-spotlight-poster picture {
+  display: block;
+}
+
+.columns-spotlight .columns-spotlight-poster img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.columns-spotlight .columns-spotlight-play {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.columns-spotlight .columns-spotlight-play:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* .cmp-video__body__link__img-blk__play-icon (71x71 svg, centred) */
+.columns-spotlight .columns-spotlight-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 71px;
+  height: 71px;
+  background: url('play.svg') center / contain no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+/* .cmp-video__body__content--bottom */
+.columns-spotlight .columns-spotlight-caption {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  background-color: var(--color-snow);
+}
+
+/* .cmp-video__body__content__title.h5--common */
+.columns-spotlight .columns-spotlight-caption p {
+  margin: 0;
+  color: var(--color-ocean);
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+/* text column: .heading.h3-secondary (h1 on source, Montserrat 27/28 semibold) */
+.columns-spotlight .columns-spotlight-text > :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 32px;
+  color: var(--color-ocean);
+  font-family: var(--body-font-family);
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.columns-spotlight .columns-spotlight-text > :first-child {
+  margin-top: 0;
+}
+
+/* CTA: .button-container.center-item.btn-small.btn-ocean */
+.columns-spotlight .columns-spotlight-text .columns-spotlight-cta {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.columns-spotlight .columns-spotlight-cta a:any-link {
+  display: inline-flex;
+  align-items: center;
+  margin: 4px;
+  padding: 5px 24px;
+  border-radius: 8px;
+  background-color: var(--color-ocean);
+  color: var(--color-snow);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.columns-spotlight .columns-spotlight-cta a:hover {
+  background-color: var(--color-midnight);
+  color: var(--color-snow);
+  text-decoration: none;
+}
+
+/* contact line: .contact-panel.mailbox-card */
+.columns-spotlight .columns-spotlight-contact {
+  box-sizing: border-box;
+  max-width: 390px;
+  margin: 24px 40px;
+  padding-left: 52px;
+  background: url('mailbox.svg') left top / 32px 32px no-repeat;
+  text-align: left;
+}
+
+.columns-spotlight .columns-spotlight-contact > p {
+  margin: 0;
+  padding: 0 0 10px;
+}
+
+.columns-spotlight .columns-spotlight-contact-title {
+  font-weight: 600;
+}
+
+.columns-spotlight .columns-spotlight-contact-title :is(strong, b) {
+  font-weight: inherit;
+}
+
+.columns-spotlight .columns-spotlight-contact-value a:any-link {
+  display: block;
+  color: var(--color-ocean);
+}
+
+/* modal player (dialog is appended to body, carries the block class) */
+dialog.columns-spotlight.columns-spotlight-dialog {
+  width: min(90vw, 1100px);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: #000;
+  overflow: visible;
+}
+
+dialog.columns-spotlight-dialog::backdrop {
+  background: rgb(0 0 0 / 80%);
+}
+
+.columns-spotlight .columns-spotlight-player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.columns-spotlight .columns-spotlight-player iframe,
+.columns-spotlight .columns-spotlight-player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.columns-spotlight .columns-spotlight-close {
+  position: absolute;
+  top: -44px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (width >= 900px) {
+  .columns-spotlight .columns-spotlight-row {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .columns-spotlight .columns-spotlight-media,
+  .columns-spotlight .columns-spotlight-text {
+    flex: 1 1 0;
+  }
+
+  .columns-spotlight .columns-spotlight-card.columns-spotlight-card-captioned {
+    margin-bottom: 16px;
+  }
+}

@@ -1,0 +1,235 @@
+/*
+ * cards-tile
+ * Source: .container__body__three-column / four-column with .contenttile (link tiles)
+ * or .mastercard (text tiles). Values from computed styles on woolworthsgroup.com.au;
+ * breakpoints follow the source (768 / 900 / 1024 / 1025 / 1440).
+ */
+
+.cards-tile {
+  margin: 24px 0;
+}
+
+.cards-tile > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---- link tile (source .contenttile .cmp-teaser--tile-image) ---- */
+.cards-tile > ul > li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  min-width: 0;
+  margin: 0 0 16px;
+  border: 1px solid rgb(241 241 241);
+  border-radius: 8px;
+  background-color: var(--color-snow);
+  box-shadow: 0 12px 24px -5px rgb(58 71 78 / 15%);
+  overflow: hidden;
+}
+
+.cards-tile .cards-tile-card-image {
+  padding-bottom: 7px;
+  background-color: rgb(196 196 196);
+  line-height: 0;
+  overflow: hidden;
+}
+
+.cards-tile .cards-tile-card-image picture {
+  display: block;
+}
+
+.cards-tile .cards-tile-card-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.cards-tile .cards-tile-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  color: var(--color-ocean);
+}
+
+.cards-tile .cards-tile-card-body > * {
+  margin: 0;
+}
+
+.cards-tile .cards-tile-title {
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  line-height: 16px;
+  color: var(--color-ocean);
+}
+
+.cards-tile .cards-tile-title a:any-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards-tile .cards-tile-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cards-tile .cards-tile-description {
+  display: none;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.cards-tile .cards-tile-cta {
+  display: none;
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.cards-tile .cards-tile-cta a:any-link {
+  position: relative;
+  z-index: 1;
+  color: var(--color-ocean);
+}
+
+.cards-tile .cards-tile-cta a:hover {
+  text-decoration: underline;
+}
+
+/* ---- text tile (source .mastercard .card) ---- */
+.cards-tile.cards-tile-text > ul > li {
+  display: block;
+  margin: 0;
+  padding-bottom: 16px;
+  border: 0;
+  box-shadow: none;
+}
+
+.cards-tile.cards-tile-text > ul > li.cards-tile-linked {
+  box-shadow: 0 2px 20px -2px rgb(58 71 78 / 15%);
+}
+
+.cards-tile.cards-tile-text .cards-tile-card-image {
+  margin-bottom: 24px;
+  padding-bottom: 0;
+  background-color: transparent;
+}
+
+.cards-tile.cards-tile-text .cards-tile-card-image img {
+  aspect-ratio: 3 / 2;
+  object-position: center;
+}
+
+.cards-tile.cards-tile-text .cards-tile-card-body {
+  display: block;
+  padding: 0 24px 8px;
+  color: var(--text-color);
+}
+
+.cards-tile.cards-tile-text .cards-tile-title {
+  margin-bottom: 16px;
+  font-size: 21px;
+  line-height: 28px;
+}
+
+.cards-tile.cards-tile-text .cards-tile-description,
+.cards-tile.cards-tile-text .cards-tile-cta {
+  display: block;
+}
+
+.cards-tile.cards-tile-text .cards-tile-title a:hover {
+  text-decoration: underline;
+}
+
+@media (width >= 768px) {
+  .cards-tile > ul {
+    grid-template-columns: repeat(3, minmax(0, min(32%, 389px)));
+    justify-content: center;
+    column-gap: 32px;
+  }
+
+  .cards-tile > ul > li {
+    margin-bottom: 24px;
+  }
+
+  .cards-tile .cards-tile-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .cards-tile.cards-tile-text > ul > li {
+    margin-bottom: 16px;
+  }
+
+  /* four tiles: 2 per row until 1440 (source .container__body__four-column) */
+  .cards-tile.cards-tile-cols-4 {
+    margin: 32px 0;
+  }
+
+  .cards-tile.cards-tile-cols-4 > ul {
+    grid-template-columns: repeat(2, minmax(0, 47%));
+    justify-content: space-between;
+    column-gap: 16px;
+  }
+}
+
+@media (width >= 900px) {
+  .cards-tile .cards-tile-title {
+    font-size: 21px;
+    line-height: 28px;
+  }
+}
+
+@media (width >= 1024px) {
+  .cards-tile > ul > li {
+    margin-right: 8px;
+  }
+
+  .cards-tile.cards-tile-text > ul > li {
+    margin-right: 0;
+  }
+
+  .cards-tile .cards-tile-card-body {
+    flex: 1 1 auto;
+  }
+
+  .cards-tile .cards-tile-description {
+    -webkit-line-clamp: 2;
+  }
+}
+
+@media (width >= 1025px) {
+  .cards-tile .cards-tile-cta {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .cards-tile.cards-tile-text .cards-tile-cta {
+    display: block;
+  }
+}
+
+@media (width >= 1440px) {
+  .cards-tile > ul {
+    column-gap: 16px;
+  }
+
+  .cards-tile.cards-tile-cols-4 > ul {
+    grid-template-columns: repeat(4, minmax(0, min(24%, 288px)));
+  }
+}

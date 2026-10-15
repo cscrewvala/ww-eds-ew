@@ -1,0 +1,23 @@
+{
+  "variantName": "hero-brand",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "ocean-solid",
+    "density": "minimal",
+    "purpose": "brand-campaign-hero",
+    "imagePattern": "logo-svg + decorative swoosh",
+    "structure": "logo + tagline",
+    "textAlignment": "left"
+  },
+  "contentPattern": "Brand campaign banner on a solid band: first image is the brand logo (e.g. '100 Woolworths Group'), an optional second image is decorative swoosh artwork anchored right (aria-hidden), and the remaining text is a tagline paragraph rendered left-aligned under the logo.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/100-years-of-wwg.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

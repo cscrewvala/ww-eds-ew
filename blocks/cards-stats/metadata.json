@@ -1,0 +1,26 @@
+{
+  "variantName": "cards-stats",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "key-figures-and-goals",
+    "imagePattern": "none",
+    "structure": "optional large figure + caption per item, items separated by vertical dividers",
+    "columns": "auto by item count (1-4); 3-up on desktop, stacked on mobile",
+    "alignment": "centered"
+  },
+  "contentPattern": "Stat / goal grid (source heroStats). One row per item: cell 1 large figure (e.g. '100%', '22.9%', '~ 100%'), cell 2 caption. Goal statements without figures use a single caption cell. Headings above the grid, dial image and CTA stay as default content. Single-item usage (one big stat) renders centered.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature.html",
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/health-and-nutrition.html"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

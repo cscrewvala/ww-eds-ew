@@ -1,0 +1,102 @@
+/*
+ * Woolworths Group brand tokens.
+ * Extracted from https://www.woolworthsgroup.com.au (see migration-work/brand.json).
+ * Heading face TomatoGrotesk is a licensed self-hosted font on the source;
+ * Plus Jakarta Sans (Google Fonts) is used as the closest open substitute.
+ */
+
+:root {
+  /* palette */
+  --color-ocean: #1971ed;
+  --color-ocean-light: #76afff;
+  --color-extended-ocean: #124fa6;
+  --color-midnight: #0e0d26;
+  --color-midnight-focus: #3a394d;
+  --color-sky: #66c5ff;
+  --color-sky-light: #c2e8ff;
+  --color-snow: #fff;
+  --color-charcoal: #202020;
+  --color-grey-200: #dededf;
+  --color-grey-300: #bdbdc2;
+
+  /* tints (source uses alpha tints over white) */
+  --color-tint-sky-5: rgb(102 197 255 / 5%);
+  --color-tint-sky-10: rgb(102 197 255 / 10%);
+  --color-tint-sky-20: rgb(102 197 255 / 20%);
+  --color-tint-ocean-10: rgb(25 113 237 / 10%);
+  --color-tint-ocean-20: rgb(25 113 237 / 20%);
+  --color-tint-ocean-60: rgb(25 113 237 / 60%);
+
+  /* semantic colors */
+  --background-color: var(--color-snow);
+  --text-color: var(--color-charcoal);
+  --heading-color: var(--color-ocean);
+  --link-color: var(--color-ocean);
+  --link-hover-color: var(--color-ocean);
+  --light-color: #f7fcff; /* opaque sky-5 (source heroStats) */
+  --dark-color: var(--color-midnight);
+  --focus-color: var(--color-ocean);
+
+  /* fonts */
+  --body-font-family: montserrat, montserrat-fallback, sans-serif;
+  --heading-font-family: "Plus Jakarta Sans", plus-jakarta-sans-fallback, sans-serif;
+
+  /* body sizes */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-line-height: 1.5;
+
+  /* heading sizes (mobile) */
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 33px;
+  --heading-font-size-l: 27px;
+  --heading-font-size-m: 23px;
+  --heading-font-size-s: 21px;
+  --heading-font-size-xs: 18px;
+  --heading-line-height-xxl: 48px;
+  --heading-line-height-xl: 40px;
+  --heading-line-height-l: 32px;
+  --heading-line-height-m: 28px;
+  --heading-line-height-s: 28px;
+  --heading-line-height-xs: 24px;
+  --heading-font-weight: 600;
+
+  /* spacing & layout */
+  --section-padding: 40px;
+  --content-max-width: 1200px;
+  --nav-height: 64px; /* header bar: 64px mobile, 94px desktop (source) */
+  --nav-utility-height: 72px; /* share-price/investor strip below the bar */
+
+  /* buttons */
+  --button-border-radius: 8px;
+  --button-font-size: 16px;
+  --button-line-height: 24px;
+  --button-font-weight: 600;
+  --button-padding: 4px 24px; /* source btn-small: 32px tall pill */
+}
+
+@media (width >= 900px) {
+  :root {
+    /* heading sizes (desktop) */
+    --heading-font-size-xxl: 64px;
+    --heading-font-size-xl: 48px;
+    --heading-font-size-l: 36px;
+    --heading-font-size-m: 28px;
+    --heading-font-size-s: 24px;
+    --heading-font-size-xs: 18px;
+    --heading-line-height-xxl: 80px;
+    --heading-line-height-xl: 56px;
+    --heading-line-height-l: 44px;
+    --heading-line-height-m: 36px;
+    --heading-line-height-s: 32px;
+    --heading-line-height-xs: 24px;
+    --nav-utility-height: 80px;
+  }
+}
+
+@media (width >= 1200px) {
+  :root {
+    --nav-height: 94px;
+  }
+}

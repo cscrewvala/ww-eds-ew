@@ -1,0 +1,23 @@
+{
+  "variantName": "cards-timeline",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark/light bands cycling (midnight, sky, ocean)",
+    "density": "high",
+    "purpose": "company-history-timeline",
+    "imagePattern": "square image under a large year, opposite the text card",
+    "structure": "full-width band per milestone: rounded text card (title + paragraphs) | year + image",
+    "columns": "2 halves on desktop, stacked on mobile (card first)"
+  },
+  "contentPattern": "History timeline (source custom historytimeline element, ~30 entries). One row per milestone: cell 1 year ('2023'), cell 2 title heading + paragraph(s), cell 3 image. Rows are rendered as full-width bands; each band gets a cycling class (cards-timeline-band-1..3) for the alternating background treatment.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-history.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

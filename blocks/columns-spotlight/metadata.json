@@ -1,0 +1,25 @@
+{
+  "variantName": "columns-spotlight",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "featured-media-spotlight",
+    "imagePattern": "16:9 video poster card with play button and caption, left column",
+    "structure": "2 equal columns: media card (poster + caption) | heading + paragraph(s) + CTA",
+    "columns": "2 on desktop, stacked on mobile (media first)"
+  },
+  "contentPattern": "Spotlight: one row, two cells. Cell 1 media: poster image (Scene7) + link to the video (Scene7 SmartCropVideoViewer URL or mp4) + caption paragraph ('Impact that matters: Climate and Nature'). Cell 2 text: heading, paragraph(s), optional CTA link ('Read more') or icon contact line. Section H1 ('Spotlight on') is default content above the block.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/reconciliation-at-woolworths-group.html",
+      "/au/en/privacy/protection"
+    ],
+    "reuseCount": 3,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

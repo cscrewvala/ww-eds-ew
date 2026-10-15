@@ -1,0 +1,26 @@
+{
+  "variantName": "cards-logo",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "brand-ecosystem-cards",
+    "imagePattern": "small square logo left of text",
+    "structure": "logo | name + underlined link, white rounded card",
+    "columns": "3 fixed-width cards per row, centered; a single card is centered"
+  },
+  "contentPattern": "Ecosystem logo cards (source 'ecosystem' component). One row per card: cell 1 logo image, cell 2 brand/channel name paragraph + link ('Visit Woolworths', 'Follow Us on LinkedIn'). Used as a single social card on the newsroom and as brand grids on Our brands.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-brands.html",
+      "/au/en/privacy",
+      "/au/en/privacy/managing-your-information"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-14T08:27:59.446557Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

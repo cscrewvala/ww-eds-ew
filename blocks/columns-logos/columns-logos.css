@@ -1,0 +1,63 @@
+/* columns-logos: values from source computed styles
+   (.container__body__six-column on woolworthsgroup.com.au) */
+
+.columns-logos {
+  margin: 24px 0;
+  color: var(--text-color);
+}
+
+/* source: flex-wrap row, gap 24px 8px; 2 per row below 768px */
+.columns-logos > ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.columns-logos > ul > li {
+  display: block;
+  min-width: 0;
+  margin: 0;
+
+  /* source slot is image + 7px (inline-image descender in its 24px line box) */
+  padding: 0 0 7px;
+}
+
+.columns-logos .columns-logos-logo,
+.columns-logos .columns-logos-logo a,
+.columns-logos .columns-logos-logo picture {
+  display: block;
+}
+
+/* source img: inline, square slot, border-radius 16px */
+.columns-logos .columns-logos-logo img {
+  display: inline;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  object-fit: contain;
+}
+
+.columns-logos .columns-logos-caption {
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+/* source: 4 per row (max-width 25%) from 768px */
+@media (width >= 768px) {
+  .columns-logos > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* source: six fixed 16% slots (192px of 1200px), centred, from 1280px;
+   unused slots stay empty so logos start at the left */
+@media (width >= 1280px) {
+  .columns-logos > ul {
+    grid-template-columns: repeat(6, 16%);
+    justify-content: center;
+  }
+}

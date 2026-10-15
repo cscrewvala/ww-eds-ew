@@ -1,0 +1,24 @@
+{
+  "variantName": "cards-profile",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "white cards on ocean-blue section",
+    "density": "medium",
+    "purpose": "leadership-profiles",
+    "imagePattern": "circular portrait photo, top-centered",
+    "structure": "photo + name + role + appointed date + 'Learn more' arrow link, centered",
+    "columns": "2 fixed-width cards per row (board), 3 per row for large sets (executive committee), 1 on mobile"
+  },
+  "contentPattern": "Leadership profile cards. One row per person: cell 1 portrait photo, cell 2 name (heading), role ('Chair and Non Executive Director'), appointment note ('Appointed 1 September 2024.') and a link-only 'Learn more' paragraph to the bio page. Intro paragraphs are default content in an ocean-styled section.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board.html"
+    ],
+    "reuseCount": 2,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

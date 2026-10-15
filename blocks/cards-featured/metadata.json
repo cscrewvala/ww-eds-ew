@@ -1,0 +1,26 @@
+{
+  "variantName": "cards-featured",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "featured-stories",
+    "imagePattern": "1 large top-image (video) + 3 left-thumbnail rows",
+    "structure": "image + tags + title + link",
+    "columns": "2 (50/50: 1 large | 3 stacked)"
+  },
+  "contentPattern": "Curated (static, hand-picked) featured story teasers. One row per card: cell 1 image (the first row may also hold a link to a Scene7/DAM/direct video, which adds a play button opening a modal player), cell 2 tag labels paragraph (e.g. '100 Years, People') + heading title + 'Learn more' link. The first card renders large with the image on top in the left column; the remaining cards stack in the right column as horizontal tiles with a thumbnail on the left.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/100-years-of-wwg.html",
+      "https://www.woolworthsgroup.com.au/",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/reconciliation/reconciliation-at-woolworths-group.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom.html"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-14T06:41:16.459763Z"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

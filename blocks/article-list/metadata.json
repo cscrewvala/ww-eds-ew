@@ -1,0 +1,28 @@
+{
+  "variantName": "article-list",
+  "baseBlock": "article-list",
+  "canonicalModel": "key-value",
+  "dynamic": true,
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "medium",
+    "purpose": "dynamic-article-listing",
+    "imagePattern": "top-image",
+    "structure": "filter chips + year/sort selects + result count + card grid + pagination/load more",
+    "columns": 2,
+    "cta": true
+  },
+  "contentPattern": "Key/value config table (Source, Filters, Tags, Limit, Layout, Index); results rendered client-side from the query index. Replaces newsArticlesDynamic, latestNewsDynamic and filterTag+contentTile listings.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-newsroom/media-releases/news-archive.html",
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/our-stories.html",
+      "https://www.woolworthsgroup.com.au/au/en/who-we-are/100-years-of-wwg.html"
+    ],
+    "reuseCount": 4,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}

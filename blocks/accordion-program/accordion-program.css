@@ -1,0 +1,182 @@
+/* accordion-program: values from the source cmp-accordion (accordion-core__themeWhite) */
+.accordion-program {
+  color: var(--text-color);
+}
+
+.accordion-program .accordion-program-item {
+  margin: 0 0 15px;
+}
+
+.accordion-program .accordion-program-item[open] {
+  box-shadow: rgb(241 241 241) 0 0 5px 1px;
+}
+
+/* header bar: tinted button, title left, chevron right */
+.accordion-program .accordion-program-item-label {
+  display: flex;
+  align-items: center;
+  padding: 6px 15px;
+  border-radius: 4px;
+  background-color: rgb(25 113 237 / 5%);
+  color: var(--color-midnight);
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion-program .accordion-program-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-program .accordion-program-item-label:hover {
+  background-color: var(--color-tint-ocean-10);
+}
+
+.accordion-program .accordion-program-item-label:focus-visible {
+  outline: none;
+  border: 2px solid var(--color-ocean);
+  border-radius: 4px;
+}
+
+.accordion-program .accordion-program-item-title {
+  display: block;
+  width: 100%;
+  padding-right: 8px;
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-midnight);
+}
+
+.accordion-program .accordion-program-item-label::after {
+  content: '';
+  flex: 0 0 14px;
+  width: 14px;
+  height: 8px;
+  background: url("icon-chevron.svg") no-repeat center / 14px 8px;
+}
+
+.accordion-program .accordion-program-item[open] > .accordion-program-item-label::after {
+  transform: rotate(180deg);
+}
+
+.accordion-program .accordion-program-item-empty > .accordion-program-item-label {
+  cursor: default;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.accordion-program .accordion-program-item-empty > .accordion-program-item-label::after {
+  visibility: hidden;
+}
+
+/* panel */
+.accordion-program .accordion-program-item-body {
+  padding: 10px 15px 15px;
+  border-bottom: 1px solid var(--color-ocean);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+.accordion-program .accordion-program-item-body > :first-child {
+  margin-top: 0;
+}
+
+.accordion-program .accordion-program-item-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.accordion-program .accordion-program-footnote {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+/* footnote paragraph: 10px text on the 24px body line grid, as on the source */
+.accordion-program .accordion-program-footnote-note {
+  font-size: 10px;
+  line-height: 24px;
+}
+
+/* document link lists (investor pages): source linkList */
+.accordion-program .accordion-program-links-title {
+  margin: 0;
+  padding: 14px 0;
+  font-family: var(--body-font-family);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 32px;
+  color: var(--color-midnight);
+}
+
+.accordion-program .accordion-program-item-body > ul.accordion-program-links {
+  margin: 0 0 40px;
+  padding: 8px 0 0;
+  list-style: none;
+}
+
+.accordion-program .accordion-program-links > li {
+  position: relative;
+  margin: 0;
+  padding: 5px 0 5px 30px;
+  line-height: 24px;
+  background: url("icon-link.svg") no-repeat 0 50%;
+}
+
+.accordion-program .accordion-program-links > li[data-type="pdf"] {
+  background-image: url("icon-pdf.svg");
+}
+
+.accordion-program .accordion-program-links > li[data-type="video"] {
+  background-image: url("icon-video.svg");
+}
+
+.accordion-program .accordion-program-links > li[data-type="content"] {
+  background-image: url("icon-content.svg");
+}
+
+.accordion-program a.accordion-program-link:any-link {
+  display: block;
+  overflow: hidden;
+  color: var(--color-ocean);
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.accordion-program .accordion-program-links > li:hover a.accordion-program-link:any-link {
+  text-decoration: underline;
+  text-decoration-color: var(--color-ocean);
+}
+
+.accordion-program .accordion-program-tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 5px;
+  border-radius: 6px;
+  background-color: var(--color-ocean);
+  color: var(--color-snow);
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.accordion-program .accordion-program-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: var(--color-ocean);
+}
+
+.accordion-program .accordion-program-links > li:hover .accordion-program-tooltip {
+  visibility: visible;
+  opacity: 1;
+}

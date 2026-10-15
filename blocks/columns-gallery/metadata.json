@@ -1,0 +1,23 @@
+{
+  "variantName": "columns-gallery",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "low",
+    "purpose": "photo-row",
+    "imagePattern": "equal photos, natural aspect (3:2 on source), 16px radius",
+    "structure": "row of images, optional caption under each",
+    "columns": "3 in a row from 768px (follows image count, max 4), stacked below 768px"
+  },
+  "contentPattern": "Image row: one row with one image per cell (typically 3 photos). Optional text in a cell becomes a caption below that image. Heading, paragraph and bullet list above it are default content.",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/careers/refrigeration-apprenticeship-program.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-14"
+  },
+  "options": [],
+  "memberVariantIds": []
+}
