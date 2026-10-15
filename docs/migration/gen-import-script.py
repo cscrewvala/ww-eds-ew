@@ -44,11 +44,11 @@ def generate(name):
     out += ['};', '']
     out += ['// PAGE TEMPLATE CONFIGURATION - Embedded from page-templates.json',
             'const PAGE_TEMPLATE = ' + json.dumps(embedded, indent=2) + ';', '']
-    out += ['''// TRANSFORMER REGISTRY - cleanup, sections (2+ sections only), DM images, then article
+    out += ['''// TRANSFORMER REGISTRY - cleanup, sections (generic, every template), DM images, then article
 // metadata last (it merges into the single Metadata block written by createMetadata)
 const transformers = [
   cleanupTransformer,
-  ...(PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [sectionsTransformer] : []),
+  sectionsTransformer,
   dmImagesTransformer,
   articleMetadataTransformer,
 ];

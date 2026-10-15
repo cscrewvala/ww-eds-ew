@@ -154,7 +154,8 @@ const PAGE_TEMPLATE = {
     {
       "name": "columns-text",
       "instances": [
-        ".container__body__content.two-50-50:has(.mastercard):not(:has(.card__primary-img img, .image, .h3-secondary, .contactpanel, .wwgvideo))"
+        ".container__body__content.two-50-50:has(.mastercard):not(:has(.card__primary-img img, .image, .h3-secondary, .contactpanel, .wwgvideo))",
+        ".container__body__content.container__body__one-column:has(> .container__body__content__cols > .cmp-container > .mastercard .card__title):not(:has(.card__primary-img img, .card__video, .image, .contactpanel, .wwgvideo, .contenttile, .heading, .text))"
       ]
     },
     {
@@ -401,11 +402,11 @@ const PAGE_TEMPLATE = {
   ]
 };
 
-// TRANSFORMER REGISTRY - cleanup, sections (2+ sections only), DM images, then article
+// TRANSFORMER REGISTRY - cleanup, sections (generic, every template), DM images, then article
 // metadata last (it merges into the single Metadata block written by createMetadata)
 const transformers = [
   cleanupTransformer,
-  ...(PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [sectionsTransformer] : []),
+  sectionsTransformer,
   dmImagesTransformer,
   articleMetadataTransformer,
 ];

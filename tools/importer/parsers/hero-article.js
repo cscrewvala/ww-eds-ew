@@ -23,6 +23,13 @@
  *     becomes the row 1 image (query string stripped, spaces encoded) - blocks/hero-article has
  *     no video support. p.p--subText under the heading is kept as a paragraph after the h1.
  *
+ * Variants (comma list, e.g. `hero-article (subtitle, gradient)`):
+ *   subtitle    title came from p.p--subText (no h2.hero)
+ *   gradient    .heroBanner.black--gradient (bottom gradient scrim instead of flat overlay)
+ *   no-overlay  .heroBanner.teaser.no-opacity, or the .cmp-image::after scrim has opacity 0
+ *   top|bottom|right  .position__obj--top/--bottom/--right, or img object-position
+ *               50% 0% / 50% 100% / 100% 50% (default 0% 50% = no class)
+ *
  * Block table (library hero: 1 column):
  *   row 1: background image (optional)
  *   row 2: category paragraph + title as h1
@@ -67,11 +74,15 @@ export default function parse(element, { document }) {
     : '';
 
   // Sub-text under a real heading (video hero): extra paragraph(s) after the h1.
+  // A `.p--subText.h3` sub-line is styled as an h3 on the source -> emit it as <h3>.
   const subTexts = titleSrc && /^H[1-6]$/.test(titleSrc.tagName)
     ? [...textWrap.querySelectorAll('p')]
       .filter((p) => p !== categorySrc && !p.classList.contains('banner--category') && p.classList.contains('p--subText'))
-      .map((p) => p.textContent.replace(/\s+/g, ' ').trim()).filter(Boolean)
+      .map((p) => ({ text: p.textContent.replace(/\s+/g, ' ').trim(), h3: p.classList.contains('h3') }))
+      .filter((t) => t.text)
     : [];
+  // Title taken from p.p--subText (no h2.hero, e.g. 2019 news-archive): smaller title variant.
+  const subtitleVariant = !!titleSrc && titleSrc.tagName === 'P' && titleSrc.classList.contains('p--subText');
 
   // Empty-block guard.
   if (!image && !posterSrc && !titleText && !categoryText) {
@@ -116,13 +127,50 @@ export default function parse(element, { document }) {
     h1.textContent = titleText;
     contentCell.push(h1);
   }
-  subTexts.forEach((text) => {
-    const p = document.createElement('p');
-    p.textContent = text;
-    contentCell.push(p);
+  subTexts.forEach(({ text, h3 }) => {
+    const el = document.createElement(h3 ? 'h3' : 'p');
+    el.textContent = text;
+    contentCell.push(el);
   });
   cells.push([contentCell]);
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'hero-article', cells });
+  // Presentation variants from the source hero banner (.heroBanner on the slide).
+  const variants = [];
+  if (subtitleVariant) variants.push('subtitle');
+  const banner = slide.closest('.heroBanner') || slide.querySelector('.heroBanner')
+    || element.querySelector('.heroBanner') || element;
+  const bannerCls = banner.className || '';
+  const view = document.defaultView || (typeof window !== 'undefined' ? window : null);
+  if (/\bblack--gradient\b/.test(bannerCls)) variants.push('gradient');
+  let noOverlay = /\bno-opacity\b/.test(bannerCls) && banner.classList.contains('teaser');
+  if (!noOverlay && view && !/\bblack--gradient\b/.test(bannerCls)) {
+    // Scrim is the .cmp-image::after overlay; opacity 0 means no darkening.
+    const scrimHost = banner.querySelector('.cmp-image');
+    try {
+      const after = scrimHost ? view.getComputedStyle(scrimHost, '::after') : null;
+      if (after && after.content !== 'none' && after.opacity === '0') noOverlay = true;
+    } catch (e) { /* no computed styles (offline) */ }
+  }
+  if (noOverlay) variants.push('no-overlay');
+  // Image anchor: position__obj--top|bottom|right, else the img object-position.
+  let anchor = (bannerCls.match(/\bposition__obj--(top|bottom|right)\b/) || [])[1] || '';
+  const imgEl = image || video;
+  if (!anchor && imgEl) {
+    let pos = '';
+    const inline = (imgEl.getAttribute('style') || '').match(/object-position\s*:\s*([^;]+)/i);
+    if (inline) pos = inline[1];
+    else if (view) {
+      try { pos = view.getComputedStyle(imgEl).objectPosition || ''; } catch (e) { pos = ''; }
+    }
+    const norm = pos.trim().toLowerCase()
+      .replace(/\bcenter\b/g, '50%').replace(/\btop\b/g, '0%').replace(/\bbottom\b/g, '100%')
+      .replace(/\bleft\b/g, '0%').replace(/\bright\b/g, '100%')
+      .replace(/\s+/g, ' ');
+    anchor = { '50% 0%': 'top', '50% 100%': 'bottom', '100% 50%': 'right' }[norm] || '';
+  }
+  if (anchor) variants.push(anchor);
+
+  const name = variants.length ? `hero-article (${variants.join(', ')})` : 'hero-article';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

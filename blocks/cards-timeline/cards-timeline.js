@@ -8,21 +8,47 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
  *   body cell:  title (heading or first paragraph) + paragraph(s)
  *   image cell: picture
  * The year may also be the first short paragraph of the body cell.
- * Each item gets a cycling class (cards-timeline-band-1..3) as a hook for the
- * alternating band treatment applied by the design pass.
+ * Optional FIRST cell: per-row variant text "<band>[, right]" where band is
+ * midnight | sky | ocean (e.g. "sky, right"). It sets the band colour
+ * (cards-timeline-band-<band>) and puts the card on the right
+ * (cards-timeline-right). Without it, bands cycle midnight/sky/ocean and the
+ * card alternates sides (even rows right).
+ * A short paragraph BEFORE the title heading is the milestone date
+ * (cards-timeline-date).
  * @param {Element} block
  */
 
 const YEAR_PATTERN = /^(c\.\s*)?\d{4}(\s*[-–]\s*\d{2,4})?s?$/i;
-const BAND_CYCLE = 3;
+const BANDS = ['midnight', 'sky', 'ocean'];
+const SIDES = ['left', 'right'];
 
 function isYearText(text) {
   return YEAR_PATTERN.test(text.trim());
 }
 
+/**
+ * Parses a per-row variant cell ("sky, right"). Returns null when the cell is
+ * not a variant cell (any token outside the known band / side keywords).
+ */
+function parseVariant(cell) {
+  if (!cell || cell.querySelector('picture, img, h1, h2, h3, h4, h5, h6')) return null;
+  const tokens = cell.textContent.toLowerCase().split(/[\s,]+/).filter(Boolean);
+  if (!tokens.length || !tokens.every((t) => BANDS.includes(t) || SIDES.includes(t))) return null;
+  return {
+    band: tokens.find((t) => BANDS.includes(t)),
+    right: tokens.includes('right'),
+  };
+}
+
 function buildItem(row, index) {
   const li = document.createElement('li');
-  li.className = `cards-timeline-item cards-timeline-band-${(index % BAND_CYCLE) + 1}`;
+  const cells = [...row.children];
+  const variant = parseVariant(cells[0]);
+  if (variant) cells.shift().remove();
+  const band = variant?.band || BANDS[index % BANDS.length];
+  const right = variant ? variant.right : index % 2 === 1;
+  li.className = `cards-timeline-item cards-timeline-band-${band}`;
+  if (right) li.classList.add('cards-timeline-right');
 
   const card = document.createElement('div');
   card.className = 'cards-timeline-card';
@@ -33,7 +59,7 @@ function buildItem(row, index) {
   const media = document.createElement('div');
   media.className = 'cards-timeline-image';
 
-  [...row.children].forEach((cell) => {
+  cells.forEach((cell) => {
     const pic = cell.querySelector('picture');
     if (pic && !media.children.length) {
       const holder = pic.parentElement;
@@ -66,8 +92,15 @@ function buildItem(row, index) {
     }
   }
 
-  const title = card.querySelector('h1, h2, h3, h4, h5, h6') || card.firstElementChild;
+  const heading = card.querySelector('h1, h2, h3, h4, h5, h6');
+  const title = heading || card.firstElementChild;
   if (title) title.classList.add('cards-timeline-title');
+
+  // date paragraph authored before the title heading
+  const lead = card.firstElementChild;
+  if (heading && lead !== heading && lead.tagName === 'P' && lead.nextElementSibling === heading) {
+    lead.classList.add('cards-timeline-date');
+  }
 
   if (year.textContent) aside.append(year);
   if (media.children.length) aside.append(media);

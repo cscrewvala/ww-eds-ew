@@ -5,6 +5,25 @@
  * Mobile-first: stacked card with full-width "Add" bar; >= 768px (source breakpoint):
  * 96px pill row with the "Add" panel on the right.
  */
+
+/* source authors ~240px of separators above the list (hero -> first card = 264px) */
+.cards-calendar {
+  padding-top: 240px;
+}
+
+/* footnote authored as default content right after the block
+   (source span.article-bullets: bold, narrow, centred on desktop) */
+main .section .cards-calendar-wrapper + .default-content-wrapper {
+  padding-bottom: 176px; /* footnote -> footer = 219px on the source */
+}
+
+main .section .cards-calendar-wrapper + .default-content-wrapper > p {
+  margin: 58px 16px 16px;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  line-height: 24px;
+}
+
 .cards-calendar > ul {
   list-style: none;
   margin: 0;
@@ -145,5 +164,21 @@
     height: auto;
     margin: -1px -1px -1px 0;
     border-radius: 0 50px 50px 0;
+  }
+}
+
+@media (width >= 900px) {
+  main .section .cards-calendar-wrapper + .default-content-wrapper > p {
+    max-width: 344px;
+    margin-inline: auto;
+    font-size: var(--body-font-size-m);
+    text-align: center;
+  }
+}
+
+/* side-nav grid: sections no longer collapse margins (48px instead of 24px above) */
+@media (width >= 1200px) {
+  body.side-nav-layout .cards-calendar {
+    padding-top: 216px;
   }
 }

@@ -4,15 +4,22 @@
   padding: 0;
 }
 
+/* source carousel keeps 24px below the hero when content follows in the same section */
+.hero-article-container .hero-article-wrapper:not(:last-child) {
+  margin-bottom: 24px;
+}
+
 .hero-article {
   position: relative;
   margin-top: 24px;
   overflow: hidden;
 }
 
-/* media: in-flow image with fixed source heights per breakpoint */
+/* media: in-flow image with fixed source heights per breakpoint.
+   The source carousel clips the bottom 20px of the image (slider margin-bottom: -27px). */
 .hero-article .hero-article-media {
   position: relative;
+  margin-bottom: -20px;
 }
 
 .hero-article .hero-article-media picture {
@@ -28,26 +35,32 @@
   border-radius: 0;
 }
 
-/* overlay: source .black--gradient on .cmp-image::after */
+/* overlay: flat 60% black scrim (source default .heroBanner.teaser .cmp-image::after) */
 .hero-article .hero-article-media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(transparent, rgb(0 0 0));
+  background: rgb(0 0 0);
+  opacity: 0.6;
   pointer-events: none;
 }
 
-/* option: flat 60% black overlay (source default teaser overlay) */
-.hero-article.dark .hero-article-media::after {
-  background: rgb(0 0 0);
-  opacity: 0.6;
+/* option: transparent-to-black gradient (source .black--gradient: privacy, sustainability) */
+.hero-article.gradient .hero-article-media::after {
+  background: linear-gradient(transparent, rgb(0 0 0));
+  opacity: 1;
+}
+
+/* option: no overlay (source .teaser.no-opacity, e.g. contact-us) */
+.hero-article.no-overlay .hero-article-media::after {
+  display: none;
 }
 
 /* text: bottom-left overlay */
 .hero-article .hero-article-inner {
   position: absolute;
   left: 16px;
-  bottom: 32px;
+  bottom: 12px;
   z-index: 1;
   width: 90%;
 }
@@ -85,6 +98,24 @@
   padding: 10px 0;
 }
 
+/* source .p--subText.h3 sub-line after the title (emitted as h3) */
+.hero-article .hero-article-content :is(h1, h2) ~ h3 {
+  margin: 0;
+  padding: 10px 0;
+  font-family: var(--heading-font-family);
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+/* subtitle: title came from p.p--subText.h3 (no h2.hero) -> h3-sized title */
+.hero-article.subtitle .hero-article-content h1,
+.hero-article.subtitle .hero-article-content h2 {
+  padding: 10px 0;
+  font-size: 27px;
+  line-height: 32px;
+}
+
 /* no image: plain text heading in flow */
 .hero-article.no-image .hero-article-media {
   display: none;
@@ -120,18 +151,38 @@
 @media (width >= 768px) {
   .hero-article .hero-article-media img {
     height: 329px;
-    object-position: left center;
+    object-position: 0 50%;
+  }
+
+  /* options: source .position__obj--top / --bottom and inline right anchors */
+  .hero-article.top .hero-article-media img {
+    object-position: 50% 0;
+  }
+
+  .hero-article.bottom .hero-article-media img {
+    object-position: 50% 100%;
+  }
+
+  .hero-article.right .hero-article-media img {
+    object-position: 100% 50%;
   }
 
   .hero-article .hero-article-inner {
     left: 24px;
-    bottom: 64px;
+    bottom: 44px;
   }
 
   .hero-article .hero-article-content h1,
   .hero-article .hero-article-content h2 {
     font-size: 64px;
     line-height: 80px;
+  }
+
+  .hero-article .hero-article-content :is(h1, h2) ~ h3,
+  .hero-article.subtitle .hero-article-content h1,
+  .hero-article.subtitle .hero-article-content h2 {
+    font-size: 36px;
+    line-height: 44px;
   }
 }
 
@@ -158,7 +209,7 @@
 
   .hero-article .hero-article-inner {
     left: 48px;
-    bottom: 72px;
+    bottom: 52px;
   }
 }
 

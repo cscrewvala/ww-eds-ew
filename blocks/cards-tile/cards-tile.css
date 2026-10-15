@@ -6,7 +6,9 @@
  */
 
 .cards-tile {
-  margin: 24px 0;
+  /* no bottom margin: the last row's li margin (source wrapMB 16/24) is the space below
+     the cards, so a section ends 24px + its padding below them and stacked blocks keep 48px */
+  margin: 24px 0 0;
 }
 
 .cards-tile > ul {
@@ -48,7 +50,9 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9;
+
+  /* natural ratio once loaded (source teaser images); 16:9 only reserves space before that */
+  aspect-ratio: auto 16 / 9;
   object-fit: cover;
   object-position: center top;
 }
@@ -107,10 +111,23 @@
   text-decoration: underline;
 }
 
+.cards-tile .cards-tile-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---- text tile (source .mastercard .card) ---- */
+.cards-tile.cards-tile-text > ul {
+  row-gap: 0;
+}
+
 .cards-tile.cards-tile-text > ul > li {
   display: block;
-  margin: 0;
+  margin: 0 0 24px;
   padding-bottom: 16px;
   border: 0;
   box-shadow: none;
@@ -152,6 +169,49 @@
   text-decoration: underline;
 }
 
+/* linked titles (source: centred title button) - one line stays left, wrapped lines centre */
+.cards-tile.cards-tile-text .cards-tile-title:has(> a) {
+  width: fit-content;
+  text-align: center;
+}
+
+/* ---- video tile (source .cmp-teaser--tile-video): play icon, no CTA row ---- */
+.cards-tile li.cards-tile-video .cards-tile-card-image {
+  position: relative;
+}
+
+.cards-tile li.cards-tile-video .cards-tile-card-image::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 71px;
+  height: 71px;
+  background: url("play.svg") center / contain no-repeat;
+  filter: drop-shadow(1px 3px 3.5px rgb(0 12 45 / 37%));
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.cards-tile li.cards-tile-video .cards-tile-title {
+  font-size: 21px;
+  line-height: 28px;
+}
+
+/* ---- two columns (source two-50-50 container), link look ---- */
+.cards-tile.cols-2:not(.cards-tile-text) .cards-tile-card-image {
+  padding-bottom: 0;
+}
+
+.cards-tile.cols-2:not(.cards-tile-text) .cards-tile-card-image img {
+  aspect-ratio: 356 / 173;
+}
+
+.cards-tile.cols-2:not(.cards-tile-text) .cards-tile-card-body {
+  box-sizing: border-box;
+  min-height: 135px;
+}
+
 @media (width >= 768px) {
   .cards-tile > ul {
     grid-template-columns: repeat(3, minmax(0, min(32%, 389px)));
@@ -170,8 +230,39 @@
     overflow: hidden;
   }
 
-  .cards-tile.cards-tile-text > ul > li {
-    margin-bottom: 16px;
+  .cards-tile.cards-tile-text > ul {
+    row-gap: 16px;
+  }
+
+  /* text tiles with a CTA: one height per row, CTA pinned to the bottom (source pads the
+     description box to a fixed height; min-height reproduces its 516px row) */
+  .cards-tile.cards-tile-text > ul > li:has(.cards-tile-cta) {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+
+  .cards-tile.cards-tile-text li:has(.cards-tile-cta) .cards-tile-card-body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+    min-height: 220px;
+  }
+
+  .cards-tile.cards-tile-text li:has(.cards-tile-cta) .cards-tile-cta {
+    flex: 0 0 auto;
+    margin-top: auto;
+  }
+
+  .cards-tile.cols-2 > ul {
+    grid-template-columns: repeat(2, minmax(0, 572px));
+    column-gap: 40px;
+  }
+
+  .cards-tile.cols-2:not(.cards-tile-text) .cards-tile-card-image img {
+    aspect-ratio: 570 / 406;
   }
 
   /* four tiles: 2 per row until 1440 (source .container__body__four-column) */
@@ -198,7 +289,8 @@
     margin-right: 8px;
   }
 
-  .cards-tile.cards-tile-text > ul > li {
+  .cards-tile.cards-tile-text > ul > li,
+  .cards-tile.cols-2 > ul > li {
     margin-right: 0;
   }
 
@@ -221,6 +313,11 @@
 
   .cards-tile.cards-tile-text .cards-tile-cta {
     display: block;
+  }
+
+  .cards-tile.cols-2:not(.cards-tile-text) .cards-tile-card-body {
+    box-sizing: border-box;
+    min-height: 228px;
   }
 }
 

@@ -10,8 +10,9 @@
   color: var(--text-color);
 }
 
-/* card: source .ecosystem__body__brands__item */
+/* card: source .ecosystem__body__brands__item (104px: 16px + 72px logo + 16px) */
 .cards-logo > ul > li {
+  position: relative;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -22,6 +23,11 @@
   padding: 16px 24px;
   border-radius: 8px;
   box-shadow: rgb(58 71 78 / 15%) 0 2px 20px -2px;
+}
+
+/* the whole card opens its pop-up (source card is tabindex=0 + click) */
+.cards-logo > ul > li.cards-logo-has-dialog {
+  cursor: pointer;
 }
 
 .cards-logo .cards-logo-image {
@@ -49,8 +55,7 @@
   min-width: 0;
 }
 
-.cards-logo .cards-logo-body > *,
-.cards-logo .cards-logo-description > * {
+.cards-logo .cards-logo-body > * {
   margin: 0;
 }
 
@@ -63,53 +68,35 @@
   color: var(--text-color);
 }
 
-/* description: modal-only copy on the source, shown inline and clamped to 2 lines */
-.cards-logo .cards-logo-description {
-  display: -webkit-box;
-  margin-top: 4px;
-  overflow: hidden;
-  font-size: var(--body-font-size-s);
-  line-height: var(--body-line-height);
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
-}
-
-.cards-logo .cards-logo-description.cards-logo-description-expanded {
-  display: block;
-  overflow: visible;
-  -webkit-line-clamp: unset;
-  line-clamp: none;
-}
-
-.cards-logo .cards-logo-description > * + * {
-  margin-top: 8px;
-}
-
-.cards-logo .cards-logo-description ul,
-.cards-logo .cards-logo-description ol {
-  padding-left: 20px;
-}
-
-.cards-logo .cards-logo-description li {
-  margin: 0;
-}
-
-/* disclosure toggle (replaces the source pop-up trigger) */
-.cards-logo .cards-logo-toggle {
-  display: block;
+/* name as the pop-up trigger: looks like the plain name */
+.cards-logo .cards-logo-trigger {
+  display: inline;
   margin: 0;
   border: 0;
   padding: 0;
   background: none;
-  font-family: var(--body-font-family);
+  font: inherit;
+  color: inherit;
   text-align: left;
   cursor: pointer;
 }
 
-/* link + toggle: source __content__cta.p2--normal-fixed */
-.cards-logo .cards-logo-link a:any-link,
-.cards-logo .cards-logo-body .cards-logo-toggle {
+.cards-logo .cards-logo-trigger:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.cards-logo .cards-logo-trigger-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* link: source __content__cta.p2--normal-fixed */
+.cards-logo .cards-logo-link a:any-link {
   font-size: var(--body-font-size-s);
   font-weight: 400;
   line-height: 24px;
@@ -117,26 +104,206 @@
   text-decoration: underline;
 }
 
-.cards-logo .cards-logo-link a:hover,
-.cards-logo .cards-logo-body .cards-logo-toggle:hover {
+.cards-logo .cards-logo-link a:hover {
   color: var(--link-color);
 }
 
-.cards-logo .cards-logo-toggle[hidden] {
+/* "Show more" under the grid: source .ecosystem__body__cta (mobile only) */
+.cards-logo .cards-logo-more {
   display: none;
+  justify-content: center;
+  padding: 0 0 24px;
 }
 
-.cards-logo .cards-logo-body .cards-logo-toggle:focus-visible {
+.cards-logo .cards-logo-more-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--color-midnight);
+  cursor: pointer;
+}
+
+.cards-logo .cards-logo-more-button:focus-visible {
   outline: var(--focus-outline);
   outline-offset: var(--focus-outline-offset);
 }
 
-.cards-logo .cards-logo-body > .cards-logo-link {
-  margin-top: 0;
+.cards-logo .cards-logo-icon-chevron {
+  width: 19px;
+  height: 32px;
+  transition: transform 0.2s ease;
+}
+
+.cards-logo .cards-logo-more-button[aria-expanded="true"] .cards-logo-icon-chevron {
+  transform: rotate(180deg);
+}
+
+@media (width < 768px) {
+  .cards-logo .cards-logo-more {
+    display: flex;
+  }
+
+  .cards-logo.cards-logo-collapsible:not(.cards-logo-expanded) > ul > li:nth-child(n + 6) {
+    display: none;
+  }
+}
+
+/* pop-up: source .ecosystem__modal */
+.cards-logo .cards-logo-dialog {
+  box-sizing: border-box;
+  width: calc(100% - 35px);
+  max-width: 576px;
+  max-height: calc(100% - 32px);
+  margin: auto;
+  border: 0;
+  border-radius: 8px;
+  padding: 0;
+  overflow-y: auto;
+  background: var(--color-snow);
+  color: var(--color-charcoal);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 400;
+  line-height: 24px;
+  cursor: auto;
+}
+
+.cards-logo .cards-logo-dialog::backdrop {
+  background: rgb(14 13 38 / 80%);
+}
+
+.cards-logo .cards-logo-dialog-panel {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.cards-logo .cards-logo-dialog-logo picture {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-logo .cards-logo-dialog-close {
+  display: flex;
+  justify-content: flex-end;
+  padding: 32px 16px 0;
+}
+
+.cards-logo .cards-logo-close {
+  display: block;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: #000;
+  line-height: 0;
+  cursor: pointer;
+}
+
+.cards-logo .cards-logo-close:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.cards-logo .cards-logo-icon-close {
+  width: 32px;
+  height: 32px;
+}
+
+.cards-logo .cards-logo-dialog-logo {
+  display: flex;
+  justify-content: center;
+  height: 224px;
+  margin: 0 0 32px;
+}
+
+.cards-logo .cards-logo-dialog-logo img {
+  display: block;
+  width: 224px;
+  max-width: 100%;
+  height: auto;
+  max-height: 224px;
+  object-fit: contain;
+}
+
+.cards-logo .cards-logo-dialog-title {
+  margin: 0 0 8px;
+  padding: 0 16px 8px;
+  font-weight: 600;
+}
+
+.cards-logo .cards-logo-dialog-description {
+  padding: 0 16px 32px;
+}
+
+.cards-logo .cards-logo-dialog-description > * {
+  margin: 0;
+}
+
+.cards-logo .cards-logo-dialog-description > * + * {
+  margin-top: 24px;
+}
+
+.cards-logo .cards-logo-dialog-description ul,
+.cards-logo .cards-logo-dialog-description ol {
+  padding-left: 20px;
+}
+
+.cards-logo .cards-logo-dialog-description a:any-link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.cards-logo .cards-logo-dialog-cta {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0 0 32px;
+}
+
+/* source cta-primary btn-medium btn-midnight (245x50) */
+.cards-logo .cards-logo-dialog-cta a.button {
+  box-sizing: border-box;
+  gap: 12px;
+  min-height: 50px;
+  margin: 4px;
+  padding: 8px 24px;
+  line-height: 22px;
+}
+
+.cards-logo .cards-logo-icon-external {
+  flex: 0 0 19px;
+  width: 19px;
+  height: 32px;
 }
 
 @media (width >= 600px) {
   .cards-logo > ul > li {
     flex: 0 0 350px;
+  }
+}
+
+@media (width >= 768px) {
+  .cards-logo .cards-logo-dialog-close {
+    padding: 32px 32px 0;
+  }
+
+  .cards-logo .cards-logo-dialog-title {
+    padding: 0 32px;
+  }
+
+  .cards-logo .cards-logo-dialog-description {
+    padding: 0 32px 32px;
   }
 }

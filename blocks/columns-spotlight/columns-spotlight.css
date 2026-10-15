@@ -219,3 +219,66 @@ dialog.columns-spotlight-dialog::backdrop {
     margin-bottom: 16px;
   }
 }
+
+/*
+ * variant: dual -- source imagevideotext.dual-container (legal pages, e.g. /privacy/protection):
+ * mobile: full-bleed rounded poster above the text; desktop: text left, poster right running to
+ * the viewport edge and stretched to the text height. Headings keep the global h2 style.
+ */
+main > .section:has(.columns-spotlight.dual) {
+  overflow-x: clip;
+}
+
+.columns-spotlight.dual .columns-spotlight-row {
+  gap: 16px;
+}
+
+.columns-spotlight.dual .columns-spotlight-media {
+  margin-inline: calc(50% - 50vw);
+}
+
+.columns-spotlight.dual .columns-spotlight-card {
+  border-radius: 16px;
+  background-color: transparent;
+}
+
+.columns-spotlight.dual .columns-spotlight-text {
+  padding-top: 16px;
+}
+
+.columns-spotlight.dual .columns-spotlight-text > :is(h1, h2, h3, h4, h5, h6) {
+  margin: 0 0 24px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+}
+
+@media (width >= 900px) {
+  .columns-spotlight.dual .columns-spotlight-row {
+    align-items: stretch;
+    gap: 32px;
+  }
+
+  .columns-spotlight.dual .columns-spotlight-media {
+    flex: 0 0 44vw;
+    order: 1;
+    margin: 0 calc(50% - 50vw) 0 0;
+  }
+
+  .columns-spotlight.dual .columns-spotlight-text {
+    flex: 1 1 0;
+    padding: 16px 0;
+  }
+
+  .columns-spotlight.dual .columns-spotlight-card,
+  .columns-spotlight.dual .columns-spotlight-poster,
+  .columns-spotlight.dual .columns-spotlight-play,
+  .columns-spotlight.dual .columns-spotlight-poster picture {
+    height: 100%;
+  }
+
+  .columns-spotlight.dual .columns-spotlight-poster img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}

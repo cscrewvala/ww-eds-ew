@@ -10,6 +10,7 @@
  * Source structure (validated against block-context/cards-timeline/source.html):
  *   .historytimeline > historytimeline > .history-timeline
  *     > .history-timeline__section (x n, colour + panel--right modifiers)   <- iterated
+ *         .history-timeline__section__{midnight|sky|ocean}, .panel--right -> variant cell
  *         __left__content p.timeline--date     -> date paragraph (usually empty)
  *         __left__content p.timeline--title    -> h3 title
  *         __left__content .timeline--text > p  -> body paragraphs (nbsp-only dropped)
@@ -18,7 +19,9 @@
  *     decorative divider <img class="*-img"> -> ignored
  *
  * Block table (cards convention / blocks/cards-timeline): one row per milestone
- *   [year | h3 title, paragraphs | image]
+ *   [variant | year | date p, h3 title, paragraphs | image]
+ *   variant = "<band>[, right]" from the section's __midnight|__sky|__ocean and panel--right
+ *   modifiers (e.g. "sky, right"); empty when the source carries neither.
  */
 const ORIGIN = 'https://www.woolworthsgroup.com.au';
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
@@ -43,16 +46,17 @@ export default function parse(element, { document }) {
     const title = clean(section.querySelector('.timeline--title, .tl--title')?.textContent);
     const date = clean(section.querySelector('.timeline--date, .tl--date')?.textContent);
 
+    // Date label sits above the title on the source.
     const body = [];
-    if (title) {
-      const h3 = document.createElement('h3');
-      h3.textContent = title;
-      body.push(h3);
-    }
     if (date) {
       const p = document.createElement('p');
       p.textContent = date;
       body.push(p);
+    }
+    if (title) {
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
+      body.push(h3);
     }
     const textEl = section.querySelector('.timeline--text');
     if (textEl) {
@@ -98,7 +102,10 @@ export default function parse(element, { document }) {
     }
 
     if (!year && !body.length && !img) return;
-    cells.push([year || '', body.length ? body : '', img]);
+    // Per-row variant cell: authored band colour (__midnight|__sky|__ocean) + card side.
+    const band = (section.className.match(/__section__(midnight|sky|ocean)\b/) || [])[1] || '';
+    const variant = [band, section.classList.contains('panel--right') ? 'right' : ''].filter(Boolean).join(', ');
+    cells.push([variant, year || '', body.length ? body : '', img]);
   });
 
   // Empty-block guard.

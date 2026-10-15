@@ -28,6 +28,11 @@
   margin: 0;
 }
 
+/* space before following content (source container break after the photo row) */
+main .columns-gallery-wrapper:not(:last-child) {
+  margin-bottom: 64px;
+}
+
 @media (width >= 768px) {
   .columns-gallery .columns-gallery-grid {
     flex-direction: row;

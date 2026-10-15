@@ -34,6 +34,10 @@
  *
  * Block table (accordion convention / blocks/accordion-program): 2 columns,
  *   one row per item: [label | rich body]
+ * Variants (block level): `open-first` when the source renders its first item expanded
+ * (data-cmp-expanded, .cmp-accordion__button--expanded or a visible first panel);
+ * `berry-bullets` when any panel uses .custom-bullets--berry lists; `inset` when any panel's
+ * content sits inside an inner .colscontainer (climate Seafood Sourcing / RSPCA / Poultry).
  */
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -243,6 +247,24 @@ export default function parse(element, { document }) {
     return;
   }
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'accordion-program', cells });
+  // Source opens the first item on load (investor accordions) -> open-first variant.
+  const first = items[0];
+  const firstBtn = first && first.querySelector('.cmp-accordion__button');
+  const firstPanel = first && (first.querySelector(':scope > .cmp-accordion__panel') || first.querySelector('.cmp-accordion__panel'));
+  const openFirst = !!first && (first.hasAttribute('data-cmp-expanded')
+    || (firstBtn && firstBtn.classList.contains('cmp-accordion__button--expanded'))
+    || (firstPanel && (firstPanel.classList.contains('cmp-accordion__panel--expanded')
+      || firstPanel.getAttribute('aria-hidden') === 'false')));
+
+  const variants = [];
+  if (openFirst) variants.push('open-first');
+  const panels = items.map((it) => it.querySelector(':scope > .cmp-accordion__panel') || it.querySelector('.cmp-accordion__panel'))
+    .filter(Boolean);
+  // Berry bullet lists in the panels (dividends).
+  if (panels.some((pn) => pn.querySelector('.custom-bullets--berry'))) variants.push('berry-bullets');
+  // Panel content wrapped in an inner layout container (.colscontainer) is inset on the source.
+  if (panels.some((pn) => pn.querySelector('.colscontainer'))) variants.push('inset');
+  const name = variants.length ? `accordion-program (${variants.join(', ')})` : 'accordion-program';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

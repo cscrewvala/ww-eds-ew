@@ -189,6 +189,9 @@ export default function decorate(block) {
     row.append(text);
   }
   if (!mediaCell) block.classList.add('columns-spotlight-no-media');
+  // "dual" variant: on legal pages this block comes from the source imagevideotext.dual-container
+  // (text left, full-bleed media right). Authors may also set it explicitly.
+  if (mediaCell && document.body.classList.contains('legal-page')) block.classList.add('dual');
 
   row.querySelectorAll('.columns-spotlight-poster picture > img').forEach((img) => {
     img.closest('picture').replaceWith(

@@ -8,6 +8,11 @@
   color: var(--text-color);
 }
 
+/* option: source separator.h-96 above the hero container (about half the story pages) */
+.hero-story.offset-top {
+  margin-top: 120px;
+}
+
 .hero-story .hero-story-content {
   /* source text column ends with an empty paragraph (24px + 16px margin) */
   padding-bottom: 40px;

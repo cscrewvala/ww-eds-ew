@@ -28,7 +28,7 @@ const LABELS = {
  */
 function toList(value) {
   if (!value) return [];
-  if (Array.isArray(value)) return value.map((v) => `${v}`.trim()).filter(Boolean);
+  if (Array.isArray(value)) return [...new Set(value.flatMap((v) => toList(v)))];
   const str = `${value}`.trim();
   if (str.startsWith('[')) {
     try {
@@ -76,7 +76,8 @@ function toArticle(row) {
   return {
     path: row.path,
     title: row.title || '',
-    description: row.description || '',
+    // the SEO description is not a teaser; only a dedicated card description is shown
+    cardDescription: row['card-description'] || '',
     image: row.image || '',
     tags: toList(row.tags),
     date,
@@ -134,7 +135,7 @@ function renderStoryCard(article) {
       { class: 'article-list-body' },
       article.tags.length ? el('ul', { class: 'article-list-tags' }, article.tags.map((t) => el('li', { class: 'article-list-tag' }, t))) : null,
       el('h3', {}, el('a', { href: article.path }, article.title)),
-      article.description ? el('p', { class: 'article-list-description' }, article.description) : null,
+      article.cardDescription ? el('p', { class: 'article-list-description' }, article.cardDescription) : null,
       el('p', { class: 'article-list-more' }, el('a', { href: article.path, 'aria-hidden': 'true', tabindex: '-1' }, 'Learn More')),
     ),
   );
@@ -149,6 +150,52 @@ function buildSelect(name, label, options, value) {
     select.append(option);
   });
   return el('div', { class: `article-list-field article-list-${name}` }, el('label', { for: id }, label), select);
+}
+
+/**
+ * Normalises a path or URL to a site path without extension or trailing slash.
+ * @param {string} value
+ * @returns {string}
+ */
+function toPath(value) {
+  try {
+    return new URL(value, window.location.origin).pathname
+      .replace(/^\/content(?=\/)/, '')
+      .replace(/\.html$/, '')
+      .replace(/\/$/, '');
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * Reads the Featured row directly so linked and plain-text paths can be mixed.
+ * @param {Element} block
+ * @returns {string[]} Normalised paths in authored order
+ */
+function readFeatured(block) {
+  const row = [...block.querySelectorAll(':scope > div')]
+    .find((r) => r.children[1] && r.children[0].textContent.trim().toLowerCase() === 'featured');
+  if (!row) return [];
+  const cell = row.children[1].cloneNode(true);
+  cell.querySelectorAll('a').forEach((a) => a.replaceWith(` ${a.getAttribute('href')} `));
+  cell.querySelectorAll('p, br, li').forEach((n) => n.after(' '));
+  const paths = cell.textContent.split(/[\s,]+/).filter(Boolean).map(toPath).filter(Boolean);
+  return [...new Set(paths)];
+}
+
+/**
+ * Orders tags by the authored Categories list; unlisted tags follow alphabetically.
+ * @param {string[]} tags
+ * @param {string[]} order
+ * @returns {string[]}
+ */
+function orderTags(tags, order) {
+  const rank = (t) => {
+    const i = order.findIndex((o) => o.toLowerCase() === t.toLowerCase());
+    return i < 0 ? order.length : i;
+  };
+  return [...tags].sort((a, b) => (rank(a) - rank(b)) || a.localeCompare(b));
 }
 
 /**
@@ -176,8 +223,8 @@ function writeState(state, defaults) {
 
 /**
  * Dynamic article listing driven by the query index.
- * Config rows: Source, Filters (tags|category, year, sort), Tags, Limit,
- * Layout (news|stories), Index.
+ * Config rows: Source, Filters (tags|category, year, sort), Tags, Categories, Featured,
+ * Limit, Layout (news|stories), Index.
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
@@ -185,6 +232,8 @@ export default async function decorate(block) {
   const sources = toList(config.source);
   const filters = toList(config.filters).map((f) => f.toLowerCase());
   const presetTags = toList(config.tags);
+  const categories = toList(config.categories);
+  const featured = readFeatured(block);
   const limit = Math.max(1, parseInt(config.limit, 10) || 12);
   const layout = (config.layout || 'news').toLowerCase() === 'stories' ? 'stories' : 'news';
   const index = config.index || DEFAULT_INDEX;
@@ -210,9 +259,11 @@ export default async function decorate(block) {
     .map(toArticle)
     .filter((a) => presetTags.every((t) => a.tags.includes(t)));
 
-  const tagOptions = [...new Set(articles.flatMap((a) => a.tags))]
-    .filter((t) => !presetTags.includes(t))
-    .sort((a, b) => a.localeCompare(b));
+  // preset tags stay as chips (the source shows them); they only restrict the pool
+  // unlisted preset tags lead the unlisted chips (source: "All Stories, 100 Years, ...")
+  const allTags = [...new Set(articles.flatMap((a) => a.tags))];
+  const tagOptions = orderTags(allTags, [...categories, ...presetTags]);
+  const featuredRank = new Map(featured.map((p, i) => [p, i]));
   const yearOptions = [...new Set(articles.map((a) => a.year).filter(Boolean))].sort().reverse();
   const allLabel = layout === 'stories' ? LABELS.allStories : LABELS.all;
   const defaults = { tag: '' };
@@ -263,32 +314,52 @@ export default async function decorate(block) {
       }
       return;
     }
+    // the source keeps the scroll position on page change; keep focus on the pager too
     const button = (label, page, attrs = {}) => {
       const b = el('button', { type: 'button', ...attrs }, label);
       b.addEventListener('click', () => {
+        const key = b.classList.contains('article-list-prev') || b.classList.contains('article-list-next')
+          ? `.${b.className}` : '[aria-current="page"]';
         update({ page });
-        block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        const target = [key, '.article-list-prev', '.article-list-next', '[aria-current="page"]']
+          .map((s) => pager.querySelector(`${s}:not(:disabled)`))
+          .find((n) => n && n.getClientRects().length);
+        if (target) target.focus({ preventScroll: true });
       });
       return b;
     };
+    const pageItem = (p) => el('li', {}, button(`${p}`, p, { 'aria-current': p === state.page ? 'page' : false, 'aria-label': `Page ${p}` }));
+    const ellipsis = () => el('li', { 'aria-hidden': 'true' }, el('span', { class: 'article-list-ellipsis' }, '...'));
     pager.append(button(LABELS.previous, state.page - 1, { class: 'article-list-prev', disabled: state.page === 1 }));
     const pages = el('ol', { class: 'article-list-pages' });
     const windowStart = Math.max(1, Math.min(state.page - 2, totalPages - 4));
     const windowEnd = Math.min(totalPages, windowStart + 4);
-    for (let p = windowStart; p <= windowEnd; p += 1) {
-      const current = p === state.page ? 'page' : false;
-      pages.append(el('li', {}, button(`${p}`, p, { 'aria-current': current, 'aria-label': `Page ${p}` })));
-    }
+    if (windowStart > 1) pages.append(pageItem(1));
+    if (windowStart > 2) pages.append(ellipsis());
+    for (let p = windowStart; p <= windowEnd; p += 1) pages.append(pageItem(p));
+    if (windowEnd < totalPages - 1) pages.append(ellipsis());
+    if (windowEnd < totalPages) pages.append(pageItem(totalPages));
     pager.append(pages);
+    // compact mobile pager: "previous 2/32 next"
+    pager.append(el('span', { class: 'article-list-page-compact' }, `${state.page}/${totalPages}`));
     pager.append(button(LABELS.next, state.page + 1, { class: 'article-list-next', disabled: state.page === totalPages }));
     pager.append(el('p', { class: 'article-list-page-of' }, `page ${state.page} of ${totalPages}`));
   }
+
+  // Featured paths lead in authored order (newest-first view only), the rest follow by date
+  const compare = (a, b) => {
+    if (state.sort === 'asc') return a.sortKey.localeCompare(b.sortKey);
+    const fa = featuredRank.has(a.path) ? featuredRank.get(a.path) : Infinity;
+    const fb = featuredRank.has(b.path) ? featuredRank.get(b.path) : Infinity;
+    if (fa !== fb) return fa < fb ? -1 : 1;
+    return b.sortKey.localeCompare(a.sortKey);
+  };
 
   function render() {
     const matches = articles
       .filter((a) => !state.tag || a.tags.includes(state.tag))
       .filter((a) => !state.year || a.year === state.year)
-      .sort((a, b) => (state.sort === 'asc' ? a.sortKey.localeCompare(b.sortKey) : b.sortKey.localeCompare(a.sortKey)));
+      .sort(compare);
     const totalPages = Math.max(1, Math.ceil(matches.length / limit));
     state.page = Math.min(state.page, totalPages);
     // stories accumulate with "Load More"; news shows one numbered page at a time

@@ -153,6 +153,13 @@ function buildMenu(menu, index) {
       const sub = item.querySelector(':scope > ul');
       if (sub) {
         sub.className = 'nav-mega-links';
+        // chevron after a real space: it wraps on its own when the label fills the column
+        sub.querySelectorAll('a').forEach((a) => {
+          const chevron = document.createElement('span');
+          chevron.className = 'nav-mega-chevron';
+          chevron.setAttribute('aria-hidden', 'true');
+          a.append(' ', chevron);
+        });
         group.append(sub);
       }
       groups.append(group);

@@ -2,9 +2,10 @@
 
 Credentials are injected by the environment (no tokens in this script).
 Usage: python3 docs/migration/go-live.py <step> [<step> ...]
-Steps: check | config | upload | preview | publish | verify
+Steps: check | config | upload [--force] | preview | publish | verify
 Package: run docs/migration/build-da-package.py first (writes /tmp/da-upload).
 """
+import hashlib
 import json
 import os
 import subprocess
@@ -14,6 +15,7 @@ import time
 ORG, SITE, REF = 'cscrewvala', 'ww-eds-ew', 'main'
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PKG = '/tmp/da-upload'
+STATE = os.path.join(ROOT, 'docs/migration/da-upload-state.json')
 DA = f'https://admin.da.live/source/{ORG}/{SITE}'
 ADMIN = 'https://admin.hlx.page'
 LIVE = f'https://{REF}--{SITE}--{ORG}.aem.live'
@@ -58,14 +60,42 @@ def step_config():
         sys.exit(1)
 
 
+def sha(data):
+    return hashlib.sha256(data.encode() if isinstance(data, str) else data).hexdigest()
+
+
+def load_state():
+    return json.load(open(STATE)) if os.path.exists(STATE) else {}
+
+
 def step_upload():
+    """Upload docs; never overwrite a document that was edited in DA since our last upload.
+
+    da-upload-state.json records the hash of what we last uploaded per path. If the current DA
+    source hash differs from it, an author changed the page in DA: skip it (pass --force to override).
+    """
     m = manifest()
-    failures = []
+    state = load_state()
+    force = '--force' in sys.argv
+    failures, skipped = [], []
     for p in m['docs']:
         f = f'{PKG}/docs/{p}.html'
+        local = open(f, encoding='utf-8').read()
+        code, current = curl(f'{DA}/{p}.html')
+        if code == 200 and not force:
+            if sha(current) == sha(local):
+                continue  # already up to date
+            if p in state and sha(current) != state[p]:
+                skipped.append(p)
+                continue
         code, _ = curl('-X', 'POST', '-F', f'data=@{f};type=text/html', f'{DA}/{p}.html')
         if code >= 300:
             failures.append((p, code))
+        else:
+            state[p] = sha(local)
+    json.dump(state, open(STATE, 'w'), indent=1, sort_keys=True)
+    if skipped:
+        print(f'skipped {len(skipped)} document(s) edited in DA since the last upload:', skipped)
     for p in m['media']:
         mime = 'image/svg+xml' if p.endswith('.svg') else 'application/octet-stream'
         code, _ = curl('-X', 'POST', '-F', f'data=@{PKG}/media/{p};type={mime}', f'{DA}/{p}')
@@ -122,6 +152,6 @@ STEPS = {'check': step_check, 'config': step_config, 'upload': step_upload,
          'preview': lambda: bulk('preview'), 'publish': lambda: bulk('live'), 'verify': step_verify}
 
 if __name__ == '__main__':
-    for s in sys.argv[1:]:
+    for s in [a for a in sys.argv[1:] if not a.startswith('--')]:
         print(f'== {s}')
         STEPS[s]()

@@ -11,6 +11,8 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
  *   - link tile (default): image + title + CTA, the whole tile is clickable.
  *   - text tile (`.cards-tile-text`): image + title + description (+ inline CTA),
  *     used when any tile carries descriptive text.
+ * Variant `cols-2`: two columns of up to 572px (source two-50-50 container).
+ * A tile whose CTA points at a video becomes a video tile (`.cards-tile-video`).
  * @param {Element} block
  */
 
@@ -103,6 +105,30 @@ function linkTile(li) {
   li.classList.add('cards-tile-linked');
 }
 
+const VIDEO_HREF = /\.(mp4|webm|mov|m3u8)([?#]|$)|\/s7viewers\/|youtube\.com|youtu\.be|vimeo\.com/i;
+
+/**
+ * Video tile (source .cmp-teaser--tile-video): play icon over the thumbnail, no CTA row.
+ * The CTA keeps working as the card link: its target is the stretched title link
+ * and its text ("Watch video") stays in that link for assistive tech only.
+ * Call after linkTile().
+ * @param {Element} li
+ */
+function videoTile(li) {
+  const cta = li.querySelector('.cards-tile-cta');
+  const ctaLink = cta && cta.querySelector('a[href]');
+  const primary = li.querySelector('.cards-tile-link');
+  if (!ctaLink || !primary || !VIDEO_HREF.test(ctaLink.getAttribute('href'))) return;
+  if (primary !== ctaLink) {
+    const label = document.createElement('span');
+    label.className = 'cards-tile-sr-only';
+    label.textContent = ` ${ctaLink.textContent.trim()}`;
+    primary.append(label);
+    cta.remove();
+  }
+  li.classList.add('cards-tile-video');
+}
+
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children]
@@ -116,16 +142,23 @@ export default function decorate(block) {
   });
 
   const tiles = [...ul.children];
-  const isText = !!ul.querySelector('.cards-tile-description');
+  // `cols-2` (source two-50-50 container of .contenttile teasers): link tiles even when they
+  // carry a description, as long as every tile has a CTA; long-copy tiles keep the text look.
+  const cols2 = block.classList.contains('cols-2');
+  const linkLook = cols2 && tiles.every((li) => li.querySelector('.cards-tile-cta'));
+  const isText = !linkLook && !!ul.querySelector('.cards-tile-description');
   if (isText) {
     block.classList.add('cards-tile-text');
     tiles.forEach((li) => {
       if (li.querySelector('a[href]')) li.classList.add('cards-tile-linked');
     });
   } else {
-    tiles.forEach(linkTile);
+    tiles.forEach((li) => {
+      linkTile(li);
+      videoTile(li);
+    });
   }
-  if (tiles.length === 4) block.classList.add('cards-tile-cols-4');
+  if (tiles.length === 4 && !cols2) block.classList.add('cards-tile-cols-4');
 
   block.replaceChildren(ul);
 }
