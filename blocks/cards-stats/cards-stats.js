@@ -6,6 +6,11 @@
  * A single-cell row is also accepted: a leading heading/strong/short paragraph
  * is treated as the figure, the rest as the caption. Rows with only text and
  * no figure render as goal statements (caption only).
+ *
+ * Variant `panel` (source hero-stats container with title / intro / CTA):
+ *   first row (optional): heading + intro paragraph(s) -> centred panel header
+ *   last row (optional):  a single CTA link -> centred outlined button
+ * rendered inside a tinted rounded container.
  * @param {Element} block
  */
 
@@ -59,15 +64,56 @@ function buildItem(row) {
   return li;
 }
 
+/** A row that holds a heading: the panel title (+ intro). */
+function isHeaderRow(row) {
+  return !!row.querySelector('h1, h2, h3, h4, h5, h6');
+}
+
+/** A row whose whole text is one link that is not a figure ("Read our latest report"). */
+function isCtaRow(row) {
+  const cells = [...row.children].filter((c) => c.textContent.trim());
+  if (cells.length !== 1) return false;
+  const links = cells[0].querySelectorAll('a[href]');
+  if (links.length !== 1) return false;
+  const text = cells[0].textContent.trim();
+  return links[0].textContent.trim() === text && !isFigureCandidate(links[0]);
+}
+
+function buildHeader(row) {
+  const header = document.createElement('div');
+  header.className = 'cards-stats-header';
+  [...row.children].forEach((cell) => header.append(...cellContent(cell)));
+  header.querySelectorAll(':scope > p').forEach((p) => p.classList.add('cards-stats-intro'));
+  return header;
+}
+
+function buildCta(row) {
+  const footer = document.createElement('div');
+  footer.className = 'cards-stats-cta';
+  const a = row.querySelector('a[href]');
+  const p = document.createElement('p');
+  p.className = 'button-wrapper';
+  a.className = 'button secondary';
+  p.append(a);
+  footer.append(p);
+  return footer;
+}
+
 export default function decorate(block) {
+  const rows = [...block.children].filter((row) => row.textContent.trim());
+  let header;
+  let cta;
+  if (block.classList.contains('panel')) {
+    if (rows.length && isHeaderRow(rows[0])) header = buildHeader(rows.shift());
+    if (rows.length && isCtaRow(rows[rows.length - 1])) cta = buildCta(rows.pop());
+  }
+
   const ul = document.createElement('ul');
-  [...block.children]
-    .filter((row) => row.textContent.trim())
-    .forEach((row) => ul.append(buildItem(row)));
+  rows.forEach((row) => ul.append(buildItem(row)));
 
   const count = ul.children.length;
   block.classList.add(`cards-stats-${Math.min(count, 4)}-up`);
   if (count === 1) block.classList.add('cards-stats-single');
 
-  block.replaceChildren(ul);
+  block.replaceChildren(...[header, ul, cta].filter(Boolean));
 }

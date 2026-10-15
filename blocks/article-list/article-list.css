@@ -24,7 +24,12 @@
   flex-direction: column;
   align-items: center;
   gap: 32px;
-  margin-bottom: 48px;
+  margin-bottom: 64px;
+}
+
+/* source: 60px from the title band to the first chip row (28px section padding + 32px) */
+.article-list.article-list-news .article-list-controls {
+  margin-top: 32px;
 }
 
 .article-list .article-list-chips {
@@ -53,7 +58,8 @@
   cursor: pointer;
 }
 
-.article-list .article-list-chip[aria-pressed='true'] {
+.article-list .article-list-chip[aria-pressed='true'],
+.article-list .article-list-chip:hover {
   border-color: var(--color-extended-ocean);
   background-color: var(--color-extended-ocean);
   color: var(--color-snow);
@@ -248,10 +254,10 @@
 .article-list .article-list-prev::before,
 .article-list .article-list-next::after {
   content: '';
-  width: 7px;
-  height: 7px;
-  border-top: 2px solid currentcolor;
-  border-right: 2px solid currentcolor;
+  width: 9px;
+  height: 9px;
+  border-top: 2px solid var(--color-ocean);
+  border-right: 2px solid var(--color-ocean);
 }
 
 .article-list .article-list-prev::before {
@@ -268,8 +274,24 @@
   cursor: default;
 }
 
-.article-list .article-list-pages {
-  display: flex;
+.article-list .article-list-pager .article-list-prev:disabled::before,
+.article-list .article-list-pager .article-list-next:disabled::after {
+  border-color: currentcolor;
+}
+
+/* mobile: compact "previous n/N next"; numbered pages and "page x of y" from 900px */
+.article-list .article-list-pages,
+.article-list .article-list-page-of {
+  display: none;
+}
+
+.article-list .article-list-page-compact {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--color-midnight);
+}
+
+.article-list .article-list-pager .article-list-pages {
   gap: 10px;
   margin: 0;
   padding: 0;
@@ -290,9 +312,22 @@
   line-height: 24px;
 }
 
+.article-list .article-list-pages button:hover {
+  background-color: rgb(102 197 255 / 40%);
+}
+
 .article-list .article-list-pages button[aria-current='page'] {
   background-color: var(--color-ocean);
   color: var(--color-snow);
+}
+
+.article-list .article-list-ellipsis {
+  display: block;
+  padding: 12px 8px;
+  color: rgb(0 0 0);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .article-list .article-list-pager button:focus-visible {
@@ -333,6 +368,12 @@
   color: var(--color-snow);
 }
 
+.article-list.article-list-stories .article-list-chip:not([aria-pressed='true']):hover {
+  border-color: var(--color-ocean-light);
+  background-color: var(--color-snow);
+  color: var(--color-ocean-light);
+}
+
 /* results count is not shown on the source stories listing; keep it for screen readers */
 .article-list.article-list-stories .article-list-status {
   position: absolute;
@@ -349,12 +390,31 @@
   gap: 72px 56px;
 }
 
+/* whole tile is clickable (source wraps the tile in one link): stretch the title link */
 .article-list.article-list-stories .article-list-card {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 426px;
   border: 1px solid rgb(241 241 241);
 }
 
+.article-list.article-list-stories .article-list-body h3 a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.article-list.article-list-stories .article-list-body h3 a:focus-visible {
+  outline: 0;
+}
+
+.article-list.article-list-stories .article-list-card:has(h3 a:focus-visible) {
+  outline: var(--focus-outline);
+  outline-offset: var(--focus-outline-offset);
+}
+
 .article-list.article-list-stories .article-list-image img {
-  aspect-ratio: 346 / 216;
+  aspect-ratio: 356 / 208;
   border-radius: 0;
 }
 
@@ -381,11 +441,18 @@
 .article-list.article-list-stories .article-list-body h3 {
   margin: 0;
   padding: 0;
+  font-size: 14px;
+  line-height: 16px;
 }
 
-/* source tiles show tag, title and CTA only */
+/* only rendered from a dedicated card-description index column */
 .article-list.article-list-stories .article-list-description {
-  display: none;
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .article-list.article-list-stories .article-list-pager {
@@ -430,8 +497,24 @@
     gap: 32px;
   }
 
+  .article-list.article-list-news .article-list-controls {
+    margin-bottom: 32px;
+  }
+
   .article-list .article-list-pager {
     column-gap: 62px;
+  }
+
+  .article-list .article-list-pager .article-list-pages {
+    display: flex;
+  }
+
+  .article-list .article-list-page-of {
+    display: block;
+  }
+
+  .article-list .article-list-page-compact {
+    display: none;
   }
 
   .article-list.article-list-stories .article-list-chip {
@@ -445,5 +528,14 @@
 
   .article-list.article-list-stories .article-list-card {
     min-height: 482px;
+  }
+
+  .article-list.article-list-stories .article-list-image img {
+    aspect-ratio: 346 / 216;
+  }
+
+  .article-list.article-list-stories .article-list-body h3 {
+    font-size: 21px;
+    line-height: 28px;
   }
 }

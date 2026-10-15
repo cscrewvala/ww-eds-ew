@@ -332,6 +332,13 @@ const SIDE_NAVS = [
     includeRoot: true, // the Overview page carries the bar too (source)
     exclude: /^\/au\/en\/our-impact\/sustainability\/our-stories\/\d{4}\//,
   },
+  {
+    // the source shows the sustainability bar on this careers page as well
+    prefix: '/au/en/careers/refrigeration-apprenticeship-program/',
+    fragment: '/au/en/our-impact/sustainability/nav-section',
+    variant: 'horizontal',
+    includeRoot: true,
+  },
 ];
 
 /**
@@ -468,6 +475,10 @@ function decorateSectionMetadata(main) {
 }
 
 export function decorateMain(main) {
+  // the delivery pipeline lifts the page metadata block out of its own section, leaving it empty
+  main.querySelectorAll(':scope > div').forEach((section) => {
+    if (!section.children.length && !section.textContent.trim()) section.remove();
+  });
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);

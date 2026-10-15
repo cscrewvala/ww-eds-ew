@@ -104,6 +104,41 @@
   font-weight: inherit;
 }
 
+/* description paragraphs sit 24px apart (title -> first paragraph stays at the 16px row gap) */
+.video-story .video-story-body p:not(.video-story-title) + p {
+  margin-top: 8px;
+}
+
+/* vertical rhythm around the block (source separators): 56px after body copy, 40px before
+   following content. Margins collapse with the preceding paragraph's 16px bottom margin. */
+main .default-content-wrapper + .video-story-wrapper {
+  margin-top: 56px;
+}
+
+main .video-story-wrapper:not(:last-child) {
+  margin-bottom: 40px;
+}
+
+/* variant: tile -- source content tile (.cmp-teaser--tile-video, e.g. refrigeration-apprenticeship-program) */
+.video-story.tile {
+  border: 1px solid rgb(241 241 241);
+  border-radius: 8px;
+  box-shadow: rgb(58 71 78 / 15%) 0 12px 24px -5px;
+}
+
+.video-story.tile .video-story-media img {
+  aspect-ratio: 1190 / 575;
+  object-position: 50% 0;
+}
+
+main .default-content-wrapper + .video-story-wrapper:has(> .video-story.tile) {
+  margin-top: 36px;
+}
+
+main .video-story-wrapper:has(> .video-story.tile):not(:last-child) {
+  margin-bottom: 56px;
+}
+
 /* modal player (appended to <body>, scoped by its own class) */
 .video-story-dialog {
   width: min(92vw, 1200px);
@@ -151,5 +186,9 @@
 @media (width >= 900px) {
   .video-story:has(.video-story-body) {
     margin-bottom: 16px;
+  }
+
+  main .video-story-wrapper:has(> .video-story.tile):not(:last-child) {
+    margin-bottom: 64px;
   }
 }

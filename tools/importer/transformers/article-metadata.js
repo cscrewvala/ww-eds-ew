@@ -305,21 +305,23 @@ function setRow(doc, table, key, value, overwrite) {
   else valueCell.textContent = String(value);
 }
 
+// Keys are lowercase so local preview (getMetadata is case-sensitive on meta[name]) matches
+// the published pipeline, e.g. body.<template>.
 function buildEntries(doc, data) {
   const entries = [];
-  if (data.title) entries.push(['Title', data.title]);
-  if (data.description) entries.push(['Description', data.description]);
+  if (data.title) entries.push(['title', data.title]);
+  if (data.description) entries.push(['description', data.description]);
   if (data.imageSrc) {
     const img = doc.createElement('img');
     img.setAttribute('src', data.imageSrc);
     if (data.imageAlt) img.setAttribute('alt', data.imageAlt);
-    entries.push(['Image', img]);
+    entries.push(['image', img]);
   }
-  if (data.template) entries.push(['Template', data.template]);
+  if (data.template) entries.push(['template', data.template]);
   if (data.isArticle) {
-    if (data.date) entries.push(['Date', data.date]);
-    if (data.tags) entries.push(['Tags', data.tags]);
-    if (data.listing) entries.push(['Listing', data.listing]);
+    if (data.date) entries.push(['date', data.date]);
+    if (data.tags) entries.push(['tags', data.tags]);
+    if (data.listing) entries.push(['listing', data.listing]);
   }
   return entries;
 }

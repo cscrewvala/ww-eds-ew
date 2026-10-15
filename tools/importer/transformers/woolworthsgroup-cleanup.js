@@ -88,19 +88,35 @@ export default function transform(hookName, element, payload) {
   if (hookName === H.before) {
     WebImporter.DOMUtils.remove(element, BEFORE_SELECTORS);
 
+    // Mark source data tables; any still loose after parsing become table-data blocks
+    // (an unconverted <table> is otherwise read as a block named after its first cell).
+    element.querySelectorAll('table').forEach((t) => t.setAttribute('data-source-table', ''));
+
     // Standalone CTA components become EDS buttons: filled -> <strong> (primary),
     // outlined/secondary -> <em> (secondary). CTAs inside cards/tiles/accordions are left to
     // their block parsers.
+    // Midnight-filled CTAs (btn-midnight / primary-midnight) -> <strong><em> (accent).
+    // A container can hold a row of buttons (newsroom category filters): wrap every link.
     const doc = element.ownerDocument;
     element.querySelectorAll('.button-container').forEach((cta) => {
       if (cta.closest(CTA_SKIP_CONTAINERS)) return;
-      const a = cta.querySelector('a[href]');
-      if (!a || /^javascript:/i.test(a.getAttribute('href')) || a.closest('strong, em')) return;
-      a.textContent = a.textContent.replace(/\s+/g, ' ').trim();
       const secondary = /\b(cta-secondary|secondary|outline|btn-[a-z-]*outline)\b/.test(cta.className);
-      const wrap = doc.createElement(secondary ? 'em' : 'strong');
-      a.replaceWith(wrap);
-      wrap.append(a);
+      const accent = !secondary && /\b(btn-midnight|primary-midnight|cta-midnight)\b/.test(cta.className);
+      cta.querySelectorAll('a[href]').forEach((a) => {
+        if (/^javascript:/i.test(a.getAttribute('href')) || a.closest('strong, em')) return;
+        if (a.parentElement.closest('a[href]')) return;
+        a.textContent = a.textContent.replace(/\s+/g, ' ').trim();
+        if (!a.textContent) return;
+        const wrap = doc.createElement(secondary ? 'em' : 'strong');
+        a.replaceWith(wrap);
+        if (accent) {
+          const em = doc.createElement('em');
+          em.append(a);
+          wrap.append(em);
+        } else {
+          wrap.append(a);
+        }
+      });
     });
 
     // Heading components carry their visual level in a class (h2--semibold, h3, h3-secondary),
@@ -120,6 +136,35 @@ export default function transform(hookName, element, payload) {
       h.append(...heading.childNodes);
       heading.replaceWith(h);
     });
+
+    // Rich-text headings carrying a visual class on their only child (h4 > span.h5) take
+    // that visual level; `p > span.h5` (sole content, leading <br> ignored) is a sub-heading.
+    const onlySpan = (el) => {
+      const kids = [...el.childNodes].filter((n) => !(n.nodeType === 3 && !n.textContent.trim())
+        && !(n.nodeName === 'BR'));
+      const span = kids.length === 1 && kids[0].nodeName === 'SPAN' ? kids[0] : null;
+      return span && span.textContent.trim() ? span : null;
+    };
+    element.querySelectorAll('.cmp-text h1, .cmp-text h2, .cmp-text h3, .cmp-text h4, .cmp-text h5, .cmp-text h6')
+      .forEach((heading) => {
+        if (heading === pageTitle) return;
+        const span = onlySpan(heading);
+        const m = span && span.className.match(/\bh([1-6])\b/);
+        if (!m) return;
+        const level = Math.min(Math.max(Number(m[1]), 2), 6);
+        if (heading.tagName === `H${level}`) return;
+        const h = doc.createElement(`h${level}`);
+        h.textContent = span.textContent.replace(/\s+/g, ' ').trim();
+        heading.replaceWith(h);
+      });
+    element.querySelectorAll('.cmp-text p').forEach((p) => {
+      const span = onlySpan(p);
+      if (!span || !span.classList.contains('h5')) return;
+      const h5 = doc.createElement('h5');
+      h5.textContent = span.textContent.replace(/\s+/g, ' ').trim();
+      p.replaceWith(h5);
+    });
+
   }
 
   if (hookName === H.after) {
@@ -135,6 +180,22 @@ export default function transform(hookName, element, payload) {
     });
 
     WebImporter.DOMUtils.remove(element, AFTER_SELECTORS);
+
+    // Loose source tables (not consumed by a block parser, not nested in a block) -> table-data
+    element.querySelectorAll('table[data-source-table]').forEach((table) => {
+      if (table.parentElement && table.parentElement.closest('table')) {
+        table.removeAttribute('data-source-table');
+        return;
+      }
+      const cells = [...table.rows].map((row) => [...row.cells].map((cell) => {
+        const div = element.ownerDocument.createElement('div');
+        div.append(...cell.childNodes);
+        return div;
+      })).filter((row) => row.length);
+      if (!cells.length) { table.remove(); return; }
+      table.replaceWith(WebImporter.Blocks.createBlock(element.ownerDocument, { name: 'table-data', cells }));
+    });
+    element.querySelectorAll('[data-source-table]').forEach((t) => t.removeAttribute('data-source-table'));
 
     // Profile pages carry a zero-size hero banner (mislabelled "Board of Directors" even on
     // management profiles) and decorative heading icons — none of it is content.
@@ -202,5 +263,6 @@ export default function transform(hookName, element, payload) {
       el.removeAttribute('data-cmp-clickable');
       el.removeAttribute('onclick');
     });
+
   }
 }

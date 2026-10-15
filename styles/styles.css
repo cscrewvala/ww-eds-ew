@@ -81,7 +81,9 @@ h6 {
 }
 
 h1,
-h2 {
+h2,
+h3,
+h4 {
   color: var(--heading-color);
 }
 
@@ -107,8 +109,8 @@ h3 {
 }
 
 h4 {
-  font-size: var(--heading-font-size-m);
-  line-height: var(--heading-line-height-m);
+  font-size: 27px;
+  line-height: 28px;
 }
 
 h5 {
@@ -409,9 +411,9 @@ main .section.ocean a:any-link:not(.button) {
 /* primary on ocean = btn-snow */
 main .section.ocean a.button.primary,
 main .section.ocean button.button.primary {
-  border-color: var(--color-snow);
+  border-color: var(--color-ocean);
   background-color: var(--color-snow);
-  color: var(--color-midnight);
+  color: var(--color-ocean);
 }
 
 main .section.ocean a.button.primary:hover,
@@ -436,47 +438,185 @@ main .section.ocean button.button.secondary:hover {
   color: var(--color-midnight);
 }
 
-/* centered */
-main .section.centered {
+/* section styles emitted by the importer from the source containers */
+
+/* centered: source heading component is centred -> headings + CTA paragraphs */
+main .section.centered .default-content-wrapper > :is(h1, h2, h3, p.button-wrapper) {
   text-align: center;
 }
 
-main .section.centered ul,
-main .section.centered ol {
+/* centered-text: every source paragraph is centred -> all default content */
+main .section.centered-text .default-content-wrapper {
+  text-align: center;
+}
+
+main .section:is(.centered, .centered-text) .default-content-wrapper > :is(ul, ol) {
   display: inline-block;
   text-align: start;
 }
 
-/* default content layout (source: centred section headings and CTAs on landing pages) */
+/* statement: large intro display text (source span.h1 in a text component) */
+main .section.statement {
+  padding-block: 64px;
+}
+
+main .section.statement .default-content-wrapper {
+  text-align: center;
+}
+
+main .section.statement .default-content-wrapper > p:not(.button-wrapper) {
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: 600;
+}
+
+/* divider: thin rule between source rows (inside the content box; padding keeps backgrounds continuous) */
+main .section.divider > div:first-child::before {
+  content: '';
+  display: block;
+  border-top: 1px solid rgb(25 113 237 / 60%);
+  margin-bottom: 36px;
+}
+
+main > .section.divider {
+  margin-top: 0;
+  padding-top: 36px;
+}
+
+/* headings-midnight: source heading components use the midnight colour */
+main .section.headings-midnight {
+  --heading-color: var(--color-midnight);
+}
+
+/* narrow: source content sits in the 739px media-template reading column */
+@media (width >= 1200px) {
+  main .section.narrow > div {
+    max-width: calc(739px + 64px);
+  }
+
+  main .section.statement .default-content-wrapper > p:not(.button-wrapper) {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  main .section.statement {
+    padding-block: 96px 104px;
+  }
+
+  main .section.divider > div:first-child::before {
+    margin-bottom: 60px;
+  }
+
+  main > .section.divider {
+    padding-top: 60px;
+  }
+}
+
+/* default content rhythm */
 main .default-content-wrapper > :is(h2, h3) {
   margin-top: 48px;
 }
 
-main .default-content-wrapper > :is(h2, h3):first-child {
+main .default-content-wrapper > :is(h1, h2, h3, h4, h5, h6):first-child {
   margin-top: 0;
 }
 
-body:not(.news-article, .story-article, .leadership-profile) main .default-content-wrapper > h2,
+main .default-content-wrapper img {
+  border-radius: 16px;
+}
+
+/* page titles authored as default content (not hero blocks) */
+main .default-content-wrapper > h1 {
+  font-size: 36px;
+  line-height: 44px;
+}
+
+/* pager / listing followed by a CTA */
+main .section .article-list-wrapper + .default-content-wrapper {
+  margin-top: 24px;
+}
+
+/* leadership profiles: midnight title, rounded inset portrait, breathing room */
+body.leadership-profile main > .section:first-of-type {
+  padding-top: 96px;
+  padding-bottom: 40px;
+}
+
+body.leadership-profile main h1 {
+  color: var(--color-midnight);
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+  margin-bottom: 0;
+}
+
+body.leadership-profile main .default-content-wrapper > h6 {
+  margin-bottom: 0;
+}
+
+body.leadership-profile main .default-content-wrapper picture img {
+  display: block;
+  width: 434px;
+  max-width: calc(100% - 64px);
+  height: auto;
+  aspect-ratio: 434 / 300;
+  object-fit: cover;
+  border-radius: 32px;
+  margin: 48px 32px;
+}
+
+@media (width >= 900px) {
+  main .default-content-wrapper > h1 {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  main .section .article-list-wrapper + .default-content-wrapper {
+    margin-top: 100px;
+  }
+
+  body.leadership-profile main > .section > .default-content-wrapper {
+    max-width: calc(739px + 64px);
+  }
+}
+
+/* headings-dark: source heading components without a colour modifier */
+main .section.headings-dark :is(h1, h2, h3, h4) {
+  color: var(--text-color);
+}
+
+/* standalone CTAs are centred on landing pages (source .button-container.center-item) */
 body:not(.news-article, .story-article, .leadership-profile) main .default-content-wrapper > p.button-wrapper {
   text-align: center;
 }
 
-/* ocean bands without headings hold an intro statement: large centred display text */
-main .section.ocean .default-content-wrapper:not(:has(h1, h2, h3)) {
-  max-width: 1000px;
-  margin-inline: auto;
+/* runs of CTA buttons (e.g. newsroom category filters) sit in one wrapping row */
+main .default-content-wrapper > p.button-wrapper:has(+ p.button-wrapper),
+main .default-content-wrapper > p.button-wrapper + p.button-wrapper {
+  display: inline-block;
+  margin: 8px;
+}
+
+/* ocean bands with a centred heading centre their copy too */
+main .section.ocean.centered .default-content-wrapper > p {
   text-align: center;
 }
 
-main .section.ocean .default-content-wrapper:not(:has(h1, h2, h3)) > p:not(.button-wrapper) {
-  font-size: 27px;
-  line-height: 36px;
-  font-weight: 600;
+/* adjacent sections with the same background read as one band */
+main > .section.ocean + .section.ocean,
+main > .section.snow + .section.snow,
+main > .section.tint-sky-5 + .section.tint-sky-5,
+main > .section.tint-sky-10 + .section.tint-sky-10,
+main > .section.tint-ocean-10 + .section.tint-ocean-10 {
+  padding-top: 0;
 }
 
-@media (width >= 900px) {
-  main .section.ocean .default-content-wrapper:not(:has(h1, h2, h3)) > p:not(.button-wrapper) {
-    font-size: 30px;
-    line-height: 40px;
-  }
+/* results pages: one section per financial year, keep the source rhythm */
+main > .section.cards-documents-container + .section.cards-documents-container {
+  margin-top: -24px;
+}
+
+/* text-only legal statements get the source breathing room */
+body.legal-page main > .section:only-of-type {
+  padding-block: 112px 96px;
 }

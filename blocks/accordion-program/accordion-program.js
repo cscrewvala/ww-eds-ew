@@ -14,6 +14,16 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
  * list: type icon (pdf / video / content / link, same icons as cards-documents),
  * single-line truncated link with a hover tooltip. A heading directly before such
  * a list (e.g. the month on ASX announcements) is styled as the list title.
+ *
+ * Runs of consecutive image-only paragraphs are grouped into an image grid
+ * (3-up from 600px), and tables are wrapped in a horizontal scroller.
+ *
+ * Variants (block classes):
+ * - open-first:    the first item is expanded on load (investor accordions)
+ * - berry-bullets: plain (non-link) bullet lists use berry dot bullets
+ *                  (source .custom-bullets--berry, e.g. dividends)
+ * - inset:         panel content inset 31px / 44px (>=900px), for source panels
+ *                  that wrap their content in an inner container
  * @param {Element} block
  */
 
@@ -70,6 +80,45 @@ function decorateLinkLists(body) {
         li.append(tip);
       }
     });
+  });
+}
+
+/** true for a <picture>, or a <p>/<a> whose only content is one picture */
+function isImageOnly(el) {
+  if (el.tagName === 'PICTURE') return true;
+  if (!/^(P|A)$/.test(el.tagName) || el.children.length !== 1) return false;
+  const child = el.firstElementChild;
+  return el.textContent.trim() === ''
+    && (child.tagName === 'PICTURE' || child.tagName === 'IMG' || isImageOnly(child));
+}
+
+/** group runs of consecutive image-only elements into an image grid */
+function decorateImages(body) {
+  let run = [];
+  const flush = () => {
+    if (run.length) {
+      const grid = document.createElement('div');
+      grid.className = 'accordion-program-images';
+      run[0].before(grid);
+      grid.append(...run);
+    }
+    run = [];
+  };
+  [...body.children].forEach((el) => {
+    if (isImageOnly(el)) run.push(el);
+    else flush();
+  });
+  flush();
+}
+
+/** wrap tables so wide ones scroll instead of overflowing the panel */
+function decorateTables(body) {
+  body.querySelectorAll('table').forEach((table) => {
+    if (table.parentElement.classList.contains('accordion-program-table')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'accordion-program-table';
+    table.before(wrap);
+    wrap.append(table);
   });
 }
 
@@ -160,6 +209,8 @@ function buildItem(row, index, blockId) {
   if (body.textContent.trim() || body.querySelector('picture, img')) {
     decorateLinkLists(body);
     decorateFootnotes(body);
+    decorateImages(body);
+    decorateTables(body);
     details.append(body);
   } else {
     details.classList.add('accordion-program-item-empty');
@@ -183,6 +234,11 @@ export default function decorate(block) {
       );
     });
   });
+
+  if (block.classList.contains('open-first')) {
+    const first = items.find((details) => !details.classList.contains('accordion-program-item-empty'));
+    if (first) first.open = true;
+  }
 
   block.replaceChildren(...items);
 }

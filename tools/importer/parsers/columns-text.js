@@ -21,8 +21,12 @@
  *   .container__body__content.container__body__three-column with 3 text-only mastercards
  *   (.card__title span.h5--common + .card__description) -> same extraction, 3 cells.
  *
+ * Contact-us one-column cards (instance
+ *   .container__body__content.container__body__one-column:has(... > .mastercard .card__title)
+ *   without images/headings/text): white text panels -> single-column block, one row per card.
+ *
  * Block table (columns convention / blocks/columns-text): one row, one cell per text card
- *   [h3, rich text | h3, rich text]
+ *   [h3, rich text | h3, rich text]   (one-column source: [h3, rich text] per row)
  */
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 const KEEP_ATTRS = ['href', 'src', 'alt'];
@@ -92,7 +96,17 @@ export default function parse(element, { document }) {
     return;
   }
 
-  const cells = [row];
+  // One-column source container (contact-us "Video Surveillance in Use" / "Explore the
+  // neighbourhood"): a single-column columns-text, one row (white panel) per card.
+  let cells = [row];
+  if (element.matches('.container__body__one-column')) {
+    cells = [...element.querySelectorAll('.card')]
+      .filter((card) => !card.parentElement.closest('.card'))
+      .map((card) => cardCell(card, document))
+      .filter((cell) => cell.length)
+      .map((cell) => [cell]);
+    if (!cells.length) cells = [row];
+  }
   const block = WebImporter.Blocks.createBlock(document, { name: 'columns-text', cells });
   element.replaceWith(block);
 }

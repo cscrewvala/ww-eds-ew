@@ -42,9 +42,11 @@
 .quote-story .quote-story-text {
   margin: 10px 42px;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-m);
+
+  /* source keeps the 36px/44px pull-quote size at every width */
+  font-size: 36px;
   font-weight: 600;
-  line-height: var(--heading-line-height-m);
+  line-height: 44px;
   color: var(--color-ocean);
 }
 
@@ -68,11 +70,6 @@
 
   .quote-story .quote-story-attribution {
     font-size: var(--body-font-size-m);
-  }
-
-  .quote-story .quote-story-text {
-    font-size: var(--heading-font-size-l);
-    line-height: var(--heading-line-height-l);
   }
 }
 

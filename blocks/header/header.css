@@ -104,7 +104,7 @@ header .nav-menu-wrapper {
 
 header .nav-bar[aria-expanded='true'] .nav-menu-wrapper {
   position: fixed;
-  top: var(--nav-height);
+  top: calc(var(--nav-height) - 4px); /* source sheet overlaps the bar's bottom 4px */
   bottom: 0;
   left: 0;
   display: flex;
@@ -158,7 +158,7 @@ header .nav-drop-toggle {
 
 header .nav-drop-toggle::after,
 header .nav-mega-back::before,
-header .nav-mega-links a::after {
+header .nav-mega-chevron {
   content: '';
   display: inline-block;
   flex: 0 0 auto;
@@ -190,7 +190,7 @@ header .nav-drop.is-open > .nav-mega {
 header .nav-mega-back {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   box-sizing: border-box;
   width: 100%;
   height: 56px;
@@ -201,9 +201,9 @@ header .nav-mega-back {
   background-color: var(--color-tint-sky-10);
   color: var(--color-ocean);
   font-family: var(--body-font-family);
-  font-size: var(--body-font-size-m);
+  font-size: 18px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 27px;
   text-align: left;
   cursor: pointer;
 }
@@ -234,8 +234,9 @@ header .nav-mega-cta {
   display: none;
 }
 
+/* bottom padding keeps the last links scrollable above the search box */
 header .nav-mega-groups {
-  padding: 0 32px 32px;
+  padding: 0 32px 104px;
 }
 
 header .nav-mega-group {
@@ -260,15 +261,30 @@ header .nav-mega a:hover {
   color: var(--color-sky);
 }
 
-header .nav-mega-links a::after {
-  margin-left: 8px;
-  vertical-align: -1px;
+/* sub-links shrink-wrap (max one column); the chevron follows a real space so it
+   wraps to the next line on its own, flush left, like the source */
+header .nav-mega-links a:any-link {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: top;
+}
+
+/* line-tall box (13px glyph 4px from the top) so a wrapped chevron keeps a 24px line */
+header .nav-mega-chevron {
+  height: 24px;
+  margin-left: 8px; /* mobile: wider gap after the label (source) */
+  vertical-align: top;
+  mask-size: 13px 13px;
+  mask-position: 0 4px;
 }
 
 /* search (mobile: bottom of the open menu) */
 header .nav-search {
+  position: relative;
+  z-index: 2; /* stays visible above an open sub-panel (source) */
   margin-top: auto;
   padding: 0 32px 32px;
+  background-color: var(--color-snow);
 }
 
 header .nav-search-box {
@@ -277,8 +293,9 @@ header .nav-search-box {
   height: 40px;
   margin: 0;
   box-sizing: border-box;
-  border: 2px solid transparent;
   border-radius: 4px;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
   background-color: rgb(25 113 237 / 5%);
   overflow: hidden;
 }
@@ -288,7 +305,7 @@ header .nav-search-box:hover {
 }
 
 header .nav-search-box:focus-within {
-  border-color: var(--color-ocean);
+  outline-color: var(--color-ocean);
   background-color: var(--color-tint-ocean-10);
 }
 
@@ -297,7 +314,7 @@ header .nav-search-input {
   min-width: 0;
   height: 100%;
   margin: 0;
-  padding: 0 6px;
+  padding: 0 8px;
   border: 0;
   outline: none;
   background: transparent;
@@ -337,7 +354,7 @@ header .nav-search-box.has-value .nav-search-clear {
 }
 
 header .nav-search-submit {
-  width: 47px;
+  width: 50px;
   height: 100%;
   color: var(--color-ocean);
 }
@@ -358,7 +375,7 @@ header .nav-utility {
   justify-content: space-between;
   box-sizing: border-box;
   height: var(--nav-utility-height);
-  padding: 0 20px;
+  padding: 0 32px;
   background-color: var(--color-midnight);
   color: var(--color-snow);
   font-family: var(--body-font-family);
@@ -408,12 +425,6 @@ header .nav-utility .nav-utility-primary-item.nav-utility-wide::after {
   border-top: 2px solid var(--color-snow);
   border-right: 2px solid var(--color-snow);
   transform: rotate(45deg);
-}
-
-@media (width >= 600px) {
-  header .nav-utility {
-    padding: 0 16px;
-  }
 }
 
 @media (width >= 900px) {
@@ -621,6 +632,10 @@ header .nav-utility .nav-utility-primary-item.nav-utility-wide::after {
     font-weight: 400;
   }
 
+  header .nav-mega-chevron {
+    margin-left: 0;
+  }
+
   /* search */
   header .nav-search {
     box-sizing: border-box;
@@ -632,5 +647,9 @@ header .nav-utility .nav-utility-primary-item.nav-utility-wide::after {
 
   header .nav-search-box {
     width: 256px;
+  }
+
+  header .nav-search-submit {
+    width: 47px;
   }
 }

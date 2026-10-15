@@ -40,6 +40,10 @@
  * Content-tile video tiles (button[data-href], no anchor) fall back to the data-href
  * (made absolute) for the link; tiles with an anchor are unaffected.
  *
+ * Variant `cols-2` when the source container is two-column (.two-50-50 /
+ * .container__body__two-column), e.g. board-of-directors "Find out more", refrigeration
+ * "Career Spotlight".
+ *
  * Block table (cards: 2 columns), one row per tile in document order:
  *   [image | h3 title, description p (optional), link p]
  * Hrefs are kept as authored (relative /content/dam/... PDFs are made absolute by a transformer).
@@ -254,6 +258,10 @@ export default function parse(element, { document }) {
     return;
   }
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'cards-tile', cells });
+  // Tiles laid out in a two-column (two-50-50) source container -> 2-up variant.
+  // Never inferred from the tile count (a 3-column row with 2 tiles stays 3-up).
+  const twoCol = element.matches('.two-50-50, .container__body__two-column');
+  const name = twoCol ? 'cards-tile (cols-2)' : 'cards-tile';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

@@ -123,11 +123,11 @@ const PAGE_TEMPLATE = {
   ]
 };
 
-// TRANSFORMER REGISTRY - cleanup, sections (2+ sections only), DM images, then article
+// TRANSFORMER REGISTRY - cleanup, sections (generic, every template), DM images, then article
 // metadata last (it merges into the single Metadata block written by createMetadata)
 const transformers = [
   cleanupTransformer,
-  ...(PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [sectionsTransformer] : []),
+  sectionsTransformer,
   dmImagesTransformer,
   articleMetadataTransformer,
 ];

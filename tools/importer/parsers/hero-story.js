@@ -16,6 +16,9 @@
  *       .image.heroBannerV3-imageBanner (or plain .image) .cmp-image > img   -> row 1 (alt kept)
  *       Dynamic Media: URL may only be on [data-cmp-src]
  *
+ * Variant `offset-top` when a 96px spacer (.separator.h-96) sits immediately before the hero
+ * container (the enclosing .colscontainer) on the source.
+ *
  * Block table (hero: 1 column):
  *   row 1: feature image
  *   row 2: h1 title + subtitle paragraph(s)
@@ -86,6 +89,17 @@ export default function parse(element, { document }) {
   });
   cells.push([contentCell]);
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'hero-story', cells });
+  // 96px spacer (separator.h-96) directly before the hero container on the source -> offset-top.
+  const prevComponent = (el) => {
+    let prev = el ? el.previousElementSibling : null;
+    while (prev && prev.matches('hr, script, noscript, style, link')) prev = prev.previousElementSibling;
+    return prev;
+  };
+  const isSpacer96 = (el) => !!el && el.matches('.separator.h-96');
+  const container = element.closest('.colscontainer');
+  const offsetTop = isSpacer96(prevComponent(container)) || isSpacer96(prevComponent(element));
+
+  const name = offsetTop ? 'hero-story (offset-top)' : 'hero-story';
+  const block = WebImporter.Blocks.createBlock(document, { name, cells });
   element.replaceWith(block);
 }

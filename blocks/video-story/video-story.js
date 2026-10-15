@@ -144,6 +144,13 @@ export default function decorate(block) {
     media.append(play);
   }
 
+  // "tile" variant = source content tile (.cmp-teaser--tile-video): a captioned card playing a
+  // direct DAM video file. Authors can set it explicitly; otherwise inferred from that shape
+  // (the .cmp-video player used on stories links to a Scene7 viewer, or has no caption).
+  if (!block.classList.contains('tile') && body.children.length && DIRECT_VIDEO.test(videoUrl)) {
+    block.classList.add('tile');
+  }
+
   const children = [];
   if (media.children.length) children.push(media);
   if (body.children.length) children.push(body);
