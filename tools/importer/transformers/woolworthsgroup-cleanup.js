@@ -157,9 +157,28 @@ export default function transform(hookName, element, payload) {
         h.textContent = span.textContent.replace(/\s+/g, ' ').trim();
         heading.replaceWith(h);
       });
+    // A leading `span.h5` followed by more text in the same paragraph is an inline lead-in
+    // label ("<span class="h5">The opportunity:</span> For decades…") -> <strong>.
+    const leadingSpan = (el) => {
+      const kids = [...el.childNodes].filter((n) => !(n.nodeType === 3 && !n.textContent.trim())
+        && !(n.nodeName === 'BR'));
+      const span = kids.length > 1 && kids[0].nodeName === 'SPAN' ? kids[0] : null;
+      return span && span.textContent.trim() && !span.querySelector('img, picture, a') ? span : null;
+    };
     element.querySelectorAll('.cmp-text p').forEach((p) => {
       const span = onlySpan(p);
-      if (!span || !span.classList.contains('h5')) return;
+      if (!span) {
+        const lead = leadingSpan(p);
+        if (!lead || !lead.classList.contains('h5')) return;
+        const strong = doc.createElement('strong');
+        strong.textContent = lead.textContent.replace(/\s+/g, ' ').trim();
+        lead.replaceWith(strong);
+        // keep a word space between the label and the following text
+        const next = strong.nextSibling;
+        if (next && next.nodeType === 3 && !/^\s/.test(next.textContent)) strong.after(doc.createTextNode(' '));
+        return;
+      }
+      if (!span.classList.contains('h5')) return;
       const h5 = doc.createElement('h5');
       h5.textContent = span.textContent.replace(/\s+/g, ' ').trim();
       p.replaceWith(h5);
@@ -205,8 +224,9 @@ export default function transform(hookName, element, payload) {
     }
 
     // Drop empty "&nbsp;" spacer paragraphs inside AEM text components
-    // (e.g. leading <p>&nbsp;</p> in .media-template-body .cmp-text).
-    element.querySelectorAll('.cmp-text p').forEach((p) => {
+    // (e.g. leading <p>&nbsp;</p> in .media-template-body .cmp-text) and empty spacer
+    // headings (<h3>&nbsp;</h3> before "Related Stories" on stories-page-template pages).
+    element.querySelectorAll('.cmp-text p, .cmp-text h1, .cmp-text h2, .cmp-text h3, .cmp-text h4, .cmp-text h5, .cmp-text h6').forEach((p) => {
       if (isEmptyParagraph(p)) p.remove();
     });
 
@@ -246,6 +266,14 @@ export default function transform(hookName, element, payload) {
       let path = url.pathname.replace(/^\/content\/wwg(?=\/au\/)/, '');
       if (path.startsWith('/content/dam/') || path.startsWith('/etc.clientlibs/')) {
         a.setAttribute('href', `${SOURCE_ORIGIN}${path}${url.search}`);
+        return;
+      }
+      // Story category tags link to the home page with ?articleFilter=<tag> (the source's
+      // filtered story feed); the EDS equivalent is the Our Stories listing, whose
+      // article-list block reads the active tag from ?tag=.
+      const articleFilter = url.searchParams.get('articleFilter');
+      if (articleFilter && /^\/(au\/en(\.html?)?\/?)?$/.test(path)) {
+        a.setAttribute('href', `/au/en/our-impact/sustainability/our-stories?tag=${encodeURIComponent(articleFilter)}`);
         return;
       }
       if (/\.html?$/.test(path)) {

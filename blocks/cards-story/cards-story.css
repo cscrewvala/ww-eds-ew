@@ -160,6 +160,34 @@
   .cards-story .cards-story-card-body {
     flex: 0 1 46%;
   }
+
+  /* single featured card (source: one-column contenttile--md): full width,
+     16:9 image over a title + 2-line description, no "Learn More".
+     A lone teaser under a "Related Stories" style heading keeps the half-width tile. */
+  .cards-story-wrapper:not(.default-content-wrapper:has(> :is(h2, h3, h4)) + *) > .cards-story > ul > li:only-child {
+    grid-column: 1 / -1;
+    height: auto;
+  }
+
+  .cards-story-wrapper:not(.default-content-wrapper:has(> :is(h2, h3, h4)) + *) > .cards-story > ul > li:only-child .cards-story-card-image {
+    flex: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .cards-story-wrapper:not(.default-content-wrapper:has(> :is(h2, h3, h4)) + *) > .cards-story > ul > li:only-child .cards-story-card-body {
+    flex: none;
+  }
+
+  .cards-story-wrapper:not(.default-content-wrapper:has(> :is(h2, h3, h4)) + *) > .cards-story > ul > li:only-child .cards-story-card-body > p:not(.cards-story-cta) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .cards-story-wrapper:not(.default-content-wrapper:has(> :is(h2, h3, h4)) + *) > .cards-story > ul > li:only-child .cards-story-cta {
+    display: none;
+  }
 }
 
 @media (width >= 900px) {

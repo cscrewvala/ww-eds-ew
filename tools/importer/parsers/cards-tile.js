@@ -51,6 +51,10 @@
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 
 const ORIGIN = 'https://www.woolworthsgroup.com.au';
+// Authored hrefs are often already percent-encoded (%20, %3A): keep valid %XX escapes and
+// encodeURI only the text between them, so they are not double-encoded (%2520 -> 404).
+const encodeOnce = (s) => String(s).split(/(%[0-9a-f]{2})/i)
+  .map((part, i) => (i % 2 ? part : encodeURI(part))).join('');
 
 // AEM author paths (/content/wwg/au/en/...) -> public paths (/au/en/...); DAM files absolute.
 function publicHref(href) {
@@ -58,7 +62,7 @@ function publicHref(href) {
   if (!h) return '';
   if (/^(https?:|mailto:|tel:)/i.test(h) || h.startsWith('//')) return h;
   if (h.startsWith('/content/wwg/')) return h.replace(/^\/content\/wwg/, '');
-  if (h.startsWith('/content/dam/')) return encodeURI(`${ORIGIN}${h}`);
+  if (h.startsWith('/content/dam/')) return encodeOnce(`${ORIGIN}${h}`);
   return h;
 }
 

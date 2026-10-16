@@ -1,14 +1,16 @@
-# Query index for the article-list block. Configure at tools.aem.live (config service → content → query.yaml);
+# Query indexes for the search (default) and article-list (articles) blocks. Configure at tools.aem.live (config service → content → query.yaml);
 # helix-query.yaml in the repo is retired.
 version: 1
 indices:
   default:
+    # site-wide index for the search block (blocks/search); updates on every publish
     include:
       - /**
     exclude:
       - /nav
       - /footer
       - /**/nav-section
+      - /au/en/search
     target: /query-index.json
     properties:
       title:
@@ -20,9 +22,21 @@ indices:
       image:
         select: head > meta[property="og:image"]
         value: attribute(el, "content")
+      date:
+        select: head > meta[name="date"]
+        value: attribute(el, "content")
+      tags:
+        select: head > meta[property="article:tag"]
+        values: attribute(el, "content")
+      template:
+        select: head > meta[name="template"]
+        value: attribute(el, "content")
       robots:
         select: head > meta[name="robots"]
         value: attribute(el, "content")
+      content:
+        select: main
+        value: words(textContent(el), 0, 250)
       lastModified:
         select: none
         value: parseTimestamp(headers["last-modified"], "ddd, DD MMM YYYY hh:mm:ss GMT")

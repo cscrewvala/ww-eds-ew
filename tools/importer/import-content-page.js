@@ -73,7 +73,8 @@ const PAGE_TEMPLATE = {
     "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/social-impact.html",
     "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/waste-and-circularity.html",
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors.html",
-    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board.html"
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board.html",
+    "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature/seafood-sourcing.html"
   ],
   "blocks": [
     {

@@ -253,7 +253,7 @@ export default async function decorate(block) {
 
   const ownPath = window.location.pathname.replace(/\/$/, '');
   const articles = rows
-    .filter((r) => r.path && r.path !== ownPath)
+    .filter((r) => r.path && r.path !== ownPath && r.listing !== 'none')
     .filter((r) => !sources.length || sources.some((s) => r.path.startsWith(s)))
     .filter((r) => /\/\d{4}\/[^/]+$/.test(r.path))
     .map(toArticle)

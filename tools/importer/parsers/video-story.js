@@ -40,11 +40,15 @@
  */
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 const ORIGIN = 'https://www.woolworthsgroup.com.au';
+// Authored hrefs are often already percent-encoded (%20, %3A): keep valid %XX escapes and
+// encodeURI only the text between them, so they are not double-encoded (%2520 -> 404).
+const encodeOnce = (s) => String(s).split(/(%[0-9a-f]{2})/i)
+  .map((part, i) => (i % 2 ? part : encodeURI(part))).join('');
 
 function absolute(href) {
   if (!href) return '';
   if (/^(https?:)?\/\//i.test(href)) return href;
-  return href.startsWith('/') ? encodeURI(`${ORIGIN}${href}`) : href;
+  return href.startsWith('/') ? encodeOnce(`${ORIGIN}${href}`) : href;
 }
 
 // Video content tile (cmp-teaser--tile-video): read the --md copy only.

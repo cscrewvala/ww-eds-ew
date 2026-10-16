@@ -57,6 +57,20 @@ export default function parse(element, { document }) {
     return;
   }
 
+  // A single image in the three-column grid is a small badge / certification logo sitting in a
+  // one-third slot on the source (seafood-sourcing: ASC, MSC portrait badge) - not a photo
+  // gallery, which would stretch it to the full column width. Use columns-logos (logo slots);
+  // its block reads text from a separate cell, so a caption moves to its own cell.
+  if (row.length === 1) {
+    const imgs = row[0].filter((n) => n.tagName === 'IMG');
+    const captions = row[0].filter((n) => n.tagName !== 'IMG');
+    if (imgs.length === 1) {
+      const logoRow = captions.length ? [imgs, captions] : [imgs];
+      element.replaceWith(WebImporter.Blocks.createBlock(document, { name: 'columns-logos', cells: [logoRow] }));
+      return;
+    }
+  }
+
   const cells = [row];
   const block = WebImporter.Blocks.createBlock(document, { name: 'columns-gallery', cells });
   element.replaceWith(block);

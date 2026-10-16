@@ -72,7 +72,7 @@ export default function decorate(block) {
       }
       if (cta && !heading.querySelector('a') && !heading.contains(cta)) {
         const titleLink = document.createElement('a');
-        titleLink.href = cta.href;
+        titleLink.setAttribute('href', cta.getAttribute('href'));
         titleLink.append(...heading.childNodes);
         heading.append(titleLink);
         // title link carries the accessible name; the CTA duplicates it
