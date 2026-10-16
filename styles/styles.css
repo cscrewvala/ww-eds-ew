@@ -586,8 +586,54 @@ main .section.headings-dark :is(h1, h2, h3, h4) {
 }
 
 /* standalone CTAs are centred on landing pages (source .button-container.center-item) */
-body:not(.news-article, .story-article, .leadership-profile) main .default-content-wrapper > p.button-wrapper {
+body:not(.news-article, .story-article, .story-banner, .leadership-profile) main .default-content-wrapper > p.button-wrapper {
   text-align: center;
+}
+
+/* story-banner (hero-article stories): source body copy, CTAs and pull quotes sit in the
+   centred 8-of-12 grid column (960px at 1440); "Related Stories" keeps the full 1200px */
+@media (width >= 900px) {
+  body.story-banner main > .section:not(.cards-story-container) > :is(.default-content-wrapper, .quote-story-wrapper) {
+    max-width: calc(min(960px, 66.667vw) + 64px);
+  }
+}
+
+/* story-banner "Back to stories" / "View all": source cta-secondary default = plain midnight
+   text link with a chevron (left before "Back to", right after "View all") */
+body.story-banner main .default-content-wrapper > p.button-wrapper > a.button.secondary {
+  gap: 8px;
+  border: 0;
+  border-radius: 0;
+  padding: 5px 0;
+  background-color: transparent;
+  color: var(--color-midnight);
+  font-weight: 600;
+  line-height: 22px;
+}
+
+body.story-banner main .default-content-wrapper > p.button-wrapper > a.button.secondary:hover {
+  background-color: transparent;
+  color: var(--color-ocean);
+}
+
+body.story-banner main .default-content-wrapper > p.button-wrapper > a.button.secondary::before,
+body.story-banner main .default-content-wrapper > p.button-wrapper > a.button.secondary::after {
+  flex: none;
+  width: 19px;
+  height: 22px;
+  background-color: var(--color-midnight);
+  mask: url("../icons/chevron-left.svg") center / 19px 19px no-repeat;
+}
+
+body.story-banner main > .section.hero-article-container > .hero-article-wrapper + .default-content-wrapper > p.button-wrapper:first-child > a.button.secondary::before,
+body.story-banner main > .section.hero-article-container + .section > .default-content-wrapper:first-child > p.button-wrapper:first-child > a.button.secondary::before {
+  content: '';
+}
+
+body.story-banner main > .section.cards-story-container .default-content-wrapper > p.button-wrapper > a.button.secondary::after {
+  content: '';
+  background-color: var(--color-ocean);
+  mask-image: url("../icons/chevron-right.svg");
 }
 
 /* runs of CTA buttons (e.g. newsroom category filters) sit in one wrapping row */

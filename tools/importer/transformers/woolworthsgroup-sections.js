@@ -253,7 +253,8 @@ function querySection(root, selectors) {
 }
 
 function templateBreaks(element, doc, sections) {
-  if (sections.length < 2) return;
+  // a single section only matters when it carries a style (e.g. search-page: tint-sky-10)
+  if (!sections.length || (sections.length === 1 && !sections[0].style)) return;
   for (let i = sections.length - 1; i >= 0; i -= 1) {
     const section = sections[i];
     if (i === 0 && !section.style) continue;

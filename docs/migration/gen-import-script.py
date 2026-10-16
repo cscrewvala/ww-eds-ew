@@ -33,7 +33,7 @@ def generate(name):
     for _, f in TRANSFORMERS:
         if not os.path.exists(os.path.join(ROOT, f'tools/importer/transformers/{f}.js')):
             sys.exit(f'Missing transformer {f}')
-    embedded = {k: tpl[k] for k in ('name', 'description', 'urls', 'blocks', 'sections') if k in tpl}
+    embedded = {k: tpl[k] for k in ('name', 'description', 'urls', 'blocks', 'sections', 'metadata') if k in tpl}
     embedded.setdefault('sections', [])
     out = ['/* eslint-disable */', '/* global WebImporter */', '', '// PARSER IMPORTS']
     out += [f"import {camel(b)} from './parsers/{b}.js';" for b in block_names]

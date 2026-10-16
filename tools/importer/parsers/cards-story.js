@@ -24,6 +24,10 @@
  * Iteration is keyed on the custom <contenttile> element (block-level wrapper), never on the
  * <a> card wrapper, so html2md inline-merging of adjacent anchors cannot collapse tiles.
  *
+ * Additional instances: stories-page-template related row
+ *   (.container__body__three-column:has(.mastercard, .wwgvideo, .contenttile)) and the 2023
+ *   two-75-25 layout's tile column (.two-75-25 > .container__body__content__cols:has(.contenttile)).
+ *
  * Block table (cards: 2 columns): [image | tags p, h3 title, "Learn More" link]
  */
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
@@ -103,6 +107,16 @@ function buildRow(tile, document) {
     h3.textContent = title;
     body.push(h3);
   }
+  // Tile description (podcast tiles): .cmp-teaser__content__description, one p per paragraph.
+  const descWrap = tile.querySelector('.cmp-teaser__content__description');
+  if (descWrap) {
+    const paras = [...descWrap.querySelectorAll('p')].map((d) => clean(d.textContent)).filter(Boolean);
+    (paras.length ? paras : [clean(descWrap.textContent)].filter(Boolean)).forEach((text) => {
+      const p = document.createElement('p');
+      p.textContent = text;
+      body.push(p);
+    });
+  }
   if (href) {
     const p = document.createElement('p');
     const a = document.createElement('a');
@@ -114,6 +128,86 @@ function buildRow(tile, document) {
   return [imgCell, body.length ? body : ''];
 }
 
+// AEM author paths (/content/wwg/au/en/..., sometimes /content/wwg//au/en/...) -> /au/en/...
+function publicPath(href) {
+  const h = clean(href);
+  if (!h) return '';
+  return h.replace(/^\/content\/wwg\/+(?=au\/)/, '/');
+}
+
+/**
+ * stories-page-template "Related Stories" row (block-context: naidoc-learning-with-dalmarri2):
+ *   .container__body__three-column > .container__body__content__cols (x3), each holding one of
+ *     .mastercard card .card   .card__primary-img img (or [data-cmp-src]) -> image
+ *                              .card__title button.link-button[data-href]  -> h3 + "Learn More"
+ *     .wwgvideo .cmp-video     img.cmp-video__body__link__img-blk__img      -> image (poster)
+ *                              .cmp-video__body__content__title (first)     -> h3
+ *                              .cmp-video__body__content__description / .card__description -> p
+ *                              a.cmp-video__body__link[href]                -> "Watch video"
+ *   Cards whose title is a bare path and that have no image (broken authoring) are skipped.
+ */
+function relatedItems(element) {
+  return [...element.querySelectorAll('.mastercard .card, .wwgvideo .cmp-video')]
+    .filter((el, i, all) => all.indexOf(el) === i && !el.parentElement.closest('.card, .cmp-video')
+      && !el.closest('.contenttile'));
+}
+
+function relatedRows(element, document) {
+  return relatedItems(element).map((item) => relatedRow(item, document)).filter(Boolean);
+}
+
+function relatedRow(item, document) {
+  {
+    const isVideo = item.classList.contains('cmp-video');
+    const imgEl = [...item.querySelectorAll('img')]
+      .find((img) => (img.getAttribute('src') || '') && !(img.getAttribute('src') || '').startsWith('data:'));
+    const dm = item.querySelector('[data-cmp-src]');
+    const src = imgEl ? imgEl.getAttribute('src') : (dm ? (dm.getAttribute('data-cmp-src') || '').replace('{.width}', '') : '');
+    let imgCell = '';
+    if (src) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = imgEl ? (imgEl.getAttribute('alt') || '') : '';
+      imgCell = img;
+    }
+    const titleEl = isVideo
+      ? item.querySelector('.cmp-video__body__content__title')
+      : item.querySelector('.card__title');
+    const title = clean(titleEl && titleEl.textContent);
+    let href = '';
+    if (isVideo) {
+      const a = item.querySelector('a.cmp-video__body__link[href], a[href]');
+      href = a ? a.getAttribute('href') : '';
+    } else {
+      const trigger = item.querySelector('.card__title [data-href], .card__title a[href], a[href]');
+      href = trigger ? publicPath(trigger.getAttribute('data-href') || trigger.getAttribute('href')) : '';
+    }
+    if (!imgCell && (!title || title.startsWith('/'))) return null;
+    const body = [];
+    if (title) {
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
+      body.push(h3);
+    }
+    // Card / video description (first copy only; the video component renders it twice).
+    const desc = clean((item.querySelector(isVideo ? '.cmp-video__body__content__description' : '.card__description') || {}).textContent);
+    if (desc) {
+      const p = document.createElement('p');
+      p.textContent = desc;
+      body.push(p);
+    }
+    if (href) {
+      const p = document.createElement('p');
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = isVideo ? 'Watch video' : 'Learn More';
+      p.append(a);
+      body.push(p);
+    }
+    return [imgCell, body.length ? body : ''];
+  }
+}
+
 export default function parse(element, { document }) {
   // Single-tile selector can also match tiles inside a two-column group; the group
   // instance owns those, so leave them for it.
@@ -122,7 +216,20 @@ export default function parse(element, { document }) {
   }
 
   const tiles = pickTiles(element);
-  const cells = tiles.map((tile) => buildRow(tile, document)).filter(Boolean);
+  let cells;
+  if (!tiles.length) {
+    // No content tiles: related-stories row of mastercards / video cards (stories-page-template).
+    cells = element.querySelector('.mastercard, .wwgvideo') ? relatedRows(element, document) : [];
+  } else {
+    // Content tiles, possibly mixed with video / mastercard cards in the same related row
+    // (e.g. 2023/regional-economic-impact: two tiles + an .wwgvideo tile): keep source order.
+    const extra = relatedItems(element);
+    const items = [...tiles.map((el) => ({ el, tile: true })), ...extra.map((el) => ({ el, tile: false }))];
+    // eslint-disable-next-line no-bitwise
+    items.sort((a, b) => (a.el.compareDocumentPosition(b.el) & 4 ? -1 : 1));
+    cells = items.map(({ el, tile }) => (tile ? buildRow(el, document) : relatedRow(el, document)))
+      .filter(Boolean);
+  }
 
   // Empty-block guard.
   if (!cells.length) {

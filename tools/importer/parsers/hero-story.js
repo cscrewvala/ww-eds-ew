@@ -25,7 +25,66 @@
  */
 const clean = (s) => (s || '').replace(/ /g, ' ').replace(/\s+/g, ' ').trim();
 
+const DURATION_LABEL_RE = /^[\d:.]+\s*(?:(?:min(?:ute)?s?|secs?|seconds?|hrs?|hours?)\.?\s*)?(?:read|video|watch|listen|view|podcast|audio)(?:ing)?(?:\s*time)?\.?$/i;
+
+/**
+ * 2023 two-75-25 story layout (2023/fighting-food-insecurity): a full-width banner image
+ * (.image.heroBannerV3-imageBanner, outside any .colscontainer) directly followed by a
+ * .colscontainer whose .two-75-25 text column starts with the h1 heading, the category tag and
+ * a read-time line. Instance: `.image.heroBannerV3-imageBanner:not(.colscontainer *)
+ * :has(~ .colscontainer .two-75-25 h1)` (only the directly following container is used).
+ * Same block table as the two-50-50 hero: the banner image, then h1 + read-time; the heading
+ * and read-time line are removed from the column (tag and body copy stay as default content).
+ */
+function parseBannerLayout(element, document) {
+  // next sibling .colscontainer (section-break <hr> markers may sit in between)
+  let container = element.nextElementSibling;
+  while (container && !container.matches('.colscontainer')) {
+    if (!container.matches('hr, script, noscript, style, link')) return;
+    container = container.nextElementSibling;
+  }
+  const column = container && container.querySelector('.two-75-25 > .container__body__content__cols:has(h1)');
+  const h1 = column && column.querySelector('h1');
+  if (!h1) return;
+  const titleText = clean((h1.querySelector('.heading-container__body__text__content') || h1).textContent);
+
+  const img = [...element.querySelectorAll('img')].find((i) => (i.getAttribute('src') || '') && !(i.getAttribute('src') || '').startsWith('data:'));
+  const dm = element.matches('[data-cmp-src]') ? element : element.querySelector('[data-cmp-src]');
+  const imgSrc = img ? img.getAttribute('src') : (dm ? (dm.getAttribute('data-cmp-src') || '').replace('{.width}', '') : '');
+  if (!titleText || !imgSrc) return;
+
+  // Read-time line: the first paragraph in the column's text components holding only a duration
+  // label (it shares a .cmp-text with the body copy); drop the text component if left empty.
+  let subtitle = '';
+  const label = [...column.querySelectorAll('.text p, .cmp-text p')]
+    .find((p) => !p.closest('.contenttile, .heading') && DURATION_LABEL_RE.test(clean(p.textContent)));
+  if (label) {
+    subtitle = clean(label.textContent);
+    const text = label.closest('.text');
+    label.remove();
+    if (text && !clean(text.textContent) && !text.querySelector('img, picture, iframe, video')) text.remove();
+  }
+  (h1.closest('.heading') || h1).remove();
+
+  const image = document.createElement('img');
+  image.src = imgSrc;
+  image.alt = img ? (img.getAttribute('alt') || '') : '';
+  const heading = document.createElement('h1');
+  heading.textContent = titleText;
+  const content = [heading];
+  if (subtitle) {
+    const p = document.createElement('p');
+    p.textContent = subtitle;
+    content.push(p);
+  }
+  element.replaceWith(WebImporter.Blocks.createBlock(document, { name: 'hero-story', cells: [[image], [content]] }));
+}
+
 export default function parse(element, { document }) {
+  if (element.matches('.heroBannerV3-imageBanner') && !element.closest('.colscontainer')) {
+    parseBannerLayout(element, document);
+    return;
+  }
   const h1 = element.querySelector('h1');
   const titleSrc = h1
     ? (h1.querySelector('.heading-container__body__text__content') || h1)
