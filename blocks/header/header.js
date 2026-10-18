@@ -10,13 +10,14 @@ const ICON_SEARCH = '<svg viewBox="0 0 32 32" width="30" height="30" fill="none"
 const ICON_CLEAR = '<svg viewBox="0 0 32 32" width="18" height="18" fill="none" aria-hidden="true" focusable="false"><path d="M13.3333 18.6667L16 16M16 16L18.6667 13.3333M16 16L13.3333 13.3333M16 16L18.6667 18.6667M28 16C28 22.6274 22.6274 28 16 28C9.37258 28 4 22.6274 4 16C4 9.37258 9.37258 4 16 4C22.6274 4 28 9.37258 28 16Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 /**
- * Fetches the nav fragment. Metadata-independent: /content first (local preview),
- * then the site root (DA/EDS preview + publish).
+ * Fetches the nav fragment. Metadata-independent: /content first on local dev
+ * (aem up --html-folder content), otherwise the site root (DA/EDS preview + publish).
  * @returns {Promise<{html: string, base: URL}|null>}
  */
 async function fetchNav() {
-  let resp = await fetch('/content/nav.plain.html');
-  if (!resp.ok) resp = await fetch('/nav.plain.html');
+  const local = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  let resp = local ? await fetch('/content/nav.plain.html') : null;
+  if (!resp || !resp.ok) resp = await fetch('/nav.plain.html');
   if (!resp.ok) return null;
   const html = await resp.text();
   return { html, base: new URL('.', resp.url || window.location.href) };

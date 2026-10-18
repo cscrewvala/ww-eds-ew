@@ -1,11 +1,12 @@
 /**
- * Fetches the footer fragment. Metadata-independent: /content first (local preview),
- * then the site root (DA/EDS preview + publish).
+ * Fetches the footer fragment. Metadata-independent: /content first on local dev
+ * (aem up --html-folder content), otherwise the site root (DA/EDS preview + publish).
  * @returns {Promise<{html: string, base: URL}|null>}
  */
 async function fetchFooter() {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
+  const local = /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname);
+  let resp = local ? await fetch('/content/footer.plain.html') : null;
+  if (!resp || !resp.ok) resp = await fetch('/footer.plain.html');
   if (!resp.ok) return null;
   const html = await resp.text();
   return { html, base: new URL('.', resp.url || window.location.href) };
