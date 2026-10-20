@@ -3,6 +3,7 @@
 
 // PARSER IMPORTS
 import accordionProgramParser from './parsers/accordion-program.js';
+import articleListParser from './parsers/article-list.js';
 import cardsDocumentsParser from './parsers/cards-documents.js';
 import cardsFeaturedParser from './parsers/cards-featured.js';
 import cardsLogoParser from './parsers/cards-logo.js';
@@ -31,6 +32,7 @@ import articleMetadataTransformer from './transformers/article-metadata.js';
 // PARSER REGISTRY
 const parsers = {
   'accordion-program': accordionProgramParser,
+  'article-list': articleListParser,
   'cards-documents': cardsDocumentsParser,
   'cards-featured': cardsFeaturedParser,
   'cards-logo': cardsLogoParser,
@@ -121,7 +123,7 @@ const PAGE_TEMPLATE = {
     {
       "name": "cards-featured",
       "instances": [
-        ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile)"
+        ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile):has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"]))"
       ]
     },
     {
@@ -196,6 +198,12 @@ const PAGE_TEMPLATE = {
       "instances": [
         ".colscontainer:has(.leadershipprofile):not(:has(.text))",
         ".colscontainer:has(.leadershipprofile):has(.text) .container__body__content:has(.leadershipprofile)"
+      ]
+    },
+    {
+      "name": "article-list",
+      "instances": [
+        ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile):not(:has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"])))"
       ]
     }
   ],
