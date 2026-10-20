@@ -24,3 +24,7 @@ migration-work/
 tools/importer/reports/
 tools/importer/bd-snapshots/
 tools/importer/*.bundle.js
+
+# python bytecode
+__pycache__/
+*.pyc
