@@ -10,7 +10,9 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
  *     the row makes it a video slide: Scene7 asset (https://<host>/is/content/<company>/<asset>,
  *     played with SmartCropVideoViewer like the source) or a direct .mp4/.webm file.
  * Page metadata `carousel-interval`: seconds between slides (default 6).
- * Variants: `gradient` (transparent-to-black scrim instead of the flat one), `no-overlay`.
+ * Variants: `gradient` (transparent-to-black scrim instead of the flat one), `no-overlay`,
+ *   `hide-controls` (no pause/play button, as the source video hero; arrows/dots still show
+ *   for several slides).
  */
 
 const DEFAULT_INTERVAL = 6;
@@ -259,8 +261,9 @@ export default function decorate(block) {
     document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
   }
 
-  // anything that moves on its own gets a pause control (WCAG 2.2.2)
-  if (multi || hasVideo) {
+  // anything that moves on its own gets a pause control (WCAG 2.2.2) unless the author hides it
+  const showToggle = !block.classList.contains('hide-controls');
+  if (showToggle && (multi || hasVideo)) {
     const toggle = document.createElement('button');
     toggle.type = 'button';
     toggle.className = 'carousel-hero-toggle';
