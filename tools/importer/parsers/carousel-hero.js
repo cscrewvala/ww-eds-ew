@@ -24,7 +24,9 @@
  *   col 1: image only (the Scene7 poster for video slides)
  *   col 2: video link (https://<host>/is/content/<asset>, video slides only), heading,
  *          sub-text, CTAs
- * Variants: gradient (.black--gradient), no-overlay (.teaser.no-opacity)
+ * Variants: gradient (.black--gradient), no-overlay (.teaser.no-opacity),
+ *   hide-controls (the slide's inline <style> hides the Scene7 control bar:
+ *   `#s7video_div_controls.s7controlbar { visibility : hidden; }`)
  * Slide timing is page metadata (`carousel-interval`, seconds), not part of the block.
  */
 const S7_HOST = 'https://woolworthsgroup.scene7.com';
@@ -130,6 +132,10 @@ export default function parse(element, { document }) {
   const variants = [];
   if (/\bblack--gradient\b/.test(cls)) variants.push('gradient');
   if (/\bno-opacity\b/.test(cls) && banner.classList.contains('teaser')) variants.push('no-overlay');
+  const styles = [...root.querySelectorAll('style')].map((st) => st.textContent).join('\n');
+  if (/\.s7controlbar\s*\{[^}]*(visibility\s*:\s*hidden|display\s*:\s*none)/i.test(styles)) {
+    variants.push('hide-controls');
+  }
 
   const name = variants.length ? `carousel-hero (${variants.join(', ')})` : 'carousel-hero';
   element.replaceWith(WebImporter.Blocks.createBlock(document, { name, cells }));

@@ -19,6 +19,6 @@
     "reuseCount": 1,
     "lastUsed": "2026-10-20T00:00:00Z"
   },
-  "options": ["gradient", "no-overlay"],
+  "options": ["gradient", "no-overlay", "hide-controls"],
   "memberVariantIds": []
 }

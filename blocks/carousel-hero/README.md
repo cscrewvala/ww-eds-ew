@@ -28,12 +28,16 @@ Model: `standalone`. One row per slide, two cells:
 - Default: light flat scrim.
 - `gradient`: transparent-to-black scrim (source `.black--gradient`).
 - `no-overlay`: no scrim (source `.teaser.no-opacity`).
+- `hide-controls`: no pause/play button, as on the source video hero (whose Scene7 control bar
+  is hidden). With several slides the arrows and dots still show. Note: autoplaying motion with
+  no pause control does not meet WCAG 2.2.2; visitors with reduced motion still get no autoplay.
 
 ## Behaviour
 
 - Rotation holds while the hero is hovered or has keyboard focus, and stops when the tab is
   hidden.
-- A pause/play button is shown whenever something moves (several slides or a video).
+- A pause/play button is shown whenever something moves (several slides or a video), unless
+  the block has `hide-controls`.
 - With `prefers-reduced-motion`, nothing autoplays until the visitor presses play.
 - The video viewer loads 3 s after the page `load` event (delayed phase); until then the poster
   image (the LCP image) fills the hero.
