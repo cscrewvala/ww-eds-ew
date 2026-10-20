@@ -11,12 +11,15 @@
  *   .newsarticles.list   <newsArticlesDynamic>  (media-releases: latest-news, category/year/sort, 12/page)
  *   .latestnews.list     <latestNewsDynamic>    (news-archive: year/sort, 12/page; type filter disabled)
  *   .cmp-container:has(> .filtertag)           (our-stories: tag chips, 9; 100 Years: preset "100 Years", 3)
+ *   .two-column contenttiles, all latest-news  (newsroom "Latest news": curated on the source, but it
+ *                                               is the newest releases -> featured layout, newest first)
  *
  * structure.json flags invalid <a><button> nesting inside the result cards. This parser never
  * iterates result cards or buttons (they are discarded), so row pairing is not affected. The only
  * per-item read is data-filter-value on tiles, used to detect a preset tag shared by every tile.
  *
  * Block table (key/value): Source | Filters | Tags | Limit | Layout | Categories | Featured
+ *   Layout:     news | stories | featured (lead card + stacked tiles, no filters/paging)
  *   Categories: source chip labels in authored order (excluding "All"), comma separated.
  *   Featured:   stories listing only (no preset tag) - the source's curated first-page tile
  *               order as migrated paths (first `Limit` tiles), comma separated.
@@ -105,7 +108,24 @@ function storyConfig(element) {
   };
 }
 
+// Two-column content tiles that all link to latest-news releases (newsroom "Latest news").
+function isFeaturedNews(element) {
+  if (element.querySelector('[data-component="filterTag"], filtertag')) return false;
+  const tiles = [...element.querySelectorAll('.contenttile')];
+  return tiles.length > 1 && tiles.every((tile) => {
+    const links = [...tile.querySelectorAll('a[href]')].map((a) => a.getAttribute('href'));
+    return links.length && links.every((h) => h.includes('/media-releases/latest-news/'));
+  });
+}
+
 function configFor(element) {
+  if (isFeaturedNews(element)) {
+    return {
+      Source: `${NEWS_ROOT}latest-news/`,
+      Limit: `${element.querySelectorAll('.contenttile').length}`,
+      Layout: 'featured',
+    };
+  }
   if (isNewsListing(element)) {
     return {
       Source: `${NEWS_ROOT}latest-news/`,

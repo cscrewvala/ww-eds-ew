@@ -78,6 +78,7 @@ function toArticle(row) {
     title: row.title || '',
     // the SEO description is not a teaser; only a dedicated card description is shown
     cardDescription: row['card-description'] || '',
+    description: row.description || '',
     image: row.image || '',
     tags: toList(row.tags),
     date,
@@ -102,9 +103,9 @@ function el(tag, attrs = {}, ...children) {
   return node;
 }
 
-function renderImage(article) {
+function renderImage(article, breakpoints = [{ width: '750' }]) {
   if (!article.image) return null;
-  const picture = createOptimizedPicture(article.image, article.title, false, [{ width: '750' }]);
+  const picture = createOptimizedPicture(article.image, article.title, false, breakpoints);
   return el('div', { class: 'article-list-image' }, picture);
 }
 
@@ -137,6 +138,31 @@ function renderStoryCard(article) {
       el('h3', {}, el('a', { href: article.path }, article.title)),
       article.cardDescription ? el('p', { class: 'article-list-description' }, article.cardDescription) : null,
       el('p', { class: 'article-list-more' }, el('a', { href: article.path, 'aria-hidden': 'true', tabindex: '-1' }, 'Learn More')),
+    ),
+  );
+}
+
+/**
+ * Featured layout card: the lead (newest) card is large with a teaser; the others are
+ * horizontal tiles. Source: newsroom "Latest news" .two-50-50 content tiles.
+ */
+function renderFeaturedCard(article, lead) {
+  const tag = article.tags[0];
+  const teaser = lead ? (article.cardDescription || article.description) : '';
+  const breakpoints = lead
+    ? [{ media: '(min-width: 900px)', width: '1200' }, { width: '750' }]
+    : [{ width: '400' }];
+  return el(
+    'li',
+    { class: lead ? 'article-list-card article-list-lead' : 'article-list-card' },
+    renderImage(article, breakpoints),
+    el(
+      'div',
+      { class: 'article-list-body' },
+      tag ? el('span', { class: 'article-list-tag' }, tag) : null,
+      el('h3', {}, el('a', { href: article.path }, article.title)),
+      teaser ? el('p', { class: 'article-list-description' }, teaser) : null,
+      el('p', { class: 'article-list-more' }, el('a', { href: article.path, 'aria-hidden': 'true', tabindex: '-1' }, LABELS.learnMore)),
     ),
   );
 }
@@ -224,7 +250,7 @@ function writeState(state, defaults) {
 /**
  * Dynamic article listing driven by the query index.
  * Config rows: Source, Filters (tags|category, year, sort), Tags, Categories, Featured,
- * Limit, Layout (news|stories), Index.
+ * Limit, Layout (news|stories|featured), Index.
  * @param {Element} block The block element
  */
 export default async function decorate(block) {
@@ -234,10 +260,13 @@ export default async function decorate(block) {
   const presetTags = toList(config.tags);
   const categories = toList(config.categories);
   const featured = readFeatured(block);
-  const limit = Math.max(1, parseInt(config.limit, 10) || 12);
-  const layout = (config.layout || 'news').toLowerCase() === 'stories' ? 'stories' : 'news';
+  const layoutName = (config.layout || 'news').toLowerCase();
+  const layout = ['stories', 'featured'].includes(layoutName) ? layoutName : 'news';
+  // featured: a fixed newest-first set (lead + tiles); no filters, paging or URL state
+  const isFeatured = layout === 'featured';
+  const limit = Math.max(1, parseInt(config.limit, 10) || (isFeatured ? 5 : 12));
   const index = config.index || DEFAULT_INDEX;
-  const showTags = filters.includes('tags') || filters.includes('category');
+  const showTags = !isFeatured && (filters.includes('tags') || filters.includes('category'));
 
   block.textContent = '';
   block.classList.add(`article-list-${layout}`);
@@ -267,7 +296,9 @@ export default async function decorate(block) {
   const yearOptions = [...new Set(articles.map((a) => a.year).filter(Boolean))].sort().reverse();
   const allLabel = layout === 'stories' ? LABELS.allStories : LABELS.all;
   const defaults = { tag: '' };
-  const state = readState(defaults);
+  const state = isFeatured ? {
+    tag: '', year: '', sort: 'desc', page: 1,
+  } : readState(defaults);
   if (state.tag && !tagOptions.includes(state.tag)) state.tag = '';
   if (state.year && !yearOptions.includes(state.year)) state.year = '';
 
@@ -290,12 +321,12 @@ export default async function decorate(block) {
     controls.append(chips);
   }
   const selects = el('div', { class: 'article-list-selects' });
-  if (filters.includes('year') && yearOptions.length) {
+  if (!isFeatured && filters.includes('year') && yearOptions.length) {
     const year = buildSelect('year', LABELS.year, [['', LABELS.allYears], ...yearOptions.map((y) => [y, y])], state.year);
     year.querySelector('select').addEventListener('change', (e) => update({ year: e.target.value, page: 1 }));
     selects.append(year);
   }
-  if (filters.includes('sort')) {
+  if (!isFeatured && filters.includes('sort')) {
     const sort = buildSelect('sort', LABELS.sort, [['desc', LABELS.newest], ['asc', LABELS.oldest]], state.sort);
     sort.querySelector('select').addEventListener('change', (e) => update({ sort: e.target.value, page: 1 }));
     selects.append(sort);
@@ -355,7 +386,20 @@ export default async function decorate(block) {
     return b.sortKey.localeCompare(a.sortKey);
   };
 
+  function renderFeatured() {
+    const visible = articles.sort(compare).slice(0, limit);
+    status.remove();
+    pager.remove();
+    // the lead card spans the rows of the tiles beside it
+    list.style.setProperty('--article-list-rest', Math.max(1, visible.length - 1));
+    list.replaceChildren(...visible.map((a, i) => renderFeaturedCard(a, i === 0)));
+  }
+
   function render() {
+    if (isFeatured) {
+      renderFeatured();
+      return;
+    }
     const matches = articles
       .filter((a) => !state.tag || a.tags.includes(state.tag))
       .filter((a) => !state.year || a.year === state.year)

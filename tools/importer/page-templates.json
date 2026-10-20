@@ -679,7 +679,7 @@
         {
           "name": "cards-featured",
           "instances": [
-            ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile)"
+            ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile):has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"]))"
           ]
         },
         {
@@ -754,6 +754,12 @@
           "instances": [
             ".colscontainer:has(.leadershipprofile):not(:has(.text))",
             ".colscontainer:has(.leadershipprofile):has(.text) .container__body__content:has(.leadershipprofile)"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            ".container__body__content.container__body__two-column:has(.contenttile ~ .contenttile):not(:has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"])))"
           ]
         }
       ],
