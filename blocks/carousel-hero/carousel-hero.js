@@ -36,11 +36,15 @@ function findVideoLink(row) {
   }) || null;
 }
 
-/** waits for the page load event, so the viewer never competes with the poster (LCP) */
+// video starts this long after the page load event (the delayed phase); the poster shows until then
+const VIDEO_DELAY = 3000;
+
+/** waits for the delayed phase, so the video never competes with the poster (LCP) */
 function afterLoad() {
   return new Promise((resolve) => {
-    if (document.readyState === 'complete') resolve();
-    else window.addEventListener('load', () => resolve(), { once: true });
+    const later = () => setTimeout(resolve, VIDEO_DELAY);
+    if (document.readyState === 'complete') later();
+    else window.addEventListener('load', later, { once: true });
   });
 }
 

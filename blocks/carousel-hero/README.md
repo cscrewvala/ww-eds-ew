@@ -35,7 +35,8 @@ Model: `standalone`. One row per slide, two cells:
   hidden.
 - A pause/play button is shown whenever something moves (several slides or a video).
 - With `prefers-reduced-motion`, nothing autoplays until the visitor presses play.
-- The video viewer loads after the page `load` event; the poster image is the LCP image.
+- The video viewer loads 3 s after the page `load` event (delayed phase); until then the poster
+  image (the LCP image) fills the hero.
 
 ## Universal Editor fields
 
