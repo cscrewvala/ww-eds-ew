@@ -1,0 +1,24 @@
+{
+  "variantName": "carousel-hero",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "colorScheme": "dark-image",
+    "density": "minimal",
+    "purpose": "page-hero",
+    "imagePattern": "background-full-bleed",
+    "structure": "slides: image or background video + heading + sub-text",
+    "textAlignment": "left-bottom",
+    "cta": true
+  },
+  "contentPattern": "One row per slide: image (video poster) | optional Scene7/MP4 video link, heading, sub-text, CTA. Slides rotate every carousel-interval seconds (page metadata).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability.html"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-10-20T00:00:00Z"
+  },
+  "options": ["gradient", "no-overlay"],
+  "memberVariantIds": []
+}

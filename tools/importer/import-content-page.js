@@ -10,6 +10,7 @@ import cardsProfileParser from './parsers/cards-profile.js';
 import cardsStatsParser from './parsers/cards-stats.js';
 import cardsTileParser from './parsers/cards-tile.js';
 import cardsTimelineParser from './parsers/cards-timeline.js';
+import carouselHeroParser from './parsers/carousel-hero.js';
 import columnsContactParser from './parsers/columns-contact.js';
 import columnsGalleryParser from './parsers/columns-gallery.js';
 import columnsLogosParser from './parsers/columns-logos.js';
@@ -37,6 +38,7 @@ const parsers = {
   'cards-stats': cardsStatsParser,
   'cards-tile': cardsTileParser,
   'cards-timeline': cardsTimelineParser,
+  'carousel-hero': carouselHeroParser,
   'columns-contact': columnsContactParser,
   'columns-gallery': columnsGalleryParser,
   'columns-logos': columnsLogosParser,
@@ -78,15 +80,21 @@ const PAGE_TEMPLATE = {
   ],
   "blocks": [
     {
+      "name": "carousel-hero",
+      "instances": [
+        "herobannercarousel.heroBannerCarousel:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner))"
+      ]
+    },
+    {
       "name": "hero-article",
       "instances": [
-        "herobannercarousel.heroBannerCarousel:has(.banner--category, .alignLeft__text)"
+        "herobannercarousel.heroBannerCarousel:has(.banner--category, .alignLeft__text):not(:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner)))"
       ]
     },
     {
       "name": "hero-banner",
       "instances": [
-        "herobannercarousel.heroBannerCarousel:not(:has(.banner--category, .alignLeft__text))"
+        "herobannercarousel.heroBannerCarousel:not(:has(.banner--category, .alignLeft__text)):not(:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner)))"
       ]
     },
     {

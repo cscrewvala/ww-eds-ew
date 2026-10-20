@@ -638,15 +638,21 @@
       "description": "General landing/content pages (AEM content-page-template). Curated (static) content tiles, ecosystem logo grids, leadership-profile cards. Capped at 20.",
       "blocks": [
         {
+          "name": "carousel-hero",
+          "instances": [
+            "herobannercarousel.heroBannerCarousel:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner))"
+          ]
+        },
+        {
           "name": "hero-article",
           "instances": [
-            "herobannercarousel.heroBannerCarousel:has(.banner--category, .alignLeft__text)"
+            "herobannercarousel.heroBannerCarousel:has(.banner--category, .alignLeft__text):not(:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner)))"
           ]
         },
         {
           "name": "hero-banner",
           "instances": [
-            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category, .alignLeft__text))"
+            "herobannercarousel.heroBannerCarousel:not(:has(.banner--category, .alignLeft__text)):not(:has(.video-screen, video, section.hero-banner-carousel:not(.single-banner)))"
           ]
         },
         {
