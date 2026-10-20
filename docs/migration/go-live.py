@@ -2,7 +2,8 @@
 
 Credentials are injected by the environment (no tokens in this script).
 Usage: python3 docs/migration/go-live.py <step> [<step> ...]
-Steps: check | config | upload [--force] | preview | publish | verify
+Steps: check | config | upload [--force] [--dry-run] | preview | publish | verify
+Upload only overwrites files this script created and nobody changed since (see guard()).
 Package: run docs/migration/build-da-package.py first (writes /tmp/da-upload).
 """
 import hashlib
@@ -68,46 +69,82 @@ def load_state():
     return json.load(open(STATE)) if os.path.exists(STATE) else {}
 
 
-def step_upload():
-    """Upload docs; never overwrite a document that was edited in DA since our last upload.
+def da_read(key):
+    """Current DA source for a key ('au/en/x.html', 'images/a.png', 'redirects.json') as bytes."""
+    out = subprocess.run(['curl', '-s', '-w', '\n%{http_code}', f'{DA}/{key}'], capture_output=True, timeout=300)
+    body, _, code = out.stdout.rpartition(b'\n')
+    return int(code), body
 
-    da-upload-state.json records the hash of what we last uploaded per path. If the current DA
-    source hash differs from it, an author changed the page in DA: skip it (pass --force to override).
+
+def guard(key, da_key, local_sha, state, force):
+    """Decide whether to upload one file. Returns 'upload', 'same', 'edited', 'foreign' or 'error'.
+
+    da-upload-state.json records the hash of what this script last uploaded per key. A file
+    already in DA is only overwritten if this script created it and nobody changed it since:
+      - same    DA already has exactly this content (adopted into the state)
+      - edited  we uploaded it, but it changed in DA since (an author edit)
+      - foreign it exists in DA but this script never uploaded it (author-created)
+      - error   DA did not answer 200/404 - never upload blind
+    --force overrides edited/foreign, not error.
+    """
+    code, current = da_read(da_key)
+    if code == 404:
+        return 'upload'
+    if code != 200:
+        return 'error'
+    if sha(current) == local_sha:
+        return 'same'
+    if force:
+        return 'upload'
+    if key not in state:
+        return 'foreign'
+    return 'edited' if sha(current) != state[key] else 'upload'
+
+
+def step_upload():
+    """Upload docs, media and sheets; never overwrite what this script did not put there.
+
+    State keys: docs as 'au/en/x' (no extension, as before), media and sheets with their
+    extension ('images/a.png', 'redirects.json'). Pass --force to overwrite edited/foreign
+    files, --dry-run to only report what would happen.
     """
     m = manifest()
     state = load_state()
     force = '--force' in sys.argv
-    failures, skipped = [], []
-    for p in m['docs']:
-        f = f'{PKG}/docs/{p}.html'
-        local = open(f, encoding='utf-8').read()
-        code, current = curl(f'{DA}/{p}.html')
-        if code == 200 and not force:
-            if sha(current) == sha(local):
-                continue  # already up to date
-            if p in state and sha(current) != state[p]:
-                skipped.append(p)
-                continue
-        code, _ = curl('-X', 'POST', '-F', f'data=@{f};type=text/html', f'{DA}/{p}.html')
+    dry = '--dry-run' in sys.argv
+    files = [(p, f'{p}.html', f'{PKG}/docs/{p}.html', 'text/html') for p in m['docs']]
+    files += [(p, p, f'{PKG}/media/{p}', 'image/svg+xml' if p.endswith('.svg') else 'application/octet-stream')
+              for p in m['media']]
+    files += [(f'{s}.json', f'{s}.json', f'{PKG}/{s}.json', 'application/json') for s in m['sheets']]
+    result = {'upload': [], 'same': [], 'edited': [], 'foreign': [], 'error': []}
+    failures = []
+    for key, da_key, f, mime in files:
+        local_sha = sha(open(f, 'rb').read())
+        verdict = guard(key, da_key, local_sha, state, force)
+        result[verdict].append(key)
+        if verdict == 'same':
+            state[key] = local_sha
+        if verdict != 'upload' or dry:
+            continue
+        code, _ = curl('-X', 'POST', '-F', f'data=@{f};type={mime}', f'{DA}/{da_key}')
         if code >= 300:
-            failures.append((p, code))
+            failures.append((key, code))
         else:
-            state[p] = sha(local)
-    json.dump(state, open(STATE, 'w'), indent=1, sort_keys=True)
-    if skipped:
-        print(f'skipped {len(skipped)} document(s) edited in DA since the last upload:', skipped)
-    for p in m['media']:
-        mime = 'image/svg+xml' if p.endswith('.svg') else 'application/octet-stream'
-        code, _ = curl('-X', 'POST', '-F', f'data=@{PKG}/media/{p};type={mime}', f'{DA}/{p}')
-        if code >= 300:
-            failures.append((p, code))
-    for s in m['sheets']:
-        code, _ = curl('-X', 'POST', '-F', f'data=@{PKG}/{s}.json;type=application/json', f'{DA}/{s}.json')
-        if code >= 300:
-            failures.append((s, code))
-    total = len(m['docs']) + len(m['media']) + len(m['sheets'])
-    print(f'uploaded {total - len(failures)}/{total}', failures[:10])
+            state[key] = local_sha
+    if not dry:
+        json.dump(state, open(STATE, 'w'), indent=1, sort_keys=True)
+    label = 'would upload' if dry else 'uploaded'
+    print(f"{label} {len(result['upload']) - len(failures)}, unchanged {len(result['same'])}")
+    if result['edited']:
+        print(f"skipped {len(result['edited'])} edited in DA since our last upload:", result['edited'])
+    if result['foreign']:
+        print(f"skipped {len(result['foreign'])} that exist in DA but were not created by this script:",
+              result['foreign'])
+    if result['error']:
+        print(f"skipped {len(result['error'])} where DA did not answer 200/404:", result['error'])
     if failures:
+        print('failed:', failures[:10])
+    if failures or result['error']:
         sys.exit(1)
 
 
