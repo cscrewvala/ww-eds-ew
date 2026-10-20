@@ -2,6 +2,7 @@
 /* global WebImporter */
 
 // PARSER IMPORTS
+import articleListParser from './parsers/article-list.js';
 import cardsFeaturedParser from './parsers/cards-featured.js';
 import cardsTileParser from './parsers/cards-tile.js';
 import heroBannerParser from './parsers/hero-banner.js';
@@ -14,6 +15,7 @@ import articleMetadataTransformer from './transformers/article-metadata.js';
 
 // PARSER REGISTRY
 const parsers = {
+  'article-list': articleListParser,
   'cards-featured': cardsFeaturedParser,
   'cards-tile': cardsTileParser,
   'hero-banner': heroBannerParser,
@@ -36,13 +38,19 @@ const PAGE_TEMPLATE = {
     {
       "name": "cards-featured",
       "instances": [
-        ".container__body__two-column.two-50-50:has(.contenttile)"
+        ".container__body__two-column.two-50-50:has(.contenttile):has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"]))"
       ]
     },
     {
       "name": "cards-tile",
       "instances": [
         ".container__body__three-column:has(.contenttile)"
+      ]
+    },
+    {
+      "name": "article-list",
+      "instances": [
+        ".container__body__two-column.two-50-50:has(.contenttile):not(:has(.contenttile a[href]:not([href*=\"/media-releases/latest-news/\"])))"
       ]
     }
   ],
