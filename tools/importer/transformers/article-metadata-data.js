@@ -1,6 +1,7 @@
 /* Generated from the source site dynamic listing feeds (newsArticlesDynamic, latestNewsDynamic,
  * filterTag story tiles). Keyed by source path without .html. Do not edit by hand.
- * Story entries extended by tools/importer/gen-story-metadata.cjs. */
+ * Story entries extended by tools/importer/gen-story-metadata.cjs, news entries by
+ * tools/importer/gen-news-metadata.cjs. */
 const ARTICLE_METADATA = {
  "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-brings-back-in-store-soft-plastics-collection": {
   "date": "2026-05-07",
@@ -795,6 +796,222 @@ const ARTICLE_METADATA = {
    "People"
   ],
   "image": "https://woolworthsgroup.scene7.com/is/image/woolworthsgroupltd/Toys%20for%20joy-2"
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-tackles-rugby-world-cup-with-major-new-sponsorship-ac": {
+  "date": "2026-10-20",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/aussies-bag-1-billion-at-woolworths-affiliated-container-collection-points": {
+  "date": "2026-10-19",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-lands-on-doordash": {
+  "date": "2026-10-12",
+  "tags": [
+   "Convenience"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-unveils-2026-festive-range-as-nearly-half-of-aussies-": {
+  "date": "2026-10-08",
+  "tags": [],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-setting-the-standard-for-aussie-retailers-with-better-cotton-certification": {
+  "date": "2026-10-07",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-just-dropped-a-real--bachelor-s-handbag--": {
+  "date": "2026-10-05",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/how-small-change-brings-hope-to-sick-children-like-ollie": {
+  "date": "2026-09-30",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/Woolworths-partnership-with-glasshouse-grower-supplies-millions-of-kilograms-of-produce-a-year": {
+  "date": "2026-09-30",
+  "tags": [
+   "Fresh & Local"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/everyday-rewards-expands-fuel-discount-across-almost-1-000-sites": {
+  "date": "2026-09-28",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/meet-the-four-town-hall-store-team-members-with-139-years-combined-service": {
+  "date": "2026-09-23",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/how-a-handshake-between-mates-became-a-40-year-family-tradition-supplying-woolworths-beef": {
+  "date": "2026-09-22",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-delivers-800-big-price-drops-on-family-essentials": {
+  "date": "2026-09-17",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/Woolworths-creates-more-than-300-jobs-in-Lauderdale-Tasmania": {
+  "date": "2026-09-16",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-statement": {
+  "date": "2026-09-11",
+  "tags": [
+   "Media releases & statements"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/new-smart-trolleys-roll-out-in-western-australia": {
+  "date": "2026-09-03",
+  "tags": [],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/far-north-queensland-welcomes-first-mini-woolies-sites-to-suppor": {
+  "date": "2026-09-02",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/turn-your-weekly-shop-into-free-fissler-food-containers": {
+  "date": "2026-09-02",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-expands-lower-shelf-price-to-over-1-000-everyday-prod": {
+  "date": "2026-08-23",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/new-smart-trolleys-roll-out-in-south-australia": {
+  "date": "2026-08-21",
+  "tags": [
+   "Convenience"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolies-drops-its-first-ever-gluten-free-mudcake": {
+  "date": "2026-08-19",
+  "tags": [
+   "Fresh & Local"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-s-new-ss26-collection-arrives-at-unbeatable-prices": {
+  "date": "2026-08-18",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/everyday-rewards-and-commbank-join-forces-to-turn-everyday-banki": {
+  "date": "2026-08-18",
+  "tags": [],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-launches-same-day-delivery-with-doordash-to-rescue-stresse": {
+  "date": "2026-08-14",
+  "tags": [
+   "Convenience"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/travelex-and-everyday-rewards-announce-partnership-to-unlock-rew": {
+  "date": "2026-08-04",
+  "tags": [],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/share-the-dignity-august-drive": {
+  "date": "2026-07-29",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/disney-ooshies-back-at-woolworths": {
+  "date": "2026-07-06",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/2026-australian-commonwealth-games-team-coins": {
+  "date": "2026-07-01",
+  "tags": [
+   "Australian Community"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-takes-the-hassle-out-of-the-weekly-shop-with-new-digi": {
+  "date": "2026-06-29",
+  "tags": [
+   "Digital & Innovation"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/big-w-unveils-1-300--toy-sale-deals-and-free-lay-by-to-help-fami": {
+  "date": "2026-05-29",
+  "tags": [
+   "Products & Value"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-partners-with-netflix-to-launch-big-night-in-campaign": {
+  "date": "2026-05-19",
+  "tags": [
+   "Convenience"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-announces-major-casuarina-store-renewal-to-enhance-sh": {
+  "date": "2026-05-18",
+  "tags": [
+   "Convenience"
+  ],
+  "image": ""
+ },
+ "/au/en/our-newsroom/media-releases/latest-news/2026/woolworths-serves-up-380-ways-to-do-dinner-with-a-massive-range-": {
+  "date": "2026-05-13",
+  "tags": [
+   "Fresh & Local"
+  ],
+  "image": ""
  }
 };
 

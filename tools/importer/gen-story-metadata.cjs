@@ -113,7 +113,8 @@ function writeOut(data, found) {
   });
   const out = `/* Generated from the source site dynamic listing feeds (newsArticlesDynamic, latestNewsDynamic,
  * filterTag story tiles). Keyed by source path without .html. Do not edit by hand.
- * Story entries extended by tools/importer/gen-story-metadata.cjs. */
+ * Story entries extended by tools/importer/gen-story-metadata.cjs, news entries by
+ * tools/importer/gen-news-metadata.cjs. */
 const ARTICLE_METADATA = ${JSON.stringify(data, null, 1)};
 
 export default ARTICLE_METADATA;
