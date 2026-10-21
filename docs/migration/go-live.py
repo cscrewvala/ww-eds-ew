@@ -2,7 +2,7 @@
 
 Credentials are injected by the environment (no tokens in this script).
 Usage: python3 docs/migration/go-live.py <step> [<step> ...]
-Steps: check | config | upload [--force] [--dry-run] | preview | publish | verify
+Steps: check | config | upload [--force] [--dry-run] | preview [--uploaded] | publish [--uploaded] | verify
 Upload only overwrites files this script created and nobody changed since (see guard()).
 Package: run docs/migration/build-da-package.py first (writes /tmp/da-upload).
 """
@@ -133,6 +133,9 @@ def step_upload():
             state[key] = local_sha
     if not dry:
         json.dump(state, open(STATE, 'w'), indent=1, sort_keys=True)
+        # what this run uploaded, for `preview --uploaded` / `publish --uploaded`
+        done = [k for k in result['upload'] if k not in {f for f, _ in failures}]
+        json.dump(done, open(f'{PKG}/uploaded.json', 'w'), indent=1)
     label = 'would upload' if dry else 'uploaded'
     print(f"{label} {len(result['upload']) - len(failures)}, unchanged {len(result['same'])}")
     if result['edited']:
@@ -149,7 +152,19 @@ def step_upload():
 
 
 def bulk(action):
-    paths = web_paths(manifest())
+    """Bulk preview/publish the package; --uploaded limits it to what the last upload wrote, so
+    documents skipped by the guard (author edits in DA) are not previewed or published."""
+    if '--uploaded' in sys.argv:
+        keys = json.load(open(f'{PKG}/uploaded.json'))
+        m = manifest()
+        paths = web_paths({'docs': [k for k in keys if k in set(m['docs'])],
+                           'media': [k for k in keys if k in set(m['media'])],
+                           'sheets': [k[:-5] for k in keys if k.endswith('.json')]})
+        if not paths:
+            print(action, 'nothing uploaded')
+            return
+    else:
+        paths = web_paths(manifest())
     code, job = curl('-X', 'POST', '-H', 'Content-Type: application/json',
                      '--data-binary', json.dumps({'paths': paths, 'forceUpdate': True}),
                      f'{ADMIN}/{action}/{ORG}/{SITE}/{REF}/*', expect_json=True)

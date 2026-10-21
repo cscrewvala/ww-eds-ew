@@ -20,7 +20,7 @@ A two-column key/value table:
 | Layout | `news` (image, category, title, date — numbered pages), `stories` (image, tags, title — Load More) or `featured` (see below) |
 | Index | optional index URL (default `/au/en/article-index.json`) |
 
-Only dated article paths (`…/<yyyy>/<slug>`) under `Source` are listed. Sort is by the `date`
+Only dated article paths (`…/<yyyy>/<slug>`, or one folder deeper) under `Source` are listed. Sort is by the `date`
 column, falling back to the year folder in the path, then `lastModified` (after any `Featured`
 paths). Filter state is kept in the URL (`?tag=&year=&sort=&page=`) so filtered views can be
 linked; changing page keeps the scroll position, as the source does.
