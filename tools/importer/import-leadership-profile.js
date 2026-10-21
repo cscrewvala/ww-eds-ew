@@ -37,7 +37,18 @@ const PAGE_TEMPLATE = {
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/mike-tyquin.html",
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/peter-atkin.html",
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/rob-mcCartney.html",
-    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/sally-copland.html"
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/sally-copland.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/holly-kramer.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/siobhan-mcKenna.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/terry-bowen.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors/tracey-fellows.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/claire-peters.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/david-walker.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/guy-brent.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/jane-danziger.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/john-hunt.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/simon-lowden.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board/stephen-harrison.html"
   ],
   "blocks": [],
   "sections": []

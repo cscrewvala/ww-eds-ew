@@ -124,3 +124,24 @@
     grid-template-columns: repeat(4, min(23%, 288px));
   }
 }
+
+/* on a dark (ocean) section each document group is a white card (source board-committees
+   .mastercardlist charters), so titles and links keep their ocean colour */
+main .section.ocean .cards-documents > ul {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 32px;
+}
+
+main .section.ocean .cards-documents .cards-documents-group {
+  padding: 16px 24px 20px;
+  border-radius: 4px;
+  background-color: var(--color-snow);
+}
+
+main .section.ocean .cards-documents .cards-documents-title {
+  padding: 0 0 8px;
+  border-bottom: 0;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--color-ocean);
+}

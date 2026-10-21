@@ -77,6 +77,10 @@ const CTA_SKIP_CONTAINERS = '.contenttile, .mastercard, .accordion, .heroStats, 
   + '.leadershipprofile, .linklist, .policydocument, herobannercarousel, .wwgmodal, .tabs';
 
 const SOURCE_ORIGIN = 'https://www.woolworthsgroup.com.au';
+// AEM accordion item / panel ids used as deep-link hashes on the source
+// (#accordion-eba33fe17d-item-b7857d1374). blocks/accordion-program has no hash deep links
+// (its ids are generated per page load), so these hashes match nothing after migration.
+const SOURCE_ACCORDION_HASH = /^#accordion-[0-9a-f]+(-item-[0-9a-f]+)?(-panel|-button)?$/i;
 const SOURCE_HOSTS = ['www.woolworthsgroup.com.au', 'woolworthsgroup.com.au'];
 
 function isEmptyParagraph(p) {
@@ -263,6 +267,15 @@ export default function transform(hookName, element, payload) {
         return;
       }
       if (!/^https?:$/.test(url.protocol) || !SOURCE_HOSTS.includes(url.hostname)) return;
+      // Dead source accordion deep links: drop the hash; a hash-only (in-page) link becomes
+      // its plain text.
+      if (SOURCE_ACCORDION_HASH.test(url.hash)) {
+        if (href.trim().startsWith('#')) {
+          a.replaceWith(...a.childNodes);
+          return;
+        }
+        url.hash = '';
+      }
       let path = url.pathname.replace(/^\/content\/wwg(?=\/au\/)/, '');
       if (path.startsWith('/content/dam/') || path.startsWith('/etc.clientlibs/')) {
         a.setAttribute('href', `${SOURCE_ORIGIN}${path}${url.search}`);

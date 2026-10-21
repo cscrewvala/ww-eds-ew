@@ -78,7 +78,12 @@ const PAGE_TEMPLATE = {
     "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/waste-and-circularity.html",
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-of-directors.html",
     "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/management-board.html",
-    "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature/seafood-sourcing.html"
+    "https://www.woolworthsgroup.com.au/au/en/our-impact/sustainability/climate-and-nature/seafood-sourcing.html",
+    "https://www.woolworthsgroup.com.au/au/en/careers/find-a-job/employment-scams.html",
+    "https://www.woolworthsgroup.com.au/au/en/contact-us/thank-you.html",
+    "https://www.woolworthsgroup.com.au/au/en/investors/our-performance/reports/regional-report.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-brands/healthylife.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-leadership-team/board-committees.html"
   ],
   "blocks": [
     {
@@ -190,7 +195,8 @@ const PAGE_TEMPLATE = {
     {
       "name": "cards-documents",
       "instances": [
-        ".colscontainer:has(> .container__body > .container__body__content > .container__body__content__cols > .cmp-container > .linklist)"
+        ".colscontainer:has(> .container__body > .container__body__content > .container__body__content__cols > .cmp-container > .linklist)",
+        ".container__body__content:has(> .container__body__content__cols > .cmp-container > .mastercardlist .master-card-list-container__body__content__cta a[href]):not(.accordion *)"
       ]
     },
     {
