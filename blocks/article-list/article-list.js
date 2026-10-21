@@ -284,7 +284,8 @@ export default async function decorate(block) {
   const articles = rows
     .filter((r) => r.path && r.path !== ownPath && r.listing !== 'none')
     .filter((r) => !sources.length || sources.some((s) => r.path.startsWith(s)))
-    .filter((r) => /\/\d{4}\/[^/]+$/.test(r.path))
+    // dated articles: <yyyy>/<slug>, or one level deeper (source: latest-news/2024/accor-…/accor-…)
+    .filter((r) => /\/\d{4}\/[^/]+(\/[^/]+)?$/.test(r.path))
     .map(toArticle)
     .filter((a) => presetTags.every((t) => a.tags.includes(t)));
 
