@@ -143,6 +143,17 @@ main .cards-stats .cards-stats-cta a.button:hover {
   mask: url("./chevron.svg") center / contain no-repeat;
 }
 
+/* on a dark (ocean) section the stats invert with the section text (source regional-report);
+   the panel variant keeps its own light background and dark text */
+main .section.ocean .cards-stats:not(.panel),
+main .section.ocean .cards-stats:not(.panel) .cards-stats-header > :is(h1, h2, h3, h4, h5, h6, p) {
+  color: var(--color-snow);
+}
+
+main .section.ocean .cards-stats:not(.panel) > ul > li + li {
+  border-color: var(--color-snow);
+}
+
 @media (width >= 900px) {
   .cards-stats {
     margin: 0 auto;

@@ -53,7 +53,12 @@ const PAGE_TEMPLATE = {
     "https://www.woolworthsgroup.com.au/au/en/privacy/in-store-technology-and-your-privacy.html",
     "https://www.woolworthsgroup.com.au/au/en/privacy/protection.html",
     "https://www.woolworthsgroup.com.au/au/en/privacy/policy-documents/terms-and-conditions.html",
-    "https://www.woolworthsgroup.com.au/au/en/woolworths-captive-insurance-pte--ltd-statement.html"
+    "https://www.woolworthsgroup.com.au/au/en/woolworths-captive-insurance-pte--ltd-statement.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/legal-disclaimer/gather-by-woolworths-group-terms---conditions.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/legal-disclaimer/work-account-by-woolworths-group-terms---conditions.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-approach-/corporate-governance.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-approach-/our-partners.html",
+    "https://www.woolworthsgroup.com.au/au/en/who-we-are/our-brands/australian-grocery-wholesalers.html"
   ],
   "blocks": [
     {
