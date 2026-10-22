@@ -9,6 +9,9 @@
  * custom path, consumed by the side-nav block (auto-blocked in scripts.js):
  *   - investors      (sidenavigation.side-nav-container)        -> /au/en/investors/nav-section
  *   - sustainability (.cmp-secondary-navigation)                 -> /au/en/our-impact/sustainability/nav-section
+ *   - who we are     (sidenavigation.side-nav-container)        -> /au/en/who-we-are/nav-section
+ *     (source: our-approach-/corporate-governance - the standard "Who we are" menu carried by
+ *     the media-page-template pages: profiles, governance, partners, legal disclaimers, AGW)
  *
  * Selector provenance (source DOM, 2026-10):
  *   sidenavigation .side-nav-container__body__heading-container__title  (heading "Investors")
@@ -27,6 +30,7 @@ const SOURCE_HOSTS = ['www.woolworthsgroup.com.au', 'woolworthsgroup.com.au'];
 const NAV_TARGETS = [
   { prefix: '/au/en/investors/', path: '/au/en/investors/nav-section' },
   { prefix: '/au/en/our-impact/sustainability', path: '/au/en/our-impact/sustainability/nav-section' },
+  { prefix: '/au/en/who-we-are/', path: '/au/en/who-we-are/nav-section' },
 ];
 
 function mapHref(href) {
