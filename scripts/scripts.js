@@ -339,6 +339,18 @@ const SIDE_NAVS = [
     variant: 'horizontal',
     includeRoot: true,
   },
+  {
+    // only the source media-page-template pages carry the "Who we are" menu; the section
+    // landing pages (who we are, our brands, history, 100 years, board lists) do not
+    prefix: '/au/en/who-we-are/',
+    fragment: '/au/en/who-we-are/nav-section',
+    variant: 'vertical',
+    include: new RegExp('^/au/en/who-we-are/('
+      + 'our-leadership-team/(board-of-directors|management-board)/[^/]+'
+      + '|our-approach/(corporate-governance|our-partners)'
+      + '|our-brands/australian-grocery-wholesalers'
+      + '|legal-disclaimer/[^/]+)$'),
+  },
 ];
 
 /**
@@ -353,7 +365,8 @@ function buildSideNavAutoBlock(main) {
   const config = SIDE_NAVS.find((c) => (path.startsWith(c.prefix)
     || (c.includeRoot && `${path}/` === c.prefix))
     && path !== c.fragment
-    && !(c.exclude && c.exclude.test(path)));
+    && !(c.exclude && c.exclude.test(path))
+    && (!c.include || c.include.test(path)));
   if (!config) return;
   const sections = [...main.querySelectorAll(':scope > div')];
   if (!sections.length) return;
