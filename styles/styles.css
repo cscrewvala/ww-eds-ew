@@ -22,17 +22,104 @@
   --focus-outline-offset: 2px;
 }
 
-/* fallback fonts */
+/*
+ * Fallback fonts, metric-matched to the web fonts so the swap does not shift layout (CLS).
+ * One family per local font: a face only applies where that font is installed, so the stack
+ * falls through Arial (Windows/macOS/iOS; Liberation Sans has the same metrics) -> Roboto
+ * (Android) -> DejaVu Sans (Linux). Regular and bold faces are separate so 600/700 text is not
+ * synthesised. size-adjust = average text width ratio measured in Chromium (body: site copy,
+ * headings: all ~600 article titles);
+ * ascent/descent/line-gap = the web font's hhea metrics / size-adjust.
+ */
 @font-face {
   font-family: montserrat-fallback;
-  size-adjust: 113.4%;
-  src: local('Arial');
+  font-weight: 100 500;
+  src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans');
+  size-adjust: 112.31%;
+  ascent-override: 86.19%;
+  descent-override: 22.35%;
+  line-gap-override: 0%;
 }
 
 @font-face {
+  font-family: montserrat-fallback;
+  font-weight: 600 900;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 107.92%;
+  ascent-override: 89.7%;
+  descent-override: 23.26%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: montserrat-fallback-roboto;
+  font-weight: 100 500;
+  src: local('Roboto'), local('Roboto-Regular');
+  size-adjust: 112.64%;
+  ascent-override: 85.94%;
+  descent-override: 22.28%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: montserrat-fallback-roboto;
+  font-weight: 600 900;
+  src: local('Roboto Bold'), local('Roboto-Bold');
+  size-adjust: 114.74%;
+  ascent-override: 84.37%;
+  descent-override: 21.88%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: montserrat-fallback-dejavu;
+  font-weight: 100 500;
+  src: local('DejaVu Sans'), local('DejaVuSans');
+  size-adjust: 98.76%;
+  ascent-override: 98.01%;
+  descent-override: 25.41%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: montserrat-fallback-dejavu;
+  font-weight: 600 900;
+  src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold');
+  size-adjust: 90.54%;
+  ascent-override: 106.92%;
+  descent-override: 27.72%;
+  line-gap-override: 0%;
+}
+
+/* headings are only set at 600/700: bold faces only */
+@font-face {
   font-family: plus-jakarta-sans-fallback;
-  size-adjust: 104%;
-  src: local('Arial');
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold');
+  size-adjust: 99.44%;
+  ascent-override: 104.39%;
+  descent-override: 22.33%;
+  line-gap-override: 0%;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: plus-jakarta-sans-fallback-roboto;
+  src: local('Roboto Bold'), local('Roboto-Bold');
+  size-adjust: 105.87%;
+  ascent-override: 98.05%;
+  descent-override: 20.97%;
+  line-gap-override: 0%;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: plus-jakarta-sans-fallback-dejavu;
+  src: local('DejaVu Sans Bold'), local('DejaVuSans-Bold');
+  size-adjust: 83.77%;
+  ascent-override: 123.91%;
+  descent-override: 26.5%;
+  line-gap-override: 0%;
+  font-weight: 100 900;
 }
 
 body {
