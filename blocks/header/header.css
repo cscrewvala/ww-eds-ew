@@ -89,11 +89,11 @@ header .nav-hamburger svg {
 }
 
 header .nav-hamburger .nav-hamburger-close,
-header .nav-bar[aria-expanded='true'] .nav-hamburger .nav-hamburger-open {
+header .nav-bar[data-expanded='true'] .nav-hamburger .nav-hamburger-open {
   display: none;
 }
 
-header .nav-bar[aria-expanded='true'] .nav-hamburger .nav-hamburger-close {
+header .nav-bar[data-expanded='true'] .nav-hamburger .nav-hamburger-close {
   display: block;
 }
 
@@ -102,7 +102,7 @@ header .nav-menu-wrapper {
   display: none;
 }
 
-header .nav-bar[aria-expanded='true'] .nav-menu-wrapper {
+header .nav-bar[data-expanded='true'] .nav-menu-wrapper {
   position: fixed;
   top: calc(var(--nav-height) - 4px); /* source sheet overlaps the bar's bottom 4px */
   bottom: 0;
@@ -459,7 +459,7 @@ header .nav-utility .nav-utility-primary-item.nav-utility-wide::after {
   }
 
   header .nav-menu-wrapper,
-  header .nav-bar[aria-expanded='true'] .nav-menu-wrapper {
+  header .nav-bar[data-expanded='true'] .nav-menu-wrapper {
     position: static;
     display: flex;
     flex-direction: row;

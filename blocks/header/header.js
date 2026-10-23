@@ -268,10 +268,12 @@ function buildSearch() {
 }
 
 function toggleMobileMenu(bar, navSections, force = null) {
-  const expanded = bar.getAttribute('aria-expanded') === 'true';
+  // the state lives on the bar as data-expanded (aria-expanded is not allowed on a div);
+  // the hamburger button carries aria-expanded for assistive tech and agents
+  const expanded = bar.dataset.expanded === 'true';
   const open = force !== null ? force : !expanded;
   const button = bar.querySelector('.nav-hamburger button');
-  bar.setAttribute('aria-expanded', open ? 'true' : 'false');
+  bar.dataset.expanded = open ? 'true' : 'false';
   button.setAttribute('aria-expanded', open ? 'true' : 'false');
   button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
   document.body.style.overflowY = open && !isDesktop.matches ? 'hidden' : '';
@@ -299,7 +301,7 @@ export default async function decorate(block) {
   const bar = document.createElement('div');
   bar.className = 'nav-bar';
   bar.id = 'nav';
-  bar.setAttribute('aria-expanded', 'false');
+  bar.dataset.expanded = 'false';
 
   // brand
   const brand = document.createElement('div');
@@ -340,7 +342,7 @@ export default async function decorate(block) {
   window.addEventListener('keydown', (e) => {
     if (e.code !== 'Escape') return;
     if (navSections.querySelector('.nav-drop.is-open')) closeAllMenus(navSections);
-    else if (bar.getAttribute('aria-expanded') === 'true') toggleMobileMenu(bar, navSections, false);
+    else if (bar.dataset.expanded === 'true') toggleMobileMenu(bar, navSections, false);
   });
 
   // reset state when crossing the desktop breakpoint
