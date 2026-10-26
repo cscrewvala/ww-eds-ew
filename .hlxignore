@@ -9,3 +9,4 @@ sync-block-collection.sh
 migration-work/*
 tools/importer/*
 docs/*
+ue/models/*

@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * hero-story: page-top split hero. Text (h1 title + optional subtitle such as a
@@ -23,6 +23,7 @@ export default function decorate(block) {
         { width: '750' },
       ]);
       const newImg = optimized.querySelector('img');
+      moveInstrumentation(img, newImg);
       newImg.setAttribute('loading', 'eager');
       newImg.setAttribute('fetchpriority', 'high');
       media.append(optimized);
@@ -35,6 +36,8 @@ export default function decorate(block) {
 
   // Gather every non-image element from all cells, in authored order.
   [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    // Universal Editor: the text cell's field moves to the content wrapper
+    if (!cell.querySelector('picture')) moveInstrumentation(cell, content);
     const children = [...cell.children];
     if (!children.length && cell.textContent.trim()) {
       const p = document.createElement('p');

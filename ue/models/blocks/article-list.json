@@ -1,0 +1,100 @@
+{
+  "definitions": [
+    {
+      "title": "Article List",
+      "id": "article-list",
+      "model": "article-list",
+      "plugins": {
+        "da": {
+          "name": "article-list",
+          "type": "key-value-block"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "article-list",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "source",
+          "label": "Source",
+          "value": "",
+          "description": "Folder(s) to list, comma separated, e.g. /au/en/our-newsroom/media-releases/latest-news/"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "filters",
+          "label": "Filters",
+          "value": "",
+          "description": "Any of: category (or tags), year, sort. Ignored by the featured layout"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "tags",
+          "label": "Tags",
+          "value": "",
+          "description": "Optional preset: only articles with all of these tags (comma separated)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "categories",
+          "label": "Categories",
+          "value": "",
+          "description": "Optional chip order (comma separated)"
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "featured",
+          "label": "Featured",
+          "value": "",
+          "description": "Optional article paths shown first, in order (comma or line separated, text or links)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "limit",
+          "label": "Limit",
+          "value": "",
+          "description": "Page size (default 12; featured layout default 5)"
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "layout",
+          "label": "Layout",
+          "value": "news",
+          "options": [
+            {
+              "name": "News",
+              "value": "news"
+            },
+            {
+              "name": "Stories",
+              "value": "stories"
+            },
+            {
+              "name": "Featured",
+              "value": "featured"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "index",
+          "label": "Index",
+          "value": "",
+          "description": "Optional index URL (default /au/en/article-index.json)"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

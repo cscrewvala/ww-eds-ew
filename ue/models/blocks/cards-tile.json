@@ -1,0 +1,107 @@
+{
+  "definitions": [
+    {
+      "title": "Cards – Tile",
+      "id": "cards-tile",
+      "model": "cards-tile",
+      "filter": "cards-tile",
+      "plugins": {
+        "da": {
+          "name": "cards-tile",
+          "rows": 1,
+          "columns": 2
+        }
+      }
+    },
+    {
+      "title": "Tile",
+      "id": "cards-tile-item",
+      "model": "cards-tile-item",
+      "plugins": {
+        "da": {
+          "name": "cards-tile-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            {
+              "name": "image",
+              "selector": "div:nth-child(1) picture>img[src]"
+            },
+            {
+              "name": "imageAlt",
+              "selector": "div:nth-child(1) picture>img[alt]"
+            },
+            {
+              "name": "imageLink",
+              "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(2)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-tile",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "2 columns",
+              "value": "cols-2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cards-tile-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image alt text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageLink",
+          "label": "Image URL (Scene7)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Title, description and link",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-tile",
+      "components": [
+        "cards-tile-item"
+      ]
+    }
+  ]
+}

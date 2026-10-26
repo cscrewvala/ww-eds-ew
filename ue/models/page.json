@@ -1,0 +1,131 @@
+{
+  "models": [
+    {
+      "id": "page-metadata",
+      "fields": [
+        {
+          "component": "text",
+          "name": "title",
+          "label": "Title"
+        },
+        {
+          "component": "text",
+          "name": "description",
+          "label": "Description"
+        },
+        {
+          "component": "reference",
+          "name": "image",
+          "label": "Image",
+          "description": "Share image; also the card image in listings and search"
+        },
+        {
+          "component": "select",
+          "name": "template",
+          "label": "Template",
+          "options": [
+            {
+              "name": "homepage",
+              "value": "homepage"
+            },
+            {
+              "name": "content-page",
+              "value": "content-page"
+            },
+            {
+              "name": "listing-page",
+              "value": "listing-page"
+            },
+            {
+              "name": "news-article",
+              "value": "news-article"
+            },
+            {
+              "name": "story-article",
+              "value": "story-article"
+            },
+            {
+              "name": "story-banner",
+              "value": "story-banner"
+            },
+            {
+              "name": "investor-page",
+              "value": "investor-page"
+            },
+            {
+              "name": "legal-page",
+              "value": "legal-page"
+            },
+            {
+              "name": "leadership-profile",
+              "value": "leadership-profile"
+            },
+            {
+              "name": "search-page",
+              "value": "search-page"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "date",
+          "label": "Date",
+          "description": "Publish date yyyy-mm-dd; sorts article listings and search"
+        },
+        {
+          "component": "text",
+          "name": "tags",
+          "label": "Tags",
+          "description": "Comma-separated categories, e.g. Australian Community, Products & Value"
+        },
+        {
+          "component": "select",
+          "name": "listing",
+          "label": "Listing",
+          "description": "Which article listing shows this page; None hides it",
+          "options": [
+            {
+              "name": "Latest news",
+              "value": "latest-news"
+            },
+            {
+              "name": "News archive",
+              "value": "news-archive"
+            },
+            {
+              "name": "Check it out",
+              "value": "check-it-out"
+            },
+            {
+              "name": "Our stories",
+              "value": "our-stories"
+            },
+            {
+              "name": "None (hidden from listings)",
+              "value": "none"
+            }
+          ]
+        },
+        {
+          "component": "text",
+          "name": "card-description",
+          "label": "Card description",
+          "description": "Two-line teaser on story tiles"
+        },
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "carousel-interval",
+          "label": "Carousel interval (seconds)",
+          "description": "Seconds between hero carousel slides (default 6)"
+        },
+        {
+          "component": "text",
+          "name": "robots",
+          "label": "Robots",
+          "description": "Index control, e.g. noindex"
+        }
+      ]
+    }
+  ]
+}

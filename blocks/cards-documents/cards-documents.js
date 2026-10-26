@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * cards-documents: grid of document link lists grouped by year (or topic),
  * 4 groups per row on desktop. Each group: title, divider, list of document links
@@ -45,6 +47,7 @@ function collectLinks(nodes) {
 function buildGroup(row) {
   const li = document.createElement('li');
   li.className = 'cards-documents-group';
+  moveInstrumentation(row, li);
   const cells = [...row.children];
 
   let titleNodes;
@@ -67,16 +70,19 @@ function buildGroup(row) {
     }
   }
 
+  const titleCell = cells.length >= 2 ? cells[0] : null;
   const titleText = titleNodes.map((n) => n.textContent).join(' ').trim();
-  if (titleText) {
+  if (titleText || titleCell?.hasAttribute('data-aue-prop')) {
     const title = document.createElement('h3');
     title.className = 'cards-documents-title';
     title.textContent = titleText;
+    moveInstrumentation(titleCell, title);
     li.append(title);
   }
 
   const list = document.createElement('ul');
   list.className = 'cards-documents-list';
+  if (cells.length >= 2) moveInstrumentation(cells[1], list);
   collectLinks(bodyNodes).forEach((a) => {
     const item = document.createElement('li');
     item.dataset.type = linkType(a);
@@ -93,14 +99,14 @@ function buildGroup(row) {
     }
     list.append(item);
   });
-  if (list.children.length) li.append(list);
+  if (list.children.length || list.hasAttribute('data-aue-prop')) li.append(list);
   return li;
 }
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children]
-    .filter((row) => row.textContent.trim())
+    .filter((row) => row.textContent.trim() || row.hasAttribute('data-aue-resource'))
     .forEach((row) => ul.append(buildGroup(row)));
   block.replaceChildren(ul);
 }

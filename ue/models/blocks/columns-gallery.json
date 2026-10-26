@@ -1,0 +1,79 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Gallery",
+      "id": "columns-gallery",
+      "model": "columns-gallery",
+      "filter": "columns-gallery",
+      "plugins": {
+        "da": {
+          "name": "columns-gallery",
+          "rows": 1,
+          "columns": 3,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Gallery Row",
+      "id": "columns-gallery-row",
+      "model": "columns-gallery-row",
+      "filter": "columns-gallery-row",
+      "plugins": {
+        "da": {
+          "name": "columns-gallery-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Gallery Column",
+      "id": "columns-gallery-cell",
+      "model": "columns-gallery-cell",
+      "filter": "columns-gallery-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-gallery",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 3,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 4
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-gallery",
+      "components": [
+        "columns-gallery-row"
+      ]
+    },
+    {
+      "id": "columns-gallery-row",
+      "components": []
+    },
+    {
+      "id": "columns-gallery-cell",
+      "components": [
+        "image",
+        "text"
+      ]
+    }
+  ]
+}

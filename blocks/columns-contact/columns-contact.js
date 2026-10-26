@@ -11,6 +11,8 @@
  * @param {Element} block
  */
 
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 const ICON_SELECTOR = 'picture, span.icon, img';
 
 const ICON_SIZES = {
@@ -62,8 +64,11 @@ function buildItem(nodes) {
   const li = document.createElement('li');
   const holder = document.createElement('div');
   nodes.forEach((n) => holder.append(...n.childNodes));
-
+  // Universal Editor: cell (column) -> item; an icon-only first cell -> the icon wrapper
   const iconWrap = document.createElement('div');
+  moveInstrumentation(nodes[nodes.length - 1], li);
+  if (nodes.length > 1) moveInstrumentation(nodes[0], iconWrap);
+
   iconWrap.className = 'columns-contact-icon';
   const icon = holder.querySelector(ICON_SELECTOR);
   // only a leading icon counts (inline icons inside text stay in place)
@@ -72,7 +77,11 @@ function buildItem(nodes) {
   if (leading) {
     const unit = icon.closest('picture') || icon.closest('span.icon') || icon;
     iconWrap.append(unit);
-    if (firstEl !== unit && !firstEl.querySelector(ICON_SELECTOR)) firstEl.remove();
+    if (firstEl !== unit && !firstEl.querySelector(ICON_SELECTOR)) {
+      // Universal Editor: the icon paragraph's component moves to the icon
+      moveInstrumentation(firstEl, unit);
+      firstEl.remove();
+    }
   }
 
   const body = document.createElement('div');
@@ -96,27 +105,39 @@ function buildItem(nodes) {
   if (type) li.classList.add(`columns-contact-${type}`);
   if (!iconWrap.children.length && type) iconWrap.append(createIcon(type));
 
-  if (iconWrap.children.length) li.append(iconWrap);
+  if (iconWrap.children.length || iconWrap.hasAttribute('data-aue-resource')) li.append(iconWrap);
   else li.classList.add('columns-contact-no-icon');
   li.append(body);
   return li;
 }
 
 export default function decorate(block) {
-  const ul = document.createElement('ul');
-  [...block.children].forEach((row) => {
+  const rows = [...block.children];
+  // Universal Editor: every authored row (instrumented) keeps its own list; otherwise one list
+  const perRow = rows.length > 1 && rows.some((r) => r.hasAttribute('data-aue-resource'));
+  const lists = [];
+  let ul = null;
+  rows.forEach((row) => {
+    if (!ul || perRow) {
+      ul = document.createElement('ul');
+      lists.push(ul);
+    }
+    // Universal Editor: row -> list
+    moveInstrumentation(row, ul);
     const cells = [...row.children]
-      .filter((c) => c.textContent.trim() || c.querySelector(ICON_SELECTOR));
+      .filter((c) => c.textContent.trim() || c.querySelector(ICON_SELECTOR)
+        || c.hasAttribute('data-aue-resource'));
     if (cells.length === 2 && isIconOnly(cells[0])) {
       ul.append(buildItem(cells));
       return;
     }
     cells.forEach((cell) => ul.append(buildItem([cell])));
   });
+  if (!lists.length) lists.push(document.createElement('ul'));
 
-  const count = ul.children.length;
+  const count = lists.reduce((n, list) => n + list.children.length, 0);
   // 4 items = 2x2 (two stacked per column, as on the source); 5+ wrap three per row
   const layout = count === 4 ? 4 : Math.min(count, 3);
   block.classList.add(`columns-contact-${layout}-up`);
-  block.replaceChildren(ul);
+  block.replaceChildren(...lists);
 }

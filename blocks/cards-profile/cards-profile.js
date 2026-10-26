@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-profile: leadership profile cards - circular photo, name, role,
@@ -21,6 +21,7 @@ function isLinkOnly(el) {
 
 function buildCard(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const photo = document.createElement('div');
   photo.className = 'cards-profile-image';
   const body = document.createElement('div');
@@ -35,6 +36,8 @@ function buildCard(row) {
         holder.remove();
       }
     }
+    // Universal Editor: the text cell's field moves to the card body
+    moveInstrumentation(cell, body);
     if (!cell.children.length) {
       const text = cell.textContent.trim();
       if (text) {
@@ -62,18 +65,21 @@ function buildCard(row) {
 
   if (photo.children.length) li.append(photo);
   else li.classList.add('cards-profile-no-image');
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return li;
 }
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .forEach((row) => ul.append(buildCard(row)));
 
   ul.querySelectorAll('.cards-profile-image picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }]));
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ width: '400' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   if (ul.children.length >= LARGE_SET) block.classList.add('cards-profile-large');

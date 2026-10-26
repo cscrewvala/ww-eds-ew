@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-logo: brand / channel cards - logo on the left, name + link on the right.
@@ -66,6 +66,7 @@ function isExternal(href) {
 
 function buildCard(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const logo = document.createElement('div');
   logo.className = 'cards-logo-image';
   const body = document.createElement('div');
@@ -80,6 +81,8 @@ function buildCard(row) {
         holder.remove();
       }
     }
+    // Universal Editor: the text cell's field moves to the card body
+    moveInstrumentation(cell, body);
     if (!cell.children.length) {
       const text = cell.textContent.trim();
       if (text) {
@@ -109,7 +112,7 @@ function buildCard(row) {
 
   if (logo.children.length) li.append(logo);
   else li.classList.add('cards-logo-no-image');
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return {
     li, logo, name, linkEl, descEls,
   };
@@ -151,6 +154,12 @@ function buildDialog(card) {
     bigLogo.className = 'cards-logo-dialog-logo';
     // same picture (sources) as the card logo, so the open pop-up reuses the cached image
     const big = (img.closest('picture') || img).cloneNode(true);
+    // the copy must not duplicate the card logo's editor instrumentation
+    [big, ...big.querySelectorAll('*')].forEach((el) => {
+      [...el.attributes].map((attr) => attr.name)
+        .filter((n) => n.startsWith('data-aue-') || n.startsWith('data-richtext-'))
+        .forEach((n) => el.removeAttribute(n));
+    });
     big.querySelectorAll('img').forEach((el) => {
       el.removeAttribute('width');
       el.removeAttribute('height');
@@ -268,12 +277,15 @@ function addShowMore(block, ul) {
 export default function decorate(block) {
   const ul = document.createElement('ul');
   const cards = [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .map(buildCard);
   cards.forEach(({ li }) => ul.append(li));
 
   ul.querySelectorAll('.cards-logo-image picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '200' }]));
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ width: '200' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   if (ul.children.length === 1) block.classList.add('cards-logo-single');

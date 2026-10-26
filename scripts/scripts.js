@@ -233,11 +233,17 @@ function buildDynamicMediaImages(main) {
     // NEVER unwrap <div> — those are block-content cells (cards,
     // carousel, columns); unwrapping them collapses the block's row
     // structure and decorators can't find their image cells.
+    // Universal Editor: the anchor (or its <p>) carries the field instrumentation
+    const img = picture.querySelector('img');
     if (isUnwrappableMarkdownParagraph(a)) {
+      // eslint-disable-next-line no-use-before-define
+      moveInstrumentation(a.parentElement, img);
       a.parentElement.replaceWith(picture);
     } else {
       a.replaceWith(picture);
     }
+    // eslint-disable-next-line no-use-before-define
+    moveInstrumentation(a, img);
   });
 }
 
@@ -262,6 +268,25 @@ window.__dmRender__ = (src, alt) => {
 };
 
 // --- END DM/Scene7 auto-block ---
+
+/**
+ * Universal Editor (Author Bus): moves the editor instrumentation (data-aue-*, data-richtext-*)
+ * from an authored element to the element that replaces it during decoration, so the editor
+ * can still select and edit it. No-op outside the editor (the attributes are only present in
+ * HTML served by *.ue.da.live).
+ * @param {Element} from the authored element
+ * @param {Element} to its replacement
+ */
+export function moveInstrumentation(from, to) {
+  if (!from || !to || from === to) return;
+  [...from.attributes]
+    .map(({ nodeName }) => nodeName)
+    .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-'))
+    .forEach((attr) => {
+      to.setAttribute(attr, from.getAttribute(attr));
+      from.removeAttribute(attr);
+    });
+}
 
 /**
  * DM/Scene7-aware wrapper around aem.js createOptimizedPicture.
@@ -557,6 +582,15 @@ async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+}
+
+// Universal Editor (Author Bus): editor-only behaviour, loaded only on *.ue.da.live.
+// The flag is set synchronously so blocks see it while decorating; ue.js is NOT awaited: it
+// imports blocks that import this module, so awaiting it here would deadlock the module graph.
+if (/\.(stage-ue|ue)\.da\.live$/.test(window.location.hostname)) {
+  document.documentElement.dataset.ue = 'true';
+  // eslint-disable-next-line import/no-unresolved
+  import(`${window.hlx.codeBasePath}/ue/scripts/ue.js`).then(({ default: ue }) => ue());
 }
 
 loadPage();

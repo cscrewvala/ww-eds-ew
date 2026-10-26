@@ -1,5 +1,5 @@
 import { getMetadata, loadScript } from '../../scripts/aem.js';
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * carousel-hero: full-bleed hero slides (image or background video, optional overlay text)
@@ -19,6 +19,11 @@ const DEFAULT_INTERVAL = 6;
 const S7_VIEWER = 'https://woolworthsgroup.scene7.com/s7viewers/html5/js/SmartCropVideoViewer.js';
 const DIRECT_VIDEO = /\.(mp4|webm|ogg|m4v|mov)(\?|#|$)/i;
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+// Universal Editor: slides do not rotate on their own while the page is being edited
+const editing = () => document.documentElement.dataset.ue === 'true';
+
+/** block -> { show, rowIndexes } for showSlide() */
+const carousels = new WeakMap();
 
 let viewerCount = 0;
 
@@ -94,6 +99,8 @@ function buildSlide(row, index, total, autoplayVideo) {
   slide.setAttribute('role', 'group');
   slide.setAttribute('aria-roledescription', 'slide');
   slide.setAttribute('aria-label', `${index + 1} of ${total}`);
+  // Universal Editor: the row (slide item) instrumentation moves to the slide
+  moveInstrumentation(row, slide);
 
   const media = document.createElement('div');
   media.className = 'carousel-hero-media';
@@ -107,6 +114,7 @@ function buildSlide(row, index, total, autoplayVideo) {
       { media: '(min-width: 900px)', width: '2000' },
       { width: '900' },
     ]);
+    moveInstrumentation(img, picture.querySelector('img'));
     if (index === 0) {
       const first = picture.querySelector('img');
       first.setAttribute('loading', 'eager');
@@ -119,6 +127,8 @@ function buildSlide(row, index, total, autoplayVideo) {
     const href = link.getAttribute('href');
     const player = document.createElement('div');
     player.className = 'carousel-hero-video';
+    // Universal Editor: the video link is not rendered; its field moves to the player
+    moveInstrumentation(link, player);
     const s7 = DIRECT_VIDEO.test(href) ? null : scene7Asset(href);
     if (s7) {
       // the Scene7 poster is the asset itself on /is/image/
@@ -135,6 +145,8 @@ function buildSlide(row, index, total, autoplayVideo) {
 
   // overlay text: everything that is not the media
   [...row.querySelectorAll(':scope > div')].forEach((cell) => {
+    // Universal Editor: the text cell's field moves to the content wrapper
+    if (!cell.contains(img)) moveInstrumentation(cell, content);
     [...cell.children].forEach((child) => {
       if (child.tagName === 'PICTURE' || child === link) return;
       const linkOnly = link && child.contains(link)
@@ -162,8 +174,10 @@ function slideVideo(slide) {
 }
 
 export default function decorate(block) {
-  const rows = [...block.querySelectorAll(':scope > div')]
+  const allRows = [...block.querySelectorAll(':scope > div')];
+  const rows = allRows
     .filter((row) => row.textContent.trim() || row.querySelector('picture, a[href]'));
+  const rowIndexes = rows.map((row) => allRows.indexOf(row));
   const animate = !reducedMotion();
   const slides = rows.map((row, i) => buildSlide(row, i, rows.length, animate));
 
@@ -220,7 +234,7 @@ export default function decorate(block) {
 
   function start() {
     stop();
-    if (multi && !paused && !hovered && !focused) {
+    if (multi && !paused && !hovered && !focused && !editing()) {
       timer = setInterval(() => show(current + 1), interval);
     }
   }
@@ -300,6 +314,19 @@ export default function decorate(block) {
     block.append(controls);
     block.classList.add('has-controls');
   }
+  carousels.set(block, { show, rowIndexes });
   show(0);
   start();
+}
+
+/**
+ * Universal Editor: shows the slide authored in row `index` (e.g. when the author selects it).
+ * @param {Element} block the carousel-hero block
+ * @param {number} index authored row index (slide index when no empty rows were skipped)
+ */
+export function showSlide(block, index) {
+  const carousel = carousels.get(block);
+  if (!carousel) return;
+  const position = carousel.rowIndexes.indexOf(Number(index));
+  carousel.show(position >= 0 ? position : Number(index) || 0);
 }

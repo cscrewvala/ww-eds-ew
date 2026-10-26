@@ -1,0 +1,79 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Logos",
+      "id": "columns-logos",
+      "model": "columns-logos",
+      "filter": "columns-logos",
+      "plugins": {
+        "da": {
+          "name": "columns-logos",
+          "rows": 1,
+          "columns": 4,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Logos Row",
+      "id": "columns-logos-row",
+      "model": "columns-logos-row",
+      "filter": "columns-logos-row",
+      "plugins": {
+        "da": {
+          "name": "columns-logos-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Logos Column",
+      "id": "columns-logos-cell",
+      "model": "columns-logos-cell",
+      "filter": "columns-logos-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-logos",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 4,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 8
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-logos",
+      "components": [
+        "columns-logos-row"
+      ]
+    },
+    {
+      "id": "columns-logos-row",
+      "components": []
+    },
+    {
+      "id": "columns-logos-cell",
+      "components": [
+        "image",
+        "text"
+      ]
+    }
+  ]
+}

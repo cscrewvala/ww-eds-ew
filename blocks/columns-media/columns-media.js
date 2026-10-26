@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * columns-media: rows of text beside a photo, 50/50 on desktop.
@@ -13,9 +13,19 @@ import { createOptimizedPicture } from '../../scripts/scripts.js';
 
 const isImageCell = (cell) => !!cell.querySelector('picture') && !cell.textContent.trim();
 
+/** Universal Editor: an image paragraph emptied by lifting its picture -> the picture */
+function liftInstrumentation(pic, stop) {
+  const holder = pic.parentElement;
+  if (holder && holder !== stop && holder.tagName === 'P' && !holder.textContent.trim()) {
+    moveInstrumentation(holder, pic);
+  }
+}
+
 function buildRow(row) {
   const item = document.createElement('div');
   item.className = 'columns-media-row';
+  // Universal Editor: row -> layout row
+  moveInstrumentation(row, item);
 
   const cells = [...row.children].filter((c) => c.textContent.trim() || c.querySelector('picture'));
   let media = null;
@@ -26,13 +36,19 @@ function buildRow(row) {
     if (!media && isImageCell(cell)) {
       media = document.createElement('div');
       media.className = 'columns-media-image';
-      media.append(cell.querySelector('picture'));
+      // Universal Editor: image cell (column) -> image wrapper
+      moveInstrumentation(cell, media);
+      const pic = cell.querySelector('picture');
+      liftInstrumentation(pic, cell);
+      media.append(pic);
       mediaFirst = !text && i === 0;
       return;
     }
     if (!text) {
       text = document.createElement('div');
       text.className = 'columns-media-text';
+      // Universal Editor: (first) text cell (column) -> text wrapper
+      moveInstrumentation(cell, text);
     }
     if (!cell.children.length) {
       const p = document.createElement('p');
@@ -50,6 +66,7 @@ function buildRow(row) {
       const holder = pic.parentElement;
       media = document.createElement('div');
       media.className = 'columns-media-image';
+      liftInstrumentation(pic, text);
       media.append(pic);
       if (holder !== text && !holder.textContent.trim() && !holder.children.length) holder.remove();
     }
@@ -68,14 +85,17 @@ function buildRow(row) {
 
 export default function decorate(block) {
   const rows = [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .map(buildRow);
 
   rows.forEach((row) => {
     row.querySelectorAll('.columns-media-image picture > img').forEach((img) => {
-      img.closest('picture').replaceWith(
-        createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 900px)', width: '900' }, { width: '750' }]),
-      );
+      const picture = img.closest('picture');
+      const optimized = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 900px)', width: '900' }, { width: '750' }]);
+      moveInstrumentation(picture, optimized);
+      moveInstrumentation(img, optimized.querySelector('img'));
+      picture.replaceWith(optimized);
     });
   });
 

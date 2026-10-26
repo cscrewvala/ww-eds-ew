@@ -1,0 +1,39 @@
+{
+  "definitions": [
+    {
+      "title": "Search",
+      "id": "search",
+      "model": "search",
+      "plugins": {
+        "da": {
+          "name": "search",
+          "type": "key-value-block"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "search",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "index",
+          "label": "Index",
+          "value": "",
+          "description": "Query index URL (default /query-index.json). Overrides a single-cell index row"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "pageSize",
+          "label": "Page size",
+          "value": "",
+          "description": "Results per page (default 10)"
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

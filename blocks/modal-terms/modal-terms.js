@@ -73,7 +73,21 @@ function decline(href) {
   }
 }
 
+/**
+ * Universal Editor: the gate would cover the page and its content would live outside the
+ * block, so in the editor the authored cells stay in place, shown inline (no dialog).
+ * @param {Element} block
+ * @returns {boolean} true when rendering for the editor
+ */
+export function isEditing(block) {
+  return document.documentElement.dataset.ue === 'true' || block.hasAttribute('data-aue-resource');
+}
+
 export default function decorate(block) {
+  if (isEditing(block)) {
+    block.classList.add('modal-terms-inline');
+    return;
+  }
   const { accept, decline: declineAction } = findActions(block);
   const declineHref = declineAction && declineAction.el.tagName === 'A'
     ? declineAction.el.getAttribute('href') : '';

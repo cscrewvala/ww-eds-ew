@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-timeline: history timeline - one full-width band per milestone with a
@@ -42,9 +42,22 @@ function parseVariant(cell) {
 
 function buildItem(row, index) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const cells = [...row.children];
   const variant = parseVariant(cells[0]);
-  if (variant) cells.shift().remove();
+  // Universal Editor: an empty band/side cell is still the setting cell
+  if (variant || cells[0]?.dataset.aueProp === 'variant') {
+    const variantCell = cells.shift();
+    variantCell.remove();
+    // Universal Editor: the band/side setting stays editable on a hidden element
+    if (variantCell.hasAttribute('data-aue-prop')) {
+      const setting = document.createElement('span');
+      setting.hidden = true;
+      setting.textContent = variantCell.textContent.trim();
+      moveInstrumentation(variantCell, setting);
+      li.append(setting);
+    }
+  }
   const band = variant?.band || BANDS[index % BANDS.length];
   const right = variant ? variant.right : index % 2 === 1;
   li.className = `cards-timeline-item cards-timeline-band-${band}`;
@@ -69,11 +82,18 @@ function buildItem(row, index) {
       }
     }
     const text = cell.textContent.trim();
-    if (!text) return;
-    if (!year.textContent && isYearText(text)) {
-      year.textContent = text;
+    if (!text) {
+      // Universal Editor: empty but editable cells keep their field in place
+      moveInstrumentation(cell, cell.dataset.aueProp === 'year' ? year : card);
       return;
     }
+    if (!year.textContent && isYearText(text)) {
+      year.textContent = text;
+      moveInstrumentation(cell, year);
+      return;
+    }
+    // Universal Editor: the text cell's field moves to the card
+    moveInstrumentation(cell, card);
     if (!cell.children.length) {
       const p = document.createElement('p');
       p.textContent = text;
@@ -102,7 +122,7 @@ function buildItem(row, index) {
     lead.classList.add('cards-timeline-date');
   }
 
-  if (year.textContent) aside.append(year);
+  if (year.textContent || year.hasAttribute('data-aue-prop')) aside.append(year);
   if (media.children.length) aside.append(media);
   li.append(card);
   if (aside.children.length) li.append(aside);
@@ -113,13 +133,14 @@ function buildItem(row, index) {
 export default function decorate(block) {
   const ol = document.createElement('ol');
   [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .forEach((row, i) => ol.append(buildItem(row, i)));
 
   ol.querySelectorAll('.cards-timeline-image picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '750' }, { width: '600' }]),
-    );
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '750' }, { width: '600' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   block.replaceChildren(ol);

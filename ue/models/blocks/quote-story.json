@@ -1,0 +1,60 @@
+{
+  "definitions": [
+    {
+      "title": "Quote – Story",
+      "id": "quote-story",
+      "model": "quote-story",
+      "plugins": {
+        "da": {
+          "name": "quote-story",
+          "rows": 2,
+          "columns": 1,
+          "fields": [
+            {
+              "name": "quote",
+              "selector": "div:nth-child(1)>div"
+            },
+            {
+              "name": "attribution",
+              "selector": "div:nth-child(2)>div"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "quote-story",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Blockquote (inline, no quote marks)",
+              "value": "blockquote"
+            }
+          ]
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "quote",
+          "label": "Quote",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "attribution",
+          "label": "Attribution (name – role)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

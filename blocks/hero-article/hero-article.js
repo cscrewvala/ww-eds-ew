@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * hero-article: full-bleed background image with an overlaid category label and h1 title.
@@ -24,6 +24,7 @@ export default function decorate(block) {
         { width: '900' },
       ]);
       const newImg = optimized.querySelector('img');
+      moveInstrumentation(img, newImg);
       newImg.setAttribute('loading', 'eager');
       newImg.setAttribute('fetchpriority', 'high');
       media.append(optimized);
@@ -37,6 +38,8 @@ export default function decorate(block) {
   // Collect all non-image content from every cell, preserving order.
   rows.forEach((row) => {
     [...row.querySelectorAll(':scope > div')].forEach((cell) => {
+      // Universal Editor: the text cell's field moves to the content wrapper
+      if (!cell.querySelector('picture')) moveInstrumentation(cell, content);
       [...cell.children].forEach((child) => {
         if (child.tagName === 'PICTURE' || (child.tagName === 'P' && child.querySelector('picture') && !child.textContent.trim())) return;
         content.append(child);

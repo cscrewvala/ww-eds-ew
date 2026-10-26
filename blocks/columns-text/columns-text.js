@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * columns-text: grid of heading + rich-text blocks (no images), 2 per row on desktop.
  * Authoring: any number of rows, each with 1-2 cells; every non-empty cell is one
@@ -13,13 +15,26 @@ export default function decorate(block) {
   const cols = Math.min(widest === 1 ? 2 : widest, 3);
   block.classList.add(`columns-text-${cols}-cols`);
 
-  const grid = document.createElement('div');
-  grid.className = 'columns-text-grid';
+  // Universal Editor: every authored row (instrumented) keeps its own grid; otherwise one grid
+  const perRow = rows.length > 1 && rows.some((r) => r.hasAttribute('data-aue-resource'));
+  const grids = [];
+  let grid = null;
+  const newGrid = () => {
+    grid = document.createElement('div');
+    grid.className = 'columns-text-grid';
+    grids.push(grid);
+  };
   rows.forEach((row) => {
+    if (!grid || perRow) newGrid();
+    // Universal Editor: row -> grid
+    moveInstrumentation(row, grid);
     [...row.children].forEach((cell) => {
-      if (!cell.textContent.trim() && !cell.querySelector('picture')) return;
+      if (!cell.textContent.trim() && !cell.querySelector('picture')
+        && !cell.hasAttribute('data-aue-resource')) return;
       const item = document.createElement('div');
       item.className = 'columns-text-item';
+      // Universal Editor: cell (column) -> text item
+      moveInstrumentation(cell, item);
       if (!cell.children.length) {
         const p = document.createElement('p');
         p.textContent = cell.textContent.trim();
@@ -30,6 +45,7 @@ export default function decorate(block) {
       grid.append(item);
     });
   });
+  if (!grid) newGrid();
 
-  block.replaceChildren(grid);
+  block.replaceChildren(...grids);
 }

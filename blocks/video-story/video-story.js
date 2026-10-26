@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * video-story: poster image with a play button; clicking opens a modal player
@@ -98,12 +98,15 @@ export default function decorate(block) {
         { width: '750' },
       ])
       : picture;
+    if (img) moveInstrumentation(img, poster.querySelector('img'));
   }
 
   // Body content: everything except the poster and the video link.
   const body = document.createElement('div');
   body.className = 'video-story-body';
   [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    // Universal Editor: the caption cell's field moves to the body wrapper
+    if (!cell.contains(picture) && !cell.contains(link)) moveInstrumentation(cell, body);
     if (!cell.children.length && cell.textContent.trim()) {
       const p = document.createElement('p');
       p.textContent = cell.textContent.trim();
@@ -140,6 +143,8 @@ export default function decorate(block) {
     play.className = 'video-story-play';
     play.setAttribute('aria-label', title ? `Play video: ${title}` : 'Play video');
     play.innerHTML = PLAY_ICON;
+    // Universal Editor: the video link is not rendered; its field moves to the play button
+    moveInstrumentation(link, play);
     play.addEventListener('click', () => openModal(videoUrl, title, play));
     media.append(play);
   }

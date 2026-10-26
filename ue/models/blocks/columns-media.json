@@ -1,0 +1,95 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Media",
+      "id": "columns-media",
+      "model": "columns-media",
+      "filter": "columns-media",
+      "plugins": {
+        "da": {
+          "name": "columns-media",
+          "rows": 1,
+          "columns": 2,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Media Row",
+      "id": "columns-media-row",
+      "model": "columns-media-row",
+      "filter": "columns-media-row",
+      "plugins": {
+        "da": {
+          "name": "columns-media-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Media Column",
+      "id": "columns-media-cell",
+      "model": "columns-media-cell",
+      "filter": "columns-media-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-media",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Image border",
+              "value": "image-border"
+            },
+            {
+              "name": "Berry bullets",
+              "value": "bullets-berry"
+            }
+          ]
+        },
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 2,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 2
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-media",
+      "components": [
+        "columns-media-row"
+      ]
+    },
+    {
+      "id": "columns-media-row",
+      "components": []
+    },
+    {
+      "id": "columns-media-cell",
+      "components": [
+        "text",
+        "image"
+      ]
+    }
+  ]
+}

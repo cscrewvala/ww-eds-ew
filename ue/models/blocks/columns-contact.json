@@ -1,0 +1,79 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Contact",
+      "id": "columns-contact",
+      "model": "columns-contact",
+      "filter": "columns-contact",
+      "plugins": {
+        "da": {
+          "name": "columns-contact",
+          "rows": 1,
+          "columns": 3,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Contact Row",
+      "id": "columns-contact-row",
+      "model": "columns-contact-row",
+      "filter": "columns-contact-row",
+      "plugins": {
+        "da": {
+          "name": "columns-contact-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Contact Column",
+      "id": "columns-contact-cell",
+      "model": "columns-contact-cell",
+      "filter": "columns-contact-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-contact",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 3,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 6
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-contact",
+      "components": [
+        "columns-contact-row"
+      ]
+    },
+    {
+      "id": "columns-contact-row",
+      "components": []
+    },
+    {
+      "id": "columns-contact-cell",
+      "components": [
+        "text",
+        "image"
+      ]
+    }
+  ]
+}

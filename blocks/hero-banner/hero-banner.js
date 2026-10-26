@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * hero-banner: full-bleed background image with a centered heading and intro paragraph.
@@ -23,6 +23,7 @@ export default function decorate(block) {
         { width: '900' },
       ]);
       const newImg = optimized.querySelector('img');
+      moveInstrumentation(img, newImg);
       if (newImg) {
         newImg.setAttribute('loading', 'eager');
         newImg.setAttribute('fetchpriority', 'high');
@@ -37,6 +38,8 @@ export default function decorate(block) {
 
   // Collect all non-image content from every cell, preserving authored order.
   [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    // Universal Editor: the text cell's field moves to the content wrapper
+    if (!cell.querySelector('picture')) moveInstrumentation(cell, content);
     if (!cell.children.length) {
       const text = cell.textContent.trim();
       if (text) {

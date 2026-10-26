@@ -1,0 +1,82 @@
+{
+  "definitions": [
+    {
+      "title": "Hero – Story",
+      "id": "hero-story",
+      "model": "hero-story",
+      "plugins": {
+        "da": {
+          "name": "hero-story",
+          "rows": 2,
+          "columns": 1,
+          "fields": [
+            {
+              "name": "image",
+              "selector": "div:nth-child(1)>div picture>img[src]"
+            },
+            {
+              "name": "imageAlt",
+              "selector": "div:nth-child(1)>div picture>img[alt]"
+            },
+            {
+              "name": "imageLink",
+              "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(2)>div"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "hero-story",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Offset top",
+              "value": "offset-top"
+            }
+          ]
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image alt text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageLink",
+          "label": "Image URL (Scene7)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Title and subtitle",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

@@ -1,0 +1,94 @@
+{
+  "definitions": [
+    {
+      "title": "Cards – Video",
+      "id": "cards-video",
+      "model": "cards-video",
+      "filter": "cards-video",
+      "plugins": {
+        "da": {
+          "name": "cards-video",
+          "rows": 1,
+          "columns": 2
+        }
+      }
+    },
+    {
+      "title": "Video Card",
+      "id": "cards-video-item",
+      "model": "cards-video-item",
+      "plugins": {
+        "da": {
+          "name": "cards-video-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            {
+              "name": "image",
+              "selector": "div:nth-child(1) picture>img[src]"
+            },
+            {
+              "name": "imageAlt",
+              "selector": "div:nth-child(1) picture>img[alt]"
+            },
+            {
+              "name": "imageLink",
+              "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(2)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-video",
+      "fields": []
+    },
+    {
+      "id": "cards-video-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Poster image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Poster image alt text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageLink",
+          "label": "Image URL (Scene7)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Video link (title) and date",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-video",
+      "components": [
+        "cards-video-item"
+      ]
+    }
+  ]
+}

@@ -48,6 +48,17 @@ export default async function decorate(block) {
   const fragment = await loadFragment(path);
   if (!fragment) return;
 
+  if (block.hasAttribute('data-aue-resource')) {
+    // Universal Editor: the block stays (selectable, URL editable in the properties panel);
+    // the authored link row is hidden and the fragment content renders inside the block.
+    // The fragment's own content is edited in the fragment document.
+    [...block.children].forEach((row) => { row.hidden = true; });
+    fragment.querySelectorAll(':scope > .section').forEach((fragSection) => {
+      block.append(...fragSection.childNodes);
+    });
+    return;
+  }
+
   const wrapper = block.closest('.fragment-wrapper');
   const section = wrapper.closest('.section');
 

@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-tile: equal-width tiles (3 per row on desktop, 4 when the block holds 4 tiles).
@@ -44,6 +44,7 @@ function classifyBody(body) {
 
 function buildTile(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const imageWrap = document.createElement('div');
   imageWrap.className = 'cards-tile-card-image';
   const body = document.createElement('div');
@@ -58,6 +59,8 @@ function buildTile(row) {
         holder.remove();
       }
     }
+    // Universal Editor: the text cell's field moves to the tile body
+    moveInstrumentation(cell, body);
     if (!cell.children.length) {
       const value = cell.textContent.trim();
       if (value) {
@@ -78,7 +81,7 @@ function buildTile(row) {
 
   if (imageWrap.children.length) li.append(imageWrap);
   else li.classList.add('cards-tile-no-image');
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return li;
 }
 
@@ -132,13 +135,14 @@ function videoTile(li) {
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .forEach((row) => ul.append(buildTile(row)));
 
   ul.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '600' }, { width: '750' }]),
-    );
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '600' }, { width: '750' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   const tiles = [...ul.children];

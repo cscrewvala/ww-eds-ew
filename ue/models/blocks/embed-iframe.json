@@ -1,0 +1,84 @@
+{
+  "definitions": [
+    {
+      "title": "Embed – Iframe",
+      "id": "embed-iframe",
+      "model": "embed-iframe",
+      "filter": "embed-iframe",
+      "plugins": {
+        "da": {
+          "name": "embed-iframe",
+          "rows": 1,
+          "columns": 3
+        }
+      }
+    },
+    {
+      "title": "Embedded Widget",
+      "id": "embed-iframe-item",
+      "model": "embed-iframe-item",
+      "plugins": {
+        "da": {
+          "name": "embed-iframe-item",
+          "rows": 1,
+          "columns": 3,
+          "fields": [
+            {
+              "name": "label",
+              "selector": "div:nth-child(1)"
+            },
+            {
+              "name": "url",
+              "selector": "div:nth-child(2)"
+            },
+            {
+              "name": "height",
+              "selector": "div:nth-child(3)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "embed-iframe",
+      "fields": []
+    },
+    {
+      "id": "embed-iframe-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "label",
+          "label": "Label (tab label and iframe title)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "url",
+          "label": "Iframe URL (https)",
+          "value": "",
+          "required": true
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "height",
+          "label": "Height in px (optional, e.g. 1300)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "embed-iframe",
+      "components": [
+        "embed-iframe-item"
+      ]
+    }
+  ]
+}

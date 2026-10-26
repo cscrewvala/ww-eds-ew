@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-featured: curated featured stories. The first card renders large (image on top),
@@ -71,6 +71,7 @@ function openModal(url, title, trigger) {
 
 function buildCard(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const imageWrap = document.createElement('div');
   imageWrap.className = 'cards-featured-card-image';
   const body = document.createElement('div');
@@ -97,6 +98,8 @@ function buildCard(row) {
       imageWrap.append(pic);
       if (holder && !holder.textContent.trim() && !holder.querySelector('picture')) holder.remove();
     }
+    // Universal Editor: the text cell's field moves to the card body
+    moveInstrumentation(cell, body);
     if (!cell.children.length) {
       const value = cell.textContent.trim();
       if (value) {
@@ -178,13 +181,14 @@ function buildCard(row) {
   }
 
   if (imageWrap.children.length) li.append(imageWrap);
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return li;
 }
 
 export default function decorate(block) {
   const rows = [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'));
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'));
 
   const featured = document.createElement('div');
   featured.className = 'cards-featured-lead';
@@ -208,9 +212,9 @@ export default function decorate(block) {
       if (/\/is\/image\//.test(src) && !/[?&]fit=/.test(src)) {
         src += `${src.includes('?') ? '&' : '?'}fit=constrain`;
       }
-      img.closest('picture').replaceWith(
-        createOptimizedPicture(src, img.alt, false, [{ width }]),
-      );
+      const picture = createOptimizedPicture(src, img.alt, false, [{ width }]);
+      moveInstrumentation(img, picture.querySelector('img'));
+      img.closest('picture').replaceWith(picture);
     });
   });
 
