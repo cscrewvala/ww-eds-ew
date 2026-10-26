@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * cards-stats: row of stat / goal items separated by vertical dividers.
  * Each authored row is one item:
@@ -40,17 +42,24 @@ function cellContent(cell) {
 
 function buildItem(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const figure = document.createElement('div');
   figure.className = 'cards-stats-figure';
   const caption = document.createElement('div');
   caption.className = 'cards-stats-caption';
 
-  const cells = [...row.children].filter((c) => c.textContent.trim() || c.querySelector('picture'));
+  const cells = [...row.children].filter((c) => c.textContent.trim() || c.querySelector('picture')
+    || c.hasAttribute('data-aue-prop'));
 
   if (cells.length >= 2) {
+    moveInstrumentation(cells[0], figure);
     figure.append(...cellContent(cells[0]));
-    cells.slice(1).forEach((c) => caption.append(...cellContent(c)));
+    cells.slice(1).forEach((c) => {
+      moveInstrumentation(c, caption);
+      caption.append(...cellContent(c));
+    });
   } else if (cells.length === 1) {
+    moveInstrumentation(cells[0], caption);
     const parts = cellContent(cells[0]);
     if (parts.length > 1 && isFigureCandidate(parts[0])) {
       figure.append(parts.shift());
@@ -58,9 +67,14 @@ function buildItem(row) {
     caption.append(...parts);
   }
 
-  if (figure.textContent.trim()) li.append(figure);
-  else li.classList.add('cards-stats-no-figure');
-  if (caption.children.length) li.append(caption);
+  if (figure.textContent.trim()) {
+    li.append(figure);
+  } else {
+    li.classList.add('cards-stats-no-figure');
+    // Universal Editor: keep an empty but editable figure in place
+    if (figure.hasAttribute('data-aue-prop')) li.append(figure);
+  }
+  if (caption.children.length || caption.hasAttribute('data-aue-prop')) li.append(caption);
   return li;
 }
 
@@ -82,7 +96,10 @@ function isCtaRow(row) {
 function buildHeader(row) {
   const header = document.createElement('div');
   header.className = 'cards-stats-header';
-  [...row.children].forEach((cell) => header.append(...cellContent(cell)));
+  [...row.children].forEach((cell) => {
+    moveInstrumentation(cell, header);
+    header.append(...cellContent(cell));
+  });
   header.querySelectorAll(':scope > p').forEach((p) => p.classList.add('cards-stats-intro'));
   return header;
 }
@@ -93,6 +110,7 @@ function buildCta(row) {
   const a = row.querySelector('a[href]');
   const p = document.createElement('p');
   p.className = 'button-wrapper';
+  moveInstrumentation(a.closest('.cards-stats > div > div'), p);
   a.className = 'button secondary';
   p.append(a);
   footer.append(p);
@@ -100,7 +118,8 @@ function buildCta(row) {
 }
 
 export default function decorate(block) {
-  const rows = [...block.children].filter((row) => row.textContent.trim());
+  const rows = [...block.children]
+    .filter((row) => row.textContent.trim() || row.hasAttribute('data-aue-resource'));
   let header;
   let cta;
   if (block.classList.contains('panel')) {

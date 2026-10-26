@@ -1,0 +1,91 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Spotlight",
+      "id": "columns-spotlight",
+      "model": "columns-spotlight",
+      "filter": "columns-spotlight",
+      "plugins": {
+        "da": {
+          "name": "columns-spotlight",
+          "rows": 1,
+          "columns": 2,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Spotlight Row",
+      "id": "columns-spotlight-row",
+      "model": "columns-spotlight-row",
+      "filter": "columns-spotlight-row",
+      "plugins": {
+        "da": {
+          "name": "columns-spotlight-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Spotlight Column",
+      "id": "columns-spotlight-cell",
+      "model": "columns-spotlight-cell",
+      "filter": "columns-spotlight-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-spotlight",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Dual (text left, full-bleed media right)",
+              "value": "dual"
+            }
+          ]
+        },
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 2,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 2
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-spotlight",
+      "components": [
+        "columns-spotlight-row"
+      ]
+    },
+    {
+      "id": "columns-spotlight-row",
+      "components": []
+    },
+    {
+      "id": "columns-spotlight-cell",
+      "components": [
+        "image",
+        "text"
+      ]
+    }
+  ]
+}

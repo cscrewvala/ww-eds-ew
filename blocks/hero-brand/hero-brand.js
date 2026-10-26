@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * hero-brand: solid brand band with a logo image + tagline on the left and optional
@@ -40,13 +40,19 @@ export default function decorate(block) {
     if (!img) return picture;
     // SVG logos do not benefit from raster renditions.
     if (/\.svg(\?|$)/i.test(img.src)) return picture;
-    return createOptimizedPicture(img.src, img.alt || '', eager, [{ width }]);
+    const optimized = createOptimizedPicture(img.src, img.alt || '', eager, [{ width }]);
+    moveInstrumentation(img, optimized.querySelector('img'));
+    return optimized;
   };
 
   // An icon (e.g. :wwg-100-years:) is the logo when the source logo was an inline SVG;
   // every picture is then decorative artwork.
   const iconLogo = block.querySelector('span.icon');
   const [logoPic, artPic] = iconLogo ? [null, pictures[0]] : pictures;
+  // Universal Editor: the logo cell's field moves to the logo wrapper
+  const logoCell = [...block.querySelectorAll(':scope > div > div')]
+    .find((cell) => cell.contains(iconLogo || logoPic || null));
+  moveInstrumentation(logoCell, logo);
   if (iconLogo) logo.append(iconLogo);
   else if (logoPic) logo.append(optimize(logoPic, true, '750'));
 
@@ -63,6 +69,8 @@ export default function decorate(block) {
   }
 
   [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
+    // Universal Editor: the tagline cell's field moves to the text wrapper
+    if (cell !== logoCell) moveInstrumentation(cell, text);
     if (!cell.children.length) {
       const value = cell.textContent.trim();
       if (value) {

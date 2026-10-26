@@ -1,0 +1,1214 @@
+{
+  "groups": [
+    {
+      "title": "Default Content",
+      "id": "default",
+      "components": [
+        {
+          "title": "Text",
+          "id": "text",
+          "model": "text",
+          "plugins": {
+            "da": {
+              "name": "text",
+              "type": "text"
+            }
+          }
+        },
+        {
+          "title": "Image",
+          "id": "image",
+          "model": "image",
+          "plugins": {
+            "da": {
+              "name": "image",
+              "type": "image",
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "img[alt]"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Sections",
+      "id": "sections",
+      "components": [
+        {
+          "title": "Section",
+          "id": "section",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>"
+            }
+          },
+          "filter": "section",
+          "model": "section"
+        }
+      ]
+    },
+    {
+      "title": "Blocks",
+      "id": "blocks",
+      "components": [
+        {
+          "title": "Accordion – Program",
+          "id": "accordion-program",
+          "model": "accordion-program",
+          "filter": "accordion-program",
+          "plugins": {
+            "da": {
+              "name": "accordion-program",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Accordion – Program Item",
+          "id": "accordion-program-item",
+          "model": "accordion-program-item",
+          "plugins": {
+            "da": {
+              "name": "accordion-program-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "summary",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Article List",
+          "id": "article-list",
+          "model": "article-list",
+          "plugins": {
+            "da": {
+              "name": "article-list",
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
+          "title": "Cards – Calendar",
+          "id": "cards-calendar",
+          "model": "cards-calendar",
+          "filter": "cards-calendar",
+          "plugins": {
+            "da": {
+              "name": "cards-calendar",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Calendar Event",
+          "id": "cards-calendar-item",
+          "model": "cards-calendar-item",
+          "plugins": {
+            "da": {
+              "name": "cards-calendar-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "date",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "title",
+                  "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "description",
+                  "selector": "div:nth-child(3)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Documents",
+          "id": "cards-documents",
+          "model": "cards-documents",
+          "filter": "cards-documents",
+          "plugins": {
+            "da": {
+              "name": "cards-documents",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Document Group",
+          "id": "cards-documents-item",
+          "model": "cards-documents-item",
+          "plugins": {
+            "da": {
+              "name": "cards-documents-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "title",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "links",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Featured",
+          "id": "cards-featured",
+          "model": "cards-featured",
+          "filter": "cards-featured",
+          "plugins": {
+            "da": {
+              "name": "cards-featured",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Featured Story",
+          "id": "cards-featured-item",
+          "model": "cards-featured-item",
+          "plugins": {
+            "da": {
+              "name": "cards-featured-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Logo",
+          "id": "cards-logo",
+          "model": "cards-logo",
+          "filter": "cards-logo",
+          "plugins": {
+            "da": {
+              "name": "cards-logo",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Logo Card",
+          "id": "cards-logo-item",
+          "model": "cards-logo-item",
+          "plugins": {
+            "da": {
+              "name": "cards-logo-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Profile",
+          "id": "cards-profile",
+          "model": "cards-profile",
+          "filter": "cards-profile",
+          "plugins": {
+            "da": {
+              "name": "cards-profile",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Profile",
+          "id": "cards-profile-item",
+          "model": "cards-profile-item",
+          "plugins": {
+            "da": {
+              "name": "cards-profile-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Resource",
+          "id": "cards-resource",
+          "model": "cards-resource",
+          "filter": "cards-resource",
+          "plugins": {
+            "da": {
+              "name": "cards-resource",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Resource Card",
+          "id": "cards-resource-item",
+          "model": "cards-resource-item",
+          "plugins": {
+            "da": {
+              "name": "cards-resource-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Stats",
+          "id": "cards-stats",
+          "model": "cards-stats",
+          "filter": "cards-stats",
+          "plugins": {
+            "da": {
+              "name": "cards-stats",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "header",
+                  "selector": "div:first-child:has(h1,h2,h3,h4,h5,h6)>div"
+                },
+                {
+                  "name": "cta",
+                  "selector": "div:last-child:not(:first-child):has(>div:only-child a:only-child)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Stat",
+          "id": "cards-stats-item",
+          "model": "cards-stats-item",
+          "plugins": {
+            "da": {
+              "name": "cards-stats-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "figure",
+                  "selector": "div:first-child:not(:last-child)"
+                },
+                {
+                  "name": "caption",
+                  "selector": "div:last-child"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Story",
+          "id": "cards-story",
+          "model": "cards-story",
+          "filter": "cards-story",
+          "plugins": {
+            "da": {
+              "name": "cards-story",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Story Card",
+          "id": "cards-story-item",
+          "model": "cards-story-item",
+          "plugins": {
+            "da": {
+              "name": "cards-story-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Tile",
+          "id": "cards-tile",
+          "model": "cards-tile",
+          "filter": "cards-tile",
+          "plugins": {
+            "da": {
+              "name": "cards-tile",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Tile",
+          "id": "cards-tile-item",
+          "model": "cards-tile-item",
+          "plugins": {
+            "da": {
+              "name": "cards-tile-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Timeline",
+          "id": "cards-timeline",
+          "model": "cards-timeline",
+          "filter": "cards-timeline",
+          "plugins": {
+            "da": {
+              "name": "cards-timeline",
+              "rows": 1,
+              "columns": 4
+            }
+          }
+        },
+        {
+          "title": "Milestone",
+          "id": "cards-timeline-item",
+          "model": "cards-timeline-item",
+          "plugins": {
+            "da": {
+              "name": "cards-timeline-item",
+              "rows": 1,
+              "columns": 4,
+              "fields": [
+                {
+                  "name": "variant",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "year",
+                  "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(3)"
+                },
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(4) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(4) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(4) a[href*=\"/is/image/\"]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Cards – Video",
+          "id": "cards-video",
+          "model": "cards-video",
+          "filter": "cards-video",
+          "plugins": {
+            "da": {
+              "name": "cards-video",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Video Card",
+          "id": "cards-video-item",
+          "model": "cards-video-item",
+          "plugins": {
+            "da": {
+              "name": "cards-video-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Carousel – Hero",
+          "id": "carousel-hero",
+          "model": "carousel-hero",
+          "filter": "carousel-hero",
+          "plugins": {
+            "da": {
+              "name": "carousel-hero",
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Carousel – Hero Slide",
+          "id": "carousel-hero-item",
+          "model": "carousel-hero-item",
+          "plugins": {
+            "da": {
+              "name": "carousel-hero-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1) picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1) picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "video",
+                  "selector": "div:nth-child(2) a[href*=\"/is/content/\"]"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Columns – Contact",
+          "id": "columns-contact",
+          "model": "columns-contact",
+          "filter": "columns-contact",
+          "plugins": {
+            "da": {
+              "name": "columns-contact",
+              "rows": 1,
+              "columns": 3,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Contact Row",
+          "id": "columns-contact-row",
+          "model": "columns-contact-row",
+          "filter": "columns-contact-row",
+          "plugins": {
+            "da": {
+              "name": "columns-contact-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Contact Column",
+          "id": "columns-contact-cell",
+          "model": "columns-contact-cell",
+          "filter": "columns-contact-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Gallery",
+          "id": "columns-gallery",
+          "model": "columns-gallery",
+          "filter": "columns-gallery",
+          "plugins": {
+            "da": {
+              "name": "columns-gallery",
+              "rows": 1,
+              "columns": 3,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Gallery Row",
+          "id": "columns-gallery-row",
+          "model": "columns-gallery-row",
+          "filter": "columns-gallery-row",
+          "plugins": {
+            "da": {
+              "name": "columns-gallery-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Gallery Column",
+          "id": "columns-gallery-cell",
+          "model": "columns-gallery-cell",
+          "filter": "columns-gallery-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Logos",
+          "id": "columns-logos",
+          "model": "columns-logos",
+          "filter": "columns-logos",
+          "plugins": {
+            "da": {
+              "name": "columns-logos",
+              "rows": 1,
+              "columns": 4,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Logos Row",
+          "id": "columns-logos-row",
+          "model": "columns-logos-row",
+          "filter": "columns-logos-row",
+          "plugins": {
+            "da": {
+              "name": "columns-logos-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Logos Column",
+          "id": "columns-logos-cell",
+          "model": "columns-logos-cell",
+          "filter": "columns-logos-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Media",
+          "id": "columns-media",
+          "model": "columns-media",
+          "filter": "columns-media",
+          "plugins": {
+            "da": {
+              "name": "columns-media",
+              "rows": 1,
+              "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Media Row",
+          "id": "columns-media-row",
+          "model": "columns-media-row",
+          "filter": "columns-media-row",
+          "plugins": {
+            "da": {
+              "name": "columns-media-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Media Column",
+          "id": "columns-media-cell",
+          "model": "columns-media-cell",
+          "filter": "columns-media-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Panel",
+          "id": "columns-panel",
+          "model": "columns-panel",
+          "filter": "columns-panel",
+          "plugins": {
+            "da": {
+              "name": "columns-panel",
+              "rows": 1,
+              "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Panel Row",
+          "id": "columns-panel-row",
+          "model": "columns-panel-row",
+          "filter": "columns-panel-row",
+          "plugins": {
+            "da": {
+              "name": "columns-panel-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Panel Column",
+          "id": "columns-panel-cell",
+          "model": "columns-panel-cell",
+          "filter": "columns-panel-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Spotlight",
+          "id": "columns-spotlight",
+          "model": "columns-spotlight",
+          "filter": "columns-spotlight",
+          "plugins": {
+            "da": {
+              "name": "columns-spotlight",
+              "rows": 1,
+              "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Spotlight Row",
+          "id": "columns-spotlight-row",
+          "model": "columns-spotlight-row",
+          "filter": "columns-spotlight-row",
+          "plugins": {
+            "da": {
+              "name": "columns-spotlight-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Spotlight Column",
+          "id": "columns-spotlight-cell",
+          "model": "columns-spotlight-cell",
+          "filter": "columns-spotlight-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Columns – Text",
+          "id": "columns-text",
+          "model": "columns-text",
+          "filter": "columns-text",
+          "plugins": {
+            "da": {
+              "name": "columns-text",
+              "rows": 1,
+              "columns": 2,
+              "behaviour": "columns"
+            }
+          }
+        },
+        {
+          "title": "Text Row",
+          "id": "columns-text-row",
+          "model": "columns-text-row",
+          "filter": "columns-text-row",
+          "plugins": {
+            "da": {
+              "name": "columns-text-row",
+              "behaviour": "columns-row"
+            }
+          }
+        },
+        {
+          "title": "Text Column",
+          "id": "columns-text-cell",
+          "model": "columns-text-cell",
+          "filter": "columns-text-cell",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div></div>",
+              "behaviour": "columns-cell"
+            }
+          }
+        },
+        {
+          "title": "Embed – Iframe",
+          "id": "embed-iframe",
+          "model": "embed-iframe",
+          "filter": "embed-iframe",
+          "plugins": {
+            "da": {
+              "name": "embed-iframe",
+              "rows": 1,
+              "columns": 3
+            }
+          }
+        },
+        {
+          "title": "Embedded Widget",
+          "id": "embed-iframe-item",
+          "model": "embed-iframe-item",
+          "plugins": {
+            "da": {
+              "name": "embed-iframe-item",
+              "rows": 1,
+              "columns": 3,
+              "fields": [
+                {
+                  "name": "label",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "url",
+                  "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "height",
+                  "selector": "div:nth-child(3)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Fragment",
+          "id": "fragment",
+          "model": "fragment",
+          "plugins": {
+            "da": {
+              "unsafeHTML": "<div class=\"fragment\"><div><div><p><a href=\"\">Fragment URL</a></p></div></div></div>",
+              "fields": [
+                {
+                  "name": "url",
+                  "selector": "div>div>p>a[href]"
+                },
+                {
+                  "name": "urlText",
+                  "selector": "div>div>p>a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero – Article",
+          "id": "hero-article",
+          "model": "hero-article",
+          "plugins": {
+            "da": {
+              "name": "hero-article",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero – Banner",
+          "id": "hero-banner",
+          "model": "hero-banner",
+          "plugins": {
+            "da": {
+              "name": "hero-banner",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero – Brand",
+          "id": "hero-brand",
+          "model": "hero-brand",
+          "plugins": {
+            "da": {
+              "name": "hero-brand",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "logo",
+                  "selector": "div:nth-child(1)>div"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Hero – Story",
+          "id": "hero-story",
+          "model": "hero-story",
+          "plugins": {
+            "da": {
+              "name": "hero-story",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Modal – Terms",
+          "id": "modal-terms",
+          "model": "modal-terms",
+          "plugins": {
+            "da": {
+              "name": "modal-terms",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "text",
+                  "selector": "div>div:nth-child(1)"
+                },
+                {
+                  "name": "actions",
+                  "selector": "div>div:nth-child(2)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Quote – Story",
+          "id": "quote-story",
+          "model": "quote-story",
+          "plugins": {
+            "da": {
+              "name": "quote-story",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "quote",
+                  "selector": "div:nth-child(1)>div"
+                },
+                {
+                  "name": "attribution",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Search",
+          "id": "search",
+          "model": "search",
+          "plugins": {
+            "da": {
+              "name": "search",
+              "type": "key-value-block"
+            }
+          }
+        },
+        {
+          "title": "Table – Data",
+          "id": "table-data",
+          "model": "table-data",
+          "filter": "table-data",
+          "plugins": {
+            "da": {
+              "name": "table-data",
+              "rows": 1,
+              "columns": 3
+            }
+          }
+        },
+        {
+          "title": "Table Row",
+          "id": "table-data-item",
+          "model": "table-data-item",
+          "plugins": {
+            "da": {
+              "name": "table-data-item",
+              "rows": 1,
+              "columns": 3,
+              "fields": [
+                {
+                  "name": "cell1",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "cell2",
+                  "selector": "div:nth-child(2)"
+                },
+                {
+                  "name": "cell3",
+                  "selector": "div:nth-child(3)"
+                },
+                {
+                  "name": "cell4",
+                  "selector": "div:nth-child(4)"
+                },
+                {
+                  "name": "cell5",
+                  "selector": "div:nth-child(5)"
+                },
+                {
+                  "name": "cell6",
+                  "selector": "div:nth-child(6)"
+                },
+                {
+                  "name": "cell7",
+                  "selector": "div:nth-child(7)"
+                },
+                {
+                  "name": "cell8",
+                  "selector": "div:nth-child(8)"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "title": "Video – Story",
+          "id": "video-story",
+          "model": "video-story",
+          "plugins": {
+            "da": {
+              "name": "video-story",
+              "rows": 2,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div picture>img[src]"
+                },
+                {
+                  "name": "imageAlt",
+                  "selector": "div:nth-child(1)>div picture>img[alt]"
+                },
+                {
+                  "name": "imageLink",
+                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                },
+                {
+                  "name": "video",
+                  "selector": "div:nth-child(1)>div a[href]:not([href*=\"/is/image/\"])"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(2)>div"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

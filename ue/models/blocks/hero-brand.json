@@ -1,0 +1,48 @@
+{
+  "definitions": [
+    {
+      "title": "Hero – Brand",
+      "id": "hero-brand",
+      "model": "hero-brand",
+      "plugins": {
+        "da": {
+          "name": "hero-brand",
+          "rows": 2,
+          "columns": 1,
+          "fields": [
+            {
+              "name": "logo",
+              "selector": "div:nth-child(1)>div"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(2)>div"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "hero-brand",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "logo",
+          "label": "Logo (icon, e.g. :wwg-100-years:)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Tagline",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

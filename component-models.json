@@ -1,0 +1,1433 @@
+[
+  {
+    "id": "page-metadata",
+    "fields": [
+      {
+        "component": "text",
+        "name": "title",
+        "label": "Title"
+      },
+      {
+        "component": "text",
+        "name": "description",
+        "label": "Description"
+      },
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "description": "Share image; also the card image in listings and search"
+      },
+      {
+        "component": "select",
+        "name": "template",
+        "label": "Template",
+        "options": [
+          {
+            "name": "homepage",
+            "value": "homepage"
+          },
+          {
+            "name": "content-page",
+            "value": "content-page"
+          },
+          {
+            "name": "listing-page",
+            "value": "listing-page"
+          },
+          {
+            "name": "news-article",
+            "value": "news-article"
+          },
+          {
+            "name": "story-article",
+            "value": "story-article"
+          },
+          {
+            "name": "story-banner",
+            "value": "story-banner"
+          },
+          {
+            "name": "investor-page",
+            "value": "investor-page"
+          },
+          {
+            "name": "legal-page",
+            "value": "legal-page"
+          },
+          {
+            "name": "leadership-profile",
+            "value": "leadership-profile"
+          },
+          {
+            "name": "search-page",
+            "value": "search-page"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "date",
+        "label": "Date",
+        "description": "Publish date yyyy-mm-dd; sorts article listings and search"
+      },
+      {
+        "component": "text",
+        "name": "tags",
+        "label": "Tags",
+        "description": "Comma-separated categories, e.g. Australian Community, Products & Value"
+      },
+      {
+        "component": "select",
+        "name": "listing",
+        "label": "Listing",
+        "description": "Which article listing shows this page; None hides it",
+        "options": [
+          {
+            "name": "Latest news",
+            "value": "latest-news"
+          },
+          {
+            "name": "News archive",
+            "value": "news-archive"
+          },
+          {
+            "name": "Check it out",
+            "value": "check-it-out"
+          },
+          {
+            "name": "Our stories",
+            "value": "our-stories"
+          },
+          {
+            "name": "None (hidden from listings)",
+            "value": "none"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "name": "card-description",
+        "label": "Card description",
+        "description": "Two-line teaser on story tiles"
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "carousel-interval",
+        "label": "Carousel interval (seconds)",
+        "description": "Seconds between hero carousel slides (default 6)"
+      },
+      {
+        "component": "text",
+        "name": "robots",
+        "label": "Robots",
+        "description": "Index control, e.g. noindex"
+      }
+    ]
+  },
+  {
+    "id": "image",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "name": "imageAlt",
+        "label": "Alt Text"
+      }
+    ]
+  },
+  {
+    "id": "section",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Style",
+        "options": [
+          {
+            "name": "Narrow (article column)",
+            "value": "narrow"
+          },
+          {
+            "name": "Centered",
+            "value": "centered"
+          },
+          {
+            "name": "Centered text",
+            "value": "centered-text"
+          },
+          {
+            "name": "Statement (large intro text)",
+            "value": "statement"
+          },
+          {
+            "name": "Divider",
+            "value": "divider"
+          },
+          {
+            "name": "Headings: dark",
+            "value": "headings-dark"
+          },
+          {
+            "name": "Headings: midnight",
+            "value": "headings-midnight"
+          },
+          {
+            "name": "Background: snow (white)",
+            "value": "snow"
+          },
+          {
+            "name": "Background: ocean (blue)",
+            "value": "ocean"
+          },
+          {
+            "name": "Background: sky tint 5%",
+            "value": "tint-sky-5"
+          },
+          {
+            "name": "Background: sky tint 10%",
+            "value": "tint-sky-10"
+          },
+          {
+            "name": "Background: sky tint 20%",
+            "value": "tint-sky-20"
+          },
+          {
+            "name": "Background: ocean tint 10%",
+            "value": "tint-ocean-10"
+          },
+          {
+            "name": "Background: light",
+            "value": "light"
+          },
+          {
+            "name": "Highlight",
+            "value": "highlight"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion-program",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Open first",
+            "value": "open-first"
+          },
+          {
+            "name": "Berry bullets",
+            "value": "berry-bullets"
+          },
+          {
+            "name": "Inset",
+            "value": "inset"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion-program-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "summary",
+        "label": "Label",
+        "value": "",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Body",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "article-list",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "source",
+        "label": "Source",
+        "value": "",
+        "description": "Folder(s) to list, comma separated, e.g. /au/en/our-newsroom/media-releases/latest-news/"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "filters",
+        "label": "Filters",
+        "value": "",
+        "description": "Any of: category (or tags), year, sort. Ignored by the featured layout"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tags",
+        "label": "Tags",
+        "value": "",
+        "description": "Optional preset: only articles with all of these tags (comma separated)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "categories",
+        "label": "Categories",
+        "value": "",
+        "description": "Optional chip order (comma separated)"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "featured",
+        "label": "Featured",
+        "value": "",
+        "description": "Optional article paths shown first, in order (comma or line separated, text or links)"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "limit",
+        "label": "Limit",
+        "value": "",
+        "description": "Page size (default 12; featured layout default 5)"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "layout",
+        "label": "Layout",
+        "value": "news",
+        "options": [
+          {
+            "name": "News",
+            "value": "news"
+          },
+          {
+            "name": "Stories",
+            "value": "stories"
+          },
+          {
+            "name": "Featured",
+            "value": "featured"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "index",
+        "label": "Index",
+        "value": "",
+        "description": "Optional index URL (default /au/en/article-index.json)"
+      }
+    ]
+  },
+  {
+    "id": "cards-calendar",
+    "fields": []
+  },
+  {
+    "id": "cards-calendar-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "date",
+        "label": "Date (dd/mm/yyyy)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Event title",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "description",
+        "label": "Details (optional)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-documents",
+    "fields": []
+  },
+  {
+    "id": "cards-documents-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "title",
+        "label": "Group title (e.g. year)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "links",
+        "label": "Document links",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-featured",
+    "fields": []
+  },
+  {
+    "id": "cards-featured-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Tags, title and link (a video link adds a play button)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-logo",
+    "fields": []
+  },
+  {
+    "id": "cards-logo-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Logo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Logo alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Name, description and link",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-profile",
+    "fields": []
+  },
+  {
+    "id": "cards-profile-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Photo",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Photo alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Name, role, appointment and link",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-resource",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Document frames",
+            "value": "documents"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cards-resource-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Icon",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Icon alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title, description and link",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-stats",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Panel (rounded container, header row and CTA row)",
+            "value": "panel"
+          },
+          {
+            "name": "Sky tint 5% background",
+            "value": "tint-sky-5"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "header",
+        "label": "Panel heading and intro (first row, panel only)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cta",
+        "label": "Panel CTA link (last row, panel only)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-stats-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "figure",
+        "label": "Figure (e.g. 100%)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "caption",
+        "label": "Caption",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-story",
+    "fields": []
+  },
+  {
+    "id": "cards-story-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Tags, title and link",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-tile",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "2 columns",
+            "value": "cols-2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cards-tile-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title, description and link",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-timeline",
+    "fields": []
+  },
+  {
+    "id": "cards-timeline-item",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "variant",
+        "label": "Band colour and side",
+        "options": [
+          {
+            "name": "Midnight band, card left",
+            "value": "midnight"
+          },
+          {
+            "name": "Midnight band, card right",
+            "value": "midnight, right"
+          },
+          {
+            "name": "Sky band, card left",
+            "value": "sky"
+          },
+          {
+            "name": "Sky band, card right",
+            "value": "sky, right"
+          },
+          {
+            "name": "Ocean band, card left",
+            "value": "ocean"
+          },
+          {
+            "name": "Ocean band, card right",
+            "value": "ocean, right"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "year",
+        "label": "Year",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title and text",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "cards-video",
+    "fields": []
+  },
+  {
+    "id": "cards-video-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Poster image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Poster image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Video link (title) and date",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "carousel-hero",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Gradient",
+            "value": "gradient"
+          },
+          {
+            "name": "No overlay",
+            "value": "no-overlay"
+          },
+          {
+            "name": "Hide controls",
+            "value": "hide-controls"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "carousel-hero-item",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image (video poster)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video URL (Scene7 /is/content/)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "columns-contact",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 3,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 6
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-gallery",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 3,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-logos",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 4,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 8
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-media",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Image border",
+            "value": "image-border"
+          },
+          {
+            "name": "Berry bullets",
+            "value": "bullets-berry"
+          }
+        ]
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 2,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-panel",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 2,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-spotlight",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Dual (text left, full-bleed media right)",
+            "value": "dual"
+          }
+        ]
+      },
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 2,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "columns-text",
+    "fields": [
+      {
+        "component": "number",
+        "valueType": "number",
+        "name": "columns",
+        "label": "Number of Columns",
+        "value": 2,
+        "validation": {
+          "numberMin": 1,
+          "numberMax": 3
+        }
+      }
+    ]
+  },
+  {
+    "id": "embed-iframe",
+    "fields": []
+  },
+  {
+    "id": "embed-iframe-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "label",
+        "label": "Label (tab label and iframe title)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Iframe URL (https)",
+        "value": "",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "height",
+        "label": "Height in px (optional, e.g. 1300)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "fragment",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "urlText",
+        "label": "Fragment URL Text"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "url",
+        "label": "Fragment URL (e.g. /au/en/fragments/name)",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "hero-article",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Subtitle",
+            "value": "subtitle"
+          },
+          {
+            "name": "Gradient",
+            "value": "gradient"
+          },
+          {
+            "name": "No overlay",
+            "value": "no-overlay"
+          },
+          {
+            "name": "Top",
+            "value": "top"
+          },
+          {
+            "name": "Bottom",
+            "value": "bottom"
+          },
+          {
+            "name": "Right",
+            "value": "right"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Label and title",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-banner",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Heading and intro",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-brand",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "logo",
+        "label": "Logo (icon, e.g. :wwg-100-years:)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Tagline",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "hero-story",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Offset top",
+            "value": "offset-top"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title and subtitle",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "modal-terms",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Alert label, heading and terms",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "actions",
+        "label": "Actions (Decline link, Accept text)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "quote-story",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Blockquote (inline, no quote marks)",
+            "value": "blockquote"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "quote",
+        "label": "Quote",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "attribution",
+        "label": "Attribution (name – role)",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "search",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "index",
+        "label": "Index",
+        "value": "",
+        "description": "Query index URL (default /query-index.json). Overrides a single-cell index row"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "pageSize",
+        "label": "Page size",
+        "value": "",
+        "description": "Results per page (default 10)"
+      }
+    ]
+  },
+  {
+    "id": "table-data",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "List (rules, link icons, stacked on mobile)",
+            "value": "list"
+          },
+          {
+            "name": "Bordered grid",
+            "value": "bordered"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "table-data-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell1",
+        "label": "Column 1",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell2",
+        "label": "Column 2",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell3",
+        "label": "Column 3",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell4",
+        "label": "Column 4",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell5",
+        "label": "Column 5",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell6",
+        "label": "Column 6",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell7",
+        "label": "Column 7",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cell8",
+        "label": "Column 8",
+        "value": ""
+      }
+    ]
+  },
+  {
+    "id": "video-story",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Tile",
+            "value": "tile"
+          }
+        ]
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Poster image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image alt text",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageLink",
+        "label": "Image URL (Scene7)",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "video",
+        "label": "Video URL",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "text",
+        "label": "Title and description",
+        "value": ""
+      }
+    ]
+  }
+]

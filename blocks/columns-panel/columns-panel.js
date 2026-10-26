@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * columns-panel: stacked text panels on the left, a large image on the right.
@@ -47,20 +47,32 @@ export default function decorate(block) {
       const holder = pic.parentElement;
       media.append(pic);
       if (holder && holder !== cell && !holder.textContent.trim() && !holder.querySelector('picture')) {
+        // Universal Editor: the image paragraph's component moves to the picture
+        moveInstrumentation(holder, pic);
         holder.remove();
       }
+      // Universal Editor: image-only cell (column) -> media wrapper
+      if (!cell.textContent.trim()) moveInstrumentation(cell, media);
     }
-    if (cell.textContent.trim()) panels.append(...splitPanels(cell));
+    if (cell.textContent.trim()) {
+      // Universal Editor: (first) text cell (column) -> panels wrapper
+      if (!panels.hasAttribute('data-aue-resource')) moveInstrumentation(cell, panels);
+      panels.append(...splitPanels(cell));
+    }
   });
 
   media.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1600' }, { width: '750' }]),
-    );
+    const picture = img.closest('picture');
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1600' }, { width: '750' }]);
+    moveInstrumentation(picture, optimized);
+    moveInstrumentation(img, optimized.querySelector('img'));
+    picture.replaceWith(optimized);
   });
 
   const row = document.createElement('div');
   row.className = 'columns-panel-row';
+  // Universal Editor: (first) authored row -> layout row
+  moveInstrumentation(block.firstElementChild, row);
   if (panels.children.length) row.append(panels);
   if (media.children.length) row.append(media);
   else block.classList.add('columns-panel-no-media');

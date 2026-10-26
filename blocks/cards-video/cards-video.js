@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-video: grid of video message cards (poster + play button + title + date).
@@ -79,6 +79,7 @@ function openModal(url, title, trigger) {
 function decorateCard(row) {
   const li = document.createElement('li');
   li.className = 'cards-video-card';
+  moveInstrumentation(row, li);
 
   const link = findVideoLink(row);
   const url = link ? link.href : '';
@@ -88,7 +89,9 @@ function decorateCard(row) {
   const media = document.createElement('div');
   media.className = 'cards-video-media';
   if (img) {
-    media.append(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]));
+    const picture = createOptimizedPicture(img.src, img.alt || '', false, [{ width: '750' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    media.append(picture);
   } else {
     li.classList.add('no-poster');
   }
@@ -96,6 +99,8 @@ function decorateCard(row) {
   const body = document.createElement('div');
   body.className = 'cards-video-body';
   [...row.children].forEach((cell) => {
+    // Universal Editor: the text cell's field moves to the card body
+    moveInstrumentation(cell, body);
     if (!cell.children.length && cell.textContent.trim()) {
       const p = document.createElement('p');
       p.textContent = cell.textContent.trim();
@@ -137,14 +142,15 @@ function decorateCard(row) {
   }
 
   if (media.children.length) li.append(media);
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return li;
 }
 
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
-    if (!row.textContent.trim() && !row.querySelector('img')) return;
+    if (!row.textContent.trim() && !row.querySelector('img')
+      && !row.hasAttribute('data-aue-resource')) return;
     ul.append(decorateCard(row));
   });
   block.replaceChildren(ul);

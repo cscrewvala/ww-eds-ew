@@ -1,0 +1,79 @@
+{
+  "definitions": [
+    {
+      "title": "Columns – Panel",
+      "id": "columns-panel",
+      "model": "columns-panel",
+      "filter": "columns-panel",
+      "plugins": {
+        "da": {
+          "name": "columns-panel",
+          "rows": 1,
+          "columns": 2,
+          "behaviour": "columns"
+        }
+      }
+    },
+    {
+      "title": "Panel Row",
+      "id": "columns-panel-row",
+      "model": "columns-panel-row",
+      "filter": "columns-panel-row",
+      "plugins": {
+        "da": {
+          "name": "columns-panel-row",
+          "behaviour": "columns-row"
+        }
+      }
+    },
+    {
+      "title": "Panel Column",
+      "id": "columns-panel-cell",
+      "model": "columns-panel-cell",
+      "filter": "columns-panel-cell",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>",
+          "behaviour": "columns-cell"
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "columns-panel",
+      "fields": [
+        {
+          "component": "number",
+          "valueType": "number",
+          "name": "columns",
+          "label": "Number of Columns",
+          "value": 2,
+          "validation": {
+            "numberMin": 1,
+            "numberMax": 2
+          }
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "columns-panel",
+      "components": [
+        "columns-panel-row"
+      ]
+    },
+    {
+      "id": "columns-panel-row",
+      "components": []
+    },
+    {
+      "id": "columns-panel-cell",
+      "components": [
+        "text",
+        "image"
+      ]
+    }
+  ]
+}

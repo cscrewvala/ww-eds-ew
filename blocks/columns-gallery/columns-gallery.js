@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * columns-gallery: a row of equal-size photos (typically 3) side by side.
@@ -27,35 +27,59 @@ function buildItem(picture, captionNodes) {
 }
 
 export default function decorate(block) {
-  const items = [];
-  [...block.querySelectorAll(':scope > div > div')].forEach((cell) => {
-    const pictures = [...cell.querySelectorAll('picture')];
-    if (!pictures.length) return;
-    if (pictures.length > 1) {
-      pictures.forEach((pic) => items.push(buildItem(pic, [])));
-      return;
+  const rows = [...block.children];
+  // Universal Editor: every authored row (instrumented) keeps its own grid; otherwise one grid
+  const perRow = rows.length > 1 && rows.some((r) => r.hasAttribute('data-aue-resource'));
+  const grids = [];
+  let grid = null;
+  let count = 0;
+  rows.forEach((row) => {
+    if (!grid || perRow) {
+      grid = document.createElement('div');
+      grid.className = 'columns-gallery-grid';
+      grids.push(grid);
     }
-    // single-image cell: remaining text becomes the caption
-    const [pic] = pictures;
-    const holder = pic.closest('p');
-    (pic.closest('a') || pic).remove();
-    if (holder && holder !== cell && !holder.textContent.trim() && !holder.querySelector('picture')) {
-      holder.remove();
-    }
-    const caption = [...cell.children].filter((el) => el.textContent.trim());
-    items.push(buildItem(pic, caption));
+    // Universal Editor: row -> grid
+    moveInstrumentation(row, grid);
+    [...row.children].forEach((cell) => {
+      const pictures = [...cell.querySelectorAll('picture')];
+      if (!pictures.length) return;
+      const items = [];
+      if (pictures.length > 1) {
+        pictures.forEach((pic) => items.push(buildItem(pic, [])));
+      } else {
+        // single-image cell: remaining text becomes the caption
+        const [pic] = pictures;
+        const holder = pic.closest('p');
+        (pic.closest('a') || pic).remove();
+        if (holder && holder !== cell && !holder.textContent.trim() && !holder.querySelector('picture')) {
+          // Universal Editor: the image paragraph's component moves to the picture
+          moveInstrumentation(holder, pic.closest('a') || pic);
+          holder.remove();
+        }
+        const caption = [...cell.children].filter((el) => el.textContent.trim());
+        items.push(buildItem(pic, caption));
+      }
+      // Universal Editor: cell (column) -> its (first) gallery item
+      moveInstrumentation(cell, items[0]);
+      grid.append(...items);
+      count += items.length;
+    });
   });
+  if (!grids.length) {
+    grid = document.createElement('div');
+    grid.className = 'columns-gallery-grid';
+    grids.push(grid);
+  }
+  block.classList.add(`columns-gallery-${Math.max(1, Math.min(count, 4))}-up`);
 
-  const grid = document.createElement('div');
-  grid.className = 'columns-gallery-grid';
-  grid.append(...items);
-  block.classList.add(`columns-gallery-${Math.max(1, Math.min(items.length, 4))}-up`);
+  grids.forEach((g) => g.querySelectorAll('picture > img').forEach((img) => {
+    const picture = img.closest('picture');
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '800' }, { width: '750' }]);
+    moveInstrumentation(picture, optimized);
+    moveInstrumentation(img, optimized.querySelector('img'));
+    picture.replaceWith(optimized);
+  }));
 
-  grid.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '800' }, { width: '750' }]),
-    );
-  });
-
-  block.replaceChildren(grid);
+  block.replaceChildren(...grids);
 }

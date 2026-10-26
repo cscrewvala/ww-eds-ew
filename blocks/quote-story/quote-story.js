@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * quote-story: pull quote with a decorative quote mark, an attribution eyebrow
  * and the quote text.
@@ -19,7 +21,9 @@ function cellContent(row) {
 }
 
 export default function decorate(block) {
-  const rows = [...block.querySelectorAll(':scope > div')].filter((r) => r.textContent.trim());
+  // Universal Editor: empty but instrumented rows (new block) stay, so their fields remain editable
+  const rows = [...block.querySelectorAll(':scope > div')]
+    .filter((r) => r.textContent.trim() || r.querySelector('[data-aue-prop]'));
 
   const figure = document.createElement('figure');
   figure.className = 'quote-story-figure';
@@ -40,12 +44,16 @@ export default function decorate(block) {
     const caption = document.createElement('figcaption');
     caption.className = 'quote-story-attribution';
     caption.append(...cellContent(attributionRow));
+    // Universal Editor: attribution cell -> figcaption
+    moveInstrumentation(attributionRow.querySelector(':scope > div'), caption);
     figure.append(caption);
   }
 
   const quote = document.createElement('blockquote');
   quote.className = 'quote-story-text';
   quoteRows.forEach((row) => quote.append(...cellContent(row)));
+  // Universal Editor: quote cell -> blockquote
+  if (quoteRows[0]) moveInstrumentation(quoteRows[0].querySelector(':scope > div'), quote);
   figure.append(quote, createMark('end'));
 
   block.replaceChildren(figure);

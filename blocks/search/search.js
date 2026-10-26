@@ -113,7 +113,8 @@ function readConfig(block) {
     categories.push({ id, label, prefix });
   });
 
-  let index = authoredIndex || config.index || DEFAULT_INDEX;
+  // an "Index" row (the Universal Editor property) wins over the single-cell index row
+  let index = config.index || authoredIndex || DEFAULT_INDEX;
   // local development only: point the block at a fixture,
   // e.g. ?index=/migration-work/query-index.json
   const override = new URLSearchParams(window.location.search).get('index');

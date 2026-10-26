@@ -1,0 +1,255 @@
+[
+  {
+    "id": "main",
+    "components": [
+      "section"
+    ]
+  },
+  {
+    "id": "section",
+    "components": [
+      "text",
+      "image",
+      "accordion-program",
+      "article-list",
+      "cards-calendar",
+      "cards-documents",
+      "cards-featured",
+      "cards-logo",
+      "cards-profile",
+      "cards-resource",
+      "cards-stats",
+      "cards-story",
+      "cards-tile",
+      "cards-timeline",
+      "cards-video",
+      "carousel-hero",
+      "columns-contact",
+      "columns-gallery",
+      "columns-logos",
+      "columns-media",
+      "columns-panel",
+      "columns-spotlight",
+      "columns-text",
+      "embed-iframe",
+      "fragment",
+      "hero-article",
+      "hero-banner",
+      "hero-brand",
+      "hero-story",
+      "modal-terms",
+      "quote-story",
+      "search",
+      "table-data",
+      "video-story"
+    ]
+  },
+  {
+    "id": "accordion-program",
+    "components": [
+      "accordion-program-item"
+    ]
+  },
+  {
+    "id": "cards-calendar",
+    "components": [
+      "cards-calendar-item"
+    ]
+  },
+  {
+    "id": "cards-documents",
+    "components": [
+      "cards-documents-item"
+    ]
+  },
+  {
+    "id": "cards-featured",
+    "components": [
+      "cards-featured-item"
+    ]
+  },
+  {
+    "id": "cards-logo",
+    "components": [
+      "cards-logo-item"
+    ]
+  },
+  {
+    "id": "cards-profile",
+    "components": [
+      "cards-profile-item"
+    ]
+  },
+  {
+    "id": "cards-resource",
+    "components": [
+      "cards-resource-item"
+    ]
+  },
+  {
+    "id": "cards-stats",
+    "components": [
+      "cards-stats-item"
+    ]
+  },
+  {
+    "id": "cards-story",
+    "components": [
+      "cards-story-item"
+    ]
+  },
+  {
+    "id": "cards-tile",
+    "components": [
+      "cards-tile-item"
+    ]
+  },
+  {
+    "id": "cards-timeline",
+    "components": [
+      "cards-timeline-item"
+    ]
+  },
+  {
+    "id": "cards-video",
+    "components": [
+      "cards-video-item"
+    ]
+  },
+  {
+    "id": "carousel-hero",
+    "components": [
+      "carousel-hero-item"
+    ]
+  },
+  {
+    "id": "columns-contact",
+    "components": [
+      "columns-contact-row"
+    ]
+  },
+  {
+    "id": "columns-contact-row",
+    "components": []
+  },
+  {
+    "id": "columns-contact-cell",
+    "components": [
+      "text",
+      "image"
+    ]
+  },
+  {
+    "id": "columns-gallery",
+    "components": [
+      "columns-gallery-row"
+    ]
+  },
+  {
+    "id": "columns-gallery-row",
+    "components": []
+  },
+  {
+    "id": "columns-gallery-cell",
+    "components": [
+      "image",
+      "text"
+    ]
+  },
+  {
+    "id": "columns-logos",
+    "components": [
+      "columns-logos-row"
+    ]
+  },
+  {
+    "id": "columns-logos-row",
+    "components": []
+  },
+  {
+    "id": "columns-logos-cell",
+    "components": [
+      "image",
+      "text"
+    ]
+  },
+  {
+    "id": "columns-media",
+    "components": [
+      "columns-media-row"
+    ]
+  },
+  {
+    "id": "columns-media-row",
+    "components": []
+  },
+  {
+    "id": "columns-media-cell",
+    "components": [
+      "text",
+      "image"
+    ]
+  },
+  {
+    "id": "columns-panel",
+    "components": [
+      "columns-panel-row"
+    ]
+  },
+  {
+    "id": "columns-panel-row",
+    "components": []
+  },
+  {
+    "id": "columns-panel-cell",
+    "components": [
+      "text",
+      "image"
+    ]
+  },
+  {
+    "id": "columns-spotlight",
+    "components": [
+      "columns-spotlight-row"
+    ]
+  },
+  {
+    "id": "columns-spotlight-row",
+    "components": []
+  },
+  {
+    "id": "columns-spotlight-cell",
+    "components": [
+      "image",
+      "text"
+    ]
+  },
+  {
+    "id": "columns-text",
+    "components": [
+      "columns-text-row"
+    ]
+  },
+  {
+    "id": "columns-text-row",
+    "components": []
+  },
+  {
+    "id": "columns-text-cell",
+    "components": [
+      "text"
+    ]
+  },
+  {
+    "id": "embed-iframe",
+    "components": [
+      "embed-iframe-item"
+    ]
+  },
+  {
+    "id": "table-data",
+    "components": [
+      "table-data-item"
+    ]
+  }
+]

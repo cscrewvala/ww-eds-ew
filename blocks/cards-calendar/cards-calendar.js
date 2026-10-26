@@ -9,6 +9,7 @@
  * The "Add" button builds an all-day .ics file client-side (Blob download) from the
  * row's date and title; rows whose date cannot be parsed render without the button.
  */
+import { moveInstrumentation } from '../../scripts/scripts.js';
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
@@ -97,6 +98,7 @@ function decorateEvent(row) {
 
   const li = document.createElement('li');
   li.className = 'cards-calendar-event';
+  moveInstrumentation(row, li);
 
   const icon = document.createElement('span');
   icon.className = 'cards-calendar-icon';
@@ -116,7 +118,8 @@ function decorateEvent(row) {
   } else {
     dateEl.textContent = dateText;
   }
-  if (dateText) body.append(dateEl);
+  moveInstrumentation(dateCell, dateEl);
+  if (dateText || dateEl.hasAttribute('data-aue-prop')) body.append(dateEl);
 
   // Title = first heading/paragraph of the next cell; remaining content = details.
   const titleCell = others.shift();
@@ -125,11 +128,12 @@ function decorateEvent(row) {
     const first = titleCell.firstElementChild;
     if (first) {
       titleEl = first;
-    } else if (titleCell.textContent.trim()) {
+    } else if (titleCell.textContent.trim() || titleCell.hasAttribute('data-aue-prop')) {
       titleEl = document.createElement('p');
       titleEl.textContent = titleCell.textContent.trim();
     }
     if (titleEl) {
+      moveInstrumentation(titleCell, titleEl);
       titleEl.classList.add('cards-calendar-title');
       body.append(titleEl);
       [...titleCell.children].forEach((el) => {
@@ -141,9 +145,10 @@ function decorateEvent(row) {
     }
   }
   others.forEach((cell) => {
-    if (!cell.textContent.trim()) return;
+    if (!cell.textContent.trim() && !cell.hasAttribute('data-aue-prop')) return;
     const details = document.createElement('div');
     details.className = 'cards-calendar-details';
+    moveInstrumentation(cell, details);
     while (cell.firstChild) details.append(cell.firstChild);
     body.append(details);
   });
@@ -172,7 +177,7 @@ function decorateEvent(row) {
 export default function decorate(block) {
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
-    if (!row.textContent.trim()) return;
+    if (!row.textContent.trim() && !row.hasAttribute('data-aue-resource')) return;
     ul.append(decorateEvent(row));
   });
   block.replaceChildren(ul);

@@ -1,0 +1,48 @@
+{
+  "definitions": [
+    {
+      "title": "Modal – Terms",
+      "id": "modal-terms",
+      "model": "modal-terms",
+      "plugins": {
+        "da": {
+          "name": "modal-terms",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            {
+              "name": "text",
+              "selector": "div>div:nth-child(1)"
+            },
+            {
+              "name": "actions",
+              "selector": "div>div:nth-child(2)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "modal-terms",
+      "fields": [
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Alert label, heading and terms",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "actions",
+          "label": "Actions (Decline link, Accept text)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

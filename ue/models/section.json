@@ -1,0 +1,130 @@
+{
+  "definitions": [
+    {
+      "title": "Section",
+      "id": "section",
+      "plugins": {
+        "da": {
+          "unsafeHTML": "<div></div>"
+        }
+      },
+      "filter": "section",
+      "model": "section"
+    }
+  ],
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "style",
+          "label": "Style",
+          "options": [
+            {
+              "name": "Narrow (article column)",
+              "value": "narrow"
+            },
+            {
+              "name": "Centered",
+              "value": "centered"
+            },
+            {
+              "name": "Centered text",
+              "value": "centered-text"
+            },
+            {
+              "name": "Statement (large intro text)",
+              "value": "statement"
+            },
+            {
+              "name": "Divider",
+              "value": "divider"
+            },
+            {
+              "name": "Headings: dark",
+              "value": "headings-dark"
+            },
+            {
+              "name": "Headings: midnight",
+              "value": "headings-midnight"
+            },
+            {
+              "name": "Background: snow (white)",
+              "value": "snow"
+            },
+            {
+              "name": "Background: ocean (blue)",
+              "value": "ocean"
+            },
+            {
+              "name": "Background: sky tint 5%",
+              "value": "tint-sky-5"
+            },
+            {
+              "name": "Background: sky tint 10%",
+              "value": "tint-sky-10"
+            },
+            {
+              "name": "Background: sky tint 20%",
+              "value": "tint-sky-20"
+            },
+            {
+              "name": "Background: ocean tint 10%",
+              "value": "tint-ocean-10"
+            },
+            {
+              "name": "Background: light",
+              "value": "light"
+            },
+            {
+              "name": "Highlight",
+              "value": "highlight"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "section",
+      "components": [
+        "text",
+        "image",
+        "accordion-program",
+        "article-list",
+        "cards-calendar",
+        "cards-documents",
+        "cards-featured",
+        "cards-logo",
+        "cards-profile",
+        "cards-resource",
+        "cards-stats",
+        "cards-story",
+        "cards-tile",
+        "cards-timeline",
+        "cards-video",
+        "carousel-hero",
+        "columns-contact",
+        "columns-gallery",
+        "columns-logos",
+        "columns-media",
+        "columns-panel",
+        "columns-spotlight",
+        "columns-text",
+        "embed-iframe",
+        "fragment",
+        "hero-article",
+        "hero-banner",
+        "hero-brand",
+        "hero-story",
+        "modal-terms",
+        "quote-story",
+        "search",
+        "table-data",
+        "video-story"
+      ]
+    }
+  ]
+}

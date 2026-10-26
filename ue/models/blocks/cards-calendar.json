@@ -1,0 +1,83 @@
+{
+  "definitions": [
+    {
+      "title": "Cards – Calendar",
+      "id": "cards-calendar",
+      "model": "cards-calendar",
+      "filter": "cards-calendar",
+      "plugins": {
+        "da": {
+          "name": "cards-calendar",
+          "rows": 1,
+          "columns": 2
+        }
+      }
+    },
+    {
+      "title": "Calendar Event",
+      "id": "cards-calendar-item",
+      "model": "cards-calendar-item",
+      "plugins": {
+        "da": {
+          "name": "cards-calendar-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            {
+              "name": "date",
+              "selector": "div:nth-child(1)"
+            },
+            {
+              "name": "title",
+              "selector": "div:nth-child(2)"
+            },
+            {
+              "name": "description",
+              "selector": "div:nth-child(3)"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "cards-calendar",
+      "fields": []
+    },
+    {
+      "id": "cards-calendar-item",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "date",
+          "label": "Date (dd/mm/yyyy)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "title",
+          "label": "Event title",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "description",
+          "label": "Details (optional)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "cards-calendar",
+      "components": [
+        "cards-calendar-item"
+      ]
+    }
+  ]
+}

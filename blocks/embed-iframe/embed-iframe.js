@@ -12,6 +12,8 @@
  * for a tab when it is first shown.
  */
 
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 let instance = 0;
 
 function readUrl(cell) {
@@ -31,6 +33,7 @@ function readHeight(cell) {
   return m ? `${m[1]}px` : '';
 }
 
+// Universal Editor: an instrumented row without a URL yet (new item) is kept
 function parseRows(block) {
   return [...block.children].map((row) => {
     const cells = [...row.children];
@@ -43,8 +46,30 @@ function parseRows(block) {
       url,
       label: labelCell ? labelCell.textContent.trim() : '',
       height: readHeight(heightCell),
+      row,
+      labelCell,
     };
-  }).filter((item) => item.url);
+  }).filter((item) => item.url || item.row.hasAttribute('data-aue-resource'));
+}
+
+/**
+ * Universal Editor: keeps the instrumentation of the authored row and its cells.
+ * The row goes to `itemEl`; the label cell to `labelEl` (if given); every other
+ * instrumented cell to a hidden span inside `itemEl`, so URL and height stay editable
+ * in the properties panel. No-op when the row carries no instrumentation.
+ */
+function keepInstrumentation(item, itemEl, labelEl) {
+  const { row } = item;
+  moveInstrumentation(row, itemEl);
+  if (labelEl && item.labelCell) moveInstrumentation(item.labelCell, labelEl);
+  [...row.children].forEach((cell) => {
+    if (![...cell.attributes].some((a) => a.name.startsWith('data-aue-'))) return;
+    const span = document.createElement('span');
+    span.hidden = true;
+    span.textContent = cell.textContent.trim();
+    moveInstrumentation(cell, span);
+    itemEl.append(span);
+  });
 }
 
 function buildIframe({ url, label, height }) {
@@ -90,11 +115,12 @@ export default function decorate(block) {
   });
 
   const ensureLoaded = (i) => {
-    if (!nearViewport || panels[i].firstChild) return;
+    if (!nearViewport || !items[i].url || panels[i].querySelector('iframe')) return;
     panels[i].append(buildIframe(items[i]));
   };
 
   if (items.length === 1) {
+    keepInstrumentation(items[0], panels[0]);
     block.append(panels[0]);
     whenNearViewport(block, () => {
       nearViewport = true;
@@ -117,6 +143,13 @@ export default function decorate(block) {
     tab.setAttribute('role', 'tab');
     tab.setAttribute('aria-controls', panels[i].id);
     tab.textContent = item.label || `Tab ${i + 1}`;
+    if (item.row.hasAttribute('data-aue-resource')) {
+      // Universal Editor: the tab is the item; its label text is the label field
+      const label = document.createElement('span');
+      label.textContent = tab.textContent;
+      tab.replaceChildren(label);
+      keepInstrumentation(item, tab, label);
+    }
     panels[i].setAttribute('role', 'tabpanel');
     panels[i].setAttribute('aria-labelledby', tab.id);
     panels[i].tabIndex = 0;
@@ -157,4 +190,14 @@ export default function decorate(block) {
     nearViewport = true;
     ensureLoaded(active);
   });
+}
+
+/**
+ * Universal Editor: shows the tab of the selected item (the tab itself or an element in it).
+ * @param {Element} block the embed-iframe block
+ * @param {Element} el the selected element
+ */
+export function showTab(block, el) {
+  const tab = el && el.closest('.embed-iframe-tab');
+  if (tab && block.contains(tab)) tab.click();
 }

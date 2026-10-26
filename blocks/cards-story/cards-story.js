@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * Splits a comma-separated tag paragraph into a list of tag pills.
@@ -29,8 +29,10 @@ export default function decorate(block) {
   const ul = document.createElement('ul');
 
   [...block.children].forEach((row) => {
-    if (!row.textContent.trim() && !row.querySelector('picture')) return;
+    if (!row.textContent.trim() && !row.querySelector('picture')
+      && !row.hasAttribute('data-aue-resource')) return;
     const li = document.createElement('li');
+    moveInstrumentation(row, li);
     const imageWrap = document.createElement('div');
     imageWrap.className = 'cards-story-card-image';
     const body = document.createElement('div');
@@ -43,6 +45,8 @@ export default function decorate(block) {
         imageWrap.append(pic);
         return;
       }
+      // Universal Editor: the text cell's field moves to the card body
+      moveInstrumentation(cell, body);
       if (pic && !imageWrap.children.length) {
         const holder = pic.closest('p') && !pic.closest('p').textContent.trim() ? pic.closest('p') : pic;
         imageWrap.append(pic);
@@ -87,14 +91,14 @@ export default function decorate(block) {
     }
 
     if (imageWrap.children.length) li.append(imageWrap);
-    if (body.children.length) li.append(body);
+    if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
     ul.append(li);
   });
 
   ul.querySelectorAll('picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]),
-    );
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   block.replaceChildren(ul);

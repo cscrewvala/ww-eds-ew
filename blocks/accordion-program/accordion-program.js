@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * accordion-program: stacked collapsible items (native <details>/<summary>).
@@ -183,6 +183,8 @@ function buildItem(row, index, blockId) {
     cells.slice(2).forEach((c) => bodyCell.append(...c.childNodes));
   } else {
     ({ label: labelCell, body: bodyCell } = splitSingleCell(cells[0] || row));
+    // Universal Editor: a single-cell row's field stays with the label
+    moveInstrumentation(cells[0], labelCell);
   }
 
   const summary = document.createElement('summary');
@@ -197,14 +199,20 @@ function buildItem(row, index, blockId) {
     title.append(...labelCell.childNodes);
   }
   summary.append(title);
+  // Universal Editor: label cell -> summary
+  moveInstrumentation(labelCell, summary);
 
   const body = document.createElement('div');
   body.className = 'accordion-program-item-body';
   body.id = `${blockId}-panel-${index}`;
   body.append(...bodyCell.childNodes);
+  // Universal Editor: body cell -> panel
+  moveInstrumentation(bodyCell, body);
 
   const details = document.createElement('details');
   details.className = 'accordion-program-item';
+  // Universal Editor: row (item) -> details
+  moveInstrumentation(row, details);
   details.append(summary);
   if (body.textContent.trim() || body.querySelector('picture, img')) {
     decorateLinkLists(body);
@@ -229,9 +237,9 @@ export default function decorate(block) {
 
   items.forEach((details) => {
     details.querySelectorAll('picture > img').forEach((img) => {
-      img.closest('picture').replaceWith(
-        createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1200' }, { width: '750' }]),
-      );
+      const picture = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1200' }, { width: '750' }]);
+      moveInstrumentation(img, picture.querySelector('img'));
+      img.closest('picture').replaceWith(picture);
     });
   });
 
@@ -241,4 +249,15 @@ export default function decorate(block) {
   }
 
   block.replaceChildren(...items);
+}
+
+/**
+ * Universal Editor: opens the accordion item that contains `itemEl` (e.g. the selected item
+ * or one of its fields). Other items keep their state.
+ * @param {Element} block the accordion-program block
+ * @param {Element} itemEl the item (<details>) or an element inside it
+ */
+export function openItem(block, itemEl) {
+  const details = itemEl && itemEl.closest('details.accordion-program-item');
+  if (details && block.contains(details)) details.open = true;
 }

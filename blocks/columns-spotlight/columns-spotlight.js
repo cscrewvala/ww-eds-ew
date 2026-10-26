@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * columns-spotlight: media card on the left, heading + text + CTA on the right.
@@ -68,7 +68,10 @@ function openModal(url, title, trigger) {
 // outer <p>, yielding invalid <p><picture><p>..</p></p>; unwrap it again
 function unwrapNestedParagraphs(cell) {
   cell.querySelectorAll(':scope > p').forEach((p) => {
-    if (p.querySelector(':scope > p, :scope > picture, :scope > div')) p.replaceWith(...p.childNodes);
+    if (p.querySelector(':scope > p, :scope > picture, :scope > div')) {
+      moveInstrumentation(p, cell);
+      p.replaceWith(...p.childNodes);
+    }
   });
 }
 
@@ -84,19 +87,29 @@ function decorateMedia(cell) {
   if (picture) {
     const holder = picture.parentElement;
     poster.append(picture);
-    if (holder && holder !== cell && !holder.textContent.trim() && !holder.querySelector('picture')) holder.remove();
+    if (holder && holder !== cell && !holder.textContent.trim() && !holder.querySelector('picture')) {
+      // Universal Editor: the image paragraph's component moves to the picture
+      moveInstrumentation(holder, picture);
+      holder.remove();
+    }
   }
 
   const caption = document.createElement('div');
   caption.className = 'columns-spotlight-caption';
 
   let url = '';
+  let videoLinkEl = null;
   if (videoLink) {
     url = videoLink.href;
     const p = videoLink.closest('p');
     // drop the raw video link (and its wrapper if it held nothing else)
-    if (p && p.textContent.trim() === videoLink.textContent.trim()) p.remove();
-    else videoLink.remove();
+    const raw = p && p.textContent.trim() === videoLink.textContent.trim() ? p : videoLink;
+    raw.remove();
+    // Universal Editor: an instrumented video link stays (below the card) so it stays editable
+    if (raw.hasAttribute('data-aue-resource') || raw.querySelector('[data-aue-resource]')) {
+      raw.classList.add('columns-spotlight-video-link');
+      videoLinkEl = raw;
+    }
   }
   [...cell.childNodes].forEach((n) => {
     if (n.nodeType === Node.ELEMENT_NODE || n.textContent.trim()) caption.append(n);
@@ -125,6 +138,7 @@ function decorateMedia(cell) {
     card.append(caption);
   }
   cell.replaceChildren(card);
+  if (videoLinkEl) cell.append(videoLinkEl);
 }
 
 const CONTACT_HREF = /^(mailto|tel):/i;
@@ -182,6 +196,8 @@ export default function decorate(block) {
     decorateMedia(mediaCell);
     row.append(mediaCell);
   }
+  // Universal Editor: (first) authored row -> layout row
+  moveInstrumentation(block.firstElementChild, row);
   if (textCells.length) {
     const text = textCells[0];
     textCells.slice(1).forEach((c) => text.append(...c.childNodes));
@@ -194,9 +210,11 @@ export default function decorate(block) {
   if (mediaCell && document.body.classList.contains('legal-page')) block.classList.add('dual');
 
   row.querySelectorAll('.columns-spotlight-poster picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(
-      createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1200' }, { width: '750' }]),
-    );
+    const picture = img.closest('picture');
+    const optimized = createOptimizedPicture(img.src, img.alt, false, [{ media: '(min-width: 600px)', width: '1200' }, { width: '750' }]);
+    moveInstrumentation(picture, optimized);
+    moveInstrumentation(img, optimized.querySelector('img'));
+    picture.replaceWith(optimized);
   });
 
   block.replaceChildren(row);

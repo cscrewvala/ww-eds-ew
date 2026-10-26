@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * table-data: semantic data table.
  *
@@ -33,10 +35,14 @@ export default function decorate(block) {
   rows.forEach((row, rowIndex) => {
     const isHeader = rowIndex === 0;
     const tr = document.createElement('tr');
+    moveInstrumentation(row, tr);
     const cells = [...row.children];
     for (let i = 0; i < columnCount; i += 1) {
       const cell = document.createElement(isHeader ? 'th' : 'td');
-      if (cells[i]) moveContent(cells[i], cell);
+      if (cells[i]) {
+        moveInstrumentation(cells[i], cell);
+        moveContent(cells[i], cell);
+      }
       if (isHeader) {
         cell.scope = 'col';
         labels[i] = cell.textContent.trim();

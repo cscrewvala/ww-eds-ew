@@ -3,6 +3,24 @@
   display: none;
 }
 
+/* Universal Editor: the gate renders inline (authored cells as-is) so it can be edited */
+.modal-terms.modal-terms-inline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0;
+  padding: 16px;
+  border: 1px dashed var(--color-midnight);
+  border-radius: 8px;
+  background-color: rgb(25 113 237 / 5%);
+}
+
+.modal-terms.modal-terms-inline > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 /* dialog is appended to <body> so it renders regardless of section load state */
 .modal-terms-dialog {
   box-sizing: border-box;

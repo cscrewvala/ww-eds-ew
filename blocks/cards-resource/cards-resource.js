@@ -1,4 +1,4 @@
-import { createOptimizedPicture } from '../../scripts/scripts.js';
+import { createOptimizedPicture, moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * cards-resource: centred resource cards (3 per row on desktop) or
@@ -66,6 +66,7 @@ const hasMedia = (el) => !!el.querySelector('picture, img, svg');
 
 function buildCard(row) {
   const li = document.createElement('li');
+  moveInstrumentation(row, li);
   const icon = document.createElement('div');
   icon.className = 'cards-resource-icon';
   const body = document.createElement('div');
@@ -76,6 +77,8 @@ function buildCard(row) {
   const emptyIconCell = cells.length > 1 && !cells[0].textContent.trim() && !hasMedia(cells[0]);
 
   cells.forEach((cell) => {
+    // Universal Editor: the text cell's field moves to the card body
+    moveInstrumentation(cell, body);
     if (!cell.children.length) {
       const value = cell.textContent.trim();
       if (value) {
@@ -111,7 +114,7 @@ function buildCard(row) {
 
   if (icon.children.length) li.append(icon);
   else li.classList.add('cards-resource-no-icon');
-  if (body.children.length) li.append(body);
+  if (body.children.length || body.hasAttribute('data-aue-prop')) li.append(body);
   return { li, title };
 }
 
@@ -136,7 +139,8 @@ function buildAccordion(li, title) {
   content.className = 'cards-resource-content';
   content.append(...body.children);
   if (!content.children.length) {
-    li.replaceChildren(header);
+    // Universal Editor: an empty but editable body stays in place
+    li.replaceChildren(header, ...(body.hasAttribute('data-aue-prop') ? [body] : []));
     return;
   }
 
@@ -162,7 +166,8 @@ function buildAccordion(li, title) {
 export default function decorate(block) {
   const ul = document.createElement('ul');
   const cards = [...block.children]
-    .filter((row) => row.textContent.trim() || row.querySelector('picture'))
+    .filter((row) => row.textContent.trim() || row.querySelector('picture')
+      || row.hasAttribute('data-aue-resource'))
     .map((row) => {
       const card = buildCard(row);
       ul.append(card.li);
@@ -170,7 +175,9 @@ export default function decorate(block) {
     });
 
   ul.querySelectorAll('.cards-resource-icon picture > img').forEach((img) => {
-    img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '200' }]));
+    const picture = createOptimizedPicture(img.src, img.alt, false, [{ width: '200' }]);
+    moveInstrumentation(img, picture.querySelector('img'));
+    img.closest('picture').replaceWith(picture);
   });
 
   const documents = block.classList.contains('documents')

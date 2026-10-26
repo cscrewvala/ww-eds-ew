@@ -1,0 +1,126 @@
+{
+  "definitions": [
+    {
+      "title": "Carousel – Hero",
+      "id": "carousel-hero",
+      "model": "carousel-hero",
+      "filter": "carousel-hero",
+      "plugins": {
+        "da": {
+          "name": "carousel-hero",
+          "rows": 1,
+          "columns": 2
+        }
+      }
+    },
+    {
+      "title": "Carousel – Hero Slide",
+      "id": "carousel-hero-item",
+      "model": "carousel-hero-item",
+      "plugins": {
+        "da": {
+          "name": "carousel-hero-item",
+          "rows": 1,
+          "columns": 2,
+          "fields": [
+            {
+              "name": "image",
+              "selector": "div:nth-child(1) picture>img[src]"
+            },
+            {
+              "name": "imageAlt",
+              "selector": "div:nth-child(1) picture>img[alt]"
+            },
+            {
+              "name": "imageLink",
+              "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(2)"
+            },
+            {
+              "name": "video",
+              "selector": "div:nth-child(2) a[href*=\"/is/content/\"]"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "carousel-hero",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Gradient",
+              "value": "gradient"
+            },
+            {
+              "name": "No overlay",
+              "value": "no-overlay"
+            },
+            {
+              "name": "Hide controls",
+              "value": "hide-controls"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carousel-hero-item",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image (video poster)",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Image alt text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageLink",
+          "label": "Image URL (Scene7)",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "valueType": "string",
+          "name": "text",
+          "label": "Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "video",
+          "label": "Video URL (Scene7 /is/content/)",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "id": "carousel-hero",
+      "components": [
+        "carousel-hero-item"
+      ]
+    }
+  ]
+}
