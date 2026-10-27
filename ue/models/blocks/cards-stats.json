@@ -9,22 +9,12 @@
         "da": {
           "name": "cards-stats",
           "rows": 1,
-          "columns": 2,
-          "fields": [
-            {
-              "name": "header",
-              "selector": "div:first-child:has(h1,h2,h3,h4,h5,h6)>div"
-            },
-            {
-              "name": "cta",
-              "selector": "div:last-child:not(:first-child):has(>div:only-child a:only-child)>div"
-            }
-          ]
+          "columns": 2
         }
       }
     },
     {
-      "title": "Stat",
+      "title": "Row (header, stat or call to action)",
       "id": "cards-stats-item",
       "model": "cards-stats-item",
       "plugins": {
@@ -35,11 +25,11 @@
           "fields": [
             {
               "name": "figure",
-              "selector": "div:first-child:not(:last-child)"
+              "selector": "div:nth-child(1)"
             },
             {
               "name": "caption",
-              "selector": "div:last-child"
+              "selector": "div:nth-child(2)"
             }
           ]
         }
@@ -54,31 +44,16 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "Panel (rounded container, header row and CTA row)",
+              "name": "panel",
               "value": "panel"
             },
             {
-              "name": "Sky tint 5% background",
+              "name": "tint-sky-5",
               "value": "tint-sky-5"
             }
           ]
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "header",
-          "label": "Panel heading and intro (first row, panel only)",
-          "value": ""
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "cta",
-          "label": "Panel CTA link (last row, panel only)",
-          "value": ""
         }
       ]
     },
@@ -87,17 +62,15 @@
       "fields": [
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "figure",
-          "label": "Figure (e.g. 100%)",
-          "value": ""
+          "label": "Figure / heading",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "caption",
           "label": "Caption",
-          "value": ""
+          "valueType": "string"
         }
       ]
     }

@@ -26,7 +26,15 @@ export default function decorate(block) {
   const rows = [...block.children].filter((row) => row.children.length);
   if (!rows.length) return;
 
-  const columnCount = Math.max(...rows.map((row) => row.children.length));
+  // columns = up to the last column with content in any row: trailing empty cells (e.g. padding
+  // added by a Universal Editor save) do not add columns; empty cells inside the table still align
+  const hasContent = (cell) => !!(cell.textContent.trim() || cell.querySelector('img, picture, a'));
+  const columnCount = Math.max(1, ...rows.map((row) => {
+    const cells = [...row.children];
+    let last = cells.length;
+    while (last > 0 && !hasContent(cells[last - 1])) last -= 1;
+    return last;
+  }));
   const table = document.createElement('table');
   const thead = document.createElement('thead');
   const tbody = document.createElement('tbody');

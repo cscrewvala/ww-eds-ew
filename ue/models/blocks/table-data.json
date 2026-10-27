@@ -3,57 +3,52 @@
     {
       "title": "Table – Data",
       "id": "table-data",
-      "model": "table-data",
       "filter": "table-data",
       "plugins": {
         "da": {
           "name": "table-data",
           "rows": 1,
-          "columns": 3
+          "columns": 7
         }
       }
     },
     {
-      "title": "Table Row",
+      "title": "Table row",
       "id": "table-data-item",
       "model": "table-data-item",
       "plugins": {
         "da": {
           "name": "table-data-item",
           "rows": 1,
-          "columns": 3,
+          "columns": 7,
           "fields": [
             {
-              "name": "cell1",
+              "name": "col1",
               "selector": "div:nth-child(1)"
             },
             {
-              "name": "cell2",
+              "name": "col2",
               "selector": "div:nth-child(2)"
             },
             {
-              "name": "cell3",
+              "name": "col3",
               "selector": "div:nth-child(3)"
             },
             {
-              "name": "cell4",
+              "name": "col4",
               "selector": "div:nth-child(4)"
             },
             {
-              "name": "cell5",
+              "name": "col5",
               "selector": "div:nth-child(5)"
             },
             {
-              "name": "cell6",
+              "name": "col6",
               "selector": "div:nth-child(6)"
             },
             {
-              "name": "cell7",
+              "name": "col7",
               "selector": "div:nth-child(7)"
-            },
-            {
-              "name": "cell8",
-              "selector": "div:nth-child(8)"
             }
           ]
         }
@@ -62,84 +57,49 @@
   ],
   "models": [
     {
-      "id": "table-data",
-      "fields": [
-        {
-          "component": "multiselect",
-          "name": "classes",
-          "label": "Style",
-          "valueType": "string",
-          "options": [
-            {
-              "name": "List (rules, link icons, stacked on mobile)",
-              "value": "list"
-            },
-            {
-              "name": "Bordered grid",
-              "value": "bordered"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "table-data-item",
       "fields": [
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell1",
+          "name": "col1",
           "label": "Column 1",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell2",
+          "name": "col2",
           "label": "Column 2",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell3",
+          "name": "col3",
           "label": "Column 3",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell4",
+          "name": "col4",
           "label": "Column 4",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell5",
+          "name": "col5",
           "label": "Column 5",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell6",
+          "name": "col6",
           "label": "Column 6",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "cell7",
+          "name": "col7",
           "label": "Column 7",
-          "value": ""
-        },
-        {
-          "component": "richtext",
-          "valueType": "string",
-          "name": "cell8",
-          "label": "Column 8",
-          "value": ""
+          "valueType": "string"
         }
       ]
     }

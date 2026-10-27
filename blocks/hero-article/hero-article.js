@@ -53,15 +53,8 @@ export default function decorate(block) {
     });
   });
 
-  // Mark the label paragraph(s) that precede the heading.
-  const heading = content.querySelector('h1, h2, h3, h4, h5, h6');
-  if (heading) {
-    let prev = heading.previousElementSibling;
-    while (prev) {
-      if (prev.tagName === 'P') prev.classList.add('hero-article-label');
-      prev = prev.previousElementSibling;
-    }
-  }
+  // The label paragraph(s) before the heading are styled structurally in CSS (no class), so
+  // the authored text cell stays unmodified and can be edited inline in the Universal Editor.
 
   const inner = document.createElement('div');
   inner.className = 'hero-article-inner';

@@ -4,37 +4,37 @@
       "title": "Columns – Logos",
       "id": "columns-logos",
       "model": "columns-logos",
-      "filter": "columns-logos",
       "plugins": {
         "da": {
           "name": "columns-logos",
           "rows": 1,
-          "columns": 4,
-          "behaviour": "columns"
-        }
-      }
-    },
-    {
-      "title": "Logos Row",
-      "id": "columns-logos-row",
-      "model": "columns-logos-row",
-      "filter": "columns-logos-row",
-      "plugins": {
-        "da": {
-          "name": "columns-logos-row",
-          "behaviour": "columns-row"
-        }
-      }
-    },
-    {
-      "title": "Logos Column",
-      "id": "columns-logos-cell",
-      "model": "columns-logos-cell",
-      "filter": "columns-logos-cell",
-      "plugins": {
-        "da": {
-          "unsafeHTML": "<div></div>",
-          "behaviour": "columns-cell"
+          "columns": 6,
+          "fields": [
+            {
+              "name": "logo1",
+              "selector": "div:nth-child(1)>div:nth-child(1)"
+            },
+            {
+              "name": "logo2",
+              "selector": "div:nth-child(1)>div:nth-child(2)"
+            },
+            {
+              "name": "logo3",
+              "selector": "div:nth-child(1)>div:nth-child(3)"
+            },
+            {
+              "name": "logo4",
+              "selector": "div:nth-child(1)>div:nth-child(4)"
+            },
+            {
+              "name": "logo5",
+              "selector": "div:nth-child(1)>div:nth-child(5)"
+            },
+            {
+              "name": "logo6",
+              "selector": "div:nth-child(1)>div:nth-child(6)"
+            }
+          ]
         }
       }
     }
@@ -44,36 +44,49 @@
       "id": "columns-logos",
       "fields": [
         {
-          "component": "number",
-          "valueType": "number",
-          "name": "columns",
-          "label": "Number of Columns",
-          "value": 4,
-          "validation": {
-            "numberMin": 1,
-            "numberMax": 8
-          }
+          "component": "richtext",
+          "name": "logo1",
+          "label": "Logo 1",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+        },
+        {
+          "component": "richtext",
+          "name": "logo2",
+          "label": "Logo 2",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+        },
+        {
+          "component": "richtext",
+          "name": "logo3",
+          "label": "Logo 3",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+        },
+        {
+          "component": "richtext",
+          "name": "logo4",
+          "label": "Logo 4",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+        },
+        {
+          "component": "richtext",
+          "name": "logo5",
+          "label": "Logo 5",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+        },
+        {
+          "component": "richtext",
+          "name": "logo6",
+          "label": "Logo 6",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns-logos",
-      "components": [
-        "columns-logos-row"
-      ]
-    },
-    {
-      "id": "columns-logos-row",
-      "components": []
-    },
-    {
-      "id": "columns-logos-cell",
-      "components": [
-        "image",
-        "text"
-      ]
-    }
-  ]
+  "filters": []
 }

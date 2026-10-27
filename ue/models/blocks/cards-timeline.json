@@ -3,7 +3,6 @@
     {
       "title": "Cards – Timeline",
       "id": "cards-timeline",
-      "model": "cards-timeline",
       "filter": "cards-timeline",
       "plugins": {
         "da": {
@@ -14,7 +13,7 @@
       }
     },
     {
-      "title": "Milestone",
+      "title": "Timeline entry",
       "id": "cards-timeline-item",
       "model": "cards-timeline-item",
       "plugins": {
@@ -24,11 +23,11 @@
           "columns": 4,
           "fields": [
             {
-              "name": "variant",
+              "name": "year",
               "selector": "div:nth-child(1)"
             },
             {
-              "name": "year",
+              "name": "era",
               "selector": "div:nth-child(2)"
             },
             {
@@ -37,15 +36,7 @@
             },
             {
               "name": "image",
-              "selector": "div:nth-child(4) picture>img[src]"
-            },
-            {
-              "name": "imageAlt",
-              "selector": "div:nth-child(4) picture>img[alt]"
-            },
-            {
-              "name": "imageLink",
-              "selector": "div:nth-child(4) a[href*=\"/is/image/\"]"
+              "selector": "div:nth-child(4)"
             }
           ]
         }
@@ -54,78 +45,31 @@
   ],
   "models": [
     {
-      "id": "cards-timeline",
-      "fields": []
-    },
-    {
       "id": "cards-timeline-item",
       "fields": [
         {
-          "component": "select",
-          "valueType": "string",
-          "name": "variant",
-          "label": "Band colour and side",
-          "options": [
-            {
-              "name": "Midnight band, card left",
-              "value": "midnight"
-            },
-            {
-              "name": "Midnight band, card right",
-              "value": "midnight, right"
-            },
-            {
-              "name": "Sky band, card left",
-              "value": "sky"
-            },
-            {
-              "name": "Sky band, card right",
-              "value": "sky, right"
-            },
-            {
-              "name": "Ocean band, card left",
-              "value": "ocean"
-            },
-            {
-              "name": "Ocean band, card right",
-              "value": "ocean, right"
-            }
-          ]
-        },
-        {
           "component": "text",
-          "valueType": "string",
           "name": "year",
           "label": "Year",
-          "value": ""
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "text",
-          "label": "Title and text",
-          "value": ""
+          "name": "era",
+          "label": "Era",
+          "valueType": "string"
         },
         {
-          "component": "reference",
-          "valueType": "string",
+          "component": "richtext",
+          "name": "text",
+          "label": "Content",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
           "name": "image",
           "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageAlt",
-          "label": "Image alt text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageLink",
-          "label": "Image URL (Scene7)",
-          "value": ""
+          "valueType": "string"
         }
       ]
     }

@@ -4,37 +4,21 @@
       "title": "Columns – Media",
       "id": "columns-media",
       "model": "columns-media",
-      "filter": "columns-media",
       "plugins": {
         "da": {
           "name": "columns-media",
           "rows": 1,
           "columns": 2,
-          "behaviour": "columns"
-        }
-      }
-    },
-    {
-      "title": "Media Row",
-      "id": "columns-media-row",
-      "model": "columns-media-row",
-      "filter": "columns-media-row",
-      "plugins": {
-        "da": {
-          "name": "columns-media-row",
-          "behaviour": "columns-row"
-        }
-      }
-    },
-    {
-      "title": "Media Column",
-      "id": "columns-media-cell",
-      "model": "columns-media-cell",
-      "filter": "columns-media-cell",
-      "plugins": {
-        "da": {
-          "unsafeHTML": "<div></div>",
-          "behaviour": "columns-cell"
+          "fields": [
+            {
+              "name": "text",
+              "selector": "div:nth-child(1)>div:nth-child(1)"
+            },
+            {
+              "name": "image",
+              "selector": "div:nth-child(1)>div:nth-child(2)"
+            }
+          ]
         }
       }
     }
@@ -47,49 +31,32 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "Image border",
+              "name": "image-border",
               "value": "image-border"
             },
             {
-              "name": "Berry bullets",
+              "name": "bullets-berry",
               "value": "bullets-berry"
             }
           ]
         },
         {
-          "component": "number",
-          "valueType": "number",
-          "name": "columns",
-          "label": "Number of Columns",
-          "value": 2,
-          "validation": {
-            "numberMin": 1,
-            "numberMax": 2
-          }
+          "component": "richtext",
+          "name": "text",
+          "label": "Text",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "image",
+          "label": "Image",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns-media",
-      "components": [
-        "columns-media-row"
-      ]
-    },
-    {
-      "id": "columns-media-row",
-      "components": []
-    },
-    {
-      "id": "columns-media-cell",
-      "components": [
-        "text",
-        "image"
-      ]
-    }
-  ]
+  "filters": []
 }

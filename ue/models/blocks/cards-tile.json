@@ -25,15 +25,7 @@
           "fields": [
             {
               "name": "image",
-              "selector": "div:nth-child(1) picture>img[src]"
-            },
-            {
-              "name": "imageAlt",
-              "selector": "div:nth-child(1) picture>img[alt]"
-            },
-            {
-              "name": "imageLink",
-              "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+              "selector": "div:nth-child(1)"
             },
             {
               "name": "text",
@@ -52,10 +44,9 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "2 columns",
+              "name": "cols-2",
               "value": "cols-2"
             }
           ]
@@ -66,32 +57,17 @@
       "id": "cards-tile-item",
       "fields": [
         {
-          "component": "reference",
-          "valueType": "string",
+          "component": "richtext",
           "name": "image",
           "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Image alt text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageLink",
-          "label": "Image URL (Scene7)",
-          "value": ""
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "text",
-          "label": "Title, description and link",
-          "value": ""
+          "label": "Content",
+          "valueType": "string"
         }
       ]
     }

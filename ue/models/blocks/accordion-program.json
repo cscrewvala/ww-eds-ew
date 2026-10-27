@@ -14,7 +14,7 @@
       }
     },
     {
-      "title": "Accordion – Program Item",
+      "title": "Accordion item",
       "id": "accordion-program-item",
       "model": "accordion-program-item",
       "plugins": {
@@ -44,18 +44,17 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "Open first",
+              "name": "open-first",
               "value": "open-first"
             },
             {
-              "name": "Berry bullets",
+              "name": "berry-bullets",
               "value": "berry-bullets"
             },
             {
-              "name": "Inset",
+              "name": "inset",
               "value": "inset"
             }
           ]
@@ -67,18 +66,15 @@
       "fields": [
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "summary",
-          "label": "Label",
-          "value": "",
-          "required": true
+          "label": "Heading",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "text",
-          "label": "Body",
-          "value": ""
+          "label": "Content",
+          "valueType": "string"
         }
       ]
     }

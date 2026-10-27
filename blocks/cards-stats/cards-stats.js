@@ -96,10 +96,9 @@ function isCtaRow(row) {
 function buildHeader(row) {
   const header = document.createElement('div');
   header.className = 'cards-stats-header';
-  [...row.children].forEach((cell) => {
-    moveInstrumentation(cell, header);
-    header.append(...cellContent(cell));
-  });
+  // Universal Editor: the header row is an item; its fields are edited in the properties panel
+  moveInstrumentation(row, header);
+  [...row.children].forEach((cell) => header.append(...cellContent(cell)));
   header.querySelectorAll(':scope > p').forEach((p) => p.classList.add('cards-stats-intro'));
   return header;
 }
@@ -107,6 +106,8 @@ function buildHeader(row) {
 function buildCta(row) {
   const footer = document.createElement('div');
   footer.className = 'cards-stats-cta';
+  // Universal Editor: the call-to-action row is an item
+  moveInstrumentation(row, footer);
   const a = row.querySelector('a[href]');
   const p = document.createElement('p');
   p.className = 'button-wrapper';

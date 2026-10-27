@@ -73,7 +73,7 @@
           }
         },
         {
-          "title": "Accordion – Program Item",
+          "title": "Accordion item",
           "id": "accordion-program-item",
           "model": "accordion-program-item",
           "plugins": {
@@ -108,7 +108,6 @@
         {
           "title": "Cards – Calendar",
           "id": "cards-calendar",
-          "model": "cards-calendar",
           "filter": "cards-calendar",
           "plugins": {
             "da": {
@@ -119,7 +118,7 @@
           }
         },
         {
-          "title": "Calendar Event",
+          "title": "Event",
           "id": "cards-calendar-item",
           "model": "cards-calendar-item",
           "plugins": {
@@ -133,12 +132,8 @@
                   "selector": "div:nth-child(1)"
                 },
                 {
-                  "name": "title",
+                  "name": "event",
                   "selector": "div:nth-child(2)"
-                },
-                {
-                  "name": "description",
-                  "selector": "div:nth-child(3)"
                 }
               ]
             }
@@ -147,7 +142,6 @@
         {
           "title": "Cards – Documents",
           "id": "cards-documents",
-          "model": "cards-documents",
           "filter": "cards-documents",
           "plugins": {
             "da": {
@@ -158,7 +152,7 @@
           }
         },
         {
-          "title": "Document Group",
+          "title": "Document group",
           "id": "cards-documents-item",
           "model": "cards-documents-item",
           "plugins": {
@@ -172,7 +166,7 @@
                   "selector": "div:nth-child(1)"
                 },
                 {
-                  "name": "links",
+                  "name": "documents",
                   "selector": "div:nth-child(2)"
                 }
               ]
@@ -182,7 +176,6 @@
         {
           "title": "Cards – Featured",
           "id": "cards-featured",
-          "model": "cards-featured",
           "filter": "cards-featured",
           "plugins": {
             "da": {
@@ -193,7 +186,7 @@
           }
         },
         {
-          "title": "Featured Story",
+          "title": "Card",
           "id": "cards-featured-item",
           "model": "cards-featured-item",
           "plugins": {
@@ -204,15 +197,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -225,7 +210,6 @@
         {
           "title": "Cards – Logo",
           "id": "cards-logo",
-          "model": "cards-logo",
           "filter": "cards-logo",
           "plugins": {
             "da": {
@@ -236,7 +220,7 @@
           }
         },
         {
-          "title": "Logo Card",
+          "title": "Logo card",
           "id": "cards-logo-item",
           "model": "cards-logo-item",
           "plugins": {
@@ -247,15 +231,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -268,7 +244,6 @@
         {
           "title": "Cards – Profile",
           "id": "cards-profile",
-          "model": "cards-profile",
           "filter": "cards-profile",
           "plugins": {
             "da": {
@@ -290,15 +265,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -311,7 +278,6 @@
         {
           "title": "Cards – Resource",
           "id": "cards-resource",
-          "model": "cards-resource",
           "filter": "cards-resource",
           "plugins": {
             "da": {
@@ -322,7 +288,7 @@
           }
         },
         {
-          "title": "Resource Card",
+          "title": "Resource",
           "id": "cards-resource-item",
           "model": "cards-resource-item",
           "plugins": {
@@ -333,15 +299,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -360,22 +318,12 @@
             "da": {
               "name": "cards-stats",
               "rows": 1,
-              "columns": 2,
-              "fields": [
-                {
-                  "name": "header",
-                  "selector": "div:first-child:has(h1,h2,h3,h4,h5,h6)>div"
-                },
-                {
-                  "name": "cta",
-                  "selector": "div:last-child:not(:first-child):has(>div:only-child a:only-child)>div"
-                }
-              ]
+              "columns": 2
             }
           }
         },
         {
-          "title": "Stat",
+          "title": "Row (header, stat or call to action)",
           "id": "cards-stats-item",
           "model": "cards-stats-item",
           "plugins": {
@@ -386,11 +334,11 @@
               "fields": [
                 {
                   "name": "figure",
-                  "selector": "div:first-child:not(:last-child)"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "caption",
-                  "selector": "div:last-child"
+                  "selector": "div:nth-child(2)"
                 }
               ]
             }
@@ -399,7 +347,6 @@
         {
           "title": "Cards – Story",
           "id": "cards-story",
-          "model": "cards-story",
           "filter": "cards-story",
           "plugins": {
             "da": {
@@ -410,7 +357,7 @@
           }
         },
         {
-          "title": "Story Card",
+          "title": "Story card",
           "id": "cards-story-item",
           "model": "cards-story-item",
           "plugins": {
@@ -421,15 +368,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -464,15 +403,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -485,7 +416,6 @@
         {
           "title": "Cards – Timeline",
           "id": "cards-timeline",
-          "model": "cards-timeline",
           "filter": "cards-timeline",
           "plugins": {
             "da": {
@@ -496,7 +426,7 @@
           }
         },
         {
-          "title": "Milestone",
+          "title": "Timeline entry",
           "id": "cards-timeline-item",
           "model": "cards-timeline-item",
           "plugins": {
@@ -506,11 +436,11 @@
               "columns": 4,
               "fields": [
                 {
-                  "name": "variant",
+                  "name": "year",
                   "selector": "div:nth-child(1)"
                 },
                 {
-                  "name": "year",
+                  "name": "era",
                   "selector": "div:nth-child(2)"
                 },
                 {
@@ -519,15 +449,7 @@
                 },
                 {
                   "name": "image",
-                  "selector": "div:nth-child(4) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(4) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(4) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(4)"
                 }
               ]
             }
@@ -536,7 +458,6 @@
         {
           "title": "Cards – Video",
           "id": "cards-video",
-          "model": "cards-video",
           "filter": "cards-video",
           "plugins": {
             "da": {
@@ -547,7 +468,7 @@
           }
         },
         {
-          "title": "Video Card",
+          "title": "Video",
           "id": "cards-video-item",
           "model": "cards-video-item",
           "plugins": {
@@ -558,15 +479,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
@@ -590,7 +503,7 @@
           }
         },
         {
-          "title": "Carousel – Hero Slide",
+          "title": "Slide",
           "id": "carousel-hero-item",
           "model": "carousel-hero-item",
           "plugins": {
@@ -601,23 +514,11 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1) picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1) picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)"
                 },
                 {
                   "name": "text",
                   "selector": "div:nth-child(2)"
-                },
-                {
-                  "name": "video",
-                  "selector": "div:nth-child(2) a[href*=\"/is/content/\"]"
                 }
               ]
             }
@@ -627,37 +528,29 @@
           "title": "Columns – Contact",
           "id": "columns-contact",
           "model": "columns-contact",
-          "filter": "columns-contact",
           "plugins": {
             "da": {
               "name": "columns-contact",
               "rows": 1,
-              "columns": 3,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Contact Row",
-          "id": "columns-contact-row",
-          "model": "columns-contact-row",
-          "filter": "columns-contact-row",
-          "plugins": {
-            "da": {
-              "name": "columns-contact-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Contact Column",
-          "id": "columns-contact-cell",
-          "model": "columns-contact-cell",
-          "filter": "columns-contact-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "columns": 4,
+              "fields": [
+                {
+                  "name": "col1",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "col2",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                },
+                {
+                  "name": "col3",
+                  "selector": "div:nth-child(1)>div:nth-child(3)"
+                },
+                {
+                  "name": "col4",
+                  "selector": "div:nth-child(1)>div:nth-child(4)"
+                }
+              ]
             }
           }
         },
@@ -665,37 +558,25 @@
           "title": "Columns – Gallery",
           "id": "columns-gallery",
           "model": "columns-gallery",
-          "filter": "columns-gallery",
           "plugins": {
             "da": {
               "name": "columns-gallery",
               "rows": 1,
               "columns": 3,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Gallery Row",
-          "id": "columns-gallery-row",
-          "model": "columns-gallery-row",
-          "filter": "columns-gallery-row",
-          "plugins": {
-            "da": {
-              "name": "columns-gallery-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Gallery Column",
-          "id": "columns-gallery-cell",
-          "model": "columns-gallery-cell",
-          "filter": "columns-gallery-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "fields": [
+                {
+                  "name": "image1",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "image2",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                },
+                {
+                  "name": "image3",
+                  "selector": "div:nth-child(1)>div:nth-child(3)"
+                }
+              ]
             }
           }
         },
@@ -703,37 +584,37 @@
           "title": "Columns – Logos",
           "id": "columns-logos",
           "model": "columns-logos",
-          "filter": "columns-logos",
           "plugins": {
             "da": {
               "name": "columns-logos",
               "rows": 1,
-              "columns": 4,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Logos Row",
-          "id": "columns-logos-row",
-          "model": "columns-logos-row",
-          "filter": "columns-logos-row",
-          "plugins": {
-            "da": {
-              "name": "columns-logos-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Logos Column",
-          "id": "columns-logos-cell",
-          "model": "columns-logos-cell",
-          "filter": "columns-logos-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "columns": 6,
+              "fields": [
+                {
+                  "name": "logo1",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "logo2",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                },
+                {
+                  "name": "logo3",
+                  "selector": "div:nth-child(1)>div:nth-child(3)"
+                },
+                {
+                  "name": "logo4",
+                  "selector": "div:nth-child(1)>div:nth-child(4)"
+                },
+                {
+                  "name": "logo5",
+                  "selector": "div:nth-child(1)>div:nth-child(5)"
+                },
+                {
+                  "name": "logo6",
+                  "selector": "div:nth-child(1)>div:nth-child(6)"
+                }
+              ]
             }
           }
         },
@@ -741,37 +622,21 @@
           "title": "Columns – Media",
           "id": "columns-media",
           "model": "columns-media",
-          "filter": "columns-media",
           "plugins": {
             "da": {
               "name": "columns-media",
               "rows": 1,
               "columns": 2,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Media Row",
-          "id": "columns-media-row",
-          "model": "columns-media-row",
-          "filter": "columns-media-row",
-          "plugins": {
-            "da": {
-              "name": "columns-media-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Media Column",
-          "id": "columns-media-cell",
-          "model": "columns-media-cell",
-          "filter": "columns-media-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "fields": [
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                }
+              ]
             }
           }
         },
@@ -779,37 +644,21 @@
           "title": "Columns – Panel",
           "id": "columns-panel",
           "model": "columns-panel",
-          "filter": "columns-panel",
           "plugins": {
             "da": {
               "name": "columns-panel",
               "rows": 1,
               "columns": 2,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Panel Row",
-          "id": "columns-panel-row",
-          "model": "columns-panel-row",
-          "filter": "columns-panel-row",
-          "plugins": {
-            "da": {
-              "name": "columns-panel-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Panel Column",
-          "id": "columns-panel-cell",
-          "model": "columns-panel-cell",
-          "filter": "columns-panel-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "fields": [
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "image",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                }
+              ]
             }
           }
         },
@@ -817,37 +666,21 @@
           "title": "Columns – Spotlight",
           "id": "columns-spotlight",
           "model": "columns-spotlight",
-          "filter": "columns-spotlight",
           "plugins": {
             "da": {
               "name": "columns-spotlight",
               "rows": 1,
               "columns": 2,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Spotlight Row",
-          "id": "columns-spotlight-row",
-          "model": "columns-spotlight-row",
-          "filter": "columns-spotlight-row",
-          "plugins": {
-            "da": {
-              "name": "columns-spotlight-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Spotlight Column",
-          "id": "columns-spotlight-cell",
-          "model": "columns-spotlight-cell",
-          "filter": "columns-spotlight-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "fields": [
+                {
+                  "name": "media",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "text",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                }
+              ]
             }
           }
         },
@@ -855,44 +688,43 @@
           "title": "Columns – Text",
           "id": "columns-text",
           "model": "columns-text",
-          "filter": "columns-text",
           "plugins": {
             "da": {
               "name": "columns-text",
-              "rows": 1,
-              "columns": 2,
-              "behaviour": "columns"
-            }
-          }
-        },
-        {
-          "title": "Text Row",
-          "id": "columns-text-row",
-          "model": "columns-text-row",
-          "filter": "columns-text-row",
-          "plugins": {
-            "da": {
-              "name": "columns-text-row",
-              "behaviour": "columns-row"
-            }
-          }
-        },
-        {
-          "title": "Text Column",
-          "id": "columns-text-cell",
-          "model": "columns-text-cell",
-          "filter": "columns-text-cell",
-          "plugins": {
-            "da": {
-              "unsafeHTML": "<div></div>",
-              "behaviour": "columns-cell"
+              "rows": 2,
+              "columns": 3,
+              "fields": [
+                {
+                  "name": "col1",
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
+                },
+                {
+                  "name": "col2",
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
+                },
+                {
+                  "name": "col3",
+                  "selector": "div:nth-child(1)>div:nth-child(3)"
+                },
+                {
+                  "name": "row2col1",
+                  "selector": "div:nth-child(2)>div:nth-child(1)"
+                },
+                {
+                  "name": "row2col2",
+                  "selector": "div:nth-child(2)>div:nth-child(2)"
+                },
+                {
+                  "name": "row2col3",
+                  "selector": "div:nth-child(2)>div:nth-child(3)"
+                }
+              ]
             }
           }
         },
         {
           "title": "Embed – Iframe",
           "id": "embed-iframe",
-          "model": "embed-iframe",
           "filter": "embed-iframe",
           "plugins": {
             "da": {
@@ -903,7 +735,7 @@
           }
         },
         {
-          "title": "Embedded Widget",
+          "title": "Embed",
           "id": "embed-iframe-item",
           "model": "embed-iframe-item",
           "plugins": {
@@ -960,15 +792,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1)>div picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1)>div picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)>div"
                 },
                 {
                   "name": "text",
@@ -990,15 +814,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1)>div picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1)>div picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)>div"
                 },
                 {
                   "name": "text",
@@ -1042,15 +858,7 @@
               "fields": [
                 {
                   "name": "image",
-                  "selector": "div:nth-child(1)>div picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1)>div picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
+                  "selector": "div:nth-child(1)>div"
                 },
                 {
                   "name": "text",
@@ -1072,11 +880,11 @@
               "fields": [
                 {
                   "name": "text",
-                  "selector": "div>div:nth-child(1)"
+                  "selector": "div:nth-child(1)>div:nth-child(1)"
                 },
                 {
                   "name": "actions",
-                  "selector": "div>div:nth-child(2)"
+                  "selector": "div:nth-child(1)>div:nth-child(2)"
                 }
               ]
             }
@@ -1107,68 +915,86 @@
         {
           "title": "Search",
           "id": "search",
-          "model": "search",
+          "filter": "search",
           "plugins": {
             "da": {
               "name": "search",
-              "type": "key-value-block"
+              "rows": 1,
+              "columns": 2
+            }
+          }
+        },
+        {
+          "title": "Search setting",
+          "id": "search-item",
+          "model": "search-item",
+          "plugins": {
+            "da": {
+              "name": "search-item",
+              "rows": 1,
+              "columns": 2,
+              "fields": [
+                {
+                  "name": "key",
+                  "selector": "div:nth-child(1)"
+                },
+                {
+                  "name": "value",
+                  "selector": "div:nth-child(2)"
+                }
+              ]
             }
           }
         },
         {
           "title": "Table – Data",
           "id": "table-data",
-          "model": "table-data",
           "filter": "table-data",
           "plugins": {
             "da": {
               "name": "table-data",
               "rows": 1,
-              "columns": 3
+              "columns": 7
             }
           }
         },
         {
-          "title": "Table Row",
+          "title": "Table row",
           "id": "table-data-item",
           "model": "table-data-item",
           "plugins": {
             "da": {
               "name": "table-data-item",
               "rows": 1,
-              "columns": 3,
+              "columns": 7,
               "fields": [
                 {
-                  "name": "cell1",
+                  "name": "col1",
                   "selector": "div:nth-child(1)"
                 },
                 {
-                  "name": "cell2",
+                  "name": "col2",
                   "selector": "div:nth-child(2)"
                 },
                 {
-                  "name": "cell3",
+                  "name": "col3",
                   "selector": "div:nth-child(3)"
                 },
                 {
-                  "name": "cell4",
+                  "name": "col4",
                   "selector": "div:nth-child(4)"
                 },
                 {
-                  "name": "cell5",
+                  "name": "col5",
                   "selector": "div:nth-child(5)"
                 },
                 {
-                  "name": "cell6",
+                  "name": "col6",
                   "selector": "div:nth-child(6)"
                 },
                 {
-                  "name": "cell7",
+                  "name": "col7",
                   "selector": "div:nth-child(7)"
-                },
-                {
-                  "name": "cell8",
-                  "selector": "div:nth-child(8)"
                 }
               ]
             }
@@ -1185,20 +1011,8 @@
               "columns": 1,
               "fields": [
                 {
-                  "name": "image",
-                  "selector": "div:nth-child(1)>div picture>img[src]"
-                },
-                {
-                  "name": "imageAlt",
-                  "selector": "div:nth-child(1)>div picture>img[alt]"
-                },
-                {
-                  "name": "imageLink",
-                  "selector": "div:nth-child(1)>div a[href*=\"/is/image/\"]"
-                },
-                {
-                  "name": "video",
-                  "selector": "div:nth-child(1)>div a[href]:not([href*=\"/is/image/\"])"
+                  "name": "media",
+                  "selector": "div:nth-child(1)>div"
                 },
                 {
                   "name": "text",

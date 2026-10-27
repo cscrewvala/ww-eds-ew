@@ -95,8 +95,10 @@ function readConfig(block) {
   const categories = [];
   let authoredIndex = '';
   [...block.querySelectorAll(':scope > div')].forEach((row) => {
-    const [labelCell, valueCell] = row.children;
+    const [labelCell, cell2] = row.children;
     if (!labelCell) return;
+    // an empty second cell counts as absent (a Universal Editor save adds empty cells)
+    const valueCell = cell2 && (cell2.textContent.trim() || cell2.querySelector('a')) ? cell2 : null;
     if (!valueCell) {
       const link = labelCell.querySelector('a');
       const value = (link ? link.getAttribute('href') : labelCell.textContent).trim();

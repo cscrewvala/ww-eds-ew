@@ -589,6 +589,14 @@ async function loadPage() {
 // imports blocks that import this module, so awaiting it here would deadlock the module graph.
 if (/\.(stage-ue|ue)\.da\.live$/.test(window.location.hostname)) {
   document.documentElement.dataset.ue = 'true';
+  // snapshot every field's authored content before decoration: the editor saves an inline
+  // edit from the element's rendered HTML, so ue.js only allows inline editing where the
+  // decorated element still matches it (otherwise the field is edited in the properties panel)
+  window.hlx.ueAuthored = new Map();
+  document.querySelectorAll('main [data-aue-prop]').forEach((el) => {
+    const resource = el.closest('[data-aue-resource]')?.dataset.aueResource;
+    window.hlx.ueAuthored.set(`${resource}|${el.dataset.aueProp}`, { html: el.innerHTML, text: el.textContent });
+  });
   // eslint-disable-next-line import/no-unresolved
   import(`${window.hlx.codeBasePath}/ue/scripts/ue.js`).then(({ default: ue }) => ue());
 }

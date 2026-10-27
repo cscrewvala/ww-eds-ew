@@ -221,18 +221,17 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Open first",
+            "name": "open-first",
             "value": "open-first"
           },
           {
-            "name": "Berry bullets",
+            "name": "berry-bullets",
             "value": "berry-bullets"
           },
           {
-            "name": "Inset",
+            "name": "inset",
             "value": "inset"
           }
         ]
@@ -244,18 +243,15 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "summary",
-        "label": "Label",
-        "value": "",
-        "required": true
+        "label": "Heading",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Body",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
   },
@@ -342,183 +338,90 @@
     ]
   },
   {
-    "id": "cards-calendar",
-    "fields": []
-  },
-  {
     "id": "cards-calendar-item",
     "fields": [
       {
         "component": "text",
-        "valueType": "string",
         "name": "date",
-        "label": "Date (dd/mm/yyyy)",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "title",
-        "label": "Event title",
-        "value": ""
+        "label": "Date",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "description",
-        "label": "Details (optional)",
-        "value": ""
+        "name": "event",
+        "label": "Event",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-documents",
-    "fields": []
   },
   {
     "id": "cards-documents-item",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "richtext",
         "name": "title",
-        "label": "Group title (e.g. year)",
-        "value": ""
+        "label": "Group title",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "links",
-        "label": "Document links",
-        "value": ""
+        "name": "documents",
+        "label": "Documents (list of links)",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-featured",
-    "fields": []
   },
   {
     "id": "cards-featured-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Tags, title and link (a video link adds a play button)",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-logo",
-    "fields": []
   },
   {
     "id": "cards-logo-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Logo",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Logo alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Name, description and link",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-profile",
-    "fields": []
   },
   {
     "id": "cards-profile-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Photo",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Photo alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Name, role, appointment and link",
-        "value": ""
-      }
-    ]
-  },
-  {
-    "id": "cards-resource",
-    "fields": [
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Options",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "Document frames",
-            "value": "documents"
-          }
-        ]
+        "label": "Content",
+        "valueType": "string"
       }
     ]
   },
@@ -526,32 +429,17 @@
     "id": "cards-resource-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
-        "label": "Icon",
-        "multi": false
-      },
-      {
-        "component": "text",
+        "label": "Image",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Icon alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Title, description and link",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
   },
@@ -562,31 +450,16 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Panel (rounded container, header row and CTA row)",
+            "name": "panel",
             "value": "panel"
           },
           {
-            "name": "Sky tint 5% background",
+            "name": "tint-sky-5",
             "value": "tint-sky-5"
           }
         ]
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "header",
-        "label": "Panel heading and intro (first row, panel only)",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "cta",
-        "label": "Panel CTA link (last row, panel only)",
-        "value": ""
       }
     ]
   },
@@ -595,54 +468,33 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "figure",
-        "label": "Figure (e.g. 100%)",
-        "value": ""
+        "label": "Figure / heading",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "caption",
         "label": "Caption",
-        "value": ""
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-story",
-    "fields": []
   },
   {
     "id": "cards-story-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Tags, title and link",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
   },
@@ -653,10 +505,9 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "2 columns",
+            "name": "cols-2",
             "value": "cols-2"
           }
         ]
@@ -667,145 +518,64 @@
     "id": "cards-tile-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Title, description and link",
-        "value": ""
+        "label": "Content",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-timeline",
-    "fields": []
   },
   {
     "id": "cards-timeline-item",
     "fields": [
       {
-        "component": "select",
-        "valueType": "string",
-        "name": "variant",
-        "label": "Band colour and side",
-        "options": [
-          {
-            "name": "Midnight band, card left",
-            "value": "midnight"
-          },
-          {
-            "name": "Midnight band, card right",
-            "value": "midnight, right"
-          },
-          {
-            "name": "Sky band, card left",
-            "value": "sky"
-          },
-          {
-            "name": "Sky band, card right",
-            "value": "sky, right"
-          },
-          {
-            "name": "Ocean band, card left",
-            "value": "ocean"
-          },
-          {
-            "name": "Ocean band, card right",
-            "value": "ocean, right"
-          }
-        ]
-      },
-      {
         "component": "text",
-        "valueType": "string",
         "name": "year",
         "label": "Year",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "text",
-        "label": "Title and text",
-        "value": ""
+        "name": "era",
+        "label": "Era",
+        "valueType": "string"
       },
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
+        "name": "text",
+        "label": "Content",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "cards-video",
-    "fields": []
   },
   {
     "id": "cards-video-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Poster image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Poster image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Video link (title) and date",
-        "value": ""
+        "label": "Video link and caption",
+        "valueType": "string"
       }
     ]
   },
@@ -816,18 +586,17 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Gradient",
+            "name": "gradient",
             "value": "gradient"
           },
           {
-            "name": "No overlay",
+            "name": "no-overlay",
             "value": "no-overlay"
           },
           {
-            "name": "Hide controls",
+            "name": "hide-controls",
             "value": "hide-controls"
           }
         ]
@@ -838,39 +607,17 @@
     "id": "carousel-hero-item",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
-        "label": "Image (video poster)",
-        "multi": false
-      },
-      {
-        "component": "text",
+        "label": "Image",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "video",
-        "label": "Video URL (Scene7 /is/content/)",
-        "value": ""
+        "label": "Text (optional video link first)",
+        "valueType": "string"
       }
     ]
   },
@@ -878,15 +625,28 @@
     "id": "columns-contact",
     "fields": [
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 3,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 6
-        }
+        "component": "richtext",
+        "name": "col1",
+        "label": "Column 1",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "col2",
+        "label": "Column 2",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "col3",
+        "label": "Column 3",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "col4",
+        "label": "Column 4",
+        "valueType": "string"
       }
     ]
   },
@@ -894,15 +654,25 @@
     "id": "columns-gallery",
     "fields": [
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 3,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 4
-        }
+        "component": "richtext",
+        "name": "image1",
+        "label": "Image 1",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "image2",
+        "label": "Image 2",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "image3",
+        "label": "Image 3",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       }
     ]
   },
@@ -910,15 +680,46 @@
     "id": "columns-logos",
     "fields": [
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 4,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 8
-        }
+        "component": "richtext",
+        "name": "logo1",
+        "label": "Logo 1",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "logo2",
+        "label": "Logo 2",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "logo3",
+        "label": "Logo 3",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "logo4",
+        "label": "Logo 4",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "logo5",
+        "label": "Logo 5",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
+      },
+      {
+        "component": "richtext",
+        "name": "logo6",
+        "label": "Logo 6",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       }
     ]
   },
@@ -929,28 +730,29 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Image border",
+            "name": "image-border",
             "value": "image-border"
           },
           {
-            "name": "Berry bullets",
+            "name": "bullets-berry",
             "value": "bullets-berry"
           }
         ]
       },
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 2,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 2
-        }
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       }
     ]
   },
@@ -958,15 +760,17 @@
     "id": "columns-panel",
     "fields": [
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 2,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 2
-        }
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "image",
+        "label": "Image",
+        "valueType": "string",
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       }
     ]
   },
@@ -977,24 +781,24 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Dual (text left, full-bleed media right)",
+            "name": "dual",
             "value": "dual"
           }
         ]
       },
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 2,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 2
-        }
+        "component": "richtext",
+        "name": "media",
+        "label": "Image and links",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "valueType": "string"
       }
     ]
   },
@@ -1002,46 +806,63 @@
     "id": "columns-text",
     "fields": [
       {
-        "component": "number",
-        "valueType": "number",
-        "name": "columns",
-        "label": "Number of Columns",
-        "value": 2,
-        "validation": {
-          "numberMin": 1,
-          "numberMax": 3
-        }
+        "component": "richtext",
+        "name": "col1",
+        "label": "Column 1",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "col2",
+        "label": "Column 2",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "col3",
+        "label": "Column 3",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "row2col1",
+        "label": "Row 2 – Column 1",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "row2col2",
+        "label": "Row 2 – Column 2",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "row2col3",
+        "label": "Row 2 – Column 3",
+        "valueType": "string"
       }
     ]
-  },
-  {
-    "id": "embed-iframe",
-    "fields": []
   },
   {
     "id": "embed-iframe-item",
     "fields": [
       {
         "component": "text",
-        "valueType": "string",
         "name": "label",
-        "label": "Label (tab label and iframe title)",
-        "value": ""
+        "label": "Tab label",
+        "valueType": "string"
       },
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "richtext",
         "name": "url",
-        "label": "Iframe URL (https)",
-        "value": "",
-        "required": true
+        "label": "URL",
+        "valueType": "string"
       },
       {
         "component": "text",
-        "valueType": "string",
         "name": "height",
-        "label": "Height in px (optional, e.g. 1300)",
-        "value": ""
+        "label": "Height (px)",
+        "valueType": "string"
       }
     ]
   },
@@ -1070,61 +891,45 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Subtitle",
+            "name": "subtitle",
             "value": "subtitle"
           },
           {
-            "name": "Gradient",
+            "name": "gradient",
             "value": "gradient"
           },
           {
-            "name": "No overlay",
+            "name": "no-overlay",
             "value": "no-overlay"
           },
           {
-            "name": "Top",
+            "name": "top",
             "value": "top"
           },
           {
-            "name": "Bottom",
+            "name": "bottom",
             "value": "bottom"
           },
           {
-            "name": "Right",
+            "name": "right",
             "value": "right"
           }
         ]
       },
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
         "label": "Label and title",
-        "value": ""
+        "valueType": "string"
       }
     ]
   },
@@ -1132,32 +937,17 @@
     "id": "hero-banner",
     "fields": [
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Heading and intro",
-        "value": ""
+        "label": "Title and text",
+        "valueType": "string"
       }
     ]
   },
@@ -1165,18 +955,16 @@
     "id": "hero-brand",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "richtext",
         "name": "logo",
-        "label": "Logo (icon, e.g. :wwg-100-years:)",
-        "value": ""
+        "label": "Logo / icon",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
         "label": "Tagline",
-        "value": ""
+        "valueType": "string"
       }
     ]
   },
@@ -1187,41 +975,25 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Offset top",
+            "name": "offset-top",
             "value": "offset-top"
           }
         ]
       },
       {
-        "component": "reference",
-        "valueType": "string",
+        "component": "richtext",
         "name": "image",
         "label": "Image",
-        "multi": false
-      },
-      {
-        "component": "text",
         "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
+        "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Title and subtitle",
-        "value": ""
+        "label": "Title and intro",
+        "valueType": "string"
       }
     ]
   },
@@ -1230,17 +1002,15 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
-        "label": "Alert label, heading and terms",
-        "value": ""
+        "label": "Terms text",
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "actions",
-        "label": "Actions (Decline link, Accept text)",
-        "value": ""
+        "label": "Buttons",
+        "valueType": "string"
       }
     ]
   },
@@ -1251,69 +1021,41 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Blockquote (inline, no quote marks)",
+            "name": "blockquote",
             "value": "blockquote"
           }
         ]
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "quote",
         "label": "Quote",
-        "value": ""
+        "valueType": "string"
       },
       {
-        "component": "text",
-        "valueType": "string",
+        "component": "richtext",
         "name": "attribution",
-        "label": "Attribution (name – role)",
-        "value": ""
+        "label": "Attribution",
+        "valueType": "string"
       }
     ]
   },
   {
-    "id": "search",
+    "id": "search-item",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "index",
-        "label": "Index",
-        "value": "",
-        "description": "Query index URL (default /query-index.json). Overrides a single-cell index row"
+        "component": "richtext",
+        "name": "key",
+        "label": "Label (or index URL / \"Page size\")",
+        "valueType": "string"
       },
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "pageSize",
-        "label": "Page size",
-        "value": "",
-        "description": "Results per page (default 10)"
-      }
-    ]
-  },
-  {
-    "id": "table-data",
-    "fields": [
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Style",
-        "valueType": "string",
-        "options": [
-          {
-            "name": "List (rules, link icons, stacked on mobile)",
-            "value": "list"
-          },
-          {
-            "name": "Bordered grid",
-            "value": "bordered"
-          }
-        ]
+        "component": "richtext",
+        "name": "value",
+        "label": "Path / value",
+        "valueType": "string"
       }
     ]
   },
@@ -1322,59 +1064,45 @@
     "fields": [
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell1",
+        "name": "col1",
         "label": "Column 1",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell2",
+        "name": "col2",
         "label": "Column 2",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell3",
+        "name": "col3",
         "label": "Column 3",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell4",
+        "name": "col4",
         "label": "Column 4",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell5",
+        "name": "col5",
         "label": "Column 5",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell6",
+        "name": "col6",
         "label": "Column 6",
-        "value": ""
+        "valueType": "string"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "cell7",
+        "name": "col7",
         "label": "Column 7",
-        "value": ""
-      },
-      {
-        "component": "richtext",
-        "valueType": "string",
-        "name": "cell8",
-        "label": "Column 8",
-        "value": ""
+        "valueType": "string"
       }
     ]
   },
@@ -1385,48 +1113,25 @@
         "component": "multiselect",
         "name": "classes",
         "label": "Options",
-        "valueType": "string",
         "options": [
           {
-            "name": "Tile",
+            "name": "tile",
             "value": "tile"
           }
         ]
       },
       {
-        "component": "reference",
+        "component": "richtext",
+        "name": "media",
+        "label": "Poster image and video link",
         "valueType": "string",
-        "name": "image",
-        "label": "Poster image",
-        "multi": false
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "imageLink",
-        "label": "Image URL (Scene7)",
-        "value": ""
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "video",
-        "label": "Video URL",
-        "value": ""
+        "description": "Poster (Scene7 image link) and the video link"
       },
       {
         "component": "richtext",
-        "valueType": "string",
         "name": "text",
         "label": "Title and description",
-        "value": ""
+        "valueType": "string"
       }
     ]
   }

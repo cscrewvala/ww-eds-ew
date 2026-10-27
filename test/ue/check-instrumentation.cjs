@@ -37,6 +37,12 @@ const filters = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(ROOT, 'c
 const args = process.argv.slice(2);
 const onlyBlock = args.includes('--block') ? args[args.indexOf('--block') + 1] : null;
 const paths = args.filter((a, i) => a.startsWith('/') && args[i - 1] !== '--block');
+// --ue-host: load the page as https://main--ww-eds-ew--cscrewvala.ue.da.live (mapped to the local
+// preview) so the editor code path runs (scripts.js editor mode + ue/scripts/ue.js inline guard).
+// Then every field still bound on the canvas must hold exactly its authored content (that is what
+// an inline save writes); fields the guard moved to the properties panel are reported, not failed.
+const ueHost = args.includes('--ue-host');
+const UE_HOST = 'https://main--ww-eds-ew--cscrewvala.ue.da.live';
 
 const typeOf = (component) => (component === 'reference' ? 'media' : component === 'richtext' ? 'richtext' : 'text');
 
@@ -64,7 +70,7 @@ function instrument({ defs: allDefs, models: allModels, filters: allFilters, onl
       el.setAttribute('data-aue-prop', f.name);
       el.setAttribute('data-aue-type', typeOfF(mf.component));
       el.setAttribute('data-aue-label', mf.label || f.name);
-      expected.push({ resource, prop: f.name, kind: 'prop' });
+      expected.push({ resource, prop: f.name, kind: 'prop', ptype: typeOfF(mf.component), html: el.innerHTML, text: el.textContent });
     });
   };
   document.querySelectorAll('main > div > div[class]').forEach((block) => {
@@ -128,14 +134,26 @@ function instrument({ defs: allDefs, models: allModels, filters: allFilters, onl
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     const errors = [];
     page.on('pageerror', (e) => errors.push(e.message));
-    const url = `${ORIGIN}/content${p === '/' ? '/index' : p}`;
+    const localUrl = `${ORIGIN}/content${p === '/' ? '/index' : p}`;
+    const url = ueHost ? `${UE_HOST}${p}` : localUrl;
+    const LIVERELOAD = new RegExp('<script[^>]*livereload[^>]*></script>', 'g');
+    await page.route(/livereload/, (route) => route.abort());
+    if (ueHost) {
+      // code and other requests on the editor host come from the local preview
+      await page.route(`${UE_HOST}/**`, async (route) => {
+        const u = new URL(route.request().url());
+        if (u.href === url) return route.fallback();
+        const res = await route.fetch({ url: `${ORIGIN}${u.pathname}${u.search}` });
+        return route.fulfill({ response: res });
+      });
+    }
     // instrument the server HTML before any page script runs
     await page.route(url, async (route) => {
-      const res = await route.fetch();
-      const html = await res.text();
+      const res = await route.fetch({ url: localUrl });
+      const html = (await res.text()).replace(LIVERELOAD, '');
       const inject = `<script nonce="aem">(${instrument.toString()})(${JSON.stringify({ defs, models, filters, onlyBlock })});</script>`;
       // run after the body is parsed but before the module scripts execute (they are deferred)
-      await route.fulfill({ response: res, body: html.replace('</body>', `${inject}</body>`), headers: { ...res.headers(), 'content-type': 'text/html' } });
+      await route.fulfill({ response: res, body: html.replace('</body>', `${inject}</body>`), headers: { ...res.headers(), 'content-type': 'text/html; charset=utf-8' } });
     });
     await page.goto(url, { waitUntil: 'networkidle' });
     // scroll through the page so lazy-loaded images get a size before visibility is measured
@@ -158,11 +176,29 @@ function instrument({ defs: allDefs, models: allModels, filters: allFilters, onl
           els = [...document.querySelectorAll(`[data-aue-prop="${e.prop}"]`)].filter((x) => x.closest(`[data-aue-resource="${e.resource}"]`) || false);
         }
         const el = els[0];
-        return { ...e, ok: !!el, visible: el ? visible(el) : false, tag: el ? el.tagName.toLowerCase() : null };
+        const norm = (x) => (x || '').replace(/\s+/g, ' ').replace(/> </g, '><').trim();
+        const inlineSame = !el || e.kind !== 'prop' || e.ptype === 'media'
+          || (e.ptype === 'richtext' ? norm(el.innerHTML) === norm(e.html) : norm(el.textContent) === norm(e.text));
+        return { ...e, ok: !!el, visible: el ? visible(el) : false, tag: el ? el.tagName.toLowerCase() : null, inlineSame,
+          ueMode: document.documentElement.dataset.ue === 'true', got: el && !inlineSame ? norm(el.innerHTML).slice(0, 200) : undefined, html: undefined, text: undefined };
       });
     });
     const byBlock = {};
     report.forEach((r) => { const b = r.block || (r.resource || '').split('/')[1]; (byBlock[b] = byBlock[b] || []).push(r); });
+    if (ueHost) {
+      const comps = report.filter((r) => r.kind !== 'prop');
+      const props = report.filter((r) => r.kind === 'prop');
+      const unsafe = props.filter((r) => r.ok && !r.inlineSame);
+      const lostComps = comps.filter((r) => !r.ok);
+      const inline = props.filter((r) => r.ok).length;
+      const notUe = report.length && !report[0].ueMode;
+      console.log(`\n${p}: ${comps.length} blocks/items (${lostComps.length} lost), fields ${props.length}: ${inline} inline, ${props.length - inline} panel-only, ${unsafe.length} UNSAFE inline${notUe ? ' (editor mode NOT active!)' : ''}${errors.length ? `, page errors: ${errors.join(' | ')}` : ''}`);
+      lostComps.forEach((r) => console.log('  LOST   ', r.missingDefinition ? `no definition for block "${r.block}"` : r.error || `${r.kind} ${r.resource}`));
+      unsafe.forEach((r) => console.log('  UNSAFE ', `${r.resource} prop=${r.prop} (${r.tag}): ${r.got}`));
+      failed += lostComps.length + unsafe.length + (notUe ? 1 : 0) + (errors.length ? 1 : 0);
+      await page.close();
+      continue;
+    }
     const lost = report.filter((r) => !r.ok);
     const hidden = report.filter((r) => r.ok && !r.visible && r.kind !== 'prop');
     console.log(`\n${p}: ${report.length} instrumented, ${lost.length} lost, ${hidden.length} on invisible elements${errors.length ? `, page errors: ${errors.join(' | ')}` : ''}`);
