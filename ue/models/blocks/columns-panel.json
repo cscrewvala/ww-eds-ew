@@ -4,37 +4,21 @@
       "title": "Columns – Panel",
       "id": "columns-panel",
       "model": "columns-panel",
-      "filter": "columns-panel",
       "plugins": {
         "da": {
           "name": "columns-panel",
           "rows": 1,
           "columns": 2,
-          "behaviour": "columns"
-        }
-      }
-    },
-    {
-      "title": "Panel Row",
-      "id": "columns-panel-row",
-      "model": "columns-panel-row",
-      "filter": "columns-panel-row",
-      "plugins": {
-        "da": {
-          "name": "columns-panel-row",
-          "behaviour": "columns-row"
-        }
-      }
-    },
-    {
-      "title": "Panel Column",
-      "id": "columns-panel-cell",
-      "model": "columns-panel-cell",
-      "filter": "columns-panel-cell",
-      "plugins": {
-        "da": {
-          "unsafeHTML": "<div></div>",
-          "behaviour": "columns-cell"
+          "fields": [
+            {
+              "name": "text",
+              "selector": "div:nth-child(1)>div:nth-child(1)"
+            },
+            {
+              "name": "image",
+              "selector": "div:nth-child(1)>div:nth-child(2)"
+            }
+          ]
         }
       }
     }
@@ -44,36 +28,20 @@
       "id": "columns-panel",
       "fields": [
         {
-          "component": "number",
-          "valueType": "number",
-          "name": "columns",
-          "label": "Number of Columns",
-          "value": 2,
-          "validation": {
-            "numberMin": 1,
-            "numberMax": 2
-          }
+          "component": "richtext",
+          "name": "text",
+          "label": "Text",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "image",
+          "label": "Image",
+          "valueType": "string",
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns-panel",
-      "components": [
-        "columns-panel-row"
-      ]
-    },
-    {
-      "id": "columns-panel-row",
-      "components": []
-    },
-    {
-      "id": "columns-panel-cell",
-      "components": [
-        "text",
-        "image"
-      ]
-    }
-  ]
+  "filters": []
 }

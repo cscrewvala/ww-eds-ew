@@ -4,37 +4,21 @@
       "title": "Columns – Spotlight",
       "id": "columns-spotlight",
       "model": "columns-spotlight",
-      "filter": "columns-spotlight",
       "plugins": {
         "da": {
           "name": "columns-spotlight",
           "rows": 1,
           "columns": 2,
-          "behaviour": "columns"
-        }
-      }
-    },
-    {
-      "title": "Spotlight Row",
-      "id": "columns-spotlight-row",
-      "model": "columns-spotlight-row",
-      "filter": "columns-spotlight-row",
-      "plugins": {
-        "da": {
-          "name": "columns-spotlight-row",
-          "behaviour": "columns-row"
-        }
-      }
-    },
-    {
-      "title": "Spotlight Column",
-      "id": "columns-spotlight-cell",
-      "model": "columns-spotlight-cell",
-      "filter": "columns-spotlight-cell",
-      "plugins": {
-        "da": {
-          "unsafeHTML": "<div></div>",
-          "behaviour": "columns-cell"
+          "fields": [
+            {
+              "name": "media",
+              "selector": "div:nth-child(1)>div:nth-child(1)"
+            },
+            {
+              "name": "text",
+              "selector": "div:nth-child(1)>div:nth-child(2)"
+            }
+          ]
         }
       }
     }
@@ -47,45 +31,27 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "Dual (text left, full-bleed media right)",
+              "name": "dual",
               "value": "dual"
             }
           ]
         },
         {
-          "component": "number",
-          "valueType": "number",
-          "name": "columns",
-          "label": "Number of Columns",
-          "value": 2,
-          "validation": {
-            "numberMin": 1,
-            "numberMax": 2
-          }
+          "component": "richtext",
+          "name": "media",
+          "label": "Image and links",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "label": "Text",
+          "valueType": "string"
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns-spotlight",
-      "components": [
-        "columns-spotlight-row"
-      ]
-    },
-    {
-      "id": "columns-spotlight-row",
-      "components": []
-    },
-    {
-      "id": "columns-spotlight-cell",
-      "components": [
-        "image",
-        "text"
-      ]
-    }
-  ]
+  "filters": []
 }

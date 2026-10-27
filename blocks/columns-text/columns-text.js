@@ -11,7 +11,9 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
-  const widest = Math.max(1, ...rows.map((r) => r.children.length));
+  // empty cells (e.g. padding added by a Universal Editor save) don't count as columns
+  const filled = (cell) => !!(cell.textContent.trim() || cell.querySelector('picture, img'));
+  const widest = Math.max(1, ...rows.map((r) => [...r.children].filter(filled).length));
   const cols = Math.min(widest === 1 ? 2 : widest, 3);
   block.classList.add(`columns-text-${cols}-cols`);
 

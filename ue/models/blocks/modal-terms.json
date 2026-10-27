@@ -12,11 +12,11 @@
           "fields": [
             {
               "name": "text",
-              "selector": "div>div:nth-child(1)"
+              "selector": "div:nth-child(1)>div:nth-child(1)"
             },
             {
               "name": "actions",
-              "selector": "div>div:nth-child(2)"
+              "selector": "div:nth-child(1)>div:nth-child(2)"
             }
           ]
         }
@@ -29,17 +29,15 @@
       "fields": [
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "text",
-          "label": "Alert label, heading and terms",
-          "value": ""
+          "label": "Terms text",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "actions",
-          "label": "Actions (Decline link, Accept text)",
-          "value": ""
+          "label": "Buttons",
+          "valueType": "string"
         }
       ]
     }

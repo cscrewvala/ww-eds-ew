@@ -3,7 +3,6 @@
     {
       "title": "Embed – Iframe",
       "id": "embed-iframe",
-      "model": "embed-iframe",
       "filter": "embed-iframe",
       "plugins": {
         "da": {
@@ -14,7 +13,7 @@
       }
     },
     {
-      "title": "Embedded Widget",
+      "title": "Embed",
       "id": "embed-iframe-item",
       "model": "embed-iframe-item",
       "plugins": {
@@ -42,33 +41,25 @@
   ],
   "models": [
     {
-      "id": "embed-iframe",
-      "fields": []
-    },
-    {
       "id": "embed-iframe-item",
       "fields": [
         {
           "component": "text",
-          "valueType": "string",
           "name": "label",
-          "label": "Label (tab label and iframe title)",
-          "value": ""
+          "label": "Tab label",
+          "valueType": "string"
         },
         {
-          "component": "text",
-          "valueType": "string",
+          "component": "richtext",
           "name": "url",
-          "label": "Iframe URL (https)",
-          "value": "",
-          "required": true
+          "label": "URL",
+          "valueType": "string"
         },
         {
           "component": "text",
-          "valueType": "string",
           "name": "height",
-          "label": "Height in px (optional, e.g. 1300)",
-          "value": ""
+          "label": "Height (px)",
+          "valueType": "string"
         }
       ]
     }

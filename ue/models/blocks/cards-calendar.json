@@ -3,7 +3,6 @@
     {
       "title": "Cards – Calendar",
       "id": "cards-calendar",
-      "model": "cards-calendar",
       "filter": "cards-calendar",
       "plugins": {
         "da": {
@@ -14,7 +13,7 @@
       }
     },
     {
-      "title": "Calendar Event",
+      "title": "Event",
       "id": "cards-calendar-item",
       "model": "cards-calendar-item",
       "plugins": {
@@ -28,12 +27,8 @@
               "selector": "div:nth-child(1)"
             },
             {
-              "name": "title",
+              "name": "event",
               "selector": "div:nth-child(2)"
-            },
-            {
-              "name": "description",
-              "selector": "div:nth-child(3)"
             }
           ]
         }
@@ -42,32 +37,19 @@
   ],
   "models": [
     {
-      "id": "cards-calendar",
-      "fields": []
-    },
-    {
       "id": "cards-calendar-item",
       "fields": [
         {
           "component": "text",
-          "valueType": "string",
           "name": "date",
-          "label": "Date (dd/mm/yyyy)",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "title",
-          "label": "Event title",
-          "value": ""
+          "label": "Date",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "description",
-          "label": "Details (optional)",
-          "value": ""
+          "name": "event",
+          "label": "Event",
+          "valueType": "string"
         }
       ]
     }

@@ -4,37 +4,37 @@
       "title": "Columns – Text",
       "id": "columns-text",
       "model": "columns-text",
-      "filter": "columns-text",
       "plugins": {
         "da": {
           "name": "columns-text",
-          "rows": 1,
-          "columns": 2,
-          "behaviour": "columns"
-        }
-      }
-    },
-    {
-      "title": "Text Row",
-      "id": "columns-text-row",
-      "model": "columns-text-row",
-      "filter": "columns-text-row",
-      "plugins": {
-        "da": {
-          "name": "columns-text-row",
-          "behaviour": "columns-row"
-        }
-      }
-    },
-    {
-      "title": "Text Column",
-      "id": "columns-text-cell",
-      "model": "columns-text-cell",
-      "filter": "columns-text-cell",
-      "plugins": {
-        "da": {
-          "unsafeHTML": "<div></div>",
-          "behaviour": "columns-cell"
+          "rows": 2,
+          "columns": 3,
+          "fields": [
+            {
+              "name": "col1",
+              "selector": "div:nth-child(1)>div:nth-child(1)"
+            },
+            {
+              "name": "col2",
+              "selector": "div:nth-child(1)>div:nth-child(2)"
+            },
+            {
+              "name": "col3",
+              "selector": "div:nth-child(1)>div:nth-child(3)"
+            },
+            {
+              "name": "row2col1",
+              "selector": "div:nth-child(2)>div:nth-child(1)"
+            },
+            {
+              "name": "row2col2",
+              "selector": "div:nth-child(2)>div:nth-child(2)"
+            },
+            {
+              "name": "row2col3",
+              "selector": "div:nth-child(2)>div:nth-child(3)"
+            }
+          ]
         }
       }
     }
@@ -44,35 +44,43 @@
       "id": "columns-text",
       "fields": [
         {
-          "component": "number",
-          "valueType": "number",
-          "name": "columns",
-          "label": "Number of Columns",
-          "value": 2,
-          "validation": {
-            "numberMin": 1,
-            "numberMax": 3
-          }
+          "component": "richtext",
+          "name": "col1",
+          "label": "Column 1",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "col2",
+          "label": "Column 2",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "col3",
+          "label": "Column 3",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "row2col1",
+          "label": "Row 2 – Column 1",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "row2col2",
+          "label": "Row 2 – Column 2",
+          "valueType": "string"
+        },
+        {
+          "component": "richtext",
+          "name": "row2col3",
+          "label": "Row 2 – Column 3",
+          "valueType": "string"
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns-text",
-      "components": [
-        "columns-text-row"
-      ]
-    },
-    {
-      "id": "columns-text-row",
-      "components": []
-    },
-    {
-      "id": "columns-text-cell",
-      "components": [
-        "text"
-      ]
-    }
-  ]
+  "filters": []
 }

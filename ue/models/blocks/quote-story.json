@@ -31,27 +31,24 @@
           "component": "multiselect",
           "name": "classes",
           "label": "Options",
-          "valueType": "string",
           "options": [
             {
-              "name": "Blockquote (inline, no quote marks)",
+              "name": "blockquote",
               "value": "blockquote"
             }
           ]
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "quote",
           "label": "Quote",
-          "value": ""
+          "valueType": "string"
         },
         {
-          "component": "text",
-          "valueType": "string",
+          "component": "richtext",
           "name": "attribution",
-          "label": "Attribution (name – role)",
-          "value": ""
+          "label": "Attribution",
+          "valueType": "string"
         }
       ]
     }

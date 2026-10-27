@@ -28,18 +28,16 @@
       "id": "hero-brand",
       "fields": [
         {
-          "component": "text",
-          "valueType": "string",
+          "component": "richtext",
           "name": "logo",
-          "label": "Logo (icon, e.g. :wwg-100-years:)",
-          "value": ""
+          "label": "Logo / icon",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "text",
           "label": "Tagline",
-          "value": ""
+          "valueType": "string"
         }
       ]
     }

@@ -3,7 +3,6 @@
     {
       "title": "Cards – Featured",
       "id": "cards-featured",
-      "model": "cards-featured",
       "filter": "cards-featured",
       "plugins": {
         "da": {
@@ -14,7 +13,7 @@
       }
     },
     {
-      "title": "Featured Story",
+      "title": "Card",
       "id": "cards-featured-item",
       "model": "cards-featured-item",
       "plugins": {
@@ -25,15 +24,7 @@
           "fields": [
             {
               "name": "image",
-              "selector": "div:nth-child(1) picture>img[src]"
-            },
-            {
-              "name": "imageAlt",
-              "selector": "div:nth-child(1) picture>img[alt]"
-            },
-            {
-              "name": "imageLink",
-              "selector": "div:nth-child(1) a[href*=\"/is/image/\"]"
+              "selector": "div:nth-child(1)"
             },
             {
               "name": "text",
@@ -46,39 +37,20 @@
   ],
   "models": [
     {
-      "id": "cards-featured",
-      "fields": []
-    },
-    {
       "id": "cards-featured-item",
       "fields": [
         {
-          "component": "reference",
-          "valueType": "string",
+          "component": "richtext",
           "name": "image",
           "label": "Image",
-          "multi": false
-        },
-        {
-          "component": "text",
           "valueType": "string",
-          "name": "imageAlt",
-          "label": "Image alt text",
-          "value": ""
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "imageLink",
-          "label": "Image URL (Scene7)",
-          "value": ""
+          "description": "Scene7 image link (link URL = image, link text = alt text). Edit the link to change the image."
         },
         {
           "component": "richtext",
-          "valueType": "string",
           "name": "text",
-          "label": "Tags, title and link (a video link adds a play button)",
-          "value": ""
+          "label": "Content",
+          "valueType": "string"
         }
       ]
     }

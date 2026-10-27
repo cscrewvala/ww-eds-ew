@@ -3,7 +3,6 @@
     {
       "title": "Cards – Documents",
       "id": "cards-documents",
-      "model": "cards-documents",
       "filter": "cards-documents",
       "plugins": {
         "da": {
@@ -14,7 +13,7 @@
       }
     },
     {
-      "title": "Document Group",
+      "title": "Document group",
       "id": "cards-documents-item",
       "model": "cards-documents-item",
       "plugins": {
@@ -28,7 +27,7 @@
               "selector": "div:nth-child(1)"
             },
             {
-              "name": "links",
+              "name": "documents",
               "selector": "div:nth-child(2)"
             }
           ]
@@ -38,25 +37,19 @@
   ],
   "models": [
     {
-      "id": "cards-documents",
-      "fields": []
-    },
-    {
       "id": "cards-documents-item",
       "fields": [
         {
-          "component": "text",
-          "valueType": "string",
+          "component": "richtext",
           "name": "title",
-          "label": "Group title (e.g. year)",
-          "value": ""
+          "label": "Group title",
+          "valueType": "string"
         },
         {
           "component": "richtext",
-          "valueType": "string",
-          "name": "links",
-          "label": "Document links",
-          "value": ""
+          "name": "documents",
+          "label": "Documents (list of links)",
+          "valueType": "string"
         }
       ]
     }
