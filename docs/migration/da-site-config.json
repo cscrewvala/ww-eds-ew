@@ -1,0 +1,33 @@
+{
+  ":names": ["data", "library", "prepare"],
+  ":type": "multi-sheet",
+  ":version": 3,
+  "data": {
+    "total": 1,
+    "limit": 1,
+    "offset": 0,
+    "data": [
+      { "key": "aem.repositoryId", "value": "author-p154720-e1630809.adobeaemcloud.com" }
+    ],
+    ":colWidths": [260, 420]
+  },
+  "library": {
+    "total": 2,
+    "limit": 2,
+    "offset": 0,
+    "data": [
+      { "title": "Blocks", "path": "https://content.da.live/cscrewvala/ww-eds-ew/library/blocks.json", "format": "", "ref": "", "icon": "", "experience": "" },
+      { "title": "Templates", "path": "https://content.da.live/cscrewvala/ww-eds-ew/library/templates.json", "format": "", "ref": "", "icon": "", "experience": "" }
+    ],
+    ":colWidths": [160, 520, 100, 80, 80, 100]
+  },
+  "prepare": {
+    "total": 1,
+    "limit": 1,
+    "offset": 0,
+    "data": [
+      { "title": "Send to Adobe Target", "path": "", "icon": "", "ref": "" }
+    ],
+    ":colWidths": [220, 300, 80, 80]
+  }
+}
