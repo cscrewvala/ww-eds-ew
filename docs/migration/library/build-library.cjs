@@ -148,6 +148,34 @@ const optionRows = [
     type: '',
     label: f.label,
   })),
+  // key-value blocks: the values the block code accepts (Experience Workspace offers them on "/"
+  // in the value cell). Layout reuses the UE select; the code tolerates comma lists for the others.
+  {
+    key: 'layout',
+    blocks: 'article-list',
+    values: models['article-list'].fields.find((f) => f.name === 'layout').options.map(opt).join(' | '),
+    type: '',
+    label: 'Layout',
+  },
+  {
+    key: 'filters',
+    blocks: 'article-list',
+    values: 'Category chips=category | Year dropdown=year | Sort dropdown=sort',
+    type: 'multi',
+    label: 'Filters',
+  },
+  {
+    key: 'source',
+    blocks: 'article-list',
+    values: [
+      'Latest news=/au/en/our-newsroom/media-releases/latest-news/',
+      'News archive=/au/en/our-newsroom/media-releases/news-archive/',
+      'Check it out=/au/en/our-newsroom/media-releases/check-it-out/',
+      'Our stories=/au/en/our-impact/sustainability/our-stories/',
+    ].join(' | '),
+    type: 'multi',
+    label: 'Source folder',
+  },
 ];
 const blocksJson = {
   ':names': ['blocks', 'options'], ':type': 'multi-sheet', ':version': 3,
