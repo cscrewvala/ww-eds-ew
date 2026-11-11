@@ -44,6 +44,7 @@ const DESCRIPTIONS = {
   'embed-iframe': 'Embedded tools (share price, calculators): one row per embed (tab label | URL | height). Several rows become tabs.',
   'fragment': 'Includes a shared fragment page: a link to the fragment path.',
   'table-data': 'Data table: first row = column headers, then one row per data row; cells may contain links.',
+  'json-object-display': 'Live values from a published sheet (JSON), e.g. the nav share price bar. Config rows: source | sheet path (default /stock-price.json), style | nav. Value rows: label | JSON key | optional unit (AUD, %).',
   'article-list': 'Dynamic news / story listing from the article index. Settings: Source (folder), Layout (news, stories, featured), Limit, Filters (category, year, sort), Tags, Categories, Featured.',
   search: 'Site search results page: index URL row, category rows (label | path prefix) and Page size.',
 };
@@ -111,9 +112,12 @@ function blockDoc(name) {
   if (!variants.length) {
     // no instance in content (e.g. fragment): an empty starter table
     const section = doc.createElement('div');
-    section.innerHTML = name === 'fragment'
-      ? `<div class="fragment"><div><div><a href="/au/en/fragments/example">/au/en/fragments/example</a></div></div></div>`
-      : `<div class="${name}"><div><div></div></div></div>`;
+    // json-object-display lives in /nav (not in page documents): the share price bar as starter
+    const STARTERS = {
+      fragment: '<div class="fragment"><div><div><a href="/au/en/fragments/example">/au/en/fragments/example</a></div></div></div>',
+      'json-object-display': '<div class="json-object-display"><div><div>source</div><div>/stock-price.json</div></div><div><div>style</div><div>nav</div></div><div><div>Share price</div><div>price</div><div>AUD</div></div><div><div>High</div><div>high</div><div></div></div><div><div>Low</div><div>low</div><div></div></div><div><div>Change</div><div>change</div><div>%</div></div></div>',
+    };
+    section.innerHTML = STARTERS[name] || `<div class="${name}"><div><div></div></div></div>`;
     const md = doc.createElement('div');
     md.className = 'library-metadata';
     md.innerHTML = `<div><div>description</div><div>${DESCRIPTIONS[name] || title(name)}</div></div>`;
@@ -175,6 +179,21 @@ const optionRows = [
     ].join(' | '),
     type: 'multi',
     label: 'Source folder',
+  },
+  // json-object-display config rows (source | sheet path, style | name)
+  {
+    key: 'source',
+    blocks: 'json-object-display',
+    values: 'Share price=/stock-price.json',
+    type: '',
+    label: 'JSON source (published sheet path)',
+  },
+  {
+    key: 'style',
+    blocks: 'json-object-display',
+    values: 'Navy share price bar=nav',
+    type: '',
+    label: 'Style',
   },
 ];
 const blocksJson = {
