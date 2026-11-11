@@ -10,3 +10,5 @@ migration-work/*
 tools/importer/*
 docs/*
 ue/models/*
+catalog/
+catalog/
