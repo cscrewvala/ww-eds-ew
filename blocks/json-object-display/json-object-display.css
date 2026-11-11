@@ -1,0 +1,63 @@
+/*
+ * json-object-display block styles
+ * Add new styles by adding a `.json-object-display.<style>` ruleset and
+ * authoring that style name in the block's `style` config row
+ * (or as a block variant, e.g. `json-object-display (<style>)`).
+ */
+
+/* base: flat key/value list, unstyled fallback */
+.json-object-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.json-object-display[hidden] {
+  display: none;
+}
+
+.json-object-display .jod-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3em;
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------
+ * style: nav -> dark navy share price bar with white text
+ * --------------------------------------------------------------- */
+.json-object-display.nav {
+  box-sizing: border-box;
+  width: 100%;
+  justify-content: center;
+  gap: 12px 24px;
+  padding: 16px 20px;
+  background-color: #0c0f2a;
+  color: #fff;
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* first item is smaller and followed by a vertical divider, as in the design */
+.json-object-display.nav .jod-item:first-child {
+  padding: 4px 16px 4px 0;
+  border-right: 1px solid #fff;
+  font-size: 0.85em;
+}
+
+@media (width >= 900px) {
+  .json-object-display.nav {
+    justify-content: flex-start;
+    min-height: 80px;
+    gap: 16px 40px;
+    padding: 0 34px;
+    font-size: 18px;
+  }
+
+  .json-object-display.nav .jod-item:first-child {
+    margin-right: -10px;
+    padding-right: 18px;
+  }
+}
