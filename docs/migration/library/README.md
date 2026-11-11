@@ -13,3 +13,8 @@ and page metadata values from the Universal Editor models), `templates/<template
 of a representative page with placeholder text) and `templates.json`.
 Upload to `https://admin.da.live/source/cscrewvala/ww-eds-ew/library/...` (preview, don't publish).
 Site config (library, data, prepare tabs): `docs/migration/da-site-config.json`.
+
+The `fields` rows in each page's `library-metadata` (which cell is which field, `IGNORE` for fixed
+key cells) are curated in DA and are not produced by `build-library.cjs`. A full rebuild overwrites
+them, so carry them over (or add a block on its own, as for `json-object-display`, whose curated page
+is in the local mirror at `content/library/blocks/json-object-display.plain.html`).
