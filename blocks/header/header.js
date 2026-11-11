@@ -1,3 +1,5 @@
+import { decorateBlock, loadBlock } from '../../scripts/aem.js';
+
 // desktop layout (hover megamenus) starts at this width; below it the hamburger menu is used
 const isDesktop = window.matchMedia('(width >= 1200px)');
 
@@ -357,11 +359,18 @@ export default async function decorate(block) {
   block.append(navWrapper);
 
   // utility strip (share price + investor links)
+  // blocks authored in the strip (e.g. json-object-display for the live share price)
+  const utilityBlocks = [];
   utilitySections.forEach((section) => {
+    section.querySelectorAll(':scope > div[class]').forEach((b) => {
+      decorateBlock(b);
+      utilityBlocks.push(b);
+    });
     const utility = document.createElement('div');
     utility.className = 'nav-utility';
     utility.append(...section.childNodes);
-    const links = [...utility.querySelectorAll('a')];
+    // links inside blocks belong to the block (e.g. a JSON source), not to the strip
+    const links = [...utility.querySelectorAll('a')].filter((a) => !a.closest('.block'));
     // links sharing a destination are long/short label variants of one link:
     // the longest label is shown on wide screens, the shortest on small screens
     const byHref = new Map();
@@ -380,7 +389,7 @@ export default async function decorate(block) {
     const primary = links.length > 1 ? links[links.length - 1] : null;
     if (primary) {
       const href = primary.getAttribute('href');
-      utility.querySelectorAll('a').forEach((a) => {
+      links.forEach((a) => {
         if (a.getAttribute('href') !== href) return;
         a.classList.add('nav-utility-primary');
         a.closest('li')?.classList.add('nav-utility-primary-item');
@@ -388,4 +397,5 @@ export default async function decorate(block) {
     }
     block.append(utility);
   });
+  await Promise.all(utilityBlocks.map((b) => loadBlock(b)));
 }

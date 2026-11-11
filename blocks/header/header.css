@@ -381,6 +381,11 @@ header .nav-utility {
   font-family: var(--body-font-family);
 }
 
+/* blocks authored in the strip stay hidden until decorated */
+header .nav-utility .block:not([data-block-status='loaded']) {
+  visibility: hidden;
+}
+
 header .nav-utility ul {
   display: flex;
   flex: 1 1 auto;
@@ -390,6 +395,11 @@ header .nav-utility ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* a block (live share price) replaces the first list item: keep the links on the right */
+header .nav-utility .block ~ ul {
+  justify-content: flex-end;
 }
 
 header .nav-utility a:any-link {
@@ -444,6 +454,18 @@ header .nav-utility .nav-utility-primary-item.nav-utility-wide::after {
   header .nav-utility a.nav-utility-primary {
     font-size: 18px;
     line-height: 27px;
+  }
+}
+
+/* with a block (live share price) in the strip, the short link label fits up to 1200px */
+@media (width >= 900px) and (width < 1200px) {
+  header .nav-utility .block ~ ul .nav-utility-wide {
+    display: none;
+  }
+
+  header .nav-utility .block ~ ul .nav-utility-compact {
+    display: flex;
+    align-items: center;
   }
 }
 

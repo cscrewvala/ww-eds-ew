@@ -1,0 +1,23 @@
+{
+  "variantName": "json-object-display",
+  "baseBlock": "json-object-display",
+  "canonicalModel": "container",
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "compact",
+    "purpose": "live-data-display",
+    "imagePattern": "none",
+    "structure": "single row of label + value pairs, divider after the first item",
+    "textAlignment": "left"
+  },
+  "contentPattern": "Config rows (source = JSON endpoint, style = visual style) plus label | json key | optional suffix rows. Fetches an EDS-published sheet (default /stock-price.json) and renders the mapped values; used in the nav utility strip for the share price (Share price | High | Low | Change).",
+  "usage": {
+    "pagesUsing": [
+      "https://www.woolworthsgroup.com.au/"
+    ],
+    "reuseCount": 1,
+    "lastUsed": "2026-11-11"
+  },
+  "options": ["nav"],
+  "memberVariantIds": []
+}

@@ -39,6 +39,14 @@ Add a table to the document. First row = block name. Then:
 Renders: `Share price 41.95 AUD │ High 42.73   Low 42.08   Change -0.92%`
 on a dark navy bar with white text.
 
+**Where to put it in `/nav`:** in the third (utility) section, in place of the
+static "Share price … AUD" list item, above the investor links list. The header
+decorates blocks in that section and fits the block into its navy utility strip
+(the strip supplies the background). Desktop shows every value; below 900px
+only the first item (share price) is shown, because the strip has room for one.
+
+Elsewhere on a page the `nav` style draws its own 72px midnight bar.
+
 ## JSON formats supported
 
 The block normalizes the common EDS/da.live shapes automatically:
@@ -61,3 +69,7 @@ class on the block.
   logged to the console, so the page never shows labels without values.
 - Values display exactly as stored in the JSON (plus optional suffix), so
   number formatting should live in the spreadsheet.
+- Universal Editor: model in `ue/models/blocks/json-object-display.json`
+  (container; one item per row, three cells). Row and cell instrumentation is
+  moved onto the rendered items. In the editor, config rows, empty rows and
+  rows without a value stay visible so they can be selected.
