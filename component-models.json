@@ -998,6 +998,45 @@
     ]
   },
   {
+    "id": "json-object-display",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "options": [
+          {
+            "name": "nav",
+            "value": "nav"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "json-object-display-item",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "label",
+        "label": "Label (or \"source\" / \"style\")",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "key",
+        "label": "JSON key (or source path / style name)",
+        "valueType": "string"
+      },
+      {
+        "component": "richtext",
+        "name": "suffix",
+        "label": "Suffix / unit (optional)",
+        "valueType": "string"
+      }
+    ]
+  },
+  {
     "id": "modal-terms",
     "fields": [
       {

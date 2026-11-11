@@ -10,7 +10,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 8px 24px;
+  font-family: var(--body-font-family);
 }
 
 .json-object-display[hidden] {
@@ -18,46 +19,62 @@
 }
 
 .json-object-display .jod-item {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.3em;
   white-space: nowrap;
 }
 
+/* config rows are only rendered in the Universal Editor */
+.json-object-display .jod-config {
+  font-size: var(--body-font-size-xs);
+  opacity: 0.7;
+}
+
 /* ---------------------------------------------------------------
- * style: nav -> dark navy share price bar with white text
+ * style: nav -> midnight share price bar (design: header utility strip)
  * --------------------------------------------------------------- */
 .json-object-display.nav {
   box-sizing: border-box;
-  width: 100%;
-  justify-content: center;
-  gap: 12px 24px;
-  padding: 16px 20px;
-  background-color: #0c0f2a;
-  color: #fff;
-  font-size: var(--body-font-size-xs);
-  font-weight: 500;
-  line-height: 1.2;
+  min-height: var(--nav-utility-height);
+  padding: 0 32px;
+  background-color: var(--color-midnight);
+  color: var(--color-snow);
+  font-size: 18px;
+  line-height: 24px;
 }
 
-/* first item is smaller and followed by a vertical divider, as in the design */
+/* first item is smaller and followed by a vertical divider */
 .json-object-display.nav .jod-item:first-child {
-  padding: 4px 16px 4px 0;
-  border-right: 1px solid #fff;
-  font-size: 0.85em;
+  padding: 0 16px 0 0;
+  border-right: 1px solid var(--color-snow);
+  font-size: var(--body-font-size-m);
+}
+
+/* inside the header utility strip the strip supplies the bar */
+header .nav-utility .json-object-display.nav {
+  min-height: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+/* mobile strip has room for the first item only */
+@media (width < 900px) {
+  header .nav-utility .json-object-display.nav .jod-item:not(:first-child) {
+    display: none;
+  }
+
+  header .nav-utility .json-object-display.nav .jod-item:first-child {
+    padding: 0;
+    border-right: 0;
+  }
 }
 
 @media (width >= 900px) {
   .json-object-display.nav {
-    justify-content: flex-start;
-    min-height: 80px;
-    gap: 16px 40px;
-    padding: 0 34px;
-    font-size: 18px;
+    column-gap: 40px;
+    padding: 0 38px;
   }
 
   .json-object-display.nav .jod-item:first-child {
-    margin-right: -10px;
-    padding-right: 18px;
+    margin-right: -11px;
+    padding-right: 17px;
   }
 }

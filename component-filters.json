@@ -37,6 +37,7 @@
       "hero-banner",
       "hero-brand",
       "hero-story",
+      "json-object-display",
       "modal-terms",
       "quote-story",
       "search",
@@ -126,6 +127,12 @@
     "id": "embed-iframe",
     "components": [
       "embed-iframe-item"
+    ]
+  },
+  {
+    "id": "json-object-display",
+    "components": [
+      "json-object-display-item"
     ]
   },
   {
