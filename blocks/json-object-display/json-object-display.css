@@ -50,6 +50,7 @@
 
 /* inside the header utility strip the strip supplies the bar */
 header .nav-utility .json-object-display.nav {
+  flex-wrap: nowrap;
   min-height: 0;
   padding: 0;
   background-color: transparent;
