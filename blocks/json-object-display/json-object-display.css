@@ -69,8 +69,14 @@ header .nav-utility .json-object-display.nav {
 
 @media (width >= 900px) {
   .json-object-display.nav {
-    column-gap: 40px;
     padding: 0 38px;
+  }
+}
+
+/* design spacing; narrower screens keep the 24px gap so the strip fits */
+@media (width >= 1200px) {
+  .json-object-display.nav {
+    column-gap: 40px;
   }
 
   .json-object-display.nav .jod-item:first-child {
