@@ -386,11 +386,6 @@ header .nav-utility .block:not([data-block-status='loaded']) {
   visibility: hidden;
 }
 
-/* a block (live share price) replaces the first list item: keep the links on the right */
-header .nav-utility .block ~ ul {
-  justify-content: flex-end;
-}
-
 header .nav-utility ul {
   display: flex;
   flex: 1 1 auto;
@@ -400,6 +395,11 @@ header .nav-utility ul {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+/* a block (live share price) replaces the first list item: keep the links on the right */
+header .nav-utility .block ~ ul {
+  justify-content: flex-end;
 }
 
 header .nav-utility a:any-link {
